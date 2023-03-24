@@ -11,6 +11,8 @@ public class Sound
     public string name;
     public AudioClip clip;
 }
+// Á¶±Ý¹Ù²»½¿ '-'
+
 
 public class SoundManager : MonoBehaviour
 {
@@ -116,4 +118,3 @@ public class SoundManager : MonoBehaviour
         mixer.SetFloat("SFX", Mathf.Log10(_val) * 20);
     }
 }
-
