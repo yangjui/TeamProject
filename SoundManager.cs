@@ -11,21 +11,21 @@ public class Sound
     public string name;
     public AudioClip clip;
 }
-// 조금바꼇슴 '-'
-
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
-    [SerializeField] Sound[] sfx = null;
+    [SerializeField] Sound[] sfx2D = null;
+    [SerializeField] Sound[] sfx3D = null;
     [SerializeField] Sound[] bgm = null;
-    [SerializeField] private Transform playerPos = null;
     [SerializeField] private AudioMixer mixer = null;
 
     [SerializeField] AudioSource bgmPlayer = null;
-    [SerializeField] GameObject sfxPrefab = null;
-    private List<GameObject> sfxList = new List<GameObject>();
+    [SerializeField] GameObject sfx2DPrefab = null;
+    [SerializeField] GameObject sfx3DPrefab = null;
+    private List<GameObject> sfx2DList = new List<GameObject>();
+    private List<GameObject> sfx3DList = new List<GameObject>();
     private float timer;
 
     private void Start()
@@ -67,33 +67,33 @@ public class SoundManager : MonoBehaviour
         timer = 0f;
     }
 
-    public void PlaySFX(string p_sfxName, Vector3 _position)
+    public void Play2DSFX(string p_sfxName, Vector3 _position)
     {
-        if (sfxList.Count == 0)
+        if (sfx2DList.Count == 0)
         {
-            AddList();
+            Add2DList();
         }
         
-        for (int i = 0; i < sfx.Length; ++i)
+        for (int i = 0; i < sfx2D.Length; ++i)
         {
-            if (p_sfxName == sfx[i].name)
+            if (p_sfxName == sfx2D[i].name)
             {
-                for (int j = 0; j < sfxList.Count; j++)
+                for (int j = 0; j < sfx2DList.Count; j++)
                 {
                     // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
-                    if (!sfxList[j].GetComponent<AudioSource>().isPlaying)
+                    if (!sfx2DList[j].GetComponent<AudioSource>().isPlaying)
                     {
-                        sfxList[j].GetComponent<AudioSource>().clip = sfx[i].clip;
-                        sfxList[j].GetComponent<AudioSource>().transform.position = _position;
-                        sfxList[j].GetComponent<AudioSource>().Play();
+                        sfx2DList[j].GetComponent<AudioSource>().clip = sfx2D[i].clip;
+                        sfx2DList[j].GetComponent<AudioSource>().transform.position = _position;
+                        sfx2DList[j].GetComponent<AudioSource>().Play();
                         return;
                     }
                 }
-                AddList();
+                Add2DList();
 
-                sfxList[i].GetComponent<AudioSource>().clip = sfx[i].clip;
-                sfxList[i].GetComponent<AudioSource>().transform.position = _position;
-                sfxList[i].GetComponent<AudioSource>().Play();
+                sfx2DList[i].GetComponent<AudioSource>().clip = sfx2D[i].clip;
+                sfx2DList[i].GetComponent<AudioSource>().transform.position = _position;
+                sfx2DList[i].GetComponent<AudioSource>().Play();
                 return;
             }
         }
@@ -101,11 +101,52 @@ public class SoundManager : MonoBehaviour
         return;
     }
 
-    private void AddList()
+    private void Add2DList()
     {
-        GameObject go = Instantiate(sfxPrefab, transform);
-        sfxPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        sfxList.Add(go);
+        GameObject go = Instantiate(sfx2DPrefab, transform);
+        sfx2DPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+        sfx2DList.Add(go);
+    }
+
+    public void Play3DSFX(string p_sfxName, Vector3 _position)
+    {
+        if (sfx3DList.Count == 0)
+        {
+            Add3DList();
+        }
+
+        for (int i = 0; i < sfx3D.Length; ++i)
+        {
+            if (p_sfxName == sfx3D[i].name)
+            {
+                for (int j = 0; j < sfx3DList.Count; j++)
+                {
+                    // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
+                    if (!sfx3DList[j].GetComponent<AudioSource>().isPlaying)
+                    {
+                        sfx3DList[j].GetComponent<AudioSource>().clip = sfx3D[i].clip;
+                        sfx3DList[j].GetComponent<AudioSource>().transform.position = _position;
+                        sfx3DList[j].GetComponent<AudioSource>().Play();
+                        return;
+                    }
+                }
+                Add3DList();
+
+                sfx3DList[i].GetComponent<AudioSource>().clip = sfx3D[i].clip;
+                sfx3DList[i].GetComponent<AudioSource>().transform.position = _position;
+                sfx3DList[i].GetComponent<AudioSource>().Play();
+                return;
+            }
+        }
+        Debug.Log(p_sfxName + " 이름의 효과음이 없습니다.");
+        return;
+    }
+
+    private void Add3DList()
+    {
+        GameObject go = Instantiate(sfx3DPrefab, transform);
+        sfx3DPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+        sfx3DList.Add(go);
     }
 
     public void BGMVolume(float _val)
@@ -118,3 +159,4 @@ public class SoundManager : MonoBehaviour
         mixer.SetFloat("SFX", Mathf.Log10(_val) * 20);
     }
 }
+
