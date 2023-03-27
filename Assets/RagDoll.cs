@@ -46,6 +46,7 @@ public class RagDoll : MonoBehaviour
             dead.transform.GetChild(i).localPosition = alive.transform.GetChild(i).localPosition;
             dead.transform.GetChild(i).localRotation = alive.transform.GetChild(i).localRotation;
         }
+        dead.transform.position = alive.transform.position; 
     }
 
     private void OnTriggerEnter(Collider _other)
