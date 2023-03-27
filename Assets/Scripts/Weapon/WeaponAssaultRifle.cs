@@ -131,9 +131,6 @@ public class WeaponAssaultRifle : WeaponBase
         RaycastHit hit;
         Vector3 targetPoint = Vector3.zero;
 
-        // 화면 중앙좌표(Aim기준으로 Raycast 연산)
-        //Vector2 sdf = new Vector2(x, y);
-
         ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
         if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
         {
