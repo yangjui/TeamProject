@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float MoveSpeed
     {
-        set => moveSpeed = Mathf.Max(0, value); // 이동속도가 음수로 내려가지 않게 제한걸어줌.
         get => moveSpeed;
+        set => moveSpeed = Mathf.Max(0, value); // 이동속도가 음수로 내려가지 않게 제한걸어줌.
     }
 
     private void Awake()

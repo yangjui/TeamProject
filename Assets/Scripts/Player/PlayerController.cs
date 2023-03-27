@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     private PlayerRotate playerRotate;
     private PlayerMovement playerMovement;
     private PlayerStatus playerStatus;
-    private PlayerAnimationController playerAnim;
-    private WeaponAssaultRifle weapon;
+    private WeaponBase weapon;
+
 
     private void Awake()
     {
@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
         playerRotate = GetComponent<PlayerRotate>();
         playerMovement = GetComponent<PlayerMovement>();
         playerStatus = GetComponent<PlayerStatus>();
-        playerAnim = GetComponent<PlayerAnimationController>();
-        weapon = GetComponentInChildren<WeaponAssaultRifle>();
     }
 
     private void Update()
@@ -54,12 +52,12 @@ public class PlayerController : MonoBehaviour
             if (z > 0) isRun = Input.GetKey(keyCodeRun); // 앞으로 갈때만 대쉬키가 활성화됨.
 
             playerMovement.MoveSpeed = isRun ? playerStatus.RunSpeed : playerStatus.WalkSpeed; // 달리고있다면 RunSpeed, 아니라면 WalkSpeed
-            playerAnim.MoveSpeed = isRun ? 1 : 0.5f; // 0이면 Idle 0.5면 Walk, 1이면 Run 애니메이션 재생됨.
+            weapon.Animator.MoveSpeed = isRun ? 1 : 0.5f; // 0이면 Idle 0.5면 Walk, 1이면 Run 애니메이션 재생됨.
         }
         else // 입력값이 없다 = 멈췄다.
         {
             playerMovement.MoveSpeed = 0f;
-            playerAnim.MoveSpeed = 0f;
+            weapon.Animator.MoveSpeed = 0f;
         }
 
         playerMovement.MoveToDir(new Vector3(x, 0, z));
@@ -84,9 +82,22 @@ public class PlayerController : MonoBehaviour
             weapon.StopWeaponAction();
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            weapon.StartWeaponAction(1);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            weapon.StopWeaponAction(1);
+        }
         if (Input.GetKeyDown(KeyCodeReload))
         {
             weapon.StartReload();
         }
+    }
+
+    public void SwitchingWeapon(WeaponBase _newWeapon)
+    {
+        weapon = _newWeapon;
     }
 }

@@ -13,14 +13,22 @@ public class PlayerAnimationController : MonoBehaviour
 
     public float MoveSpeed
     {
-        set => anim.SetFloat("movementSpeed", value);
         get => anim.GetFloat("movementSpeed");
+        set => anim.SetFloat("movementSpeed", value);
+    }
+
+    public bool AimModeIs
+    {
+        get => anim.GetBool("isAimMode");
+        set => anim.SetBool("isAimMode", value);
     }
 
     public void OnReload()
     {
         anim.SetTrigger("onReload");
     }
+
+
 
     public void Play(string _stateName, int _layer, float _normalizedTime)
     {

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WeaponRevolver
+  m_Controller: {fileID: 9100000, guid: 3198968970b887d4186858e00457e2b8, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7f9b0300320e4a845b119045a8588376, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c617342c43283c5428497801763eb159, type: 2}
+    m_OverrideClip: {fileID: 7400002, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 3ef04d253d2f54446a18bc45b5219e84, type: 2}
+    m_OverrideClip: {fileID: 7400012, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 5fc459d8d7fb74940b5ac892d008bd8d, type: 2}
+    m_OverrideClip: {fileID: 7400018, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 1cf96fbf6a932f74b9499e913391b294, type: 2}
+    m_OverrideClip: {fileID: 7400024, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: ed3cafc3d7d092f499922b4f9c72de6c, type: 2}
+    m_OverrideClip: {fileID: 7400030, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: d1366dd9b2f8d5842b88c7f45732e83c, type: 2}
+    m_OverrideClip: {fileID: 7400044, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 71a4c8cb927b74742958292f4e93ff02, type: 2}
+    m_OverrideClip: {fileID: 7400046, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: e548a025b0473f047854b537c589a39a, type: 2}
+    m_OverrideClip: {fileID: 7400048, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 176e79e5f65997f448180ff732ee29d2, type: 2}
+    m_OverrideClip: {fileID: 7400050, guid: 56ec0b9a5b8762642811ea26a5242e04, type: 3}
