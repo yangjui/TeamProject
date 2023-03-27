@@ -87,7 +87,7 @@ public class Zombie : MonoBehaviour
             Debug.Log("Around");
 
             isPlayerAround = true;
-            anim.SetBool("isAround", true);
+            anim.SetBool("isAttack", true);
         }
     }
 
