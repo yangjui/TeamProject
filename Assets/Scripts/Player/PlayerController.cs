@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private PlayerStatus playerStatus;
     private WeaponBase weapon;
 
-
     private void Awake()
     {
         Cursor.visible = false;
@@ -27,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
         Rotate();
         Move();
         Jump();

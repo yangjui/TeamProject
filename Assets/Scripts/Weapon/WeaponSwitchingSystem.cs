@@ -5,13 +5,20 @@ using UnityEngine;
 public class WeaponSwitchingSystem : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private WeaponBase[] weapons;
 
+    [HideInInspector]
+    public PlayerHUD playerHUD;
     private WeaponBase currentWeapon;
     private WeaponBase previousWeapon;
+    private WeaponAssaultRifle weaponAssaultRifle;
 
     private void Awake()
+    {
+        weaponAssaultRifle = GetComponentInChildren<WeaponAssaultRifle>();
+    }
+
+    public void Init()
     {
         playerHUD.SetupAllWeapons(weapons);
 
@@ -22,18 +29,18 @@ public class WeaponSwitchingSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
-
         SwitchingWeapon(WeaponType.Main);
     }
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
         UpdateSwitch();
     }
 
     private void UpdateSwitch()
     {
-        if (!Input.anyKeyDown) return;
+        if (!Input.anyKeyDown || weaponAssaultRifle.isAimMode) return;
 
         int inputIndex = 0;
         // 입력된 값이 1~4 사이의 숫자라면 inputIndex에 입력값이 저장되고

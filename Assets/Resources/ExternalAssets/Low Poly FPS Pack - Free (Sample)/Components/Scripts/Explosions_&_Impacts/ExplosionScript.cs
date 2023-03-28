@@ -21,11 +21,28 @@ public class ExplosionScript : MonoBehaviour {
 		StartCoroutine (DestroyTimer ());
 		StartCoroutine (LightFlash ());
 
-		//Get a random impact sound from the array
-		audioSource.clip = explosionSounds
-			[Random.Range(0, explosionSounds.Length)];
-		//Play the random explosion sound
-		audioSource.Play();
+		int random = Random.Range(0, 6);
+		switch (random)
+		{
+			case 0:
+				SoundManager.instance.Play3DSFX("explosion-1", transform.position);
+				break;
+			case 1:
+				SoundManager.instance.Play3DSFX("explosion-2", transform.position);
+				break;
+			case 2:
+				SoundManager.instance.Play3DSFX("explosion-3", transform.position);
+				break;
+			case 3:
+				SoundManager.instance.Play3DSFX("explosion-4", transform.position);
+				break;
+			case 4:
+				SoundManager.instance.Play3DSFX("explosion-5", transform.position);
+				break;
+			case 5:
+				SoundManager.instance.Play3DSFX("explosion-6", transform.position);
+				break;
+		}
 	}
 
 	private IEnumerator LightFlash () {

@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController))] // 캐릭터컨트롤러를 무조건 달아줌
 public class PlayerMovement : MonoBehaviour
 {
-    private float moveSpeed;
     private Vector3 moveForce;
-
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float gravity;
-
-
+    private float moveSpeed;
+    private float jumpForce = 5f;
+    private float gravity = -15f;
 
     private CharacterController cc;
 

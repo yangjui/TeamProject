@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class WeaponAssaultRifle : WeaponBase
 {
+    public delegate void ChangeAimModeDelegate(bool _aimMode);
+    private ChangeAimModeDelegate changeAimModeCallback = null;
+
     [Header("# Fire Effects")]
     [SerializeField] private GameObject muzzleFlashEffect;
 
@@ -12,17 +15,16 @@ public class WeaponAssaultRifle : WeaponBase
     [SerializeField] private Transform casingSpawnPoint;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    [Header("# Aim UI")]
-    [SerializeField] private Image[] imageAim;
-
     private CasingObjectPool casingObjectPool;
     private ImpactObjectPool impactObjectPool;
     private Camera mainCamera;
 
     private bool isModeChange = false;      // 모드전환 여부 체크
+    private bool isTakeOut = false;
     private float defaultModeFOV = 60f;     // 기본모드에서의 카메라 FOV
     private float aimModeFOV = 30f;         // Aim모드에서의 카메라 FOV
 
+    public bool isAimMode = false;
     
 
     private void Awake()
@@ -69,14 +71,14 @@ public class WeaponAssaultRifle : WeaponBase
         isReload = true;
 
         anim.OnReload();
-        SoundManager.instance.Play2DSFX("assault_rifle_reload_out", transform.position);
-
+        if (isAimMode)
+        {
+            StartCoroutine(OnReloadingModeChange());
+        }
         while (true)
         {
-            if (anim.CurrentAnimationIs("Movement"))
+            if (!isReload)
             {
-                isReload = false;
-
                 if (WeaponName != 0)
                 {
                     weaponSetting.currentMagazine--;
@@ -98,16 +100,16 @@ public class WeaponAssaultRifle : WeaponBase
         float percent = 0f;
         float time = 0.35f;
 
+        isAimMode = !isAimMode;
         anim.AimModeIs = !anim.AimModeIs;
-        imageAim[0].enabled = !imageAim[0].enabled;
-        imageAim[1].enabled = !imageAim[1].enabled;
 
         float start = mainCamera.fieldOfView;
         float end = anim.AimModeIs ? aimModeFOV : defaultModeFOV;
 
-        isModeChange = true;
 
-        while (percent < 1)
+        isModeChange = true;
+        changeAimModeCallback?.Invoke(isAimMode);
+        while (percent < 0.5)
         {
             current += Time.deltaTime;
             percent = current / time;
@@ -116,6 +118,30 @@ public class WeaponAssaultRifle : WeaponBase
             yield return null;
         }
         isModeChange = false;
+    }
+
+    private IEnumerator OnReloadingModeChange()
+    {
+        float current = 0f;
+        float percent = 0f;
+        float time = 0.35f;
+
+        
+        float start = mainCamera.fieldOfView;
+        
+        isModeChange = true;
+        changeAimModeCallback?.Invoke(isAimMode);
+        while (percent < 0.5)
+        {
+            current += Time.deltaTime;
+            percent = current / time;
+
+            mainCamera.fieldOfView = Mathf.Lerp(start, 60f, percent);
+            yield return null;
+        }
+        isModeChange = false;
+        isAimMode = !isAimMode;
+        anim.AimModeIs = !anim.AimModeIs;
     }
 
     private void ResetVariables()
@@ -156,8 +182,8 @@ public class WeaponAssaultRifle : WeaponBase
 
     public override void StartWeaponAction(int type = 0)
     {
-        // 장전중이면 무기 액션 할 수 없게
-        if (isReload) return;
+        // 준비상태거나 장전중이면 무기 액션 할 수 없게
+        if (isReload || isTakeOut) return;
 
         // 모드 전환중이면 무기 액션 할수없게
         if (isModeChange) return;
@@ -186,14 +212,13 @@ public class WeaponAssaultRifle : WeaponBase
     {
         if (type == 0)
         {
-            isAttack = false;
             StopCoroutine("OnAttackLoop");
         }
     }
 
     public override void StartReload()
     {
-        if (isReload || weaponSetting.currentMagazine <= 0) return; // 장전 중 재장전 불가능
+        if (isReload || isTakeOut || weaponSetting.currentMagazine <= 0 ) return; // 장전 중 재장전 불가능
         StopWeaponAction(); // 무기 사용중일 수 있으니 무기사용 멈춰줌
 
         StartCoroutine("OnReload");
@@ -203,7 +228,7 @@ public class WeaponAssaultRifle : WeaponBase
     {
         if (Time.time - lastAttackTime > weaponSetting.attackRate) // 공격주기가 되어야 공격할 수 있다.
         {
-            if (anim.MoveSpeed > 0.5f) return; // 달리기중일땐 공격불가
+            if (anim.MoveSpeed > 0.5f || isTakeOut) return; // 준비상태거나 달리기중일땐 공격불가
 
             //공격주기를 알 수 있도록 현재 시간 저장
             lastAttackTime = Time.time;
@@ -239,5 +264,31 @@ public class WeaponAssaultRifle : WeaponBase
     public void TakeOut()
     {
         SoundManager.instance.Play2DSFX("take_out_weapon", transform.position);
+        isTakeOut = true;
+    }
+
+    public void IsTakeOut()
+    {
+        isTakeOut = false;
+    }
+
+    public void IsReload()
+    {
+        isReload = false;
+    }
+
+    public void IsStopAttack()
+    {
+        isAttack = false;
+    }
+
+    public void ReloadSound()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out", transform.position);
+    }
+
+    public void OnChangeAimModeDelegate(ChangeAimModeDelegate _changeAimModeCallback)
+    {
+        changeAimModeCallback = _changeAimModeCallback;
     }
 }

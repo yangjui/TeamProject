@@ -14,15 +14,32 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Sprite[] spriteWeaponIcons;        // 무기 아이콘에 사용되는 sprite 배열
     [SerializeField] private Vector2[] sizeWeaponIcons;         // 무기 아이콘의 UI 크기 배열
 
-    [Header("Ammo")]
+    [Header("# Ammo")]
     [SerializeField] private TextMeshProUGUI textAmmo;          // 현재/최대 탄 수 출력 Text
 
-    [Header("Magazine")]
+    [Header("# Magazine")]
     [SerializeField] private GameObject magazineUIPrefab;       // 탄창 UI 프리팹
     [SerializeField] private Transform magazineParent;          // 탄창 UI가 배치되는 Panel
     [SerializeField] private int maxMagazineCount;              // 처음 생성하는 최대 탄창 수
 
+    [Header("# AimMode")]
+    [SerializeField] private Image[] aimMode;
+
     private List<GameObject> magazineList;                      // 탄창 UI 리스트
+
+    public void ChangeAimMode(bool _aimMode) // 에임모드에 따라 에임 변경
+    {
+        if (_aimMode)
+        {
+            aimMode[0].enabled = false;
+            aimMode[1].enabled = true;
+        }
+        else if (!_aimMode)
+        {
+            aimMode[0].enabled = true;
+            aimMode[1].enabled = false;
+        }
+    }
 
     public void SetupAllWeapons(WeaponBase[] _weapons)
     {
