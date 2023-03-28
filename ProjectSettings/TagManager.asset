@@ -3,15 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - bullet
+  - PlayerAround
+  - LeftUpperHitRange
+  - RightUpperHitRange
+  - HeadHitRange
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Dead
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

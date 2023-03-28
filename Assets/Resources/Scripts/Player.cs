@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
 
         }
         MoveDir.y -= gravity * Time.deltaTime;
+
+        // 캐릭터 움직임.
         player.Move(MoveDir * Time.deltaTime);
     }
 
