@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class MainGameManager : MonoBehaviour
 {
-    public void ChangePlayScene()
+    [SerializeField] private TitleSceneManager titleSceneManager;
+
+    public void ChangeScene()
     {
-        SceneManager.LoadScene("PlayScene");
+        titleSceneManager.ChangePlayScene();
     }
 }

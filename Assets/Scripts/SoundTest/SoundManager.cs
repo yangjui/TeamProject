@@ -161,4 +161,15 @@ public class SoundManager : MonoBehaviour
     {
         mixer.SetFloat("SFX", Mathf.Log10(_val) * 20);
     }
+
+    public float VolumeSetting()
+    {
+        float _val;
+        bool result = mixer.GetFloat("SFX", out _val);
+        if (result)
+        {
+            return _val;
+        }
+        return 0f;
+    }
 }
