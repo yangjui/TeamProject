@@ -14,7 +14,7 @@ public class PathTrigger : MonoBehaviour
     {
         if(other.CompareTag("Agent"))
         {
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
             navAgentManager.SetNewTartget(this, other.name);
         }
     }

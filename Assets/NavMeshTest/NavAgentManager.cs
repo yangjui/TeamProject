@@ -16,8 +16,8 @@ public class NavAgentManager : MonoBehaviour
 
     private List<NavMeshAgent> navMeshAgents = new List<NavMeshAgent>();
 
-    private float maxSpeed = 5f;
-    private float minSpeed = 1f;
+    private float maxSpeed = 3f;
+    private float minSpeed = 7f;
 
     private float detectionRadius = 5f;
     private float fleeRadius = 10f;
