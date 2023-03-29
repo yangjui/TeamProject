@@ -5,16 +5,12 @@ using UnityEngine.AI;
 
 public class Zombie : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject alive;
-    [SerializeField]
-    private GameObject dead;
-    [SerializeField]
-    private float attackCoolTime = 0.5f;
-    [SerializeField]
-    private float zombieAttackDamage = 10f;
-    [SerializeField]
-    private float zombieHealth = 100f;
+    [SerializeField] private GameObject alive;
+    [SerializeField] private GameObject dead;
+    [SerializeField] private float attackCoolTime = 0.5f;
+    [SerializeField] private float zombieAttackDamage = 10f;
+    [SerializeField] private float zombieHealth = 10f;
+
 
     private float currentHealth;
 
@@ -26,7 +22,6 @@ public class Zombie : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(alive.transform.childCount);
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         currentHealth = zombieHealth;
@@ -48,10 +43,11 @@ public class Zombie : MonoBehaviour
     // 렉돌로 바꿔치기
     private void Dead()
     {
-        RagDollPosition(alive.transform, dead.transform);
+        GameObject newRagdoll = Instantiate(dead, transform.position, transform.rotation);
+
+        RagDollPosition(alive.transform, newRagdoll.transform);
 
         alive.SetActive(false);
-        dead.SetActive(true);
     }
 
     // 렉돌 전환시 T자 아바타 되는 거 방지. 각 관절 위치 맞춰주기
@@ -83,6 +79,8 @@ public class Zombie : MonoBehaviour
     {
         if (_other.CompareTag("PlayerAround"))
         {
+            Debug.Log("!!!!!!!!!!");
+
             // 이거는 지금 사망처리 (총알 등등) 처리 못해서 죽는거 대충 만들어둠. 없앨거임
             currentHealth -= Time.deltaTime;
 
@@ -113,8 +111,8 @@ public class Zombie : MonoBehaviour
     // ex) if (무기 ray가 좀비의 Head 판정일때) BodyPartsHitName(Head);
     // 이런식으로 받으면 제가 각 판정 위치에 따른 애니메이션 실행시킬게요!
     // 함수이름이랑 변수명 수정할겁니당 
-    private void BodyPartsHitName(int Somewherebodypart)
+    public void BodyPartsHitName(string HitRange)
     {
-        // anim.SetBool("",true); 여기 스위치 케이스
+        // HitRange.CompareTo("Head")
     }
 }  
