@@ -29,7 +29,7 @@ public class WeaponSwitchingSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
-        SwitchingWeapon(WeaponType.Main);
+        SwitchingWeapon(WeaponType.AssaultRifle);
     }
 
     private void Update()

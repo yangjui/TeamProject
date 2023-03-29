@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,9 @@ public class WeaponAssaultRifle : WeaponBase
     private float aimModeFOV = 30f;         // Aim모드에서의 카메라 FOV
 
     public bool isAimMode = false;
-    
+
+
+    private enum AmmoType { AssaultRifle, laser };
 
     private void Awake()
     {
@@ -149,7 +152,7 @@ public class WeaponAssaultRifle : WeaponBase
         isReload = false;
         isAttack = false;
         isModeChange = false;
-    }
+    } // 총 바꿀때마다 기본상태로 리셋
 
     private void TwoStepRaycast()
     {
@@ -261,34 +264,37 @@ public class WeaponAssaultRifle : WeaponBase
         }
     }
 
-    public void TakeOut()
-    {
-        SoundManager.instance.Play2DSFX("take_out_weapon", transform.position);
-        isTakeOut = true;
-    }
-
-    public void IsTakeOut()
-    {
-        isTakeOut = false;
-    }
-
-    public void IsReload()
-    {
-        isReload = false;
-    }
+    
+    /// 애니메이션함수, 콜백
 
     public void IsStopAttack()
     {
         isAttack = false;
     }
 
-    public void ReloadSound()
+    public void IsTakeOutStart()
+    {
+        SoundManager.instance.Play2DSFX("take_out_weapon", transform.position);
+        isTakeOut = true;
+    }
+
+    public void IsTakeOutOver()
+    {
+        isTakeOut = false;
+    }
+
+    public void IsReloadStart()
     {
         SoundManager.instance.Play2DSFX("assault_rifle_reload_out", transform.position);
+    }
+
+    public void IsReloadOver()
+    {
+        isReload = false;
     }
 
     public void OnChangeAimModeDelegate(ChangeAimModeDelegate _changeAimModeCallback)
     {
         changeAimModeCallback = _changeAimModeCallback;
-    }
+    } // 에임모드 바뀔때마다 조준선 바꿔주려고 콜백
 }

@@ -20,10 +20,6 @@ public class TitleSceneManager : MonoBehaviour
         fadePanel.color = c;
     }
 
-    private void Start()
-    {
-    }
-
     public void ChangePlayScene()
     {
         StartCoroutine(FadeInOutStart());
@@ -43,7 +39,6 @@ public class TitleSceneManager : MonoBehaviour
             fadePanel.color = c;
             yield return new WaitForSeconds(0.01f);
         }
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("PlayScene");
+        LoadingSceneController.LoadScene("PlayScene");
     }
 }

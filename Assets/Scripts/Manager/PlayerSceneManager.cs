@@ -22,10 +22,12 @@ public class PlayerSceneManager : MonoBehaviour
         VolumeSetting();
     }
 
-    private void VolumeSetting()
+    private void VolumeSetting() // 볼륨설정값 저장
     {
-        sfxSlider.value = SoundManager.instance.VolumeSetting();
+        float val = SoundManager.instance.VolumeSetting();
+        sfxSlider.value = Mathf.Pow(10, val / 20f);
     }
+
     private void Update()
     {
         Option();
