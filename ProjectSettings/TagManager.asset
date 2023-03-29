@@ -9,6 +9,12 @@ TagManager:
   - LeftUpperHitRange
   - RightUpperHitRange
   - HeadHitRange
+  - Enemy
+  - Zombie
+  - Platform
+  - Target
+  - Metal
+  - ExplosiveBarrel
   layers:
   - Default
   - TransparentFX
@@ -17,8 +23,8 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
-  - 
+  - Sound
+  - Map
   - 
   - 
   - 
