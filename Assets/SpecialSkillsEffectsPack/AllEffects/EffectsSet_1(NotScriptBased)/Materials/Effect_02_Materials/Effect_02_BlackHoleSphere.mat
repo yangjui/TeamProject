@@ -149,7 +149,7 @@ Material:
     - _TextureAnimate: 1
     - _TextureAnimateAdvanced: 0
     - _TextureAnimateSpeed: 5
-    - _TextureAnimateStyle: 1.42
+    - _TextureAnimateStyle: 0
     - _TextureBlend: 1
     - _TextureNoise: 0
     - _UVSec: 0
@@ -166,5 +166,5 @@ Material:
     - _NoiseValue: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 2.2923045, g: 1.8825177, b: 1.1137141, a: 1}
     - _TintColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor2: {r: 0.4339623, g: 0.018388232, b: 0, a: 1}
+    - _TintColor2: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

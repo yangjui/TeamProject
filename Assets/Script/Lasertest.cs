@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,10 +23,12 @@ public class Lasertest : MonoBehaviour
     [SerializeField]
     private Transform chargeEffectLocation;
     [SerializeField]
-    private GameObject fireEffectLocation;
+    private Transform fireEffectLocation;
+
+    private GameObject chargeEffectInstance;
 
     RaycastHit[] hits;
-
+    
     private float nextFireTime;
 
 
@@ -33,64 +36,80 @@ public class Lasertest : MonoBehaviour
     {
         //if (nextFireTime == 0f)
         //{
-            if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
+        {
+            //if (currentChargingTime >= chargingTime)
+            //{
+            currentChargingTime = 0f;
+            //}
+            if (chargeEffectPrefab != null)
             {
-                //if (currentChargingTime >= chargingTime)
-                //{
-                    currentChargingTime = 0f;
-                //}
+                chargeEffectInstance = Instantiate(chargeEffectPrefab, chargeEffectLocation.position,
+                     chargeEffectLocation.rotation);
+
+                chargeEffectInstance.transform.localScale /= 4f;
+
 
             }
-            if (Input.GetMouseButton(0))
-            {
-                currentChargingTime += Time.deltaTime;
-            }
-            Debug.Log(" 충전중 ... " + currentChargingTime);
 
-            if (Input.GetMouseButtonUp(0))
-            {
-            // Fire();
+        }
+        if (Input.GetMouseButton(0))
+        {
+            currentChargingTime += Time.deltaTime;
+        }
+        Debug.Log(" 충전중 ... " + currentChargingTime);
 
-            if (currentChargingTime < chargingTime)
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (currentChargingTime >= chargingTime)
             {
-                currentChargingTime = 0f;
-            }
-            else 
-            {
-                Debug.DrawRay(transform.position, transform.forward * Maxrange, Color.red, 0.5f);
-                hits = Physics.RaycastAll(transform.position, transform.forward, Maxrange);
+                //Debug.DrawRay(transform.position, transform.forward * Maxrange, Color.red, 0.5f);
+                float sphereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
+                hits = Physics.SphereCastAll(transform.position, sphereScale, 
+                    transform.forward, Maxrange);
 
+                Destroy(chargeEffectInstance);
                 Fire();
             }
+            else Destroy(chargeEffectInstance);
 
-           // }
+            currentChargingTime = 0f;
         }
     }
-
     private void Fire()
     {
-        RaycastHit[] hits;
-
-        hits = Physics.RaycastAll(transform.position, transform.forward, Maxrange);
-
-        for (int i = 0; i < hits.Length; i++)
+        if (fireEffectPrefab != null)
         {
-            RaycastHit hit = hits[i];
-            MeshRenderer ChangeColor = hit.transform.GetComponent<MeshRenderer>();
+            GameObject fire = Instantiate(fireEffectPrefab, transform.position, transform.rotation);
+            LineRenderer lineRenderer = fire.GetComponent<LineRenderer>();
 
-            if (ChangeColor)
+            for (int i = 0; i < hits.Length; i++)
             {
-                hit.transform.GetComponent<MeshRenderer>().material.color = Color.red;
+                RaycastHit hit = hits[i];
+                //MeshRenderer ChangeColor = hit.transform.GetComponent<MeshRenderer>();
+
+                //if (ChangeColor)
+                //{
+                //    hit.transform.GetComponent<MeshRenderer>().material.color = Color.red;
+                //}
+
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                }
+
+
+                if (lineRenderer != null)
+                {
+                    lineRenderer.SetPosition(0, transform.position);
+                    lineRenderer.SetPosition(1, hit.point);
+                }
             }
 
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null) 
-            {
-            target.TakeDamage(damage);
-            }
+            Destroy(fire, 1.5f);
         }
-       
-        nextFireTime = Time.time + fireRate;
     }
+
 
 }
