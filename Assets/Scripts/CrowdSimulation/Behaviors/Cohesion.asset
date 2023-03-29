@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212140ef0b0a2cc45b8061652a98b991, type: 3}
-  m_Name: SteeredCohesion
+  m_Script: {fileID: 11500000, guid: 63107bea02c64c845b2218f084a91edb, type: 3}
+  m_Name: Cohesion
   m_EditorClassIdentifier: 
-  agentSmoothTime: 0.5

@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad31bc47473adbc45bfaf5f2469b8f85, type: 3}
-  m_Name: Stay In Radius
+  m_Script: {fileID: 11500000, guid: ca8b0fecda5219849b1fd4ad745cb70e, type: 3}
+  m_Name: Alignment
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0, z: 0}
-  radius: 50
