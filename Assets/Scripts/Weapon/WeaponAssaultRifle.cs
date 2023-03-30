@@ -155,15 +155,11 @@ public class WeaponAssaultRifle : WeaponBase
         {
             impactObjectPool.SpawnImpact(hit);
 
-            //if (hit.transform.CompareTag("Zombie"))
-            //    zombie.CurrentHealthZombie(30f);
-
             if (hit.transform.TryGetComponent(out Zombie zombie))
             {
                 // Raycast가 맞은 오브젝트가 Zombie 컴포넌트를 가지고 있다면
                 zombieManager.zombies.Find(z => z == zombie)?.CurrentHealthZombie(30f);
             }
-
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
     }

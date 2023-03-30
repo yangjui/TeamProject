@@ -8,7 +8,7 @@ public class ZombieManager : MonoBehaviour
 
     private void Awake()
     {
-        Invoke("ZombieAwake", 1.5f);
+        Invoke("ZombieAwake", 2f);
     }
     private void ZombieAwake()
     {

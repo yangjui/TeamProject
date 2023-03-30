@@ -14,6 +14,7 @@ public class PathTrigger : MonoBehaviour
     {
         if (_other.CompareTag("Zombie"))
         {
+            // _other.isTrigger = false;
             navAgentManager.SetNewTartget(this, _other.name);
         }
     }
