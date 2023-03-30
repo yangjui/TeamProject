@@ -15,6 +15,7 @@ TagManager:
   - Target
   - Metal
   - ExplosiveBarrel
+  - Boundary
   layers:
   - Default
   - TransparentFX

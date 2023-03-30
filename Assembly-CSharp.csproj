@@ -60,6 +60,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Scripts\PopupUI\PopupUI.cs" />
+    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieInstantiateBP.cs" />
     <Compile Include="Assets\Scripts\PopupUI\PopupUIManager.cs" />
     <Compile Include="Assets\Resources\Scripts\RagDoll.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponBase.cs" />
@@ -68,10 +69,12 @@
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Casings_&amp;_Projectiles\CasingScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\AssetsList.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Weapon_Scripts\AutomaticGunScriptLPFP.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Bullet\BulletScript.cs" />
+    <Compile Include="Assets\Scripts\NavMeshTest\DropFleeing.cs" />
     <Compile Include="Assets\Scripts\SoundTest\PlayerMove.cs" />
     <Compile Include="Assets\Resources\Scripts\Zombie.cs" />
     <Compile Include="Assets\Scripts\SoundTest\PlaySound.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="Assets\Resources\Scripts\ZombieManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponRevolver.cs" />
+    <Compile Include="Assets\Scripts\NavMeshTest\PathTrigger.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\Weapon\Impact.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\AssetsListBP.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHUD.cs" />
@@ -98,6 +103,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieCustomization.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponSetting.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponGrenadeProjectile.cs" />
@@ -108,6 +114,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Explosions_&amp;_Impacts\ExplosionScript.cs" />
+    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieCustomizationBP.cs" />
     <Compile Include="Assets\Scripts\Weapon\CasingObjectPool.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Explosions_&amp;_Impacts\ImpactScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
@@ -119,6 +126,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAnimationController.cs" />
+    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieInstantiate.cs" />
+    <Compile Include="Assets\Scripts\NavMeshTest\NavAgentManager.cs" />
     <Compile Include="Assets\Scripts\Weapon\Casing.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Weapon_Scripts\HandgunScriptLPFP.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -130,12 +139,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerRotate.cs" />
     <Compile Include="Assets\Scripts\SoundTest\SoundManager.cs" />
-    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\AssetsListBP.cs" />
-    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieCustomization.cs" />
-    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieInstantiate.cs" />
-    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\AssetsList.cs" />
-    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieCustomizationBP.cs" />
-    <Compile Include="Assets\Zombie\StudioNewPunch\ShirtlessZombies\Scripts\ShirtlessZombieInstantiateBP.cs" />
+    <Compile Include="Assets\BoundaryTrigger.cs" />
+    <Compile Include="Assets\AttackZombie.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

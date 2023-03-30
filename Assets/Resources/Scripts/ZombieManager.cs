@@ -8,6 +8,10 @@ public class ZombieManager : MonoBehaviour
 
     private void Awake()
     {
+        Invoke("ZombieAwake", 1.5f);
+    }
+    private void ZombieAwake()
+    {
         zombies = new List<Zombie>();
 
         foreach (Transform child in transform)
