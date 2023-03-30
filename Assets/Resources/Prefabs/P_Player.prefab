@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   runSpeed: 5
+  maxHp: 0
 --- !u!114 &988425925576858187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,7 +1266,7 @@ MonoBehaviour:
   weaponSetting:
     weaponName: 1
     currentMagazine: 0
-    maxMagazine: 3
+    maxMagazine: 2
     currentAmmo: 0
     maxAmmo: 1
     attackRate: 0.1

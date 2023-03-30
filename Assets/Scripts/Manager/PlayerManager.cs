@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
         go.GetComponent<WeaponSwitchingSystem>().playerHUD = playerHUD;
         go.GetComponent<WeaponSwitchingSystem>().Init();
         go.GetComponentInChildren<WeaponAssaultRifle>().OnChangeAimModeDelegate(OnChangeAimMode);
+        go.GetComponent<PlayerController>().SetUnderAttackDelegate(StartBloodScreenCoroutine);
     }
 
     private void OnChangeAimMode(bool _aimMode)
@@ -26,6 +27,11 @@ public class PlayerManager : MonoBehaviour
         changeAimModeCallback?.Invoke(_aimMode);
         go.GetComponent<PlayerRotate>().ChangeAimMode(_aimMode);
         go.GetComponent<PlayerController>().ChangeAimMode(_aimMode);
+    }
+
+    private void StartBloodScreenCoroutine()
+    {
+        playerHUD.StartBloddScreenCoroutine();
     }
 
     public void OnChangeAimModeDelegate(ChangeAimModeDelegate _changeAimModeCallback)
