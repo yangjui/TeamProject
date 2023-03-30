@@ -13,6 +13,8 @@ public class BlackHole : MonoBehaviour
     }
 
 
+
+
     private void OnCollisionStay(Collision collision)
     {
         if(collision.collider.CompareTag("Agent") || collision.collider.CompareTag("Map"))

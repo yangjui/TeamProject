@@ -73,4 +73,9 @@ public class NavTestPlayer : MonoBehaviour
         mouseX += Input.GetAxis("Mouse X") * mouseXSpeed;
         transform.eulerAngles = new Vector3(0, mouseX, 0);
     }
+
+    public Vector3 GivePlayerPosition()
+    {
+        return transform.position;
+    }
 }

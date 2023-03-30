@@ -96,9 +96,10 @@ public class NavAgentManager : MonoBehaviour
         {
             if (Vector3.Distance(position, navMeshAgents[i].transform.position) < blackHoleRadius)
             {
-                //navMeshAgents[i].ResetPath();
-                Vector3 dir = position - navMeshAgents[i].transform.position;
-                navMeshAgents[i].transform.position += dir * 10f * Time.deltaTime;
+                //Vector3 dir = position - navMeshAgents[i].transform.position;
+                //navMeshAgents[i].transform.position += dir * 10f * Time.deltaTime;
+                //navMeshAgents[i].GetComponent<NavAgentTest>().NoMoreMember();
+                navMeshAgents.RemoveAt(i);
             }
         }
     }
