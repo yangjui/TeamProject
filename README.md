@@ -13,6 +13,18 @@ https://github.com/yangjui/TeamProject
 [할일.txt](https://github.com/yangjui/TeamProject/files/11059037/default.txt)
 
 
+브랜치 : 
+
+
+1. 각자 개인 이름 브랜치
+
+
+2. develop - 머지된 브랜치
+
+
+3. master - 최종 브랜치
+
+
 
 이거는 나중에 정리할게요~
 ![KakaoTalk_20230323_174909623](https://user-images.githubusercontent.com/71171290/227151076-146265bd-5ed1-450a-927a-22fa534f1d61.jpg)
