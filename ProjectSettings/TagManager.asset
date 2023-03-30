@@ -9,6 +9,8 @@ TagManager:
   - ExplosiveBarrel
   - Platform
   - Enemy
+  - Agent
+  - Map
   layers:
   - Default
   - TransparentFX

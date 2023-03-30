@@ -9,9 +9,9 @@ public class DropFleeing : MonoBehaviour
     private NavAgentManager navAgentManager = null;
     [SerializeField] 
     private GameObject obstacle;
-    private List<NavMeshAgent> agents = new List<NavMeshAgent>();
-    private List<GameObject> obstacles;
     private float destroyTIme = 3f;
+    private Vector3 point;
+
 
     private void Start()
     {
@@ -26,18 +26,20 @@ public class DropFleeing : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray.origin, ray.direction, out hitInfo))
             {
+                point = hitInfo.point;
                 GameObject newOBJ = Instantiate(obstacle, hitInfo.point, obstacle.transform.rotation);
-                navAgentManager.DetectNewObstacle(hitInfo.point);
+                navAgentManager.DetectNewObstacle(point);
                 Destroy(newOBJ, destroyTIme);
-                StartCoroutine("Return");
+                Invoke("Return", destroyTIme);
             }
         }
     }
 
-    private IEnumerator Return()
+    private void Return()
     {
-        yield return new WaitForSeconds(destroyTIme);
         navAgentManager.ResetAgnet();
     }
+
+
 
 }

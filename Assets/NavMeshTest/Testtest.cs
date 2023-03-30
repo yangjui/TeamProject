@@ -10,13 +10,11 @@ public class Testtest : MonoBehaviour
     private void OnBecameInvisible()
     {
         animator.enabled = false;
-        Debug.Log("안보여");
     }
 
     private void OnBecameVisible()
     {
         animator.enabled = true;
-        Debug.Log("잘보여");
     }
 
 }

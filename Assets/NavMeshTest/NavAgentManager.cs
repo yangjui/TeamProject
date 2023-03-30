@@ -16,11 +16,11 @@ public class NavAgentManager : MonoBehaviour
 
     private List<NavMeshAgent> navMeshAgents = new List<NavMeshAgent>();
 
-    private float maxSpeed = 3f;
-    private float minSpeed = 7f;
+    private float maxSpeed = 2f;
+    private float minSpeed = 5f;
 
-    private float detectionRadius = 5f;
-    private float fleeRadius = 10f;
+    private float detectionRadius = 10f;
+    private float blackHoleRadius = 7f;
 
 
     private void Awake()
@@ -66,27 +66,44 @@ public class NavAgentManager : MonoBehaviour
     {
         for (int i = 0; i < navMeshAgents.Count; ++i)
         {
-           //ResetPath();
-           navMeshAgents[i].speed = Random.Range(minSpeed, maxSpeed);
-           navMeshAgents[i].angularSpeed = 120f;
+            if (navMeshAgents[i].speed >= 10f)
+            {
+                navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
+                navMeshAgents[i].speed = Random.Range(minSpeed, maxSpeed);
+                navMeshAgents[i].angularSpeed = 120f;
+            }
         }
     }
 
     public void DetectNewObstacle(Vector3 position)
     {
-        for(int i = 0; i < navMeshAgents.Count; ++i)
+        for (int i = 0; i < navMeshAgents.Count; ++i)
         {
-            if(Vector3.Distance(position, navMeshAgents[i].transform.position) < detectionRadius)
+            if (Vector3.Distance(position, navMeshAgents[i].transform.position) < detectionRadius && Vector3.Distance(position, navMeshAgents[i].transform.position) > blackHoleRadius)
             {
-                Vector3 FleeDirection = (navMeshAgents[i].transform.position = position).normalized;
-                Vector3 newgoal = navMeshAgents[i].transform.position + FleeDirection * fleeRadius;
-
+                Debug.Log(navMeshAgents[i].name + "Fleeing Active");
                 navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
                 navMeshAgents[i].speed = 10f;
                 navMeshAgents[i].angularSpeed = 500f;
             }
         }
     }
+
+    public void DetectBlackHole(Vector3 position)
+    {
+        Debug.Log("Active");
+        for (int i = 0; i < navMeshAgents.Count; ++i)
+        {
+            if (Vector3.Distance(position, navMeshAgents[i].transform.position) < blackHoleRadius)
+            {
+                //navMeshAgents[i].ResetPath();
+                Vector3 dir = position - navMeshAgents[i].transform.position;
+                navMeshAgents[i].transform.position += dir * 10f * Time.deltaTime;
+            }
+        }
+    }
+
+
 
     //private void ResetPath()
     //{
