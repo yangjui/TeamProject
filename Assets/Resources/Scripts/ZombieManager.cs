@@ -17,7 +17,7 @@ public class ZombieManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             Zombie zombie = child.GetComponent<Zombie>();
-            Debug.Log(zombie);
+
             if (zombie != null)
             {
                 zombies.Add(zombie);

@@ -18,11 +18,6 @@ public class PathTrigger : MonoBehaviour
         }
     }
 
-    public string ZombieName(string name)
-    {
-        return name;
-    }
-
     public Vector3  pathPosition()
     {
         return this.transform.position;

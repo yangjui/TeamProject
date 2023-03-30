@@ -75,6 +75,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Bullet\BulletScript.cs" />
     <Compile Include="Assets\Scripts\NavMeshTest\DropFleeing.cs" />
+    <Compile Include="Assets\AttackZombie.cs" />
     <Compile Include="Assets\Scripts\SoundTest\PlayerMove.cs" />
     <Compile Include="Assets\Resources\Scripts\Zombie.cs" />
     <Compile Include="Assets\Scripts\SoundTest\PlaySound.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Resources\ExternalAssets\Low Poly FPS Pack - Free (Sample)\Components\Scripts\Misc\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\PopupUI\PopupUIHeader.cs" />
+    <Compile Include="Assets\BoundaryTrigger.cs" />
     <Compile Include="Assets\Scripts\Weapon\ObjectPool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
@@ -139,8 +141,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerRotate.cs" />
     <Compile Include="Assets\Scripts\SoundTest\SoundManager.cs" />
-    <Compile Include="Assets\BoundaryTrigger.cs" />
-    <Compile Include="Assets\AttackZombie.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

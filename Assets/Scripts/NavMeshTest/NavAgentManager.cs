@@ -54,7 +54,6 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
-
     public List<NavMeshAgent> GetNavMeshAgents()
     {
         return navMeshAgents;

@@ -9,11 +9,10 @@ public class Zombie : MonoBehaviour
     [SerializeField] private GameObject dead;
     [SerializeField] private float attackCoolTime = 0.5f;
     [SerializeField] private float zombieAttackDamage = 10f;
-    [SerializeField] private float zombieHealth = 1000f;
+    [SerializeField] private float zombieHealth = 100f;
     [SerializeField] private BoxCollider triggerCollider;
     [SerializeField] private GameObject attackZombieL;
     [SerializeField] private GameObject attackZombieR;
-
 
     private float currentHealth;
     private bool isMovingSelf = false;
@@ -39,7 +38,6 @@ public class Zombie : MonoBehaviour
         {
             agent.isStopped = true; // 네브에이전트 꺼주기
             Dead();
-
         }
 
         if (isMovingSelf)
@@ -108,13 +106,6 @@ public class Zombie : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision _collision)
-    {
-
-    }
-
-
-    // 거리 멀어지면 다시 걸어옴. 플레이어와 멀어지는 경우가 있으려나 싶긴 한데 일단 혹시 몰라서 넣어둠 -> 차후 다시 얘기 해 볼것
     private void OnTriggerExit(Collider _other)
     {
         if (_other.CompareTag("PlayerAround"))
