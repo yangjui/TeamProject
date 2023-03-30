@@ -179,6 +179,10 @@ public class WeaponAssaultRifle : WeaponBase
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactObjectPool.SpawnImpact(hit);
+            //if (hit.transform.CompareTag("Enemy")) // 대미지 주는 함수
+            //{
+            //    hit.transform.GetComponent<Enemy>().Takedamage(weaponSetting.damage);
+            //}
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
     }

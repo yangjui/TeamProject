@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponName { AssaultRifle = 0, Laser, HandGrenade, GravityGrenade }
+public enum WeaponName { 돌격소총 = 0, 레이저라이플, 수류탄, 중력자탄 }
 
 [System.Serializable]
 public struct WeaponSetting

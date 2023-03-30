@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType { AssaultRifle = 0, Laser, HandGrenade, GravityGrenade }
+public enum WeaponType { 돌격소총 = 0, 레이저라이플, 수류탄, 중력자탄 }
 
 // 이벤트 클래스
 // 특정 상황에서 호출될 때 마다 매개변수값을 받아서 원하는 함수들을 실행시킨다.

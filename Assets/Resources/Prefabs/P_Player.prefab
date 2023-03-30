@@ -373,8 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e148b633c07d3849bd92c2477107819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateXSpeed: 2
-  rotateYSpeed: 2
 --- !u!114 &988425925576858188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
       propertyPath: m_Name
-      value: Laser
+      value: LaserRifle
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
       propertyPath: m_Layer

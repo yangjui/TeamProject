@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7f2297143c0d2bd4596d507584dbd089
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - LINE Seed Sans KR
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 162f0075401834a44bf75ffb466116db, type: 3}
+  - {fileID: 12800000, guid: 5424edac33ce63b47a9e0446a2587e3f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

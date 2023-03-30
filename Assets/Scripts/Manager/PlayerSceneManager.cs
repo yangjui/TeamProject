@@ -9,8 +9,7 @@ public class PlayerSceneManager : MonoBehaviour
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private Image option;
-    [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private OptionSetting optionSetting;
 
     private bool isStop = false;
 
@@ -18,14 +17,7 @@ public class PlayerSceneManager : MonoBehaviour
     {
         playerManager.OnChangeAimModeDelegate(ChangeAimMode);
         playerManager.Init();
-
-        VolumeSetting();
-    }
-
-    private void VolumeSetting() // 볼륨설정값 저장
-    {
-        float val = SoundManager.instance.VolumeSetting();
-        sfxSlider.value = Mathf.Pow(10, val / 20f);
+        optionSetting.Init();
     }
 
     private void Update()
@@ -57,5 +49,23 @@ public class PlayerSceneManager : MonoBehaviour
             option.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
+    }
+
+    public void OptionClose()
+    {
+        isStop = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        option.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void OnTitleScene()
+    {
+        isStop = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 1f;
+        LoadingSceneController.LoadScene("TitleScene");
     }
 }
