@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class NavTestPlayer : MonoBehaviour
 {
- 
-
     [Header("Speed")]
 
     [SerializeField]

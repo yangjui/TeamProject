@@ -431,6 +431,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8859547540926176392}
     m_Modifications:
+    - target: {fileID: 274424846091009396, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274424846091009396, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3100228499646435455, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}
       propertyPath: m_Name
       value: BlackHoleTest
@@ -461,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4822387464333557930, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.796
       objectReference: {fileID: 0}
     - target: {fileID: 4822387464333557930, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}
       propertyPath: m_LocalPosition.z
@@ -501,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7570588208930572727, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}
       propertyPath: m_Radius
-      value: 1.4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cd011ce04098a643ae864924bed0c42, type: 3}

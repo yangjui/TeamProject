@@ -6686,6 +6686,7 @@ GameObject:
   - component: {fileID: 114648241757291754}
   - component: {fileID: 5904358652685148358}
   - component: {fileID: 7206453600389527468}
+  - component: {fileID: 5593077166451566695}
   m_Layer: 0
   m_Name: TESTZombie2
   m_TagString: Agent
@@ -6888,6 +6889,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!114 &5593077166451566695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948390032194472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7666fbd97d965a499f86624ecc9c3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1973817139255376
 GameObject:
   m_ObjectHideFlags: 0

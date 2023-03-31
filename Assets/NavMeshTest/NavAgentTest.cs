@@ -6,19 +6,24 @@ using UnityEngine.AI;
 public class NavAgentTest : MonoBehaviour
 {
     private NavMeshAgent navAgent = null;
-    [SerializeField] NavTestPlayer player = null;
+    private NavTestPlayer player = null;
 
     private float maxSpeed = 2f;
     private float minSpeed = 5f;
 
-    private float detectionRadius = 10f;
     private float blackHoleRadius = 7f;
+    private float detectionRadius = 10f;
+
 
     private bool isMember = true;
+    private bool isInblackHole = false;
+
+    private Vector3 blackHolePosition;
 
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        player = FindObjectOfType<NavTestPlayer>();
     }
 
 
@@ -26,7 +31,15 @@ public class NavAgentTest : MonoBehaviour
     {
         if(!isMember)
         {
-            navAgent.SetDestination(player.GivePlayerPosition());
+            if(isInblackHole == false)
+                navAgent.SetDestination(player.GivePlayerPosition());
+
+            if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
+            {
+                navAgent.enabled = false;
+                Vector3 dir = blackHolePosition - transform.position;
+                transform.position += dir * 4f * Time.deltaTime;
+            }
         }
     }
 
@@ -38,11 +51,25 @@ public class NavAgentTest : MonoBehaviour
 
     public void HitByBlackHole(Vector3 position)
     {
-       if (Vector3.Distance(position, transform.position) < blackHoleRadius)
-       {
-            Vector3 dir = position - transform.position;
-            transform.position += dir * 10f * Time.deltaTime;
-       }
+        blackHolePosition = position;
+        isInblackHole = true;
     }
 
+    public void ResetAgent()
+    {
+        isInblackHole = false;
+        navAgent.enabled = true;
+    }
+
+
+    public void DetectNewObstacle(Vector3 position)
+    {
+        if (Vector3.Distance(position, transform.position) < detectionRadius && Vector3.Distance(position, transform.position) > blackHoleRadius)
+        {
+            //navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
+            navAgent.speed = 10f;
+            navAgent.angularSpeed = 500f;
+        }
+        
+    }
 }

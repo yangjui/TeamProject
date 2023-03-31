@@ -81,7 +81,6 @@ public class NavAgentManager : MonoBehaviour
         {
             if (Vector3.Distance(position, navMeshAgents[i].transform.position) < detectionRadius && Vector3.Distance(position, navMeshAgents[i].transform.position) > blackHoleRadius)
             {
-                Debug.Log(navMeshAgents[i].name + "Fleeing Active");
                 navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
                 navMeshAgents[i].speed = 10f;
                 navMeshAgents[i].angularSpeed = 500f;
@@ -96,9 +95,8 @@ public class NavAgentManager : MonoBehaviour
         {
             if (Vector3.Distance(position, navMeshAgents[i].transform.position) < blackHoleRadius)
             {
-                //Vector3 dir = position - navMeshAgents[i].transform.position;
-                //navMeshAgents[i].transform.position += dir * 10f * Time.deltaTime;
-                //navMeshAgents[i].GetComponent<NavAgentTest>().NoMoreMember();
+                navMeshAgents[i].GetComponent<NavAgentTest>().NoMoreMember();
+                //Debug.Log(navMeshAgents[i].name + "is No more manber");
                 navMeshAgents.RemoveAt(i);
             }
         }

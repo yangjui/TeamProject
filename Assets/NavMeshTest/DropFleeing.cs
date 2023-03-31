@@ -13,15 +13,12 @@ public class DropFleeing : MonoBehaviour
     private Vector3 point;
 
 
-    private void Start()
-    {
-        navAgentManager.GetNavMeshAgents();
-    }
 
     private void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
+            navAgentManager.GetNavMeshAgents();
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray.origin, ray.direction, out hitInfo))
@@ -31,7 +28,7 @@ public class DropFleeing : MonoBehaviour
                 navAgentManager.DetectNewObstacle(point);
                 Destroy(newOBJ, destroyTIme);
                 Invoke("Return", destroyTIme);
-            }
+            } 
         }
     }
 
