@@ -21,6 +21,8 @@ public class Lasertest : MonoBehaviour
     [SerializeField]
     private GameObject fireEffectPrefab;
     [SerializeField]
+    private GameObject groundEffectPrefab;
+    [SerializeField]
     private Transform chargeEffectLocation;
     [SerializeField]
     private Transform fireEffectLocation;
@@ -64,7 +66,7 @@ public class Lasertest : MonoBehaviour
             if (currentChargingTime >= chargingTime)
             {
                 //Debug.DrawRay(transform.position, transform.forward * Maxrange, Color.red, 0.5f);
-                float sphereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
+                float sphereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z) * 2;
                 hits = Physics.SphereCastAll(transform.position, sphereScale, 
                     transform.forward, Maxrange);
 
@@ -80,8 +82,10 @@ public class Lasertest : MonoBehaviour
     {
         if (fireEffectPrefab != null)
         {
-            GameObject fire = Instantiate(fireEffectPrefab, transform.position, transform.rotation);
+            GameObject fire = Instantiate(fireEffectPrefab, fireEffectLocation.position, transform.rotation);
+            fire.transform.localScale *= 2f;
             LineRenderer lineRenderer = fire.GetComponent<LineRenderer>();
+
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -93,6 +97,7 @@ public class Lasertest : MonoBehaviour
                 //    hit.transform.GetComponent<MeshRenderer>().material.color = Color.red;
                 //}
 
+                
                 Target target = hit.transform.GetComponent<Target>();
                 if (target != null)
                 {
@@ -105,8 +110,21 @@ public class Lasertest : MonoBehaviour
                     lineRenderer.SetPosition(0, transform.position);
                     lineRenderer.SetPosition(1, hit.point);
                 }
+                //Vector3 startPos = new Vector3(0f, -1f, 0f);
+                //Vector3 endPos = new Vector3(0f, -1f, 0f);
+
+                RaycastHit[] groundHits = Physics.RaycastAll(hit.point, Vector3.down);
+                if (groundHits.Length > 0)
+                {                  
+                    Vector3 groundEffectPosition = groundHits[0].point;
+                    GameObject groundEffect = Instantiate(groundEffectPrefab, groundEffectPosition, Quaternion.identity);
+                    groundEffect.transform.localScale /= 2f; 
+
+                    Destroy(groundEffect, 4f);
+                }
             }
 
+            //Destroy(ground, 3f);
             Destroy(fire, 1.5f);
         }
     }
