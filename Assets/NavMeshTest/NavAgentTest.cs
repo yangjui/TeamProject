@@ -32,7 +32,9 @@ public class NavAgentTest : MonoBehaviour
         if(!isMember)
         {
             if(isInblackHole == false)
+            {
                 navAgent.SetDestination(player.GivePlayerPosition());
+            }
 
             if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
             {
@@ -65,11 +67,9 @@ public class NavAgentTest : MonoBehaviour
     public void DetectNewObstacle(Vector3 position)
     {
         if (Vector3.Distance(position, transform.position) < detectionRadius && Vector3.Distance(position, transform.position) > blackHoleRadius)
-        {
-            //navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
+        { 
             navAgent.speed = 10f;
             navAgent.angularSpeed = 500f;
         }
-        
     }
 }
