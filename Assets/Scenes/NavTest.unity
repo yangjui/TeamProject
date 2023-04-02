@@ -1390,6 +1390,7 @@ MonoBehaviour:
   runSpeed: 10
   jump: 10
   gravity: 9.81
+  grenade: {fileID: 3388418423442505836, guid: e52181631595d1e4ca6ea3168f85db3f, type: 3}
 --- !u!143 &1506499647
 CharacterController:
   m_ObjectHideFlags: 0

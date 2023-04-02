@@ -32,8 +32,8 @@ public class BlackHole : MonoBehaviour
         {
             if (agents[i].CompareTag("Agent"))
             {
-                Debug.Log("BlackHole Update");
-                Debug.Log(agents[i].name + "hitByblackHole");
+               // Debug.Log("BlackHole Update");
+                //Debug.Log(agents[i].name + "hitByblackHole");
                 agents[i].GetComponent<NavAgentTest>().HitByBlackHole(this.transform.position);
             }
         }

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))] // 컴포넌트 자동 추가!
@@ -17,6 +18,10 @@ public class NavTestPlayer : MonoBehaviour
     [SerializeField]
     private float gravity = 9.81f;
 
+    [SerializeField]
+    private GameObject grenade = null;
+
+    private bool isGrenadeRady = false;
 
     [Space(10f)]
 
@@ -61,6 +66,16 @@ public class NavTestPlayer : MonoBehaviour
             {
                 MoveDir.y = jump;
             }
+
+            if(Input.GetKey(KeyCode.Alpha1))
+            {
+                SetGrenade();
+            }
+
+            if(Input.GetMouseButtonDown(0))
+            {
+                ThrowGrenade();
+            }
         }
         MoveDir.y -= gravity * Time.deltaTime;
         player.Move(MoveDir * Time.deltaTime);
@@ -75,5 +90,27 @@ public class NavTestPlayer : MonoBehaviour
     public Vector3 GivePlayerPosition()
     {
         return transform.position;
+    }
+
+    private void SetGrenade()
+    {
+        isGrenadeRady = true;
+    }
+
+    private void ThrowGrenade()
+    {
+        if (!isGrenadeRady) return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+
+        if(Physics.Raycast(ray, out rayHit, 100f))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 2f;
+
+            GameObject grenadeOBJ = Instantiate(grenade, GivePlayerPosition(), player.transform.rotation);
+            grenadeOBJ.GetComponent<DropFleeing>().grenadeRigidbody(nextVec);
+        }
     }
 }
