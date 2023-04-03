@@ -26,7 +26,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 30551
+  controlID: 3554
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 30552
+  controlID: 3555
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -418,9 +418,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.050449606, y: 2.191421, z: -7.987504}
+    m_Target: {x: 0.041609913, y: 2.1891549, z: -12.846696}
     speed: 2
-    m_Value: {x: -0.050449606, y: 2.191421, z: -7.987504}
+    m_Value: {x: 0.041609913, y: 2.1891549, z: -12.846696}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -467,9 +467,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0003640658, y: 0.99966997, z: -0.016808864, w: 0.023107076}
+    m_Target: {x: -0.0007882936, y: 0.99893355, z: 0.044669423, w: 0.017092537}
     speed: 2
-    m_Value: {x: 0.0003640373, y: 0.9995917, z: -0.016807547, w: 0.023105266}
+    m_Value: {x: -0.00078823196, y: 0.9988555, z: 0.04466593, w: 0.0170912}
   m_Size:
     m_Target: 1.6583124
     speed: 2
@@ -707,8 +707,8 @@ MonoBehaviour:
     y: 0
     width: 298
     height: 947
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 10}
@@ -745,9 +745,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: b4640000
+      m_SelectedIDs: aa21ffff
       m_LastClickedID: 0
-      m_ExpandedIDs: b24dfdff904ffdff984ffdffb84ffdffd04ffdffd84ffdfff04ffdfff84ffdfffc4ffdff1251fdff545efdff40acfdffc8b9fdffa8d1fdff50dbfdff56dffdff2afcfdff6607feff720bfeffdc47feff58b3feffc0bdfeff0ecefeffcaeefeff42f9fefff40bffffb217ffff2821fffffa29ffffd833ffff4c42ffff7e4bffffbe5fffff126affff0873fffff683ffffc685ffff32fbffff165b000046a3000060b7000076d5000078da00003ceb0000cceb0000d0eb0000c81001000c1201009419010098190100
+      m_ExpandedIDs: 0026ffffd027ffffe2befffff0d6ffffd0eaffffa0ecffff26fbffffa47e000074cb0000f4cb0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -839,22 +839,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Weapon
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Weapon
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\admin\Desktop\ZombieSlayer
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9c640000
-    m_LastClickedID: 25756
-    m_ExpandedIDs: 000000006e64000070640000726400007464000076640000786400007a6400007c640000946400009a640000f6ec000000ca9a3b
+    m_SelectedIDs: 7a6b0000
+    m_LastClickedID: 27514
+    m_ExpandedIDs: 00000000346b0000386b00003a6b00003c6b00003e6b0000406b0000426b0000446b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -882,7 +882,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006e64000070640000726400007464000076640000786400007a6400007c6400009464000000ca9a3b
+    m_ExpandedIDs: 00000000346b0000386b00003a6b00003c6b00003e6b0000406b0000426b0000446b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -907,8 +907,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: b4640000
-    m_LastClickedInstanceID: 25780
+    m_SelectedInstanceIDs: aa21ffff
+    m_LastClickedInstanceID: -56918
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 64900000805e000044620000a0600000405e000000000000385d0000ec7000001c710000fa700000167100000671000022710000ee700000f4700000007100000c710000767c0000707c00007c7c0000d66e0000125b0000945e00003a5e0000fc5e0000
     m_RenameOverlay:
