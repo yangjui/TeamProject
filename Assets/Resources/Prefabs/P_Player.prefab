@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 988425925576858187}
   m_Layer: 6
   m_Name: P_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   runSpeed: 5
-  maxHp: 0
+  maxHp: 100
+  currentHp: 0
 --- !u!114 &988425925576858187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,7 +425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &625132322077172523
 Transform:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class NavAgentManager : MonoBehaviour
 
     private List<NavMeshAgent> navMeshAgents = new List<NavMeshAgent>();
 
-    private float maxSpeed = 5f;
+    private float maxSpeed = 3f;
     private float minSpeed = 1f;
 
     private float detectionRadius = 5f;
@@ -80,8 +80,8 @@ public class NavAgentManager : MonoBehaviour
                 Vector3 newgoal = navMeshAgents[i].transform.position + FleeDirection * fleeRadius;
 
                 navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
-                navMeshAgents[i].speed = 10f;
-                navMeshAgents[i].angularSpeed = 500f;
+                navMeshAgents[i].speed = 8f;
+                navMeshAgents[i].angularSpeed = 300f;
             }
         }
     }

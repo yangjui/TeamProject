@@ -29,7 +29,6 @@ public class WeaponAssaultRifle : WeaponBase
 
     public bool isAimMode = false;
 
-
     private enum AmmoType { AssaultRifle, laser };
 
     private void Awake()
@@ -44,13 +43,6 @@ public class WeaponAssaultRifle : WeaponBase
         weaponSetting.currentAmmo = weaponSetting.maxAmmo;
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
-
-        Invoke("FetchZombie", 0.5f);
-    }
-
-    private void FetchZombie()
-    {
-        GameObject zombieManager = GameObject.Find("ZombieManager");
     }
 
     private void OnEnable()
@@ -85,9 +77,7 @@ public class WeaponAssaultRifle : WeaponBase
 
         anim.OnReload();
         if (isAimMode)
-        {
             StartCoroutine(OnReloadingModeChange());
-        }
         while (true)
         {
             if (!isReload)
@@ -119,7 +109,6 @@ public class WeaponAssaultRifle : WeaponBase
         float start = mainCamera.fieldOfView;
         float end = anim.AimModeIs ? aimModeFOV : defaultModeFOV;
 
-
         isModeChange = true;
         changeAimModeCallback?.Invoke(isAimMode);
         while (percent < 0.5)
@@ -138,7 +127,6 @@ public class WeaponAssaultRifle : WeaponBase
         float current = 0f;
         float percent = 0f;
         float time = 0.35f;
-
 
         float start = mainCamera.fieldOfView;
 
@@ -277,7 +265,6 @@ public class WeaponAssaultRifle : WeaponBase
             TwoStepRaycast();
         }
     }
-
 
     /// 애니메이션함수, 콜백
 

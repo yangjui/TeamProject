@@ -10,7 +10,8 @@ public class PlayerStatus : MonoBehaviour
 
     [Header("# Player HP")]
     [SerializeField] private float maxHp;
-    private float currentHp;
+    
+    public float currentHp;
 
     public float WalkSpeed => walkSpeed;
     public float RunSpeed => runSpeed;
@@ -29,10 +30,8 @@ public class PlayerStatus : MonoBehaviour
 
         currentHp = currentHp - _damage > 0 ? currentHp - _damage : 0;
 
-        if (currentHp == 0)
-        {
-            return true;
-        }
+        if (currentHp == 0) return true;
+
         return false;
     }
 }

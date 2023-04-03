@@ -3,18 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Platform
+  - Target
+  - Boundary
+  - Zombie
+  - PlayerAround
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Dead
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Sound
+  - Platform
+  - Zombie
   - 
   - 
   - 

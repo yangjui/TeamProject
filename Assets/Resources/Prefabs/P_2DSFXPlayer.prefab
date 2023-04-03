@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5732676510553706393}
   - component: {fileID: 5732676510553706392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_2DSFXPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
