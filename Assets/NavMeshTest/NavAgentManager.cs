@@ -86,7 +86,7 @@ public class NavAgentManager : MonoBehaviour
                 navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
                 navMeshAgents[i].speed = 15f;
                 navMeshAgents[i].angularSpeed = 500f;
-                Debug.Log(navMeshAgents[i].name + "isFleeing");
+                //Debug.Log(navMeshAgents[i].name + "isFleeing");
             }
         }
     }

@@ -16,6 +16,7 @@ public class NavAgentTest : MonoBehaviour
     private float blackHoleRadius = 7f;
     private float detectionRadius = 10f;
 
+    private float resetTime = 5f;
 
     private bool isMember = true;
     private bool isInblackHole = false;
@@ -35,19 +36,19 @@ public class NavAgentTest : MonoBehaviour
         if(!isMember)
         {
             InTheBlackHole();
-            TrackPlayer();
+            //TrackPlayer();
+
+            if(isInblackHole)
+            {
+                resetTime -= Time.deltaTime;
+                if(resetTime <= 0)
+                {
+                    Ray();
+                }
+            }
         }
     }
 
-    private void OnBecameInvisible()
-    {
-        animator.enabled = false;
-    }
-
-    private void OnBecameVisible()
-    {
-        animator.enabled = true;
-    }
 
     private void TrackPlayer()
     {
@@ -55,16 +56,19 @@ public class NavAgentTest : MonoBehaviour
         navAgent.SetDestination(player.GivePlayerPosition());
     }
 
+
+
     private void InTheBlackHole()
     {
         if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
         {
+            Debug.Log(transform.name + ": is inblackHole");
             navAgent.enabled = false;
             Vector3 dir = blackHolePosition - transform.position;
-            transform.position += dir * 3f * Time.deltaTime;
-            //transform.RotateAround(blackHolePosition, dir, 3f * Time.deltaTime);
+            transform.position += dir * 3f * Time.deltaTime;  
         }
     }
+
 
     public void NoMoreMember()
     {
@@ -78,10 +82,17 @@ public class NavAgentTest : MonoBehaviour
         isInblackHole = true;
     }
 
-    public void ResetAgent()
+    public void StopAnimation()
     {
+        animator.enabled = false; // 땅에 떨어지는 순간으로 다시 애니메이션 작동하도록 만들어야함
         isInblackHole = false;
+    }
+
+    public void ResetAgent() //땅에 떨어지는 순간으로 바꿔야함
+    {
         navAgent.enabled = true;
+        animator.enabled = true;
+        resetTime = 5f;
     }
 
     public void DetectNewObstacle(Vector3 position)
@@ -90,6 +101,15 @@ public class NavAgentTest : MonoBehaviour
         { 
             navAgent.speed = 10f;
             navAgent.angularSpeed = 500f;
+        }
+    }
+
+    private void Ray()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.1f))
+        {
+            ResetAgent();
         }
     }
 }

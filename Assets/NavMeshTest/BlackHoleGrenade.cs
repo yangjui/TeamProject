@@ -12,7 +12,7 @@ public class BlackHoleGrenade : MonoBehaviour
     [SerializeField] 
     private GameObject obstacle;
 
-    private float destroyTIme = 3f;
+    private float destroyTIme = 7f;
     private Vector3 point;
 
     private void Awake()

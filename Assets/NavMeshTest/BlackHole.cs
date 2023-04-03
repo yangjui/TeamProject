@@ -24,10 +24,7 @@ public class BlackHole : MonoBehaviour
                 agents.Add(other.gameObject);
             }
         }
-    }
 
-    private void Update()
-    {
         for (int i = 0; i < agents.Count; ++i)
         {
             if (agents[i].CompareTag("Agent"))
@@ -37,11 +34,18 @@ public class BlackHole : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+
+    }
+
     private void OnDestroy()
     {
+        navAgentManager.ResetAgnet();
+
         for (int i = 0; i < agents.Count; ++i)
         {
-            agents[i].GetComponent<NavAgentTest>().ResetAgent();
+            agents[i].GetComponent<NavAgentTest>().StopAnimation();
         }
     }
 

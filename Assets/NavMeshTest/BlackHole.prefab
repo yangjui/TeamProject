@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackHoleCore 1
       objectReference: {fileID: 0}
+    - target: {fileID: 579948216698898369, guid: 8b4efd44b5ba7814f82a25d227f37834, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7081326017350481089, guid: 8b4efd44b5ba7814f82a25d227f37834, type: 3}
       propertyPath: m_RootOrder
       value: 8
