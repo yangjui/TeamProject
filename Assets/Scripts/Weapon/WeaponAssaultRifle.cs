@@ -186,6 +186,7 @@ public class WeaponAssaultRifle : WeaponBase
         Vector3 targetPoint = Vector3.zero;
 
         ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f + shotVec);
+        
         if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
         {
             // 레이가 맞는다면 타겟포인트는 맞은대상
@@ -197,7 +198,7 @@ public class WeaponAssaultRifle : WeaponBase
             targetPoint = ray.origin + ray.direction * weaponSetting.attackDistance;
         }
         Debug.DrawRay(ray.origin, ray.direction * weaponSetting.attackDistance, Color.red);
-
+        
         // 위에서 나온 타겟포인트에서 총구방향을 빼면 총구에서 타겟포인트로 향하는 방향을 구할 수 있음
         Vector3 attackDirection = (targetPoint - bulletSpawnPoint.position).normalized;
         // 총구에서 위 방향으로 레이를 쏨
