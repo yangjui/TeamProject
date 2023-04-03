@@ -32,23 +32,29 @@ public class PlayerSceneManager : MonoBehaviour
 
     private void Option()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isStop)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isStop = true;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-            option.gameObject.SetActive(true);
-            Time.timeScale = 0f;
+            if (!isStop)
+            {
+                isStop = true;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                option.gameObject.SetActive(true);
+                Time.timeScale = 0f;
+            }
+
+            else if (isStop)
+            {
+                isStop = false;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                option.gameObject.SetActive(false);
+                Time.timeScale = 1f;
+            }
         }
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && isStop)
-        {
-            isStop = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            option.gameObject.SetActive(false);
-            Time.timeScale = 1f;
-        }
+        if(Input.GetKeyDown(KeyCode.KeypadEnter))
+            LoadingSceneController.LoadScene("PlayScene");
     }
 
     public void OptionClose()

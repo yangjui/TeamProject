@@ -129,7 +129,8 @@ public class Zombie : MonoBehaviour
         anim.SetBool("isRun", true);
     }
 
-
+                //if (hit.transform.TryGetComponent(out Zombie zombie))
+                //zombie.CurrentHealthZombie(30f);
 
     private float CheckPlayerPosition()
     {
@@ -151,7 +152,7 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    public void CurrentHealthZombie(float playerAttackDamage)
+    public void Takedamage(float playerAttackDamage)
     {
         currentHealth = currentHealth - playerAttackDamage;
     }

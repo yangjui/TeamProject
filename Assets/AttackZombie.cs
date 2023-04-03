@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class AttackZombie : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider _other) // 다른 오브젝트의 이름!
+    private bool isColliding = false; // 충돌 여부를 저장할 변수
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (_other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isColliding) // isColliding 변수가 false인 경우에만 처리
         {
-            _other.GetComponent<PlayerStatus>().DecreaseHP(5);
-            Debug.Log(_other.GetComponent<PlayerStatus>().currentHp);
+            other.GetComponent<PlayerStatus>().DecreaseHP(5);
+            Debug.Log(other.GetComponent<PlayerStatus>().currentHp);
+            isColliding = true; // 충돌 상태를 true로 변경
+            StartCoroutine(ResetCollisionState()); // 충돌 상태를 0.1초 뒤에 false로 변경
         }
+    }
+
+    IEnumerator ResetCollisionState()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isColliding = false;
     }
 }

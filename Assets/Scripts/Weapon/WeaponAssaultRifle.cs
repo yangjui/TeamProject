@@ -27,7 +27,15 @@ public class WeaponAssaultRifle : WeaponBase
     private float defaultModeFOV = 60f;     // 기본모드에서의 카메라 FOV
     private float aimModeFOV = 30f;         // Aim모드에서의 카메라 FOV
 
+    private int shotCount = 0;
+    private float lastShotTime;
+    private float currentShotTime;
+    private float shotVaildTime = 0.3f;
+    private bool shotIsVaild;
+    private Vector2 shotVec;
+
     public bool isAimMode = false;
+
 
     private enum AmmoType { AssaultRifle, laser };
 
@@ -55,6 +63,11 @@ public class WeaponAssaultRifle : WeaponBase
         ResetVariables();
     }
 
+    private void Update()
+    {
+        ShotTimer();
+    }
+
     private IEnumerator OnAttackLoop()
     {
         while (true)
@@ -77,7 +90,9 @@ public class WeaponAssaultRifle : WeaponBase
 
         anim.OnReload();
         if (isAimMode)
+        {
             StartCoroutine(OnReloadingModeChange());
+        }
         while (true)
         {
             if (!isReload)
@@ -109,6 +124,7 @@ public class WeaponAssaultRifle : WeaponBase
         float start = mainCamera.fieldOfView;
         float end = anim.AimModeIs ? aimModeFOV : defaultModeFOV;
 
+
         isModeChange = true;
         changeAimModeCallback?.Invoke(isAimMode);
         while (percent < 0.5)
@@ -131,6 +147,7 @@ public class WeaponAssaultRifle : WeaponBase
         float start = mainCamera.fieldOfView;
 
         isModeChange = true;
+        isAimMode = !isAimMode;
         changeAimModeCallback?.Invoke(isAimMode);
         while (percent < 0.5)
         {
@@ -141,8 +158,18 @@ public class WeaponAssaultRifle : WeaponBase
             yield return null;
         }
         isModeChange = false;
-        isAimMode = !isAimMode;
         anim.AimModeIs = !anim.AimModeIs;
+    }
+
+    private IEnumerator ResetShotAfterDelay()
+    {
+        yield return new WaitForSeconds(shotVaildTime);
+
+        // 마지막 공격 이후 3초 이상이 지난 경우 콤보 카운트 초기화
+        if (Time.time - lastShotTime >= shotVaildTime)
+        {
+            shotCount = 0;
+        }
     }
 
     private void ResetVariables()
@@ -158,7 +185,7 @@ public class WeaponAssaultRifle : WeaponBase
         RaycastHit hit;
         Vector3 targetPoint = Vector3.zero;
 
-        ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
+        ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f + shotVec);
         if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
         {
             // 레이가 맞는다면 타겟포인트는 맞은대상
@@ -179,10 +206,83 @@ public class WeaponAssaultRifle : WeaponBase
             impactObjectPool.SpawnImpact(hit);
             bulletHoleObjectPool.SpawnImpact(hit);
 
-            if (hit.transform.TryGetComponent(out Zombie zombie))
-                zombie.CurrentHealthZombie(30f);
+            if (hit.transform.CompareTag("Zombie")) // 대미지 주는 함수
+            {
+                hit.transform.GetComponent<Zombie>().Takedamage(weaponSetting.damage);
+            }
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
+    }
+
+    private void ShotTimer()
+    {
+        // 현재 시간을 기록
+        currentShotTime = Time.time;
+
+        // 이전 공격 시간과의 차이를 계산하여 ShotIsVaild의 참거짓을 판단
+        shotIsVaild = currentShotTime - lastShotTime <= shotVaildTime;
+    }
+
+    private void ShotCount()
+    {
+        if (shotIsVaild)
+        {
+            // Shot 카운트 증가
+            shotCount++;
+        }
+        else // 유효 시간 내에 공격을 안 한 경우
+        {
+            // Shot 카운트 초기화 후 1부터 시작
+            shotCount = 1;
+        }
+        // 현재 공격 시간을 마지막 공격 시간으로 저장
+        lastShotTime = currentShotTime;
+
+        // 공격 후 shotVaildTime동안 공격이 없으면 Shot카운트 초기화
+        StartCoroutine(ResetShotAfterDelay());
+    }
+
+    private void ShotVec()
+    {
+        switch (shotCount)
+        {
+            case 0:
+                shotVec = Vector2.zero;
+                break;
+            case 1:
+                shotVec = Vector2.zero;
+                break;
+            case 2:
+                shotVec = Vector2.zero;
+                break;
+            case > 3:
+                shotVec = new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f));
+                break;
+                //case 4:
+                //    shotVec = new Vector2(1f, 0f);
+                //    break;
+                //case 5:
+                //    shotVec = new Vector2(0.5f, 0f);
+                //    break;
+                //case 6:
+                //    shotVec = new Vector2(0f, 0f);
+                //    break;
+                //case 7:
+                //    shotVec = new Vector2(-0.5f, 0f);
+                //    break;
+                //case 8:
+                //    shotVec = new Vector2(-1f, 0f);
+                //    break;
+                //case 9:
+                //    shotVec = new Vector2(-0.5f, 0f);
+                //    break;
+                //case 10:
+                //    shotVec = new Vector2(0f, 0f);
+                //    break;
+                //case > 10:
+                //    shotVec = new Vector2(0f, (shotCount - 10) * 0.03f);
+                //    break;
+        }
     }
 
     public override void StartWeaponAction(int type = 0)
@@ -244,6 +344,12 @@ public class WeaponAssaultRifle : WeaponBase
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
 
+            // 반동제어용 발수 카운트
+            ShotCount();
+
+            // 반동제어용 Vector 변환
+            ShotVec();
+
             // 탄 수 UI 업데이트
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
 
@@ -265,6 +371,7 @@ public class WeaponAssaultRifle : WeaponBase
             TwoStepRaycast();
         }
     }
+
 
     /// 애니메이션함수, 콜백
 

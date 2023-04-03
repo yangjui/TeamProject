@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 6169126630865536916, guid: 8acdc51c20c972f4d824ba303fa1140f, type: 3}
-  agentNum: 200
+  agentNum: 100
   paths:
   - {fileID: 489867998}
   - {fileID: 1037234835}
