@@ -8,6 +8,8 @@ public class NavAgentTest : MonoBehaviour
     private NavMeshAgent navAgent = null;
     private NavTestPlayer player = null;
 
+    private Animator animator = null;
+
     private float maxSpeed = 2f;
     private float minSpeed = 5f;
 
@@ -23,6 +25,7 @@ public class NavAgentTest : MonoBehaviour
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         player = FindObjectOfType<NavTestPlayer>();
     }
 
@@ -31,17 +34,35 @@ public class NavAgentTest : MonoBehaviour
     {
         if(!isMember)
         {
-            if(isInblackHole == false)
-            {
-                navAgent.SetDestination(player.GivePlayerPosition());
-            }
+            InTheBlackHole();
+            TrackPlayer();
+        }
+    }
 
-            if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
-            {
-                navAgent.enabled = false;
-                Vector3 dir = blackHolePosition - transform.position;
-                transform.position += dir * 4f * Time.deltaTime;
-            }
+    private void OnBecameInvisible()
+    {
+        animator.enabled = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        animator.enabled = true;
+    }
+
+    private void TrackPlayer()
+    {
+        if(isInblackHole) return;
+        navAgent.SetDestination(player.GivePlayerPosition());
+    }
+
+    private void InTheBlackHole()
+    {
+        if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
+        {
+            navAgent.enabled = false;
+            Vector3 dir = blackHolePosition - transform.position;
+            transform.position += dir * 3f * Time.deltaTime;
+            //transform.RotateAround(blackHolePosition, dir, 3f * Time.deltaTime);
         }
     }
 
@@ -62,7 +83,6 @@ public class NavAgentTest : MonoBehaviour
         isInblackHole = false;
         navAgent.enabled = true;
     }
-
 
     public void DetectNewObstacle(Vector3 position)
     {

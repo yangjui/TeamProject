@@ -44,8 +44,7 @@ public class NavTestPlayer : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (player.isGrounded)
-        {
+
             MoveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical") );
             MoveDir = transform.TransformDirection(MoveDir.normalized);
 
@@ -76,7 +75,7 @@ public class NavTestPlayer : MonoBehaviour
             {
                 ThrowGrenade();
             }
-        }
+
         MoveDir.y -= gravity * Time.deltaTime;
         player.Move(MoveDir * Time.deltaTime);
     }
@@ -100,17 +99,16 @@ public class NavTestPlayer : MonoBehaviour
     private void ThrowGrenade()
     {
         if (!isGrenadeRady) return;
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
 
         if(Physics.Raycast(ray, out rayHit, 100f))
         {
             Vector3 nextVec = rayHit.point - transform.position;
-            nextVec.y = 2f;
+            nextVec.y = 1f;
 
-            GameObject grenadeOBJ = Instantiate(grenade, GivePlayerPosition(), player.transform.rotation);
-            grenadeOBJ.GetComponent<DropFleeing>().grenadeRigidbody(nextVec);
+            GameObject grenadeOBJ = Instantiate(grenade, transform.position, player.transform.rotation);
+            grenadeOBJ.GetComponent<BlackHoleGrenade>().grenadeRigidbody(nextVec);
         }
     }
 }
