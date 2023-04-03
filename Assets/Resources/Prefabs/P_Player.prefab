@@ -1266,7 +1266,7 @@ MonoBehaviour:
   weaponSetting:
     weaponName: 1
     currentMagazine: 0
-    maxMagazine: 3
+    maxMagazine: 2
     currentAmmo: 0
     maxAmmo: 1
     attackRate: 0.1

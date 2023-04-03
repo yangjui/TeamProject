@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public delegate void UnderAttackDelegate();
+    private UnderAttackDelegate underAttackCallback = null;
+
     [Header("# Input keyCodes")]
     [SerializeField] private KeyCode keyCodeRun = KeyCode.LeftShift;
     [SerializeField] private KeyCode keyCodeJump = KeyCode.Space;
@@ -33,6 +36,11 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         WeaponAction();
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            TakeDamage(1); // 테스트
+        }
     }
 
     private void Rotate()
@@ -118,6 +126,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         bool isDead = playerStatus.DecreaseHP(_damage);
+        underAttackCallback?.Invoke();
         if (isDead)
         {
             // 사망 애니메이션 => 이건 한번만 나와야함. 여러번나오지않게.
@@ -125,5 +134,10 @@ public class PlayerController : MonoBehaviour
             // Restart? UI
             // 죽었다고 콜백 => 게임매니저한테 죽었다고 알려주고 게임매니저가 EnemyManager한테 플레이어 죽었으니 다른 타겟으로 바꾸라던지 명령해줌. 이건 해도되고 안해도됨
         }
+    }
+
+    public void SetUnderAttackDelegate(UnderAttackDelegate _underAttackCallback)
+    {
+        underAttackCallback = _underAttackCallback;
     }
 }

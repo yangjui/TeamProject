@@ -25,6 +25,10 @@ public class PlayerHUD : MonoBehaviour
     [Header("# AimMode")]
     [SerializeField] private Image[] aimMode;
 
+    [Header("# UnderAttack")]
+    [SerializeField] private Image bloodScreen;
+    [SerializeField] private AnimationCurve curveBloodScreen;
+
     private List<GameObject> magazineList;                      // 탄창 UI 리스트
 
     public void ChangeAimMode(bool _aimMode) // 에임모드에 따라 에임 변경
@@ -96,4 +100,24 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
+    public void StartBloddScreenCoroutine()
+    {
+        StopCoroutine("OnBloddScreen");
+        StartCoroutine("OnBloddScreen");
+    }
+
+    private IEnumerator OnBloddScreen()
+    {
+        float percent = 0;
+        while (percent < 1)
+        {
+            percent += Time.deltaTime;
+
+            Color color = bloodScreen.color;
+            color.a = Mathf.Lerp(0.5f, 0, curveBloodScreen.Evaluate(percent));
+            bloodScreen.color = color;
+
+            yield return null;
+        }
+    }
 }
