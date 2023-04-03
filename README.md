@@ -1,30 +1,22 @@
-# TeamProject
+# 0403 현재 상태
 
 
-기획 - NOTION
-https://www.notion.so/3e120ee17c544c4ab1b1a4acf7c24ef7?pvs=4
+효석 + 해빈 + 주이
 
 
-버전관리 - GIT
-https://github.com/yangjui/TeamProject
+# 업데이트 사항
 
 
-세부일정
-[할일.txt](https://github.com/yangjui/TeamProject/files/11059037/default.txt)
+1. 탄흔 추가
 
 
-브랜치 : 
+# 설명
 
 
-1. 각자 개인 이름 브랜치
+좀비 생성, 플레이어 생성
 
 
-2. develop - 머지된 브랜치
+좀비 : 정해진 Path 따라 이동 -> 특정 트리거(Boundary) 도달시 타겟 플레이어 -> 플레이어 주변(PlayerAround) 도달 시 달리기 -> 플레이어 충돌 시 공격
 
 
-3. master - 최종 브랜치
-
-
-
-이거는 나중에 정리할게요~
-![KakaoTalk_20230323_174909623](https://user-images.githubusercontent.com/71171290/227151076-146265bd-5ed1-450a-927a-22fa534f1d61.jpg)
+(( 플레이어에게 데미지 주는 부분 미구현
