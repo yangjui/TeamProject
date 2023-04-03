@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   runSpeed: 5
+  maxHp: 0
 --- !u!114 &988425925576858187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,6 +1280,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   muzzleFlashEffect: {fileID: 1540909213}
+  bulletHoleEffect: {fileID: 0}
   casingSpawnPoint: {fileID: 2102474989}
   bulletSpawnPoint: {fileID: 1629430114}
   isAimMode: 0
@@ -2110,9 +2112,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   muzzleFlashEffect: {fileID: 988425923651750793}
+  bulletHoleEffect: {fileID: 8366297743284147365, guid: ba33459b083fec847abd1fb9a16255c5, type: 3}
   casingSpawnPoint: {fileID: 988425924281464143}
   bulletSpawnPoint: {fileID: 988425923934615395}
   isAimMode: 0
+--- !u!114 &2703447212295712434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988425924256063016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d263669cce8933341bf7394b8a702a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletHolePrefab: {fileID: 8366297743284147365, guid: ba33459b083fec847abd1fb9a16255c5, type: 3}
 --- !u!4 &988425924256350728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}

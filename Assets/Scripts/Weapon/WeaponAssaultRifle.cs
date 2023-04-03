@@ -11,6 +11,7 @@ public class WeaponAssaultRifle : WeaponBase
 
     [Header("# Fire Effects")]
     [SerializeField] private GameObject muzzleFlashEffect;
+    [SerializeField] private GameObject bulletHoleEffect;
 
     [Header("# SpawnPoints")]
     [SerializeField] private Transform casingSpawnPoint;
@@ -18,6 +19,7 @@ public class WeaponAssaultRifle : WeaponBase
 
     private CasingObjectPool casingObjectPool;
     private ImpactObjectPool impactObjectPool;
+    private BulletHoleObjectPool bulletHoleObjectPool;
     private Camera mainCamera;
 
     private bool isModeChange = false;      // 모드전환 여부 체크
@@ -35,6 +37,7 @@ public class WeaponAssaultRifle : WeaponBase
         base.SetUp();
         casingObjectPool = GetComponent<CasingObjectPool>();
         impactObjectPool = GetComponent<ImpactObjectPool>();
+        bulletHoleObjectPool = GetComponent<BulletHoleObjectPool>();
         mainCamera = Camera.main;
 
         // 첫 탄 수 최대탄수로 설정
@@ -179,10 +182,11 @@ public class WeaponAssaultRifle : WeaponBase
         if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
         {
             impactObjectPool.SpawnImpact(hit);
+            bulletHoleObjectPool.SpawnImpact(hit);
             //if (hit.transform.CompareTag("Enemy")) // 대미지 주는 함수
             //{
             //    hit.transform.GetComponent<Enemy>().Takedamage(weaponSetting.damage);
-            //}
+            //}            
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
     }
