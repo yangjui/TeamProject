@@ -2102,7 +2102,7 @@ MonoBehaviour:
     currentAmmo: 0
     maxAmmo: 30
     attackRate: 0.1
-    attackDistance: 30
+    attackDistance: 100
     isAutomaticAttack: 1
     damage: 0
   onAmmoEvent:
