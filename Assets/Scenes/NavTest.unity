@@ -688,12 +688,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 5904358652685148358, guid: ece812fafdd5b314dabff498f245ad79, type: 3}
   agentNum: 200
-  paths:
+  target:
   - {fileID: 728961014}
   - {fileID: 1698744676}
   - {fileID: 954405043}
   - {fileID: 1576578502}
   - {fileID: 1140936609}
+  playerTrasform: {fileID: 1506499645}
 --- !u!1 &954405039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,9 +1354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 247e3c7861ba5494098e11e59e46b36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 5
-  walkSpeed: 5
-  runSpeed: 10
+  normalSpeed: 50
+  walkSpeed: 50
+  runSpeed: 50
   jump: 10
   gravity: 9.81
   grenade: {fileID: 3388418423442505836, guid: e52181631595d1e4ca6ea3168f85db3f, type: 3}

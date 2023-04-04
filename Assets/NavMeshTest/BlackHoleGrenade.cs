@@ -42,4 +42,9 @@ public class BlackHoleGrenade : MonoBehaviour
         rigidbody.useGravity = true;
     }
 
+    private void OnDestroy()
+    {
+        navAgentManager.ResetAgnet();
+    }
+
 }

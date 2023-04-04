@@ -12,7 +12,10 @@ public class NavAgentManager : MonoBehaviour
     [SerializeField] private int agentNum;
 
     [SerializeField]
-    private List<Transform> paths = null;
+    private List<Transform> target = null;
+
+    [SerializeField]
+    private Transform playerTrasform; // 씬매니저로 부터 받아와야함
 
     private List<NavMeshAgent> navMeshAgents = new List<NavMeshAgent>();
 
@@ -21,7 +24,6 @@ public class NavAgentManager : MonoBehaviour
 
     private float detectionRadius = 13f;
     private float blackHoleRadius = 7f;
-
 
     private void Awake()
     {
@@ -34,9 +36,8 @@ public class NavAgentManager : MonoBehaviour
             transform
             );
 
-            newAgent.speed = Random.Range(minSpeed, maxSpeed);
-            newAgent.SetDestination(paths[0].position);
             newAgent.name = "Agent" + i;
+            newAgent.GetComponent<NavAgentTest>().SetNewTarget(target[0]);
             navMeshAgents.Add(newAgent);
         }
     }
@@ -47,9 +48,10 @@ public class NavAgentManager : MonoBehaviour
         {
             if (navMeshAgents[i].name == name)
             {
-                if (Vector3.Distance(navMeshAgents[i].destination, trigger.pathPosition()) < 1f)
+                if (Vector3.Distance(navMeshAgents[i].GetComponent<NavAgentTest>().curdestination(), 
+                    trigger.pathPosition().position) < 1f)
                 {
-                    navMeshAgents[i].SetDestination(trigger.nextPos());
+                    navMeshAgents[i].GetComponent<NavAgentTest>().SetNewTarget(trigger.nextPos());
                 }
             }
         }
@@ -67,11 +69,11 @@ public class NavAgentManager : MonoBehaviour
     {
         for (int i = 0; i < navMeshAgents.Count; ++i)
         {
-            if (navMeshAgents[i].speed >= 10f)
+            if (navMeshAgents[i].GetComponent<NavAgentTest>().AgentSpeed() >= 10f)
             {
-                navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
-                navMeshAgents[i].speed = Random.Range(minSpeed, maxSpeed);
-                navMeshAgents[i].angularSpeed = 120f;
+                navMeshAgents[i].GetComponent<NavAgentTest>().SetNewTarget(target[Random.Range(0, target.Count - 1)]);
+                navMeshAgents[i].GetComponent<NavAgentTest>().GetSpeepByManager(Random.Range(minSpeed, maxSpeed));
+                navMeshAgents[i].GetComponent<NavAgentTest>().GetAngularSpeedByManager(120f);
             }
         }
     }
@@ -83,13 +85,14 @@ public class NavAgentManager : MonoBehaviour
         {
             if (Vector3.Distance(position, navMeshAgents[i].transform.position) < detectionRadius && Vector3.Distance(position, navMeshAgents[i].transform.position) > blackHoleRadius)
             {
-                navMeshAgents[i].SetDestination(paths[Random.Range(0, paths.Count - 1)].position);
-                navMeshAgents[i].speed = 15f;
-                navMeshAgents[i].angularSpeed = 500f;
+                navMeshAgents[i].GetComponent<NavAgentTest>().SetNewTarget(target[Random.Range(0, target.Count - 1)]);
+                navMeshAgents[i].GetComponent<NavAgentTest>().GetSpeepByManager(10f);
+                navMeshAgents[i].GetComponent<NavAgentTest>().GetAngularSpeedByManager(500f);
+
                 //Debug.Log(navMeshAgents[i].name + "isFleeing");
             }
         }
-    }
+    }   
 
 
     public void DetectBlackHole(Vector3 position)
@@ -99,6 +102,7 @@ public class NavAgentManager : MonoBehaviour
         {
             if (Vector3.Distance(position, navMeshAgents[i].transform.position) < blackHoleRadius)
             {
+                navMeshAgents[i].GetComponent<NavAgentTest>().SetNewTarget(playerTrasform);
                 navMeshAgents[i].GetComponent<NavAgentTest>().NoMoreMember();
                 //Debug.Log(navMeshAgents[i].name + "is No more manber");
                 navMeshAgents.RemoveAt(i);
@@ -106,14 +110,7 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
+    
 
 
-    //private void ResetPath()
-    //{
-    //    for (int i = 0; i < navMeshAgents.Count; ++i)
-    //    {
-    //        Vector3 oldDestination = navMeshAgents[i].destination;
-    //        navMeshAgents[i].SetDestination(oldDestination);
-    //    }
-    //}
 }

@@ -48,8 +48,6 @@ public class NavTestPlayer : MonoBehaviour
             MoveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical") );
             MoveDir = transform.TransformDirection(MoveDir.normalized);
 
-            MoveDir.y -= gravity * Time.deltaTime;
-            player.Move(MoveDir * Time.deltaTime);
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -78,6 +76,8 @@ public class NavTestPlayer : MonoBehaviour
                 ThrowGrenade();
             }
 
+            MoveDir.y -= gravity * Time.deltaTime;
+            player.Move(MoveDir * Time.deltaTime);
 
     }
 

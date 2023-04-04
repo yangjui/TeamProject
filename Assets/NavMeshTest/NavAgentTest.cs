@@ -16,49 +16,67 @@ public class NavAgentTest : MonoBehaviour
     private float blackHoleRadius = 7f;
     private float detectionRadius = 10f;
 
-    private float resetTime = 11f;
+    private float resetTime = 10f;
 
     private bool isMember = true;
     private bool isInblackHole = false;
 
     private Vector3 blackHolePosition;
 
+    private Transform target = null;
+
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         player = FindObjectOfType<NavTestPlayer>();
+        navAgent.speed = Random.Range(minSpeed, maxSpeed);
     }
 
 
     private void Update()
     {
-        if(!isMember)
+
+        //Debug.Log(transform.name + " : isInblackHole :" + isInblackHole);
+
+        if (!isMember)
         {
-            InTheBlackHole();
-           
-            if(isInblackHole)
+           if(resetTime > 3)
+           {
+                InTheBlackHole();
+           }
+
+            if (isInblackHole)
             {
-                //Debug.Log(this.name + ": resetTime : " + resetTime);
+                //Debug.Log(transform.name + " : SetDestination" + target.name);
                 resetTime -= Time.deltaTime;
-                if(resetTime <= 0)
+                if (resetTime <= 0)
                 {
-                    RayCheckGround();
+                    ResetAgent();
+
                 }
             }
-            else
+
+            if(!isInblackHole)
             {
-                TrackPlayer();
+                //Debug.Log(transform.name + " : SetDestination" + target.name);
+                navAgent.SetDestination(target.position);
             }
+        }
+        else
+        {
+           // Debug.Log(transform.name + " : SetDestination" + target.name );
+            navAgent.SetDestination(target.position);
+        }
+
+        if(resetTime <= 0)
+        {
+            resetTime = 10f;
         }
     }
 
 
-    private void TrackPlayer()
-    {
-        navAgent.SetDestination(player.GivePlayerPosition());
-        Debug.Log("track Player");
-    }
+
 
 
 
@@ -66,18 +84,18 @@ public class NavAgentTest : MonoBehaviour
     {
         if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
         {
-            Debug.Log(transform.name + ": is inblackHole");
+           // Debug.Log(transform.name + ": is inblackHole");
             navAgent.enabled = false;
             Vector3 dir = blackHolePosition - transform.position;
-            transform.position += dir * 3f * Time.deltaTime;  
+            transform.position += dir * 3f * Time.deltaTime;
         }
     }
-
 
     public void NoMoreMember()
     {
         isMember = false;
         navAgent.speed = Random.Range(minSpeed, maxSpeed);
+
     }
 
     public void HitByBlackHole(Vector3 position)
@@ -91,29 +109,55 @@ public class NavAgentTest : MonoBehaviour
         animator.enabled = false; // 땅에 떨어지는 순간으로 다시 애니메이션 작동하도록 만들어야함
     }
 
-    public void ResetAgent() 
-    {
-        isInblackHole = false;
-        navAgent.enabled = true;
-        animator.enabled = true;
-        resetTime = 10f;
-    }
+
 
     public void DetectNewObstacle(Vector3 position)
     {
         if (Vector3.Distance(position, transform.position) < detectionRadius && Vector3.Distance(position, transform.position) > blackHoleRadius)
         { 
-            navAgent.speed = 10f;
+            navAgent.speed = 15f;
             navAgent.angularSpeed = 500f;
         }
     }
 
-    private void RayCheckGround()
+    //private void RayCheckGround()
+    //{
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.1f))
+    //    {
+    //        ResetAgent();
+    //    }
+    //}
+
+    private void ResetAgent()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.1f))
-        {
-            ResetAgent();
-        }
+        navAgent.enabled = true;
+        animator.enabled = true;
+        isInblackHole = false;
+    }
+
+    public Vector3 curdestination()
+    {
+        return navAgent.destination;
+    }
+
+    public void SetNewTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
+    public float AgentSpeed()
+    {
+        return navAgent.speed;
+    }
+
+    public void GetSpeepByManager(float speed)
+    {
+        navAgent.speed = speed;
+    }
+
+    public void GetAngularSpeedByManager(float speed)
+    {
+        navAgent.angularSpeed = speed;
     }
 }

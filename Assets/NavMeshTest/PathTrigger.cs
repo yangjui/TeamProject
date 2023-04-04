@@ -14,18 +14,17 @@ public class PathTrigger : MonoBehaviour
     {
         if(other.CompareTag("Agent"))
         {
-            //Debug.Log(other.name);
             navAgentManager.SetNewTartget(this, other.name);
         }
     }
 
-    public Vector3  pathPosition()
+    public Transform  pathPosition()
     {
-        return this.transform.position;
+        return this.transform;
     }
 
 
-    public Vector3 nextPos()
+    public Transform nextPos()
     {
         for(int i =0; i<paths.Count; ++i)
         {
@@ -33,15 +32,15 @@ public class PathTrigger : MonoBehaviour
             {
                 if (i == paths.Count - 1)
                 {
-                    return paths[0].position;
+                    return paths[0];
                 }
                 else
                 {
-                    return paths[i + 1].position;
+                    return paths[i + 1];
                 }
             }   
         }
-        return this.transform.position;
+        return this.transform;
     }
 
     public string pathName()

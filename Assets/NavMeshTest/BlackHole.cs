@@ -34,10 +34,6 @@ public class BlackHole : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-
-    }
 
     private void OnDestroy()
     {

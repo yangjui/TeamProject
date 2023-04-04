@@ -48,7 +48,15 @@ public class ShirtlessZombieCustomization : MonoBehaviour
 	public ClothesMaterial clothesMat;
 
 
-	void Start ()
+    private void Awake()
+    {
+		MeshVariant randomMeshVar = (MeshVariant)Random.Range(0, 4);
+		BodyMaterial randomBodyMat = (BodyMaterial)Random.Range(0, 2);
+		ClothesMaterial randomClothesMat = (ClothesMaterial)Random.Range(0, 4);
+		charCustomize((int)randomMeshVar, (int)randomBodyMat, (int)randomClothesMat);
+	}
+
+    void Start ()
 	{
 		
 	}
