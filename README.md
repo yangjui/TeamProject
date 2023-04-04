@@ -10,20 +10,7 @@ https://github.com/yangjui/TeamProject
 
 
 세부일정
-[할일.txt](https://github.com/yangjui/TeamProject/files/11059037/default.txt)
-
-
-브랜치 : 
-
-
-1. 각자 개인 이름 브랜치
-
-
-2. develop - 머지된 브랜치
-
-
-3. master - 최종 브랜치
-
+[할일.txt](https://github.com/yangjui/TeamProject/files/11059037/default.txt
 
 
 이거는 나중에 정리할게요~
