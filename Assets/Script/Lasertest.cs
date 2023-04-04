@@ -59,7 +59,7 @@ public class Lasertest : MonoBehaviour
         {
             currentChargingTime += Time.deltaTime;
         }
-        Debug.Log(" 충전중 ... " + currentChargingTime);
+       // Debug.Log(" 충전중 ... " + currentChargingTime);
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -113,15 +113,7 @@ public class Lasertest : MonoBehaviour
                 //Vector3 startPos = new Vector3(0f, -1f, 0f);
                 //Vector3 endPos = new Vector3(0f, -1f, 0f);
 
-                RaycastHit[] groundHits = Physics.RaycastAll(hit.point, Vector3.down);
-                if (groundHits.Length > 0)
-                {                  
-                    Vector3 groundEffectPosition = groundHits[0].point;
-                    GameObject groundEffect = Instantiate(groundEffectPrefab, groundEffectPosition, Quaternion.identity);
-                    groundEffect.transform.localScale /= 2f; 
 
-                    Destroy(groundEffect, 4f);
-                }
             }
 
             //Destroy(ground, 3f);

@@ -7,52 +7,22 @@ using UnityEngine;
 public class Laserbullet : MonoBehaviour
 {
     [SerializeField]
-    private float cutoutValue = 0.5f;
-    [SerializeField]
-    private float cutoutRange = 3f;
+    private GameObject groundEffectPrefab;
 
-
-    private Renderer monsterRenderer;
-    private List<Monster> monstersInRange = new List<Monster>();
-
-    private void Start()
-    {
-        monsterRenderer = GetComponent<Renderer>();
-    }
 
     private void OnTriggerEnter(Collider _other)
     {
-        if (_other.CompareTag("Laser"))
+        if (_other.CompareTag("Floor"))
         {
+            Debug.Log("Floor");
 
+            Vector3 groundPosition = _other.ClosestPoint(transform.position);
+          GameObject ge = Instantiate(groundEffectPrefab, groundPosition, Quaternion.identity);
+            ge.transform.localScale /= 2f;
 
-
-            Monster monster = _other.GetComponentInParent<Monster>();
-            if (monster != null)
-            {
-                monstersInRange.Add(monster);
-            }
+            Destroy(ge, 4f);
         }
     }
 
-    private void OnTriggerExit(Collider _other)
-    {
-        if (_other.CompareTag("Laser"))
-        {
-            Monster monster = _other.GetComponentInParent<Monster>();
-            if (monster != null)
-            {
-                monstersInRange.Remove(monster);
-            }
-        }
-    }
 
-    private void Update()
-    {
-        foreach (Monster monster in monstersInRange)
-        {
-            float currentCutoutValue = monster.GetAlphaCutoutValue();
-            monster.SetAlphaCutoutValue(Mathf.Clamp(currentCutoutValue - cutoutValue, 0f, 1f));
-        }
-    }
 }

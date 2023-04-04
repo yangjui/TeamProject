@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5115854740689918547}
+  - component: {fileID: 3093742276333564694}
+  - component: {fileID: 3930857680292764994}
   m_Layer: 0
   m_Name: Effect_38_CoreBeam
   m_TagString: Laser
@@ -34,6 +36,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3093742276333564694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115854740689918544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5631e334f95c48a448d85c9430cc442a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundEffectPrefab: {fileID: 8170752514618103492, guid: 79be24f135d46964e9f186bacaca2299, type: 3}
+--- !u!65 &3930857680292764994
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115854740689918544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4, z: 25}
+  m_Center: {x: 0, y: 0, z: 13.68}
 --- !u!1001 &590413333489888451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279,6 +307,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5474435748291734848, guid: 7c0e9f1865f7334488954a6b601a34a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572453912333919102, guid: 7c0e9f1865f7334488954a6b601a34a0, type: 3}
+      propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5572453912333919102, guid: 7c0e9f1865f7334488954a6b601a34a0, type: 3}

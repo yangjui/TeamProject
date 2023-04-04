@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
     [SerializeField]
     private int hp = 100;
 
+
     public void TakeDamage(int damage)
     {
         hp -= damage;
@@ -20,4 +21,10 @@ public class Target : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public float HiveHP()
+    {
+        return hp;
+    }
+
 }

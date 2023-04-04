@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Laser
   - Monster
+  - Floor
+  - Zombie
   layers:
   - Default
   - TransparentFX
