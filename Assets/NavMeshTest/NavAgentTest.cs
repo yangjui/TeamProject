@@ -16,7 +16,7 @@ public class NavAgentTest : MonoBehaviour
     private float blackHoleRadius = 7f;
     private float detectionRadius = 10f;
 
-    private float resetTime = 5f;
+    private float resetTime = 11f;
 
     private bool isMember = true;
     private bool isInblackHole = false;
@@ -36,15 +36,19 @@ public class NavAgentTest : MonoBehaviour
         if(!isMember)
         {
             InTheBlackHole();
-            //TrackPlayer();
-
+           
             if(isInblackHole)
             {
+                //Debug.Log(this.name + ": resetTime : " + resetTime);
                 resetTime -= Time.deltaTime;
                 if(resetTime <= 0)
                 {
-                    Ray();
+                    RayCheckGround();
                 }
+            }
+            else
+            {
+                TrackPlayer();
             }
         }
     }
@@ -52,8 +56,8 @@ public class NavAgentTest : MonoBehaviour
 
     private void TrackPlayer()
     {
-        if(isInblackHole) return;
         navAgent.SetDestination(player.GivePlayerPosition());
+        Debug.Log("track Player");
     }
 
 
@@ -85,14 +89,14 @@ public class NavAgentTest : MonoBehaviour
     public void StopAnimation()
     {
         animator.enabled = false; // 땅에 떨어지는 순간으로 다시 애니메이션 작동하도록 만들어야함
-        isInblackHole = false;
     }
 
-    public void ResetAgent() //땅에 떨어지는 순간으로 바꿔야함
+    public void ResetAgent() 
     {
+        isInblackHole = false;
         navAgent.enabled = true;
         animator.enabled = true;
-        resetTime = 5f;
+        resetTime = 10f;
     }
 
     public void DetectNewObstacle(Vector3 position)
@@ -104,7 +108,7 @@ public class NavAgentTest : MonoBehaviour
         }
     }
 
-    private void Ray()
+    private void RayCheckGround()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -Vector3.up, out hit, 0.1f))
