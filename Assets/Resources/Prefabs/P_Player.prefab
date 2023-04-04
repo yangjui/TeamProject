@@ -2102,7 +2102,11 @@ MonoBehaviour:
     currentAmmo: 0
     maxAmmo: 30
     attackRate: 0.1
+<<<<<<< Updated upstream
     attackDistance: 100
+=======
+    attackDistance: 250
+>>>>>>> Stashed changes
     isAutomaticAttack: 1
     damage: 0
   onAmmoEvent:
@@ -2265,7 +2269,7 @@ MonoBehaviour:
     attackRate: 0
     attackDistance: 0
     isAutomaticAttack: 0
-    damage: 0
+    damage: 100
   onAmmoEvent:
     m_PersistentCalls:
       m_Calls: []

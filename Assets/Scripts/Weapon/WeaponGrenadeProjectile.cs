@@ -28,21 +28,21 @@ public class WeaponGrenadeProjectile : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider hit in colliders)
         {
-            /* 플레이어가 맞았다면
-            PlayerController player = hit.GetComponent<PlayerController>();
-            if (player != null)
+            //// 플레이어가 맞았다면
+            //PlayerController player = hit.GetComponent<PlayerController>();
+            //if (player != null)
+            //{
+            //    player.TakeDamage((int)(explosionDamage * 0.2f));
+            //    continue;
+            //}
+            //적이 맞았다면
+            Zombie zombie = hit.GetComponent<Zombie>();
+            if (zombie != null)
             {
-                player.TakeDamage((int)(explosionDamage * 0.2f));
+                zombie.Takedamage(explosionDamage);
                 continue;
             }
-            적이 맞았다면
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(explosionDamage);
-                continue;
-            }
-            */
+            
             // Rigidbody를 가지고 있는 오브젝트가 맞았다면
             Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
             if (rigidbody != null)

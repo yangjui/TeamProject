@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9213813342579031164}
   - component: {fileID: 6053574376675592964}
   - component: {fileID: 622909457475520301}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: hand_grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,6 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 1427962332153456, guid: 301583a5af63a494298d60cd9f296909, type: 3}
-  explosionRadius: 10
+  explosionRadius: 5
   explosionForce: 500
   throwForce: 1000

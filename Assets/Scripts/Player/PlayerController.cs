@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public delegate void UnderAttackDelegate();
     private UnderAttackDelegate underAttackCallback = null;
+    private UnderAttackDelegate playerIsDeadCallback = null;
 
     [Header("# Input keyCodes")]
     [SerializeField] private KeyCode keyCodeRun = KeyCode.LeftShift;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private WeaponBase weapon;
 
     private bool isAimMode = false;
+    private bool isAlive = true;
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0) return;
+        if (Time.timeScale == 0 || !isAlive) return;
         Rotate();
         Move();
         Jump();
@@ -126,9 +128,12 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         bool isDead = playerStatus.DecreaseHP(_damage);
+        bool dead = false;
         underAttackCallback?.Invoke();
-        if (isDead)
+        if (isDead && !dead)
         {
+            dead = true;
+            playerIsDeadCallback?.Invoke();
             // 사망 애니메이션 => 이건 한번만 나와야함. 여러번나오지않게.
             // 사망 사운드
             // Restart? UI
@@ -136,8 +141,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetUnderAttackDelegate(UnderAttackDelegate _underAttackCallback)
+    public void PlayerIsDead()
+    {
+        isAlive = false;
+    }
+
+    public void SetUnderAttackDelegate(UnderAttackDelegate _underAttackCallback, UnderAttackDelegate _playerIsDeadCallback)
     {
         underAttackCallback = _underAttackCallback;
+        playerIsDeadCallback = _playerIsDeadCallback;
     }
 }

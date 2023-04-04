@@ -9,6 +9,8 @@ TagManager:
   - ExplosiveBarrel
   - Platform
   - Enemy
+  - Metal
+  - ExplosiveBarrel
   layers:
   - Default
   - TransparentFX
@@ -17,11 +19,19 @@ TagManager:
   - Water
   - UI
   - Player
+<<<<<<< Updated upstream
   - Casing
   - Grenade
   - 
   - 
   - 
+=======
+  - Sound
+  - Platform
+  - Zombie
+  - Grenade
+  - Casing
+>>>>>>> Stashed changes
   - 
   - 
   - 

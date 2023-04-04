@@ -10,12 +10,15 @@ public class PlayerSceneManager : MonoBehaviour
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private Image option;
     [SerializeField] private OptionSetting optionSetting;
+    [SerializeField] private UIManager uiManager;
+   
 
     private bool isStop = false;
 
     private void Start()
     {
         playerManager.OnChangeAimModeDelegate(ChangeAimMode);
+        playerManager.OnPlayerIsDeadDelegate(OnReStart);
         playerManager.Init();
         optionSetting.Init();
     }
@@ -49,6 +52,13 @@ public class PlayerSceneManager : MonoBehaviour
             option.gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
+    }
+
+    private void OnReStart()
+    {
+        uiManager.OnReStartImage();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void OptionClose()

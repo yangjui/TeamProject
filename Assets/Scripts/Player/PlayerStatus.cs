@@ -29,10 +29,16 @@ public class PlayerStatus : MonoBehaviour
 
         currentHp = currentHp - _damage > 0 ? currentHp - _damage : 0;
 
+<<<<<<< Updated upstream
         if (currentHp == 0)
         {
             return true;
         }
+=======
+        Debug.Log("curHP : " + currentHp);
+        if (currentHp == 0) return true;
+
+>>>>>>> Stashed changes
         return false;
     }
 }
