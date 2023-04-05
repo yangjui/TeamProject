@@ -29,7 +29,6 @@ public class NavAgentTest : MonoBehaviour
     {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        player = FindObjectOfType<NavTestPlayer>();
         navAgent.speed = Random.Range(minSpeed, maxSpeed);
     }
 
