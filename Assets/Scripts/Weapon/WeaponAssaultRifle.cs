@@ -209,11 +209,6 @@ public class WeaponAssaultRifle : WeaponBase
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
     }
 
-    public Transform PlayerPosition()
-    {
-        return this.transform;
-    }
-
     private void ShotTimer()
     {
         // 현재 시간을 기록
@@ -279,7 +274,7 @@ public class WeaponAssaultRifle : WeaponBase
         else
         {
             // 공격중이면 모드전환 할 수 없게
-            if (isAttack) return;
+            if (isAttack || anim.MoveSpeed > 0.5f) return;
             StartCoroutine("OnModeChange");
         }
     }

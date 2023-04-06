@@ -19,7 +19,7 @@ public class Lasertest : MonoBehaviour
     [SerializeField]
     private float chargingSize = 0.1f;
 
-    
+
     [SerializeField]
     private GameObject chargeEffectPrefab;
     [SerializeField]
@@ -34,7 +34,7 @@ public class Lasertest : MonoBehaviour
     private GameObject chargeEffectInstance;
 
     RaycastHit[] hits;
-    
+
     private float nextFireTime;
 
     private void Update()
@@ -44,24 +44,20 @@ public class Lasertest : MonoBehaviour
         //{
         if (Input.GetMouseButtonDown(0))
         {
-            //if (currentChargingTime >= chargingTime)
-            //{
             currentChargingTime = 0f;
-            //}
             if (chargeEffectPrefab != null)
             {
                 chargeEffectInstance = Instantiate(chargeEffectPrefab, chargeEffectLocation.position,
                      chargeEffectLocation.rotation);
                 chargeEffectInstance.transform.localScale *= 0;
             }
-
         }
         if (Input.GetMouseButton(0))
         {
             currentChargingTime += Time.deltaTime;
 
             if (currentChargingTime < chargingTime)
-            chargeEffectInstance.transform.localScale += Vector3.one * currentChargingTime * Time.deltaTime * chargingSize;
+                chargeEffectInstance.transform.localScale += Vector3.one * currentChargingTime * Time.deltaTime * chargingSize;
         }
         // Debug.Log(" ÃæÀüÁß ... " + currentChargingTime);
 
@@ -72,7 +68,7 @@ public class Lasertest : MonoBehaviour
             {
                 //Debug.DrawRay(transform.position, transform.forward * Maxrange, Color.red, 0.5f);
                 float sphereScale = Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z) * 2;
-                hits = Physics.SphereCastAll(transform.position, sphereScale, 
+                hits = Physics.SphereCastAll(transform.position, sphereScale,
                     transform.forward, Maxrange);
 
                 Destroy(chargeEffectInstance);
@@ -89,7 +85,7 @@ public class Lasertest : MonoBehaviour
         {
             GameObject fire = Instantiate(fireEffectPrefab, fireEffectLocation.position, transform.rotation);
             fire.transform.localScale *= 2f;
-            LineRenderer lineRenderer = fire.GetComponent<LineRenderer>();
+            //LineRenderer lineRenderer = fire.GetComponent<LineRenderer>();
 
 
             for (int i = 0; i < hits.Length; i++)
@@ -102,7 +98,7 @@ public class Lasertest : MonoBehaviour
                 //    hit.transform.GetComponent<MeshRenderer>().material.color = Color.red;
                 //}
 
-                
+
                 Target target = hit.transform.GetComponent<Target>();
                 if (target != null)
                 {
@@ -110,11 +106,11 @@ public class Lasertest : MonoBehaviour
                 }
 
 
-                if (lineRenderer != null)
-                {
-                    lineRenderer.SetPosition(0, transform.position);
-                    lineRenderer.SetPosition(1, hit.point);
-                }
+                //if (lineRenderer != null)
+                //{
+                //    lineRenderer.SetPosition(0, transform.position);
+                //    lineRenderer.SetPosition(1, hit.point);
+                //}
                 //Vector3 startPos = new Vector3(0f, -1f, 0f);
                 //Vector3 endPos = new Vector3(0f, -1f, 0f);
 

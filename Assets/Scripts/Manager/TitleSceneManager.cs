@@ -42,7 +42,7 @@ public class TitleSceneManager : MonoBehaviour
             fadePanel.color = c;
             yield return new WaitForSeconds(0.01f);
         }
-        LoadingSceneController.LoadScene("Training");
+        LoadingSceneController.LoadScene("TrainingScene");
     }
 
     public void ExitGame()
