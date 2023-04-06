@@ -37,7 +37,7 @@ public class DropFleeing : MonoBehaviour
     private IEnumerator Return()
     {
         yield return new WaitForSeconds(destroyTIme);
-        navAgentManager.ResetAgnet();
+        navAgentManager.ResetAgent();
     }
 
 }

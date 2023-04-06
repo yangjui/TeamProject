@@ -37,7 +37,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnDestroy()
     {
-        navAgentManager.ResetAgnet();
+        navAgentManager.ResetAgent();
 
         for (int i = 0; i < agents.Count; ++i)
         {

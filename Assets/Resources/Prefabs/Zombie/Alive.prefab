@@ -6199,11 +6199,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: {fileID: 5924059365190695168}
-  dead: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
-  zombieHealth: 100
+  deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
+  dead: {fileID: 5924059365190695168, guid: c9cc23b8721d86842ad00304af7d5b2f, type: 3}
   attackZombieL: {fileID: 3519497827689566339}
   attackZombieR: {fileID: 4266021825545389826}
-  deadName: 
+  zombieHealth: 100
 --- !u!65 &4354202824092009961
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -269,7 +269,6 @@ public class WeaponAssaultRifle : WeaponBase
         {
             if (weaponSetting.isAutomaticAttack)
             {
-                isAttack = true;
                 StartCoroutine("OnAttackLoop");
             }
             else
@@ -315,6 +314,8 @@ public class WeaponAssaultRifle : WeaponBase
 
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
+
+            isAttack = true;
 
             // 반동제어용 발수 카운트
             ShotCount();

@@ -14,7 +14,7 @@ public class NavAgentManager : MonoBehaviour
     [SerializeField]
     private List<Transform> target = null;
 
-    private Transform playerTransform; // 씬매니저로 부터 받아와야함
+    private Transform playerTransform;
 
     private List<NavMeshAgent> navMeshAgents = new List<NavMeshAgent>();
 
@@ -51,15 +51,15 @@ public class NavAgentManager : MonoBehaviour
     }
 
 
-    public void SetNewTartget(PathTrigger trigger, string name)
+    public void SetNewTarget(PathTrigger _trigger, string _name)
     {
         for (int i = 0; i < navMeshAgents.Count; ++i)
         {
-            if (navMeshAgents[i].name == name)
+            if (navMeshAgents[i].name == _name)
             {
-                if (Vector3.Distance(navMeshAgents[i].GetComponent<Zombie>().CurDestination(), trigger.PathPosition().position) < 1f)
+                if (Vector3.Distance(navMeshAgents[i].GetComponent<Zombie>().CurDestination(), _trigger.PathPosition().position) < 1f)
                 {
-                    navMeshAgents[i].GetComponent<Zombie>().SetNewTarget(trigger.NextPos());
+                    navMeshAgents[i].GetComponent<Zombie>().SetNewTarget(_trigger.NextPos());
                 }
             }
         }
@@ -70,7 +70,7 @@ public class NavAgentManager : MonoBehaviour
         return navMeshAgents;
     }
 
-    public void ResetAgnet()
+    public void ResetAgent()
     {
         for (int i = 0; i < navMeshAgents.Count; ++i)
         {

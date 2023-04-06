@@ -1688,7 +1688,7 @@ GameObject:
   - component: {fileID: 905055421}
   - component: {fileID: 905055422}
   m_Layer: 0
-  m_Name: PlaySceneManager
+  m_Name: TrainingSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1718,7 +1718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 905055420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a211987bac3c54590063fc5ebbe671, type: 3}
+  m_Script: {fileID: 11500000, guid: 47635c91340350244957881e1d94c9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 997631819}
@@ -4035,7 +4035,7 @@ PrefabInstance:
     - target: {fileID: 3610759724208889024, guid: 8544b53f153678f449df51f5264c8fc2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 905055422}
+      objectReference: {fileID: 0}
     - target: {fileID: 3610759724208889024, guid: 8544b53f153678f449df51f5264c8fc2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OptionClose
@@ -4059,6 +4059,6 @@ PrefabInstance:
     - target: {fileID: 7632287764616666322, guid: 8544b53f153678f449df51f5264c8fc2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 905055422}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8544b53f153678f449df51f5264c8fc2, type: 3}

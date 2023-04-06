@@ -5,7 +5,17 @@ using UnityEngine.AI;
 
 public class Zombie : MonoBehaviour
 {
-    private NavMeshAgent navAgent = null;
+    [Header("# Zombie")]
+    [SerializeField] private GameObject alive;
+    [SerializeField] private GameObject deadRagdoll;
+    [SerializeField] private GameObject dead;
+    [SerializeField] private GameObject attackZombieL;
+    [SerializeField] private GameObject attackZombieR;
+    [SerializeField] private float zombieHealth = 100f;
+
+    private NavMeshAgent navAgent;
+
+    private float currentHealth;
 
     private float maxWalkSpeed = 1f;
     private float minWalkSpeed = 0.5f;
@@ -15,34 +25,20 @@ public class Zombie : MonoBehaviour
 
     private float blackHoleRadius = 7f;
     private float detectionRadius = 10f;
-
-    [Header("# Zombie")]
-    [SerializeField] private GameObject alive;
-    [SerializeField] private GameObject dead;
-    [SerializeField] private float zombieHealth = 100f;
-    [SerializeField] private GameObject attackZombieL;
-    [SerializeField] private GameObject attackZombieR;
-
     private float resetTime = 10f;
 
     private bool isMember = true;
     private bool isInBlackHole = false;
+    private bool isRun = false;
 
     private Vector3 blackHolePosition;
 
-    private Transform target = null;
+    private Transform target;
     private Transform playerPosition;
-
-    private float currentHealth;
-
     private Animator anim;
-
-    public string deadName;
 
     public delegate void ZombieFreeEventHandler(Zombie zombie);
     public ZombieFreeEventHandler OnZombieFree;
-
-    private bool isRun = false;
 
     private void Awake()
     {
@@ -54,10 +50,8 @@ public class Zombie : MonoBehaviour
 
     private void Update()
     {
-
         if (!isMember)
         {
-
             if (resetTime > 3)
             {
                 InTheBlackHole();
@@ -109,13 +103,11 @@ public class Zombie : MonoBehaviour
                 Run();
                 break;
             case < 2:
-                // if (isIdle) return;
                 Idle();
                 break;
             default:
                 return;
         }
-        
     }
 
     private void Dead()
@@ -123,25 +115,72 @@ public class Zombie : MonoBehaviour
         navAgent.enabled = false;
         alive.SetActive(false);
 
-        GameObject newRagdoll = Instantiate(dead, transform.position, transform.rotation);
+        GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+        RagdollPosition(alive.transform, newRagdoll.transform);
 
-        RagDollPosition(alive.transform, newRagdoll.transform);
+        //Destroy(newRagdoll, 3f);
+
+        //GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
+        //DeadPosition(newRagdoll.transform, newDead.transform);
+
 
         Destroy(alive);
     }
 
-    private void RagDollPosition(Transform alive, Transform dead)
-    {
-        for (int i = 0; i < alive.transform.childCount; ++i)
-        {
-            if (alive.transform.childCount != 0)
-                RagDollPosition(alive.transform.GetChild(i), dead.transform.GetChild(i));
+    //private void Dead()
+    //{
+    //    navAgent.enabled = false;
+    //    alive.SetActive(false);
 
-            dead.transform.GetChild(i).localPosition = alive.transform.GetChild(i).localPosition;
-            dead.transform.GetChild(i).localRotation = alive.transform.GetChild(i).localRotation;
+    //    GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+    //    RagdollPosition(alive.transform, newRagdoll.transform);
+
+    //    //newRagdoll.SetActive(false);
+    //    Invoke("waitDead(newRagdoll)", 3f);
+    //    Invoke("InstanceDead", 3f);
+    //    Invoke("DeadPosition(dead, newDead)", 3f);
+    //    Destroy(alive);
+    //    Destroy(newRagdoll);
+    //}
+
+    //private void InstanceDead()
+    //{
+    //    GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
+    //}
+
+    //private void waitDead(GameObject _newRagdoll)
+    //{
+    //    _newRagdoll.SetActive(false);
+    //}
+
+
+    private void RagdollPosition(Transform _alive, Transform _dead)
+    {
+        for (int i = 0; i < _alive.transform.childCount; ++i)
+        {
+            if (_alive.transform.childCount != 0)
+                RagdollPosition(_alive.transform.GetChild(i), _dead.transform.GetChild(i));
+
+            _dead.transform.GetChild(i).localPosition = _alive.transform.GetChild(i).localPosition;
+            _dead.transform.GetChild(i).localRotation = _alive.transform.GetChild(i).localRotation;
         }
-        dead.transform.position = alive.transform.position; // 렉돌 자체의 위치 맞추기
+        _dead.transform.position = _alive.transform.position; // 렉돌 자체의 위치 맞추기
     }
+
+    //private void DeadPosition(Transform _dead, Transform _newRagdoll)
+    //{
+    //    for (int i = 0; i < _dead.transform.childCount; ++i)
+    //    {
+    //        if (_dead.transform.childCount != 0)
+    //            DeadPosition(_dead.transform.GetChild(i), _newRagdoll.transform.GetChild(i));
+
+    //        _newRagdoll.transform.GetChild(i).localPosition = _dead.transform.GetChild(i).localPosition;
+    //        _newRagdoll.transform.GetChild(i).localRotation = _dead.transform.GetChild(i).localRotation;
+    //    }
+    //    _newRagdoll.transform.position = _dead.transform.position;
+    //}
+
+
 
     private void InTheBlackHole()
     {

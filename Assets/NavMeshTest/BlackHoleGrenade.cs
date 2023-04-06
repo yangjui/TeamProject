@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BlackHoleGrenade : MonoBehaviour
 {
@@ -12,8 +11,7 @@ public class BlackHoleGrenade : MonoBehaviour
     [SerializeField] 
     private GameObject obstacle;
 
-    private float destroyTIme = 7f;
-    private Vector3 point;
+    private float destroyTime = 7f;
 
     private void Awake()
     {
@@ -27,24 +25,25 @@ public class BlackHoleGrenade : MonoBehaviour
 
     private IEnumerator BlackholeStart()
     {
-        yield return new WaitForSeconds(3f);
+        //yield return new WaitForSeconds(3f);
+        yield return null;
         GameObject newOBJ = Instantiate(obstacle, transform.position, Quaternion.Euler(Vector3.zero));
         navAgentManager.DetectNewObstacle(transform.position);
-        Destroy(newOBJ, destroyTIme);
+        Destroy(newOBJ, destroyTime);
         Destroy(this.gameObject);
     }
 
-    public void grenadeRigidbody(Vector3 aa)
+    public void GrenadeRigidbody(Vector3 _direction)
     {
-        Rigidbody rigidbody =  GetComponent<Rigidbody>();
-        rigidbody.AddForce(aa, ForceMode.Impulse);
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.AddForce(_direction, ForceMode.Impulse);
         rigidbody.isKinematic = false;
         rigidbody.useGravity = true;
     }
 
     private void OnDestroy()
     {
-        navAgentManager.ResetAgnet();
+        navAgentManager.ResetAgent();
     }
 
 }
