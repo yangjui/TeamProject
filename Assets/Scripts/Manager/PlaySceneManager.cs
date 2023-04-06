@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerSceneManager : MonoBehaviour
+public class PlaySceneManager : MonoBehaviour
 {
     [SerializeField] private NavAgentManager navAgentManager;
     [SerializeField] private PlayerManager playerManager;
@@ -64,9 +64,6 @@ public class PlayerSceneManager : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
-
-        if(Input.GetKeyDown(KeyCode.KeypadEnter))
-            LoadingSceneController.LoadScene("PlayScene");
     }
 
     private void OnReStart()
