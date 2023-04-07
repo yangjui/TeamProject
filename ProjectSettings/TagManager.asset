@@ -10,8 +10,7 @@ TagManager:
   - ExplosiveBarrel
   - Platform
   - Dead
-  - Enemy
-  - Laser
+  - Ragdoll
   layers:
   - Default
   - TransparentFX
@@ -24,8 +23,8 @@ TagManager:
   - Zombie
   - Casing
   - Granade
-  - 
-  - 
+  - Sound
+  - Ragdoll
   - 
   - 
   - 

@@ -24,6 +24,10 @@ public class NavAgentManager : MonoBehaviour
     private float detectionRadius = 13f;
     private float blackHoleRadius = 7f;
 
+    [SerializeField] private RuntimeAnimatorController Zombie1;
+    [SerializeField] private RuntimeAnimatorController Zombie2;
+
+
     public void Init(Transform _position)
     {
         playerTransform = _position;
@@ -40,6 +44,12 @@ public class NavAgentManager : MonoBehaviour
             newAgent.GetComponent<Zombie>().SetNewTarget(target[0]);
             newAgent.GetComponent<Zombie>().PlayerPosition(playerTransform);
             newAgent.GetComponent<Zombie>().OnZombieFree += RemoveZombieFromList;
+
+            if (Random.Range(0, 2) % 2 == 0)
+                newAgent.GetComponent<Zombie>().AniController(Zombie1);
+            else
+                newAgent.GetComponent<Zombie>().AniController(Zombie2);
+
             navMeshAgents.Add(newAgent);
 
         }
@@ -93,26 +103,9 @@ public class NavAgentManager : MonoBehaviour
                 navMeshAgents[i].GetComponent<Zombie>().SetNewTarget(target[Random.Range(0, target.Count - 1)]);
                 navMeshAgents[i].GetComponent<Zombie>().GetSpeedByManager(10f);
                 navMeshAgents[i].GetComponent<Zombie>().GetAngularSpeedByManager(500f);
-
-                //Debug.Log(navMeshAgents[i].name + "isFleeing");
             }
         }
     }
-
-    //public void DetectBlackHole(Vector3 _position)
-    //{
-    //    for (int i = 0; i < navMeshAgents.Count; ++i)
-    //    {
-    //        if (Vector3.Distance(_position, navMeshAgents[i].transform.position) < blackHoleRadius)
-    //        {
-    //            navMeshAgents[i].GetComponent<Zombie>().SetNewTarget(playerTransform);
-    //            navMeshAgents[i].GetComponent<Zombie>().NoMoreMember();
-
-    //            navMeshAgents.RemoveAt(i);
-    //        }
-    //    }
-    //}
-
 
     private void RemoveZombieFromList(Zombie zombie)
     {
@@ -120,9 +113,8 @@ public class NavAgentManager : MonoBehaviour
         {
             if (navMeshAgents[i].GetComponent<Zombie>() == zombie)
             {
-                navMeshAgents[i].GetComponent<Zombie>().SetNewTarget(playerTransform);
                 navMeshAgents[i].GetComponent<Zombie>().NoMoreMember();
-                //Debug.Log(navMeshAgents[i].name + "is No more manber");
+                navMeshAgents[i].GetComponent<Zombie>().navAgent.enabled = false;
                 navMeshAgents.RemoveAt(i);
             }
         }

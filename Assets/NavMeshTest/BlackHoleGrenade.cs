@@ -25,7 +25,6 @@ public class BlackHoleGrenade : MonoBehaviour
 
     private IEnumerator BlackholeStart()
     {
-        //yield return new WaitForSeconds(3f);
         yield return null;
         GameObject newOBJ = Instantiate(obstacle, transform.position, Quaternion.Euler(Vector3.zero));
         navAgentManager.DetectNewObstacle(transform.position);
