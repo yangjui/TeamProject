@@ -8,9 +8,15 @@ TagManager:
   - Metal
   - ExplosiveBarrel
   - Platform
+<<<<<<< Updated upstream
   - Enemy
   - Metal
   - ExplosiveBarrel
+=======
+  - Dead
+  - Enemy
+  - Laser
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -31,6 +37,11 @@ TagManager:
   - Zombie
   - Grenade
   - Casing
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+  - Granade
+  - 
 >>>>>>> Stashed changes
   - 
   - 

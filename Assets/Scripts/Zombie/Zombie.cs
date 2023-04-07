@@ -117,6 +117,44 @@ public class Zombie : MonoBehaviour
         Attack();
     }
 
+<<<<<<< Updated upstream
+=======
+    private void Run()
+    {
+        if (!isRun && OnZombieFree != null) 
+        {
+            OnZombieFree(this); // 이벤트 발생과 함께 좀비의 이름 전달
+            isRun = true;
+        }
+        anim.SetBool("isIdle", false);
+        anim.SetBool("isRun", true);
+        navAgent.speed = Random.Range(minRunSpeed, maxRunSpeed);
+        anim.speed = navAgent.speed;
+    }
+
+    private void Walk()
+    {
+        anim.SetBool("isRun", false);
+        navAgent.speed = Random.Range(minWalkSpeed, maxWalkSpeed);
+        anim.speed = navAgent.speed;
+    }
+
+    public void TakeDamage(float playerAttackDamage)
+    {
+        currentHealth = currentHealth - playerAttackDamage;
+        Debug.Log(currentHealth);
+        if (OnZombieFree != null)
+        {
+            OnZombieFree(this); // 이벤트 발생과 함께 좀비의 이름 전달
+        }
+    }
+
+    public float CurrentHealth()
+    {
+        return currentHealth;
+    }
+
+>>>>>>> Stashed changes
     public void RAttackOn()
     {
         attackZombieR.SetActive(true);
