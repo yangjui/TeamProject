@@ -455,7 +455,7 @@ MonoBehaviour:
     currentMagazine: 0
     maxMagazine: 0
     currentAmmo: 0
-    maxAmmo: 2
+    maxAmmo: 100
     attackRate: 0
     attackDistance: 0
     isAutomaticAttack: 0
@@ -1073,10 +1073,18 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13700002, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e640e087787fb14d90f8ea8907d6ce2, type: 2}
     - target: {fileID: 13700004, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13700004, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e640e087787fb14d90f8ea8907d6ce2, type: 2}
     - target: {fileID: 13700006, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -1108,9 +1116,9 @@ MonoBehaviour:
   weaponSetting:
     weaponName: 1
     currentMagazine: 0
-    maxMagazine: 2
+    maxMagazine: 8
     currentAmmo: 0
-    maxAmmo: 1
+    maxAmmo: 8
     attackRate: 0
     attackDistance: 0
     isAutomaticAttack: 0
@@ -1122,12 +1130,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   chargeEffectPoint: {fileID: 5933864138250310442}
-  fireEffectPoint: {fileID: 5933864138250310442}
-  chargingTime: 2
-  currentChargingTime: 0
+  laserEffectPoint: {fileID: 5933864138250310442}
   chargeEffectPrefab: {fileID: 1180268408184453300, guid: 94a9ce787863e964bbf5dd4e95f75f2a, type: 3}
-  fireEffectPrefab: {fileID: 2749479866245950336, guid: 1034309b7dfe90844ab87f9fdef85cfb, type: 3}
-  groundEffectPrefab: {fileID: 8170752514618103492, guid: 9fb8b68544e1ed74ca8202d7f5919382, type: 3}
+  laserEffectPrefab: {fileID: 2749479866245950336, guid: 1034309b7dfe90844ab87f9fdef85cfb, type: 3}
+  chargingTime: 2
   chargingSize: 0.1
 --- !u!114 &1982401215
 MonoBehaviour:
@@ -1840,6 +1846,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13700002, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e11c4f3ee458bf446918382a2f5f9451, type: 2}
     - target: {fileID: 13700004, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -2078,7 +2088,7 @@ MonoBehaviour:
     currentMagazine: 0
     maxMagazine: 0
     currentAmmo: 0
-    maxAmmo: 2
+    maxAmmo: 100
     attackRate: 0
     attackDistance: 0
     isAutomaticAttack: 0

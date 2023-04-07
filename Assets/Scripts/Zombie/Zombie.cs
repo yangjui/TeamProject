@@ -287,7 +287,7 @@ public class Zombie : MonoBehaviour
     public void TakeDamage(float playerAttackDamage)
     {
         currentHealth = currentHealth - playerAttackDamage;
-
+        Debug.Log(currentHealth);
         if (OnZombieFree != null)
         {
             OnZombieFree(this); // 이벤트 발생과 함께 좀비의 이름 전달

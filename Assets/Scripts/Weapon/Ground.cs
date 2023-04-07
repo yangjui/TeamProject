@@ -11,6 +11,11 @@ public class Ground : MonoBehaviour
 
     private float nextdamageTime;
 
+    private void Start()
+    {
+        Destroy(gameObject, 4f);
+    }
+
     private void OnTriggerStay(Collider _other)
     {
         if (_other.CompareTag("Zombie") && Time.time >= nextdamageTime)

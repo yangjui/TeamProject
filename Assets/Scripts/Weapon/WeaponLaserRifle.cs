@@ -8,20 +8,24 @@ public class WeaponLaserRifle : WeaponBase
 {
     [Header("# SpawnPoints")]
     [SerializeField] private Transform chargeEffectPoint;
-    [SerializeField] private Transform fireEffectPoint;
-    private Camera mainCamera;
+    [SerializeField] private Transform laserEffectPoint;
 
+    [Header("# Prefab")]
+    [SerializeField] private GameObject chargeEffectPrefab = null;
+    [SerializeField] private GameObject laserEffectPrefab = null;
+
+    [Header("# LaserSetting")]
     [SerializeField] private float chargingTime = 2f;
-    [SerializeField] private float currentChargingTime = 0f;
-    [SerializeField] private GameObject chargeEffectPrefab;
-    [SerializeField] private GameObject fireEffectPrefab;
-    [SerializeField] private GameObject groundEffectPrefab;
     [SerializeField] private float chargingSize = 0.1f;
+
     private Vector3 attackDirection;
+    private Vector3 attackRotation;
     private GameObject chargeEffect;
+    private Camera mainCamera;
 
     private bool isTakeOut = false;
     private bool isCharging = false;
+    private float currentChargingTime = 0f;
 
     private void Awake()
     {
@@ -97,8 +101,7 @@ public class WeaponLaserRifle : WeaponBase
         }
         Debug.DrawRay(ray.origin, ray.direction * weaponSetting.attackDistance, Color.red);
 
-        // 위에서 나온 타겟포인트에서 총구방향을 빼면 총구에서 타겟포인트로 향하는 방향을 구할 수 있음
-        attackDirection = (targetPoint - chargeEffectPoint.position).normalized;
+        attackDirection = targetPoint - chargeEffectPoint.position;
     }
 
     private IEnumerator ChargingLaserCoroutine()
@@ -121,13 +124,14 @@ public class WeaponLaserRifle : WeaponBase
 
     private void ShotLaser()
     {
+        TwoStepRaycast();
         isCharging = false;
         StopCoroutine("ChargingLaserCoroutine");
         if (currentChargingTime >= chargingTime)
         {
             Destroy(chargeEffect);
-            Instantiate(fireEffectPrefab, fireEffectPoint.position, fireEffectPoint.rotation);
-
+            Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.LookRotation(attackDirection,Vector3.up) * Quaternion.Euler(0f, 180f, 0f));
+      
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
 
@@ -192,9 +196,6 @@ public class WeaponLaserRifle : WeaponBase
 
             // 무기 애니메이션 재생
             anim.Play("Fire", -1, 0);
-
-            // 광선을 발사해 원하는 위치 공격
-            TwoStepRaycast();
         }
     }
 

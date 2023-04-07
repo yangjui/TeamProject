@@ -10,6 +10,8 @@ TagManager:
   - ExplosiveBarrel
   - Platform
   - Dead
+  - Enemy
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Zombie
   - Casing
   - Granade
-  - Sound
+  - 
   - 
   - 
   - 

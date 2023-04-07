@@ -388,7 +388,6 @@ GameObject:
   - component: {fileID: 45497293}
   - component: {fileID: 45497292}
   - component: {fileID: 45497291}
-  - component: {fileID: 45497295}
   m_Layer: 7
   m_Name: Cube
   m_TagString: Platform
@@ -474,22 +473,6 @@ Transform:
   m_Father: {fileID: 1895834783}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!54 &45497295
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45497290}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &47011398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,7 +1897,6 @@ GameObject:
   - component: {fileID: 290901012}
   - component: {fileID: 290901011}
   - component: {fileID: 290901010}
-  - component: {fileID: 290901013}
   m_Layer: 7
   m_Name: Wall2
   m_TagString: Platform
@@ -2000,22 +1982,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290901008}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &290901013
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290901008}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &299997522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,7 +1994,6 @@ GameObject:
   - component: {fileID: 299997526}
   - component: {fileID: 299997525}
   - component: {fileID: 299997524}
-  - component: {fileID: 299997527}
   m_Layer: 7
   m_Name: Ground (1)
   m_TagString: Platform
@@ -2114,22 +2079,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299997522}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &299997527
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299997522}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &306973426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,7 +2279,6 @@ GameObject:
   - component: {fileID: 319962423}
   - component: {fileID: 319962422}
   - component: {fileID: 319962421}
-  - component: {fileID: 319962425}
   m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Platform
@@ -2416,22 +2364,6 @@ Transform:
   m_Father: {fileID: 1895834783}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &319962425
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319962420}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &347357623
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,7 +3895,6 @@ GameObject:
   - component: {fileID: 886145960}
   - component: {fileID: 886145959}
   - component: {fileID: 886145958}
-  - component: {fileID: 886145961}
   m_Layer: 7
   m_Name: Wall3
   m_TagString: Platform
@@ -4049,22 +3980,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886145956}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &886145961
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886145956}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &890207859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6075,7 +5990,6 @@ GameObject:
   - component: {fileID: 1198584747}
   - component: {fileID: 1198584746}
   - component: {fileID: 1198584745}
-  - component: {fileID: 1198584748}
   m_Layer: 7
   m_Name: Wall4
   m_TagString: Platform
@@ -6161,22 +6075,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198584743}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1198584748
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198584743}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1211585634
 GameObject:
   m_ObjectHideFlags: 0
@@ -7256,7 +7154,6 @@ GameObject:
   - component: {fileID: 1553018774}
   - component: {fileID: 1553018773}
   - component: {fileID: 1553018772}
-  - component: {fileID: 1553018776}
   m_Layer: 7
   m_Name: Ground
   m_TagString: Platform
@@ -7342,22 +7239,6 @@ Transform:
   m_Father: {fileID: 1895834783}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1553018776
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553018771}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1583911969
 GameObject:
   m_ObjectHideFlags: 0
