@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 30
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 130
+  controlID: 120
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 254
     height: 841
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.20059925, y: 0.14843564, z: -0.030509489, w: -0.96795595}
     speed: 2
-    m_Value: {x: -0.20058495, y: 0.14842506, z: -0.030507313, w: -0.9678869}
+    m_Value: {x: -0.20059925, y: 0.14843565, z: -0.03050949, w: -0.96795595}
   m_Size:
     m_Target: 11.999342
     speed: 2
@@ -770,9 +770,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 62650000
-      m_LastClickedID: 25954
-      m_ExpandedIDs: f0f2ffffa6f4ffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 36fbffff8e5a0000c85a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -837,22 +837,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/TextMesh Pro/Resources/Fonts & Materials
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/TextMesh Pro/Resources/Fonts & Materials
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\SAMSUNG\Desktop\gitlee\TeamProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7c640000
-    m_LastClickedID: 25724
-    m_ExpandedIDs: 000000006264000066640000686400006a6400006c6400006e64000070640000746400007a64000000ca9a3bffffff7f
+    m_SelectedIDs: d25d0000
+    m_LastClickedID: 24018
+    m_ExpandedIDs: 000000006e5d0000705d0000725d0000745d0000765d0000785d00007a5d00007c5d00007e5d0000925d0000d45d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -880,7 +880,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000626400006464000066640000686400006a6400006c6400006e640000706400007264000074640000
+    m_ExpandedIDs: 000000006e5d0000705d0000725d0000745d0000765d0000785d00007a5d00007c5d00007e5d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
