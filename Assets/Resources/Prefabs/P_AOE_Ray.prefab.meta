@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Resources/Materials/New Material.mat.meta
-guid: d1c93f312ab2e9c41bbcbb7ac4d978b0
-NativeFormatImporter:
-========
 guid: b58d4854e84a68043bdd7e089d8bf263
 PrefabImporter:
->>>>>>>> Stashed changes:Assets/Resources/Prefabs/P_AOE_Ray.prefab.meta
   externalObjects: {}
-  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

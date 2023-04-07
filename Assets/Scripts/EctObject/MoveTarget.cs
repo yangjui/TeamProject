@@ -12,7 +12,7 @@ public class MoveTarget : MonoBehaviour
 
     private void Start()
     {
-        transform.position = pointA.position;
+        // transform.position = pointA.position;
     }
 
     private void Update()

@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform startPos;
     [SerializeField] private PlayerHUD playerHUD;
-
+    
     private GameObject go;
 
     public void Init()
@@ -22,20 +22,13 @@ public class PlayerManager : MonoBehaviour
         go.GetComponent<WeaponSwitchingSystem>().playerHUD = playerHUD;
         go.GetComponent<WeaponSwitchingSystem>().Init();
         go.GetComponentInChildren<WeaponAssaultRifle>().OnChangeAimModeDelegate(OnChangeAimMode);
-<<<<<<< Updated upstream
-        go.GetComponent<PlayerController>().SetUnderAttackDelegate(StartBloodScreenCoroutine);
-=======
         go.GetComponent<PlayerController>().SetUnderAttackDelegate(StartBloodScreenCoroutine, OnPlayerIsDead);
-
-        instance = this;
-
-        playerTransform = go.transform;
     }
 
-    public void Update()
+    public Transform PlayerPosition()
     {
-        Vector3 playerPosition = playerTransform.position;
->>>>>>> Stashed changes
+        return go.GetComponent<PlayerController>().PlayerPosition();
+
     }
 
     private void OnChangeAimMode(bool _aimMode)
@@ -47,7 +40,7 @@ public class PlayerManager : MonoBehaviour
 
     private void StartBloodScreenCoroutine()
     {
-        playerHUD.StartBloddScreenCoroutine();
+        playerHUD.StartBloodScreenCoroutine();
     }
 
     private void OnPlayerIsDead()

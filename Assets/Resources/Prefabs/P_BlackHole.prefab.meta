@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Resources/ExternalAssets/character.fbm.meta
-guid: 10a964b7dd0f13b46bddbb64e94cf190
-folderAsset: yes
-DefaultImporter:
-========
 guid: bbbd96d6d37aaf74abc8f7ea9585c3a6
 PrefabImporter:
->>>>>>>> Stashed changes:Assets/Resources/Prefabs/P_BlackHole.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

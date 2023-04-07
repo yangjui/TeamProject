@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
             TakeDamage(1); // Å×½ºÆ®
         }
     }
+    public Transform PlayerPosition()
+    {
+        return this.transform;
+    }
 
     private void Rotate()
     {

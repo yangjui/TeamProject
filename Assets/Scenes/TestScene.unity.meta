@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Resources/Materials/M_White.mat.meta
-guid: 31ae17cd62475dc4da92ed7e5c58bc8c
-NativeFormatImporter:
-========
 guid: a43ac06c5f754e44e8da71aa143bee0f
 DefaultImporter:
->>>>>>>> Stashed changes:Assets/Scenes/TestScene.unity.meta
   externalObjects: {}
-  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

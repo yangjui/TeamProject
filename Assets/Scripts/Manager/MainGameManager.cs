@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MainGameManager : MonoBehaviour
 {
     [SerializeField] private TitleSceneManager titleSceneManager;
-    
+
     public void ChangeScene()
     {
         titleSceneManager.ChangePlayScene();

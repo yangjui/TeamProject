@@ -5,65 +5,100 @@ using UnityEngine.AI;
 
 public class Zombie : MonoBehaviour
 {
+    [Header("# Zombie")]
     [SerializeField] private GameObject alive;
+    [SerializeField] private GameObject deadRagdoll;
     [SerializeField] private GameObject dead;
-    [SerializeField] private float attackCoolTime = 0.5f;
-    [SerializeField] private float zombieAttackDamage = 10f;
-    [SerializeField] private float zombieHealth = 100f;
-    [SerializeField] private BoxCollider triggerCollider;
     [SerializeField] private GameObject attackZombieL;
     [SerializeField] private GameObject attackZombieR;
+    [SerializeField] private float zombieHealth = 100f;
 
-    [System.NonSerialized] public Transform playerTransform;
-    private Vector3 playerPosition;
+    private NavMeshAgent navAgent;
 
     private float currentHealth;
-    private bool isMovingSelf = false;
+
+    private float maxWalkSpeed = 1f;
+    private float minWalkSpeed = 0.5f;
+
+    private float maxRunSpeed = 2f;
+    private float minRunSpeed = 1.5f;
+
+    private float blackHoleRadius = 7f;
+    private float detectionRadius = 10f;
+    private float resetTime = 10f;
+
+    private bool isMember = true;
+    private bool isInBlackHole = false;
+    private bool isRun = false;
+
+    private Vector3 blackHolePosition;
+
+    private Transform target;
+    private Transform playerPosition;
     private Animator anim;
-    private PathTrigger pathTrigger;
-    private NavAgentManager navAgentManager;
 
-    private PlayerController player;
-
-    NavMeshAgent agent;
+    public delegate void ZombieFreeEventHandler(Zombie zombie);
+    public ZombieFreeEventHandler OnZombieFree;
 
     private void Awake()
     {
+        navAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-        // player = GetComponentInParent<NavAgentManager>().player;
         currentHealth = zombieHealth;
-
-        Invoke("FetchPlayer", 1f);
-    }
-
-    private void FetchPlayer()
-    {
-        PlayerManager playerManager = PlayerManager.instance;
-        playerTransform = playerManager.playerTransform;
+        InvokeRepeating("ZombieState", 1f, 2f);
     }
 
     private void Update()
     {
-        if (currentHealth <= 0)
+        if (!isMember)
         {
-            agent.isStopped = true; // 네브에이전트 꺼주기
-            Dead();
+            if (resetTime > 3)
+            {
+                InTheBlackHole();
+            }
+
+            if (isInBlackHole)
+            {
+                resetTime -= Time.deltaTime;
+                if (resetTime <= 0)
+                {
+                    ResetAgent();
+                }
+            }
+
+            if (!isInBlackHole)
+            {
+                navAgent.SetDestination(target.position);
+            }
+        }
+        else
+        {
+            navAgent.SetDestination(target.position);
         }
 
-        if (isMovingSelf)
+        if (resetTime <= 0)
         {
-            playerPosition = playerTransform.position;
-            agent.SetDestination(playerPosition);
-            
-            ZombieState();
+            resetTime = 10f;
         }
+
+        if (currentHealth <= 0 && !isInBlackHole)
+        {
+            Dead();
+        }
+    }
+
+    public void PlayerPosition(Transform _playerPosition)
+    {
+        playerPosition = _playerPosition;
     }
 
     private void ZombieState()
     {
-        switch (Vector3.Distance(this.transform.position, playerPosition))
+        switch (Vector3.Distance(transform.position, playerPosition.position))
         {
+            case >= 10:
+                Walk();
+                break;
             case < 10 and >= 2:
                 Run();
                 break;
@@ -75,50 +110,160 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    // 렉돌로 바꿔치기
     private void Dead()
     {
-        GameObject newRagdoll = Instantiate(dead, transform.position, transform.rotation);
-
-        RagDollPosition(alive.transform, newRagdoll.transform);
-
-        isMovingSelf = false;
+        navAgent.enabled = false;
         alive.SetActive(false);
+
+        GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+        RagdollPosition(alive.transform, newRagdoll.transform);
+
+        //Destroy(newRagdoll, 3f);
+
+        //GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
+        //DeadPosition(newRagdoll.transform, newDead.transform);
+
+
+        Destroy(alive);
     }
 
-    // 렉돌 전환시 T자 아바타 되는 거 방지. 각 관절 위치 맞춰주기
-    private void RagDollPosition(Transform alive, Transform dead)
-    {
-        for (int i = 0; i < alive.transform.childCount; ++i)
-        {
-            if (alive.transform.childCount != 0)
-                RagDollPosition(alive.transform.GetChild(i), dead.transform.GetChild(i));
+    //private void Dead()
+    //{
+    //    navAgent.enabled = false;
+    //    alive.SetActive(false);
 
-            dead.transform.GetChild(i).localPosition = alive.transform.GetChild(i).localPosition;
-            dead.transform.GetChild(i).localRotation = alive.transform.GetChild(i).localRotation;
+    //    GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+    //    RagdollPosition(alive.transform, newRagdoll.transform);
+
+    //    //newRagdoll.SetActive(false);
+    //    Invoke("waitDead(newRagdoll)", 3f);
+    //    Invoke("InstanceDead", 3f);
+    //    Invoke("DeadPosition(dead, newDead)", 3f);
+    //    Destroy(alive);
+    //    Destroy(newRagdoll);
+    //}
+
+    //private void InstanceDead()
+    //{
+    //    GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
+    //}
+
+    //private void waitDead(GameObject _newRagdoll)
+    //{
+    //    _newRagdoll.SetActive(false);
+    //}
+
+
+    private void RagdollPosition(Transform _alive, Transform _dead)
+    {
+        for (int i = 0; i < _alive.transform.childCount; ++i)
+        {
+            if (_alive.transform.childCount != 0)
+                RagdollPosition(_alive.transform.GetChild(i), _dead.transform.GetChild(i));
+
+            _dead.transform.GetChild(i).localPosition = _alive.transform.GetChild(i).localPosition;
+            _dead.transform.GetChild(i).localRotation = _alive.transform.GetChild(i).localRotation;
         }
-        dead.transform.position = alive.transform.position; // 렉돌 자체의 위치 맞추기
+        _dead.transform.position = _alive.transform.position; // 렉돌 자체의 위치 맞추기
+    }
+
+    //private void DeadPosition(Transform _dead, Transform _newRagdoll)
+    //{
+    //    for (int i = 0; i < _dead.transform.childCount; ++i)
+    //    {
+    //        if (_dead.transform.childCount != 0)
+    //            DeadPosition(_dead.transform.GetChild(i), _newRagdoll.transform.GetChild(i));
+
+    //        _newRagdoll.transform.GetChild(i).localPosition = _dead.transform.GetChild(i).localPosition;
+    //        _newRagdoll.transform.GetChild(i).localRotation = _dead.transform.GetChild(i).localRotation;
+    //    }
+    //    _newRagdoll.transform.position = _dead.transform.position;
+    //}
+
+
+
+    private void InTheBlackHole()
+    {
+        if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInBlackHole)
+        {
+            navAgent.enabled = false;
+            Vector3 dir = blackHolePosition - transform.position;
+            transform.position += dir * 3f * Time.deltaTime;
+        }
+    }
+
+    public void NoMoreMember()
+    {
+        isMember = false;
+    }
+
+    public void HitByBlackHole(Vector3 _position)
+    {
+        blackHolePosition = _position;
+        isInBlackHole = true;
+    }
+
+    public void StopAnimation()
+    {
+        anim.enabled = false; // 땅에 떨어지는 순간으로 다시 애니메이션 작동하도록 만들어야함
+    }
+
+
+    public void DetectNewObstacle(Vector3 _position)
+    {
+        if (Vector3.Distance(_position, transform.position) < detectionRadius && Vector3.Distance(_position, transform.position) > blackHoleRadius)
+        {
+            navAgent.speed = 15f;
+            navAgent.angularSpeed = 500f;
+        }
+    }
+
+    private void ResetAgent()
+    {
+        navAgent.enabled = true;
+        anim.enabled = true;
+        isInBlackHole = false;
+    }
+
+    public Vector3 CurDestination()
+    {
+        return navAgent.destination;
+    }
+
+    public void SetNewTarget(Transform _newTarget)
+    {
+        target = _newTarget;
+    }
+
+    public float AgentSpeed()
+    {
+        return navAgent.speed;
+    }
+
+    public void GetSpeedByManager(float _speed)
+    {
+        navAgent.speed = _speed;
+    }
+
+    public void GetAngularSpeedByManager(float _speed)
+    {
+        navAgent.angularSpeed = _speed;
     }
 
     private void Attack()
     {
-        //attackZombieL.SetActive(true);
-        //attackZombieR.SetActive(true);
-
         anim.SetTrigger("isAttack");
     }
 
     private void Idle()
     {
-        //attackZombieL.SetActive(false);
-        //attackZombieR.SetActive(false);
-        
+        navAgent.speed = 0.1f;
+        navAgent.angularSpeed = 500f;
+
         anim.SetBool("isIdle", true);
         Attack();
     }
 
-<<<<<<< Updated upstream
-=======
     private void Run()
     {
         if (!isRun && OnZombieFree != null) 
@@ -154,7 +299,6 @@ public class Zombie : MonoBehaviour
         return currentHealth;
     }
 
->>>>>>> Stashed changes
     public void RAttackOn()
     {
         attackZombieR.SetActive(true);
@@ -174,44 +318,4 @@ public class Zombie : MonoBehaviour
     {
         attackZombieL.SetActive(false);
     }
-
-    private void OnTriggerEnter(Collider _other)
-    {
-        if (_other.CompareTag("Boundary"))
-            isMovingSelf = true;
-    }
-
-    private void Run()
-    {
-        anim.SetBool("isIdle", false);
-        anim.SetBool("isRun", true);
-    }
-
-                //if (hit.transform.TryGetComponent(out Zombie zombie))
-                //zombie.CurrentHealthZombie(30f);
-
-    private float CheckPlayerPosition()
-    {
-        return Vector3.SqrMagnitude(this.transform.position - playerPosition);
-    }
-
-    private void OnTriggerExit(Collider _other)
-    {
-        if (_other.CompareTag("PlayerAround"))
-        {
-            anim.SetBool("isAttack", false);
-            anim.SetBool("isRun", false);
-        }
-
-        if (_other.CompareTag("Player"))
-        {
-            anim.SetBool("isIdle", false);
-            anim.SetBool("isAttack", false);
-        }
-    }
-
-    public void Takedamage(float playerAttackDamage)
-    {
-        currentHealth -= playerAttackDamage;
-    }
-}  
+}

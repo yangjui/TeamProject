@@ -12,6 +12,7 @@ public class WeaponGrenade : WeaponBase
     {
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+        isAttack = false;
     }
 
     private void Awake()

@@ -4,45 +4,27 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Zombie
   - Target
   - Metal
   - ExplosiveBarrel
   - Platform
-<<<<<<< Updated upstream
-  - Enemy
-  - Metal
-  - ExplosiveBarrel
-=======
   - Dead
   - Enemy
   - Laser
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Dead
   - Water
   - UI
   - Player
-<<<<<<< Updated upstream
-  - Casing
-  - Grenade
-  - 
-  - 
-  - 
-=======
-  - Sound
   - Platform
   - Zombie
-  - Grenade
   - Casing
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
   - Granade
   - 
->>>>>>> Stashed changes
   - 
   - 
   - 

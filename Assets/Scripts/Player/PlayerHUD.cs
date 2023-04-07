@@ -100,13 +100,13 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    public void StartBloddScreenCoroutine()
+    public void StartBloodScreenCoroutine()
     {
-        StopCoroutine("OnBloddScreen");
-        StartCoroutine("OnBloddScreen");
+        StopCoroutine("OnBloodScreen");
+        StartCoroutine("OnBloodScreen");
     }
 
-    private IEnumerator OnBloddScreen()
+    private IEnumerator OnBloodScreen()
     {
         float percent = 0;
         while (percent < 1)

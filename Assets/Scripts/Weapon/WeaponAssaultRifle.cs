@@ -36,7 +36,6 @@ public class WeaponAssaultRifle : WeaponBase
 
     public bool isAimMode = false;
 
-
     private enum AmmoType { AssaultRifle, laser };
 
     private void Awake()
@@ -124,7 +123,6 @@ public class WeaponAssaultRifle : WeaponBase
         float start = mainCamera.fieldOfView;
         float end = anim.AimModeIs ? aimModeFOV : defaultModeFOV;
 
-
         isModeChange = true;
         changeAimModeCallback?.Invoke(isAimMode);
         while (percent < 0.5)
@@ -143,9 +141,8 @@ public class WeaponAssaultRifle : WeaponBase
         float current = 0f;
         float percent = 0f;
         float time = 0.35f;
-
         float start = mainCamera.fieldOfView;
-        
+
         isModeChange = true;
         isAimMode = !isAimMode;
         changeAimModeCallback?.Invoke(isAimMode);
@@ -167,9 +164,7 @@ public class WeaponAssaultRifle : WeaponBase
 
         // 마지막 공격 이후 3초 이상이 지난 경우 콤보 카운트 초기화
         if (Time.time - lastShotTime >= shotVaildTime)
-        {
             shotCount = 0;
-        }
     }
 
     private void ResetVariables()
@@ -186,7 +181,6 @@ public class WeaponAssaultRifle : WeaponBase
         Vector3 targetPoint = Vector3.zero;
 
         ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f + shotVec);
-        
         if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
         {
             // 레이가 맞는다면 타겟포인트는 맞은대상
@@ -198,7 +192,7 @@ public class WeaponAssaultRifle : WeaponBase
             targetPoint = ray.origin + ray.direction * weaponSetting.attackDistance;
         }
         Debug.DrawRay(ray.origin, ray.direction * weaponSetting.attackDistance, Color.red);
-        
+
         // 위에서 나온 타겟포인트에서 총구방향을 빼면 총구에서 타겟포인트로 향하는 방향을 구할 수 있음
         Vector3 attackDirection = (targetPoint - bulletSpawnPoint.position).normalized;
         // 총구에서 위 방향으로 레이를 쏨
@@ -206,10 +200,11 @@ public class WeaponAssaultRifle : WeaponBase
         {
             impactObjectPool.SpawnImpact(hit);
             bulletHoleObjectPool.SpawnImpact(hit);
-            //if (hit.transform.CompareTag("Enemy")) // 대미지 주는 함수
-            //{
-            //    hit.transform.GetComponent<Enemy>().Takedamage(weaponSetting.damage);
-            //}            
+
+            if (hit.transform.TryGetComponent(out Zombie zombie))
+            {
+                zombie.TakeDamage(weaponSetting.damage);
+            }
         }
         Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
     }
@@ -247,41 +242,13 @@ public class WeaponAssaultRifle : WeaponBase
         switch (shotCount)
         {
             case 0:
-                shotVec = Vector2.zero;
-                break;
             case 1:
-                shotVec = Vector2.zero;
-                break;
             case 2:
                 shotVec = Vector2.zero;
                 break;
             case > 3:
                 shotVec = new Vector2(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f));
                 break;
-                //case 4:
-                //    shotVec = new Vector2(1f, 0f);
-                //    break;
-                //case 5:
-                //    shotVec = new Vector2(0.5f, 0f);
-                //    break;
-                //case 6:
-                //    shotVec = new Vector2(0f, 0f);
-                //    break;
-                //case 7:
-                //    shotVec = new Vector2(-0.5f, 0f);
-                //    break;
-                //case 8:
-                //    shotVec = new Vector2(-1f, 0f);
-                //    break;
-                //case 9:
-                //    shotVec = new Vector2(-0.5f, 0f);
-                //    break;
-                //case 10:
-                //    shotVec = new Vector2(0f, 0f);
-                //    break;
-                //case > 10:
-                //    shotVec = new Vector2(0f, (shotCount - 10) * 0.03f);
-                //    break;
         }
     }
 
@@ -297,7 +264,6 @@ public class WeaponAssaultRifle : WeaponBase
         {
             if (weaponSetting.isAutomaticAttack)
             {
-                isAttack = true;
                 StartCoroutine("OnAttackLoop");
             }
             else
@@ -308,7 +274,7 @@ public class WeaponAssaultRifle : WeaponBase
         else
         {
             // 공격중이면 모드전환 할 수 없게
-            if (isAttack) return; 
+            if (isAttack || anim.MoveSpeed > 0.5f) return;
             StartCoroutine("OnModeChange");
         }
     }
@@ -323,7 +289,7 @@ public class WeaponAssaultRifle : WeaponBase
 
     public override void StartReload()
     {
-        if (isReload || isTakeOut || weaponSetting.currentMagazine <= 0 ) return; // 장전 중 재장전 불가능
+        if (isReload || isTakeOut || weaponSetting.currentMagazine <= 0) return; // 장전 중 재장전 불가능
         StopWeaponAction(); // 무기 사용중일 수 있으니 무기사용 멈춰줌
 
         StartCoroutine("OnReload");
@@ -339,10 +305,12 @@ public class WeaponAssaultRifle : WeaponBase
             lastAttackTime = Time.time;
 
             // 총알이 없다면 return
-            if (weaponSetting.currentAmmo <= 0) return; 
+            if (weaponSetting.currentAmmo <= 0) return;
 
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
+
+            isAttack = true;
 
             // 반동제어용 발수 카운트
             ShotCount();
@@ -372,7 +340,7 @@ public class WeaponAssaultRifle : WeaponBase
         }
     }
 
-    
+
     /// 애니메이션함수, 콜백
 
     public void IsStopAttack()
