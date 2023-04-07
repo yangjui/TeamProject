@@ -6569,9 +6569,9 @@ GameObject:
   - component: {fileID: 5830373423081588698}
   - component: {fileID: 6027376670075067134}
   - component: {fileID: 6028032229690951234}
-  - component: {fileID: -2092043923485341104}
   - component: {fileID: -2306039222863610988}
   - component: {fileID: 635004668376939218}
+  - component: {fileID: 9190634310630192010}
   m_Layer: 12
   m_Name: Ragdoll
   m_TagString: Ragdoll
@@ -6719,20 +6719,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e299c6dad34ee654589529fe0e209430, type: 2}
   - {fileID: 2100000, guid: b0fe930d5cf8a7c4cad119f917b58a85, type: 2}
   - {fileID: 2100000, guid: e14b03b7f1f66544fa361168f7b8be43, type: 2}
---- !u!114 &-2092043923485341104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924059365190695168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ddfe1eafd0a0ea45a64bfdf738c87eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ragdoll: {fileID: 5924059365190695168}
-  dead: {fileID: 5924059365190695168, guid: c9cc23b8721d86842ad00304af7d5b2f, type: 3}
 --- !u!54 &-2306039222863610988
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6762,6 +6748,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.92, y: 1.8, z: 0.52}
   m_Center: {x: 0, y: 0.85, z: 0.04}
+--- !u!114 &9190634310630192010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924059365190695168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff391d3bdb5dd4445aee9fc313dd8ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdoll: {fileID: 5924059365190695168}
+  dead: {fileID: 5924059365190695168, guid: c9cc23b8721d86842ad00304af7d5b2f, type: 3}
 --- !u!1 &5924063587905269664
 GameObject:
   m_ObjectHideFlags: 0
