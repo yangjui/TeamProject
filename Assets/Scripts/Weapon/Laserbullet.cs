@@ -19,7 +19,7 @@ public class Laserbullet : MonoBehaviour
     {
         if (_other.CompareTag("Zombie"))
         {
-            Zombie zombie = _other.GetComponent<Zombie>();
+            BakeZombie zombie = _other.GetComponent<BakeZombie>();
             zombie.TakeDamage(damage);
             
             Vector3 Dir = transform.position - _other.transform.position;

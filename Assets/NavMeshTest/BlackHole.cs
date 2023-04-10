@@ -25,10 +25,9 @@ public class BlackHole : MonoBehaviour
 
     private void Update()
     {
-        if (agents.Count == 0) return;
-
-        for (int i = 0; i < agents.Count; ++i)
+        if(agents.Count > 0)
         {
+
             if (agents[i].gameObject != null)
             {
                 if (agents[i].CompareTag("Zombie"))

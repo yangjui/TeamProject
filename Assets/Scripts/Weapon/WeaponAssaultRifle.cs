@@ -201,7 +201,7 @@ public class WeaponAssaultRifle : WeaponBase
             impactObjectPool.SpawnImpact(hit);
             bulletHoleObjectPool.SpawnImpact(hit);
 
-            if (hit.transform.TryGetComponent(out Zombie zombie))
+            if (hit.transform.TryGetComponent(out BakeZombie zombie))
             {
                 zombie.TakeDamage(weaponSetting.damage);
             }

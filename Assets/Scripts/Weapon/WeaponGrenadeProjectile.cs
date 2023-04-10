@@ -34,7 +34,7 @@ public class WeaponGrenadeProjectile : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider hit in colliders)
         {
-            Zombie zombie = hit.GetComponent<Zombie>();
+            BakeZombie zombie = hit.GetComponent<BakeZombie>();
             if (zombie != null)
             {
                 zombie.TakeDamage(explosionDamage);

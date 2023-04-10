@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: V5_Clothes.Z-CoolTime.animTex
+  m_Shader: {fileID: 4800000, guid: 744a72612a3320a40b62e72c05d0c4eb, type: 3}
+  m_ValidKeywords:
+  - ANIM_LOOP
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: db86d061c44f1a94796ad73d6f8d8d84, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NmlTex:
+        m_Texture: {fileID: 2800000, guid: 4f18a202635287540a44c7be9843c04e, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PosTex:
+        m_Texture: {fileID: 2800000, guid: 3867a3098811d8448a63f0f8642158d6, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _DT: 0
+    - _Length: 1.2918999
+    - _Loop: 1
+    m_Colors: []
+  m_BuildTextureStacks: []
