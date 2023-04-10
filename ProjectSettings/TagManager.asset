@@ -11,6 +11,11 @@ TagManager:
   - Platform
   - Dead
   - Ragdoll
+  - Laser
+  - Floor
+  - ground
+  - Enemy
+  - fire
   layers:
   - Default
   - TransparentFX

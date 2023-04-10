@@ -4,24 +4,12 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    [SerializeField]
-    private int damage = 10;
-    [SerializeField]
-    private float damageInterval = 1f;
 
-    private float nextdamageTime;
-
-    private void Start()
+    private void OnTriggerEnter(Collider _other)
     {
-        Destroy(gameObject, 4f);
-    }
-
-    private void OnTriggerStay(Collider _other)
-    {
-        if (_other.CompareTag("Zombie") && Time.time >= nextdamageTime)
+        if (_other.CompareTag("Zombie"))
         {
-            _other.GetComponent<Zombie>().TakeDamage(damage);
-            nextdamageTime = Time.time + damageInterval;
+            _other.GetComponent<Target>().Onfire();
         }
     }
 }
