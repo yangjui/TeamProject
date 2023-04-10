@@ -8,17 +8,23 @@ public class WeaponGrenadeProjectile : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private float explosionRadius;
     [SerializeField] private float explosionForce;
-    [SerializeField] private float throwForce;
 
     private int explosionDamage;
+    private float throwForce;
     private Rigidbody rb;
 
-    public void Setup(int _damage, Vector3 _rotation)
+    public void Setup(int _damage, Vector3 _rotation, float _throwForce)
     {
+        ThrowForce(_throwForce);
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(_rotation * throwForce);
+        rb.AddForce(_rotation * throwForce * 50);
 
         explosionDamage = _damage;
+    }
+
+    public void ThrowForce(float _throwForce)
+    {
+        throwForce = _throwForce;
     }
 
     private void OnCollisionEnter(Collision _collision)

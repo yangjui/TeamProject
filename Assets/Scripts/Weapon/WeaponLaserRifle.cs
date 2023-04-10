@@ -20,6 +20,7 @@ public class WeaponLaserRifle : WeaponBase
 
     private Vector3 attackDirection;
     private Vector3 attackRotation;
+    private Vector3 targetPoint;
     private GameObject chargeEffect;
     private Camera mainCamera;
 
@@ -86,7 +87,7 @@ public class WeaponLaserRifle : WeaponBase
     {
         Ray ray;
         RaycastHit hit;
-        Vector3 targetPoint = Vector3.zero;
+        targetPoint = Vector3.zero;
 
         ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
         if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
@@ -130,8 +131,10 @@ public class WeaponLaserRifle : WeaponBase
         if (currentChargingTime >= chargingTime)
         {
             Destroy(chargeEffect);
-            Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.LookRotation(attackDirection,Vector3.up) * Quaternion.Euler(0f, 180f, 0f));
-      
+            //Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.LookRotation(attackDirection,Vector3.up) * Quaternion.Euler(0f, 180f, 0f));
+            GameObject go = Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.identity);
+            go.transform.LookAt(targetPoint);
+            Debug.Log(targetPoint);
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
 

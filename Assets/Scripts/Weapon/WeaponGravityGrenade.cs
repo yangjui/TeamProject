@@ -7,11 +7,13 @@ public class WeaponGravityGrenade : WeaponBase
     [Header("# Grenade")]
     [SerializeField] private GameObject gravityGrenadePrefab;
     [SerializeField] private Transform grenadeSpawnPoint;
+    [SerializeField] private float throwForce;
 
     private void OnEnable()
     {
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+        GetComponent<TestGrenade>().SetThrowForce(throwForce);
         isAttack = false;
     }
 
@@ -64,7 +66,7 @@ public class WeaponGravityGrenade : WeaponBase
     public void SpawnGrenadeProjectile()
     {
         GameObject grenadeClone = Instantiate(gravityGrenadePrefab, grenadeSpawnPoint.position, Random.rotation);
-        grenadeClone.GetComponent<WeaponGravityGrenadeProjectile>().Setup(weaponSetting.damage, transform.parent.forward);
+        grenadeClone.GetComponent<WeaponGravityGrenadeProjectile>().Setup(weaponSetting.damage, transform.parent.forward, throwForce);
         weaponSetting.currentAmmo--;
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
     }

@@ -336,7 +336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961725777032337022}
   m_LocalRotation: {x: -0.28629574, y: -0.0000007690792, z: -0.00000022980348, w: 0.9581413}
-  m_LocalPosition: {x: -0.104, y: 0.639, z: 0.803}
+  m_LocalPosition: {x: -0.003, y: 0.445, z: 0.559}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -468,6 +468,22 @@ MonoBehaviour:
       m_Calls: []
   gravityGrenadePrefab: {fileID: 3738602556219916582, guid: 09c03ff7eae171840b3568320463e8c4, type: 3}
   grenadeSpawnPoint: {fileID: 1838675837}
+  throwForce: 20
+--- !u!114 &1632161462546993665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838181239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ab2ae7956ab8343afcd3d7b77b3fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectoryLinePrefab: {fileID: 6562467412027193472, guid: 973e795370db86940b8c991699cff11e, type: 3}
+  numDots: 20
+  dotSpacing: 0.1
 --- !u!4 &1838675799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: 182b7f11db452bc458d35a6c9eced06f, type: 3}
@@ -1120,7 +1136,7 @@ MonoBehaviour:
     currentAmmo: 0
     maxAmmo: 8
     attackRate: 0
-    attackDistance: 0
+    attackDistance: 30
     isAutomaticAttack: 0
     damage: 0
   onAmmoEvent:
@@ -1134,7 +1150,7 @@ MonoBehaviour:
   chargeEffectPrefab: {fileID: 1180268408184453300, guid: 94a9ce787863e964bbf5dd4e95f75f2a, type: 3}
   laserEffectPrefab: {fileID: 2749479866245950336, guid: 1034309b7dfe90844ab87f9fdef85cfb, type: 3}
   chargingTime: 2
-  chargingSize: 0.1
+  chargingSize: 0.01
 --- !u!114 &1982401215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,3 +2117,19 @@ MonoBehaviour:
       m_Calls: []
   grenadePrefab: {fileID: 3738602556219916582, guid: 0c64429b6a140464bb09a86089ff0791, type: 3}
   grenadeSpawnPoint: {fileID: 988425924810849309}
+  throwForce: 20
+--- !u!114 &2492324107908655352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988425924810940439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ab2ae7956ab8343afcd3d7b77b3fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectoryLinePrefab: {fileID: 6562467412027193472, guid: 973e795370db86940b8c991699cff11e, type: 3}
+  numDots: 20
+  dotSpacing: 0.1
