@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     private float fireRate = 0.1f;
     [SerializeField]
     private float bulletLifetime = 2f;
-    private int maxbullets = 30;
+    private int maxbullets = 5000;
 
     private void Update()
     {

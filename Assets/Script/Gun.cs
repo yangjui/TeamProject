@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private float range = 100f;
     [SerializeField]
-    private int damage = 30;
+    private int damage = 50;
     [SerializeField]
     private Transform muzzle;
 

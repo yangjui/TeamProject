@@ -20,17 +20,23 @@ public class BlackHole : MonoBehaviour
         {
             agents.Add(_other.gameObject);
         }
+    }
 
-        for (int i = 0; i < agents.Count; ++i)
+    private void Update()
+    {
+        if(agents.Count > 0)
         {
-            if (agents[i].CompareTag("Zombie"))
+            for (int i = 0; i < agents.Count; ++i)
             {
-                agents[i].GetComponent<Zombie>().HitByBlackHole(this.transform.position);
-                agents[i].GetComponent<Zombie>().TakeDamage(0);
-            }
-            else if (agents[i].CompareTag("Dead"))
-            {
-                agents[i].GetComponent<DeadZombie>().HitByBlackHole(this.transform.position);
+                if (agents[i].CompareTag("Zombie"))
+                {
+                    agents[i].GetComponent<BakeZombie>().HitByBlackHole(this.transform.position);
+                    agents[i].GetComponent<BakeZombie>().TakeDamage(0);
+                }
+                else if (agents[i].CompareTag("Dead"))
+                {
+                    agents[i].GetComponent<DeadZombie>().HitByBlackHole(this.transform.position);
+                }
             }
         }
     }
@@ -38,12 +44,6 @@ public class BlackHole : MonoBehaviour
     private void OnDestroy()
     {
         navAgentManager.ResetAgent();
-
-        for (int i = 0; i < agents.Count; ++i)
-        {
-            if (agents[i].CompareTag("Zombie"))
-                agents[i].GetComponent<Zombie>().StopAnimation();
-        }
     }
 
 }

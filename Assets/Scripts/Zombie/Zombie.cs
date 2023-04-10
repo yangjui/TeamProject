@@ -40,12 +40,15 @@ public class Zombie : MonoBehaviour
     public delegate void ZombieFreeEventHandler(Zombie zombie);
     public ZombieFreeEventHandler OnZombieFree;
 
+
+
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentHealth = zombieHealth;
         InvokeRepeating("ZombieState", 1f, 2f);
+
     }
 
     private void Update()
