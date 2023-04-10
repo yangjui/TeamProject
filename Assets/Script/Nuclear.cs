@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,7 +59,21 @@ public class Nuclear : MonoBehaviour
         GameObject bomb = Instantiate(bombPrefab, hit.point + Vector3.up * drophighest, bombPrefab.transform.rotation);
         Vector3 dir = hit.point - bomb.transform.position;
        bomb.GetComponent<Rigidbody>().AddForce(dir * 5f, ForceMode.Impulse);
+        if (bomb.CompareTag("Floor"))
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            Destroy(bomb);
+            Invoke("CreatExplosion", 0.5f);
+        }
+    }
+    
+    private void CreatExplosion()
+    {
+        GameObject explo = Instantiate(explosionPrefab, hit.point, Quaternion.identity);
     }
 
-
+    private void OnTriggerEnter(Collider _other)
+    {
+        
+    }
 }

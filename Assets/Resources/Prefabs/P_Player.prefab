@@ -336,7 +336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961725777032337022}
   m_LocalRotation: {x: -0.28629574, y: -0.0000007690792, z: -0.00000022980348, w: 0.9581413}
-  m_LocalPosition: {x: -0.104, y: 0.639, z: 0.803}
+  m_LocalPosition: {x: 0.011, y: 0.504, z: 0.686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1131,10 +1131,10 @@ MonoBehaviour:
       m_Calls: []
   chargeEffectPoint: {fileID: 5933864138250310442}
   laserEffectPoint: {fileID: 5933864138250310442}
-  chargeEffectPrefab: {fileID: 1180268408184453300, guid: 94a9ce787863e964bbf5dd4e95f75f2a, type: 3}
+  chargeEffectPrefab: {fileID: 5990112604267223275, guid: e18c351ac3f6ed7409f6cae5ba1302eb, type: 3}
   laserEffectPrefab: {fileID: 2749479866245950336, guid: 1034309b7dfe90844ab87f9fdef85cfb, type: 3}
   chargingTime: 2
-  chargingSize: 0.1
+  chargingSize: 0.05
 --- !u!114 &1982401215
 MonoBehaviour:
   m_ObjectHideFlags: 0
