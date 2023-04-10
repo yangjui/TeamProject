@@ -8,6 +8,8 @@ public class BlackHole : MonoBehaviour
     private NavAgentManager navAgentManager = null;
     private List<GameObject> agents = new List<GameObject>();
 
+    private float blackHoleRadius = 10f;
+
     private void Awake()
     {
         navAgentManager = FindObjectOfType<NavAgentManager>();
@@ -16,7 +18,6 @@ public class BlackHole : MonoBehaviour
     private void OnTriggerEnter(Collider _other)
     {
         // navAgentManager.DetectBlackHole(transform.position);
-
         if (_other.CompareTag("Zombie") || _other.CompareTag("Dead") || _other.CompareTag("Ragdoll"))
         {
             agents.Add(_other.gameObject);
@@ -25,48 +26,46 @@ public class BlackHole : MonoBehaviour
 
     private void Update()
     {
-        if(agents.Count > 0)
-        {
+        if (agents.Count == 0) return;
 
-            if (agents[i].gameObject != null)
+        for (int i = 0; i < agents.Count; ++i)
+        {
+            if (agents[i] == null) continue;
+            if (agents[i].CompareTag("Zombie"))
             {
-                if (agents[i].CompareTag("Zombie"))
+                //if (agents[i].GetComponent<Zombie>().CurrentHealth() == 0)
+                //{
+                //    agents.RemoveAt(i);
+                //}
+                agents[i].GetComponent<Zombie>().TakeDamage(0);
+                agents[i].GetComponent<Zombie>().BlackHole();
+
+                // if (Vector3.Distance(agents[i].transform.position, transform.position) < blackHoleRadius)
                 {
-                    if (agents[i].GetComponent<Zombie>().CurrentHealth() == 0)
-                    {
-                        agents.RemoveAt(i);
-                    }
-                    agents[i].GetComponent<Zombie>().HitByBlackHole(this.transform.position);
-                    agents[i].GetComponent<Zombie>().TakeDamage(0);
+                    Vector3 dir = transform.position - agents[i].transform.position;
+                    agents[i].transform.position += dir * 3f * Time.deltaTime;
                 }
-                else if (agents[i].CompareTag("Dead"))
-                {
-                    agents[i].GetComponent<Dead>().HitByBlackHole(this.transform.position);
-                }
-                else if (agents[i].CompareTag("Ragdoll"))
-                {
-                    agents[i].GetComponent<Ragdoll>().HitByBlackHole(this.transform.position);
-                }
+
             }
+            //else if(agents[i].CompareTag("Dead") || agents[i].CompareTag("Ragdoll"))
+            //{
+            //    if (Vector3.Distance(agents[i].transform.position, transform.position) < blackHoleRadius)
+            //    {
+            //        Vector3 dir = transform.position - agents[i].transform.position;
+            //        agents[i].transform.position += dir * 3f * Time.deltaTime;
+            //    }
+            //}
         }
     }
 
     private void OnDestroy()
     {
-        navAgentManager.ResetAgent();
-
-        for (int i = 0; i < agents.Count; ++i)
+        for (int i = agents.Count - 1; i >= 0; --i)
         {
-
-            if (agents[i].gameObject != null)
-            {
-                if (agents[i].CompareTag("Zombie"))
-                {
-                    if (agents[i].GetComponent<Zombie>().CurrentHealth() == 0)
-                        agents.RemoveAt(i);
-                    agents[i].GetComponent<Zombie>().ResetAgent();
-                }
-            }
+            if (agents[i] == null) continue;
+            agents[i].GetComponent<Zombie>().TakeDamage(100);
+            agents.RemoveAt(i);
         }
     }
+
 }

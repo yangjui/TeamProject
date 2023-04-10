@@ -28,8 +28,9 @@ public class Laserbullet : MonoBehaviour
             GameObject dummyPrefab = angle < 0 ? leftZombiePrefab : rightZombiePrefab;
             Instantiate(dummyPrefab, _other.transform.position, Quaternion.identity);
 
-            //bool dummyPrefab = angle < 0 ? true : false;
-            //zombie.레이저좀비소환(dummyPrefab);
+            int dummyType = angle < 0 ? 1 : 2;
+
+            //zombie.DeadType(dummyType);
         }
     }
 }

@@ -24,10 +24,6 @@ public class NavAgentManager : MonoBehaviour
     private float detectionRadius = 13f;
     private float blackHoleRadius = 7f;
 
-    [SerializeField] private RuntimeAnimatorController Zombie1;
-    [SerializeField] private RuntimeAnimatorController Zombie2;
-
-
     public void Init(Transform _position)
     {
         playerTransform = _position;
@@ -36,13 +32,12 @@ public class NavAgentManager : MonoBehaviour
             int randomPrefab = Random.Range(0, agentPrefab.Count);
             NavMeshAgent newAgent = Instantiate(
             agentPrefab[randomPrefab],
-            transform.position /*+ new Vector3(Random.Range(-20f, 20f), 0, Random.Range(-20f, 20f) * agentNum * 0.002f)*/,
+            transform.position + new Vector3(Random.Range(-20f, 20f), 0, Random.Range(-20f, 20f) * agentNum * 0.002f),
             Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)),
             transform
             );
 
             newAgent.name = "Agent" + i;
-
             newAgent.GetComponent<BakeZombie>().SetNewTarget(target[0]);
             newAgent.GetComponent<BakeZombie>().PlayerPosition(playerTransform);
             newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromList;
@@ -99,6 +94,8 @@ public class NavAgentManager : MonoBehaviour
                 navMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(target[Random.Range(0, target.Count - 1)]);
                 navMeshAgents[i].GetComponent<BakeZombie>().GetSpeedByManager(10f);
                 navMeshAgents[i].GetComponent<BakeZombie>().GetAngularSpeedByManager(500f);
+
+                //Debug.Log(navMeshAgents[i].name + "isFleeing");
             }
         }
     }
@@ -111,6 +108,7 @@ public class NavAgentManager : MonoBehaviour
             {
                 navMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
                 navMeshAgents[i].GetComponent<BakeZombie>().NoMoreMember();
+                //Debug.Log(navMeshAgents[i].name + "is No more manber");
                 navMeshAgents.RemoveAt(i);
             }
         }

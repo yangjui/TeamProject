@@ -8,11 +8,19 @@ public class Zombie : MonoBehaviour
     [Header("# Zombie")]
     [SerializeField] private GameObject alive;
     [SerializeField] private GameObject deadRagdoll;
+    [SerializeField] private GameObject leftZombiePrefab;
+    [SerializeField] private GameObject rightZombiePrefab;
     [SerializeField] private GameObject attackZombieL;
     [SerializeField] private GameObject attackZombieR;
     [SerializeField] private float zombieHealth = 100f;
 
     [System.NonSerialized] public NavMeshAgent navAgent;
+    [System.NonSerialized] public bool isCritical = false;
+
+    private int LeftZombie = 1;
+    private int RightZombie = 2;
+
+    private int deadType = 0;
 
     private float currentHealth;
 
@@ -39,6 +47,7 @@ public class Zombie : MonoBehaviour
     public ZombieFreeEventHandler OnZombieFree;
 
     private Rigidbody rb;
+
     [SerializeField] private float curSpeed = 2f;
     [SerializeField] private float runSpeed = 4f;
     [SerializeField] private float walkSpeed = 2f;
@@ -57,12 +66,12 @@ public class Zombie : MonoBehaviour
     {
         if (!isMember)
         {
-            if (isInBlackHole)
-            {
-                InTheBlackHole();
-            }
+            //if (isInBlackHole)
+            //{
+            //    InTheBlackHole();
+            //}
 
-            if (!isInBlackHole)
+            //if (!isInBlackHole)
             {
                 ChasePlayer(target.position);
             }
@@ -101,10 +110,10 @@ public class Zombie : MonoBehaviour
     {
         switch (Vector3.Distance(transform.position, playerPosition.position))
         {
-            case >= 10:
+            case >= 15:
                 Walk();
                 break;
-            case < 10 and >= 2:
+            case < 15 and >= 2:
                 Run();
                 break;
             case < 2:
@@ -120,12 +129,28 @@ public class Zombie : MonoBehaviour
         navAgent.enabled = false;
         alive.SetActive(false);
 
-        GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+        GameObject newRagdoll;
+        switch (deadType)
+        {
+            case 1:
+                newRagdoll = Instantiate(leftZombiePrefab, transform.position, transform.rotation);
+                break;
+            case 2:
+                newRagdoll = Instantiate(rightZombiePrefab, transform.position, transform.rotation);
+                break;
+            default:
+                newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+                break;
+        }
         RagdollPosition(alive.transform, newRagdoll.transform);
 
         Destroy(alive);
     }
 
+    public void DeadType(int _type)
+    {
+        deadType = _type;
+    }
 
 
     private void RagdollPosition(Transform _alive, Transform _dead)
@@ -138,38 +163,29 @@ public class Zombie : MonoBehaviour
             _dead.transform.GetChild(i).localPosition = _alive.transform.GetChild(i).localPosition;
             _dead.transform.GetChild(i).localRotation = _alive.transform.GetChild(i).localRotation;
         }
-        _dead.transform.position = _alive.transform.position; // 렉돌 자체의 위치 맞추기
+        _dead.transform.position = _alive.transform.position; 
     }
 
 
-    private void InTheBlackHole()
-    {
-        if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInBlackHole)
-        {
-            navAgent.enabled = false;
-            Vector3 dir = blackHolePosition - transform.position;
-            transform.position += dir * 3f * Time.deltaTime;
-        }
-    }
 
     public void NoMoreMember()
     {
         isMember = false;
     }
 
-    public void HitByBlackHole(Vector3 _position)
+    public void BlackHole()
     {
-        blackHolePosition = _position;
-        isInBlackHole = true;
-        anim.SetTrigger("isBlackHole");
+        if (!isInBlackHole)
+        {
+            isInBlackHole = true;
+            anim.SetTrigger("isBlackHole");
+        }
     }
-
 
     public void StopAnimation()
     {
-        anim.enabled = false; // 땅에 떨어지는 순간으로 다시 애니메이션 작동하도록 만들어야함
+        anim.enabled = false; 
     }
-
 
     public void DetectNewObstacle(Vector3 _position)
     {
@@ -180,11 +196,8 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    // 없어질지도~!
     public void ResetAgent()
     {
-        // navAgent.enabled = true;
-        // anim.enabled = true;
         isInBlackHole = false;
     }
 
@@ -230,7 +243,7 @@ public class Zombie : MonoBehaviour
     {
         if (!isRun && OnZombieFree != null)
         {
-            OnZombieFree(this); // 이벤트 발생과 함께 좀비의 이름 전달
+            OnZombieFree(this); 
             isRun = true;
         }
         curSpeed = runSpeed;

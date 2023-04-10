@@ -793,7 +793,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faacf17123751d54cb605a14c7a677ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 889856488082658277, guid: 8ac8ce7c87b2c6749a9687f2cf28bc33, type: 3}
+  agentPrefab:
+  - {fileID: 4189057010568706084, guid: 71dfc2c5fd67b0d4c900bc08346dc1eb, type: 3}
+  - {fileID: -7179311333481470131, guid: 44e7d04e152d63244b87ab717d42a1b0, type: 3}
+  - {fileID: 3577636364133266066, guid: 590c187e588f91d4c895edec09594a03, type: 3}
+  - {fileID: -3998514127418184473, guid: d9f8e8371e5d7334886f76a56a5b65ee, type: 3}
+  - {fileID: -9140723752193763795, guid: 91acd1a08bd7cde47a7d60652da6ee41, type: 3}
   agentNum: 50
   target:
   - {fileID: 489867998}
@@ -802,8 +807,6 @@ MonoBehaviour:
   - {fileID: 1782559845}
   - {fileID: 1094463371}
   - {fileID: 350353623}
-  Zombie1: {fileID: 9100000, guid: d7c979b9acb11344880b6d564225912a, type: 2}
-  Zombie2: {fileID: 9100000, guid: b09099afa583b2c45bfed845fa81db8e, type: 2}
 --- !u!195 &450550265
 NavMeshAgent:
   m_ObjectHideFlags: 0

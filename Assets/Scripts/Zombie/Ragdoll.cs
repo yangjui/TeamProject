@@ -3,32 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Ragdoll: MonoBehaviour
+public class Ragdoll : MonoBehaviour
 {
-    private bool isInblackHole = false;
-
-    private float blackHoleRadius = 7f;
-
-    private Vector3 blackHolePosition;
+    private Rigidbody rb;
+    private float onGroundTime = 0;
 
     [SerializeField] private GameObject ragdoll;
     [SerializeField] private GameObject dead;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        Invoke("Kinematic", 3f);
+        Invoke("ColliderPosition", 0.8f);
+    }
+
+    private void ColliderPosition()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
 
     private void Update()
     {
-        Invoke("Dead", 3f);
-
-        if (isInblackHole)
+        if (rb.IsSleeping())
         {
-            InTheBlackHole();
+            onGroundTime += Time.deltaTime;
+            if (onGroundTime >= 3f)
+                Dead();
+        }
+        else
+            onGroundTime = 0f;
+    }
+
+    private void Kinematic()
+    {
+        foreach (Rigidbody childRb in GetComponentsInChildren<Rigidbody>())
+        {
+            childRb.isKinematic = true;
         }
     }
 
+
+
     private void Dead()
     {
-        Debug.Log(ragdoll);
-
         ragdoll.SetActive(false);
 
         GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
@@ -49,22 +68,5 @@ public class Ragdoll: MonoBehaviour
             _dead.transform.GetChild(i).localRotation = _newRagdoll.transform.GetChild(i).localRotation;
         }
         _dead.transform.position = _newRagdoll.transform.position;
-    }
-
-
-    private void InTheBlackHole()
-    {
-        if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
-        {
-            Vector3 dir = blackHolePosition - transform.position;
-            transform.position += dir * 3f * Time.deltaTime;
-        }
-    }
-
-
-    public void HitByBlackHole(Vector3 position)
-    {
-        blackHolePosition = position;
-        isInblackHole = true;
     }
 }
