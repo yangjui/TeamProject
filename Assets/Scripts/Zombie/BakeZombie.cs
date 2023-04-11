@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,7 +5,6 @@ using UnityEngine.AI;
 public class BakeZombie : MonoBehaviour
 {
     [Header("# Zombie")]
-    [SerializeField] private GameObject alive;
     [SerializeField] private GameObject deadRagdoll;
     [SerializeField] private GameObject dead;
 
@@ -24,13 +22,18 @@ public class BakeZombie : MonoBehaviour
     private float currentHealth;
 
     private float maxWalkSpeed = 5f;
-    private float minWalkSpeed = 7f;
+    private float minWalkSpeed = 3f;
 
-    private float maxRunSpeed = 10f;
-    private float minRunSpeed = 13f;
+    private float maxRunSpeed = 11f;
+    private float minRunSpeed = 9f;
+
+    private float walkSpeed;
+    private float runSpeed;
 
     private float blackHoleRadius = 7f;
     private float detectionRadius = 10f;
+
+
     private float resetTime = 10f;
 
     private bool isMember = true;
@@ -45,10 +48,12 @@ public class BakeZombie : MonoBehaviour
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
     public ZombieFreeEventHandler OnZombieFree2;
 
+    private Rigidbody rb;
 
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         currentHealth = zombieHealth;
     }
 
@@ -67,13 +72,12 @@ public class BakeZombie : MonoBehaviour
             newClothesAnimMate[i].SetFloat("_Length", randomAnimSpeed);
         }
 
-        target = playerPosition;
+        walkSpeed = Random.Range(minWalkSpeed, maxWalkSpeed);
+        runSpeed = Random.Range(minRunSpeed, maxRunSpeed);
     }
 
     private void Update()
     {
-        ZombieState();
-
         if (!isMember)
         {
             if (resetTime > 3)
@@ -109,6 +113,8 @@ public class BakeZombie : MonoBehaviour
         {
             Dead();
         }
+
+        ZombieState();
     }
 
     public void PlayerPosition(Transform _playerPosition)
@@ -138,46 +144,13 @@ public class BakeZombie : MonoBehaviour
 
     private void Dead()
     {
+        this.gameObject.SetActive(false);
         navAgent.enabled = false;
-        alive.SetActive(false);
-
         GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
-        RagdollPosition(alive.transform, newRagdoll.transform);
+        RagdollPosition(this.transform, newRagdoll.transform);
 
-        //Destroy(newRagdoll, 3f);
-
-        //GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
-        //DeadPosition(newRagdoll.transform, newDead.transform);
-
-
-        Destroy(alive);
+        Destroy(this);
     }
-
-    //private void Dead()
-    //{
-    //    navAgent.enabled = false;
-    //    alive.SetActive(false);
-
-    //    GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
-    //    RagdollPosition(alive.transform, newRagdoll.transform);
-
-    //    //newRagdoll.SetActive(false);
-    //    Invoke("waitDead(newRagdoll)", 3f);
-    //    Invoke("InstanceDead", 3f);
-    //    Invoke("DeadPosition(dead, newDead)", 3f);
-    //    Destroy(alive);
-    //    Destroy(newRagdoll);
-    //}
-
-    //private void InstanceDead()
-    //{
-    //    GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
-    //}
-
-    //private void waitDead(GameObject _newRagdoll)
-    //{
-    //    _newRagdoll.SetActive(false);
-    //}
 
 
     private void RagdollPosition(Transform _alive, Transform _dead)
@@ -192,21 +165,6 @@ public class BakeZombie : MonoBehaviour
         }
         _dead.transform.position = _alive.transform.position; // 렉돌 자체의 위치 맞추기
     }
-
-    //private void DeadPosition(Transform _dead, Transform _newRagdoll)
-    //{
-    //    for (int i = 0; i < _dead.transform.childCount; ++i)
-    //    {
-    //        if (_dead.transform.childCount != 0)
-    //            DeadPosition(_dead.transform.GetChild(i), _newRagdoll.transform.GetChild(i));
-
-    //        _newRagdoll.transform.GetChild(i).localPosition = _dead.transform.GetChild(i).localPosition;
-    //        _newRagdoll.transform.GetChild(i).localRotation = _dead.transform.GetChild(i).localRotation;
-    //    }
-    //    _newRagdoll.transform.position = _dead.transform.position;
-    //}
-
-
 
     private void InTheBlackHole()
     {
@@ -228,9 +186,6 @@ public class BakeZombie : MonoBehaviour
         blackHolePosition = _position;
         isInBlackHole = true;
     }
-
-
-
 
     public void DetectNewObstacle(Vector3 _position)
     {
@@ -294,17 +249,18 @@ public class BakeZombie : MonoBehaviour
             OnZombieFree2(this); // 이벤트 발생과 함께 좀비의 이름 전달
             isRun = true;
         }
+
         bodyMr.material = newBodyAnimMate[1];
         clothesMr.material = newClothesAnimMate[1];
-    
-        navAgent.speed = Random.Range(minRunSpeed, maxRunSpeed);
+
+        navAgent.speed = runSpeed;
     }
 
     private void Walk()
     {
         bodyMr.material = newBodyAnimMate[0];
         clothesMr.material = newClothesAnimMate[0];
-        navAgent.speed = Random.Range(minWalkSpeed, maxWalkSpeed);
+        navAgent.speed = walkSpeed;
     }
 
     public void TakeDamage(float playerAttackDamage)
@@ -321,6 +277,5 @@ public class BakeZombie : MonoBehaviour
     {
         return currentHealth;
     }
-
 
 }

@@ -41,9 +41,5 @@ public class BlackHole : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        navAgentManager.ResetAgent();
-    }
 
 }

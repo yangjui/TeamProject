@@ -15,7 +15,7 @@ public class DropFleeing : MonoBehaviour
 
     private void Start()
     {
-        navAgentManager.GetNavMeshAgents();
+
     }
 
     private void Update()
@@ -27,7 +27,6 @@ public class DropFleeing : MonoBehaviour
             if(Physics.Raycast(ray.origin, ray.direction, out hitInfo))
             {
                 GameObject newOBJ = Instantiate(obstacle, hitInfo.point, obstacle.transform.rotation);
-                navAgentManager.DetectNewObstacle(hitInfo.point);
                 Destroy(newOBJ, destroyTIme);
                 StartCoroutine("Return");
             }
@@ -37,7 +36,6 @@ public class DropFleeing : MonoBehaviour
     private IEnumerator Return()
     {
         yield return new WaitForSeconds(destroyTIme);
-        navAgentManager.ResetAgent();
     }
 
 }
