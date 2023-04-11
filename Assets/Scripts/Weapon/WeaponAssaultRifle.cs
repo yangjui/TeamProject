@@ -205,8 +205,12 @@ public class WeaponAssaultRifle : WeaponBase
             {
                 zombie.TakeDamage(weaponSetting.damage);
             }
+            if (hit.transform.CompareTag("Button"))
+            {
+                LoadingSceneController.LoadScene("PlayScene");
+            }
         }
-        Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
+            Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
     }
 
     private void ShotTimer()
@@ -327,7 +331,7 @@ public class WeaponAssaultRifle : WeaponBase
             if (!anim.AimModeIs) StartCoroutine("OnMuzzleFlashEffect");
 
             // 공격 사운드 재생
-            SoundManager.instance.Play2DSFX("Shoot", transform.position);
+            SoundManager.instance.Play2DSFX("Shoot");
 
             // 총구 이펙트 재생
             StartCoroutine("OnMuzzleFlashEffect");
@@ -350,7 +354,7 @@ public class WeaponAssaultRifle : WeaponBase
 
     public void IsTakeOutStart()
     {
-        SoundManager.instance.Play2DSFX("take_out_weapon", transform.position);
+        SoundManager.instance.Play2DSFX("take_out_weapon");
         isTakeOut = true;
     }
 
@@ -361,7 +365,7 @@ public class WeaponAssaultRifle : WeaponBase
 
     public void IsReloadStart()
     {
-        SoundManager.instance.Play2DSFX("assault_rifle_reload_out", transform.position);
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out");
     }
 
     public void IsReloadOver()

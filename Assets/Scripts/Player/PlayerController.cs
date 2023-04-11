@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private WeaponBase weapon;
 
     private bool isAimMode = false;
+    private bool isChargingMode = false;
     private bool isAlive = true;
 
     private void Awake()
@@ -67,12 +68,12 @@ public class PlayerController : MonoBehaviour
             bool isRun = false;
             if (z > 0) isRun = Input.GetKey(keyCodeRun); // 앞으로 갈때만 대쉬키가 활성화됨.
 
-            if (!isAimMode)
+            if (!isAimMode && !isChargingMode)
             {
                 playerMovement.MoveSpeed = isRun ? playerStatus.RunSpeed : playerStatus.WalkSpeed; // 달리고있다면 RunSpeed, 아니라면 WalkSpeed
                 weapon.Animator.MoveSpeed = isRun ? 1 : 0.5f; // 0이면 Idle 0.5면 Walk, 1이면 Run 애니메이션 재생됨.
             }
-            else if (isAimMode)
+            else if (isAimMode || isChargingMode)
             {
                 playerMovement.MoveSpeed = (isRun ? playerStatus.RunSpeed : playerStatus.WalkSpeed) * 0.5f; // 달리고있다면 RunSpeed, 아니라면 WalkSpeed
             }
@@ -127,6 +128,11 @@ public class PlayerController : MonoBehaviour
     public void ChangeAimMode(bool _bool)
     {
         isAimMode = _bool;
+    }
+
+    public void ChangeChargeMode(bool _bool)
+    {
+        isChargingMode = _bool;
     }
 
     public void TakeDamage(float _damage)

@@ -77,7 +77,7 @@ public class WeaponRevolver : WeaponBase
             anim.Play("Fire", -1, 0);
             
             // 공격 사운드 재생
-            SoundManager.instance.Play2DSFX("Shoot", transform.position);
+            SoundManager.instance.Play2DSFX("Shoot");
 
             // 총구 이펙트 재생
             StartCoroutine("OnMuzzleFlashEffect");
@@ -99,7 +99,7 @@ public class WeaponRevolver : WeaponBase
         isReload = true;
 
         anim.OnReload();
-        SoundManager.instance.Play2DSFX("handgun_reload_out", transform.position);
+        SoundManager.instance.Play2DSFX("handgun_reload_out");
 
         while (true)
         {

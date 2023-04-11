@@ -52,9 +52,6 @@ public class TrainingSceneManager : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
-            LoadingSceneController.LoadScene("PlayScene");
     }
 
     public void OptionClose()

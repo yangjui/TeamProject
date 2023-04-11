@@ -17,7 +17,7 @@ public class BulletHoleObjectPool : MonoBehaviour
     {
         if (hit.transform.CompareTag("Platform"))
         {
-            OnSpawnImpact(hit.point + hit.transform.up / 1000f, Quaternion.LookRotation(hit.normal));
+            OnSpawnImpact(hit.point + hit.transform.up * 0.001f, Quaternion.LookRotation(hit.normal));
         }
     }
 

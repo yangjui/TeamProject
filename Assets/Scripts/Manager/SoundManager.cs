@@ -31,7 +31,8 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         instance = this;
-        mixer.SetFloat("SFX", Mathf.Log10(PlayerPrefs.GetFloat("sfx")) * 20);
+        // 믹서 볼륨과 UI 설정 값 동기화
+        mixer.SetFloat("SFX", Mathf.Log10(PlayerPrefs.GetFloat("sfx")) * 20); 
         mixer.SetFloat("BGM", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);
     }
 
@@ -55,6 +56,18 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(StopBGMCoroutine());
     }
 
+    public void StopSFX(string _sfxName)
+    {
+        for (int i = 0; i < sfx2DList.Count; ++i)
+        {
+            AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
+            if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+            {
+                sfxI.Stop();
+            }
+        }
+    }
+
     private IEnumerator StopBGMCoroutine()
     {
         float curVolume = bgmPlayer.volume;
@@ -69,33 +82,33 @@ public class SoundManager : MonoBehaviour
         timer = 0f;
     }
 
-    public void Play2DSFX(string p_sfxName, Vector3 _position)
+    public void Play2DSFX(string p_sfxName)
     {
         if (sfx2DList.Count == 0)
         {
             Add2DList();
         }
         
-        for (int i = 0; i < sfx2D.Length; ++i)
+        for (int i = 0; i < sfx2D.Length; ++i) // 넣어둔 음원 갯수만큼 반복문 동작
         {
-            if (p_sfxName == sfx2D[i].name)
+            if (p_sfxName == sfx2D[i].name) // 해당 음원 찾았다면 아래 반복문 동작
             {
-                for (int j = 0; j < sfx2DList.Count; j++)
+                for (int j = 0; j < sfx2DList.Count; j++) // 음원을 재생할 List의 갯수만큼 반복문 동작
                 {
+                    AudioSource sfxJ = sfx2DList[j].GetComponent<AudioSource>(); // 캐싱
                     // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
-                    if (!sfx2DList[j].GetComponent<AudioSource>().isPlaying)
+                    if (!sfxJ.isPlaying)
                     {
-                        sfx2DList[j].GetComponent<AudioSource>().clip = sfx2D[i].clip;
-                        sfx2DList[j].GetComponent<AudioSource>().transform.position = _position;
-                        sfx2DList[j].GetComponent<AudioSource>().Play();
+                        sfxJ.clip = sfx2D[i].clip;
+                        sfxJ.Play();
                         return;
                     }
                 }
                 Add2DList();
 
-                sfx2DList[i].GetComponent<AudioSource>().clip = sfx2D[i].clip;
-                sfx2DList[i].GetComponent<AudioSource>().transform.position = _position;
-                sfx2DList[i].GetComponent<AudioSource>().Play();
+                AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>(); // 캐싱
+                sfxI.clip = sfx2D[i].clip;
+                sfxI.Play();
                 return;
             }
         }
@@ -123,20 +136,22 @@ public class SoundManager : MonoBehaviour
             {
                 for (int j = 0; j < sfx3DList.Count; j++)
                 {
+                    AudioSource sfxJ = sfx3DList[j].GetComponent<AudioSource>();
                     // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
-                    if (!sfx3DList[j].GetComponent<AudioSource>().isPlaying)
+                    if (!sfxJ.isPlaying)
                     {
-                        sfx3DList[j].GetComponent<AudioSource>().clip = sfx3D[i].clip;
-                        sfx3DList[j].GetComponent<AudioSource>().transform.position = _position;
-                        sfx3DList[j].GetComponent<AudioSource>().Play();
+                        sfxJ.clip = sfx3D[i].clip;
+                        sfxJ.transform.position = _position;
+                        sfxJ.Play();
                         return;
                     }
                 }
                 Add3DList();
 
-                sfx3DList[i].GetComponent<AudioSource>().clip = sfx3D[i].clip;
-                sfx3DList[i].GetComponent<AudioSource>().transform.position = _position;
-                sfx3DList[i].GetComponent<AudioSource>().Play();
+                AudioSource sfxI = sfx3DList[i].GetComponent<AudioSource>();
+                sfxI.clip = sfx3D[i].clip;
+                sfxI.transform.position = _position;
+                sfxI.Play();
                 return;
             }
         }

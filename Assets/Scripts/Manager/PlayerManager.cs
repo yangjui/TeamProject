@@ -23,12 +23,23 @@ public class PlayerManager : MonoBehaviour
         go.GetComponent<WeaponSwitchingSystem>().Init();
         go.GetComponentInChildren<WeaponAssaultRifle>().OnChangeAimModeDelegate(OnChangeAimMode);
         go.GetComponent<PlayerController>().SetUnderAttackDelegate(StartBloodScreenCoroutine, OnPlayerIsDead);
+        StartCoroutine(DelegateCoroutine());
+    }
+
+    private IEnumerator DelegateCoroutine()
+    {
+        GameObject laserRifle = null;
+        while (laserRifle == null)
+        {
+            laserRifle = GameObject.Find("LaserRifle");
+            yield return null;
+        }
+        go.GetComponentInChildren<WeaponLaserRifle>().OnChangeChargeModeDelegate(OnChangeChargeMode);
     }
 
     public Transform PlayerPosition()
     {
         return go.GetComponent<PlayerController>().PlayerPosition();
-
     }
 
     private void OnChangeAimMode(bool _aimMode)
@@ -36,6 +47,11 @@ public class PlayerManager : MonoBehaviour
         changeAimModeCallback?.Invoke(_aimMode);
         go.GetComponent<PlayerRotate>().ChangeAimMode(_aimMode);
         go.GetComponent<PlayerController>().ChangeAimMode(_aimMode);
+    }
+
+    private void OnChangeChargeMode(bool _chargeMode)
+    {
+        go.GetComponent<PlayerController>().ChangeChargeMode(_chargeMode);
     }
 
     private void StartBloodScreenCoroutine()

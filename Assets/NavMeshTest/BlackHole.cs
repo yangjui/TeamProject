@@ -62,7 +62,7 @@ public class BlackHole : MonoBehaviour
     {
         for (int i = agents.Count - 1; i >= 0; --i)
         {
-            if (agents[i] == null) continue;
+            if (agents[i] == null) continue; // 이거 컨티뉴 맞음? 널인데 계속 뺑이돌리면 안되는거아닌가 몰?루
             agents[i].GetComponent<Zombie>().TakeDamage(100);
             agents.RemoveAt(i);
         }

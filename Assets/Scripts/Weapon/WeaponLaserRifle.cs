@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class WeaponLaserRifle : WeaponBase
 {
+    public delegate void ChangeChargeModeDelegate(bool _chargeMode);
+    private ChangeChargeModeDelegate changeChargeModeCallback = null;
+
     [Header("# SpawnPoints")]
     [SerializeField] private Transform chargeEffectPoint;
     [SerializeField] private Transform laserEffectPoint;
@@ -19,7 +22,6 @@ public class WeaponLaserRifle : WeaponBase
     [SerializeField] private float chargingSize = 0.1f;
 
     private Vector3 attackDirection;
-    private Vector3 attackRotation;
     private Vector3 targetPoint;
     private GameObject chargeEffect;
     private Camera mainCamera;
@@ -45,6 +47,14 @@ public class WeaponLaserRifle : WeaponBase
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
 
         ResetVariables();
+    }
+
+    private void Update()
+    {
+        if (this.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CancelLaser();
+        }
     }
 
     private void OnDisable()
@@ -109,7 +119,11 @@ public class WeaponLaserRifle : WeaponBase
     {
         Debug.Log("StartCharging!");
         isCharging = true;
+        changeChargeModeCallback?.Invoke(isCharging);
         currentChargingTime = 0f;
+
+        if (chargeEffect != null) Destroy(chargeEffect);
+
         chargeEffect = Instantiate(chargeEffectPrefab, chargeEffectPoint.position, chargeEffectPoint.rotation);
         chargeEffect.transform.SetParent(chargeEffectPoint);
         chargeEffect.transform.localScale *= 0;
@@ -127,11 +141,11 @@ public class WeaponLaserRifle : WeaponBase
     {
         TwoStepRaycast();
         isCharging = false;
+        changeChargeModeCallback?.Invoke(isCharging);
         StopCoroutine("ChargingLaserCoroutine");
         if (currentChargingTime >= chargingTime)
         {
             Destroy(chargeEffect);
-            //Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.LookRotation(attackDirection,Vector3.up) * Quaternion.Euler(0f, 180f, 0f));
             GameObject go = Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.identity);
             go.transform.LookAt(targetPoint);
             Debug.Log(targetPoint);
@@ -149,6 +163,7 @@ public class WeaponLaserRifle : WeaponBase
     private void CancelLaser()
     {
         isCharging = false;
+        changeChargeModeCallback?.Invoke(isCharging);
         currentChargingTime = 0f;
         StopCoroutine("ChargingLaserCoroutine");
         Destroy(chargeEffect);
@@ -212,7 +227,7 @@ public class WeaponLaserRifle : WeaponBase
 
     public void IsTakeOutStart()
     {
-        SoundManager.instance.Play2DSFX("take_out_weapon", transform.position);
+        SoundManager.instance.Play2DSFX("take_out_weapon");
         isTakeOut = true;
     }
 
@@ -223,11 +238,16 @@ public class WeaponLaserRifle : WeaponBase
 
     public void IsReloadStart()
     {
-        SoundManager.instance.Play2DSFX("assault_rifle_reload_out", transform.position);
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out");
     }
 
     public void IsReloadOver()
     {
         isReload = false;
     }
+
+    public void OnChangeChargeModeDelegate(ChangeChargeModeDelegate _changeChargeModeCallback)
+    {
+        changeChargeModeCallback = _changeChargeModeCallback;
+    } 
 }
