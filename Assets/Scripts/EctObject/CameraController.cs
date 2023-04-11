@@ -6,24 +6,34 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private float force = 0f;
     [SerializeField] private Vector3 offset = Vector3.zero;
+    
+    public static CameraController instance;
+
     private Quaternion originRot;
+    private float timer;
 
     private void Start()
     {
         originRot = transform.rotation;
+        instance = this;
     }
 
-    private void Update()
+    public void StartShakeCamera()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-            StartCoroutine(ShakeCameraCoroutine());
-        if (Input.GetKeyDown(KeyCode.P))
-            StartCoroutine(StopShakeCameraCoroutine());
+        StopCoroutine("ShakeCameraCoroutine");
+        StartCoroutine("ShakeCameraCoroutine");
+    }
+
+    public void StopShakeCamera()
+    {
+        StopCoroutine("ShakeCameraCoroutine");
+        StartCoroutine(StopShakeCameraCoroutine());
     }
 
     private IEnumerator ShakeCameraCoroutine()
     {
-        Vector3 originEuler = transform.eulerAngles;
+        Vector3 originEuler = transform.localEulerAngles;
+        timer = 1f;
 
         while (true)
         {
@@ -33,10 +43,17 @@ public class CameraController : MonoBehaviour
 
             Vector3 randomRot = originEuler + new Vector3(rotX, rotY, rotZ);
             Quaternion rot = Quaternion.Euler(randomRot);
-            while (Quaternion.Angle(transform.rotation, rot) > 0.1f)
+            while (Quaternion.Angle(transform.localRotation, rot) > 0.1f)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, force * Time.deltaTime);
+                // A로테이션 -> B로테이션 
+                transform.localRotation = Quaternion.RotateTowards(transform.localRotation, rot, force * Time.deltaTime);
                 yield return null;
+                timer -= Time.deltaTime;
+                if (timer < 0)
+                {
+                    StopShakeCamera();
+                    break;
+                }
             }
             yield return null;
         }
@@ -44,45 +61,10 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator StopShakeCameraCoroutine()
     {
-        while (Quaternion.Angle(transform.rotation, originRot) > 0f)
+        while (Quaternion.Angle(transform.localRotation, originRot) > 0f)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, originRot, force * Time.deltaTime);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originRot, force * Time.deltaTime);
             yield return null;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

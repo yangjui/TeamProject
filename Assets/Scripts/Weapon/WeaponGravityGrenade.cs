@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WeaponGravityGrenade : WeaponBase
 {
+    public delegate void TrajectoryDelegate(bool _bool);
+    private TrajectoryDelegate trajectoryCallback = null;
+
     [Header("# Grenade")]
     [SerializeField] private GameObject gravityGrenadePrefab;
     [SerializeField] private Transform grenadeSpawnPoint;
@@ -13,7 +16,7 @@ public class WeaponGravityGrenade : WeaponBase
     {
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-        GetComponent<TestGrenade>().SetThrowForce(throwForce);
+        GetComponent<GrenadeTrajectory>().SetThrowForce(throwForce);
         isAttack = false;
     }
 
@@ -46,6 +49,7 @@ public class WeaponGravityGrenade : WeaponBase
     private IEnumerator OnAttack()
     {
         isAttack = true;
+        trajectoryCallback?.Invoke(!isAttack);
 
         anim.Play("Fire", -1, 0);
         //SoundManager.instance.Play3DSFX("grenade-throw-2", transform.position);
@@ -57,6 +61,7 @@ public class WeaponGravityGrenade : WeaponBase
             if (anim.CurrentAnimationIs("Movement"))
             {
                 isAttack = false;
+                trajectoryCallback?.Invoke(!isAttack);
                 yield break;
             }
             yield return null;
@@ -69,5 +74,10 @@ public class WeaponGravityGrenade : WeaponBase
         grenadeClone.GetComponent<WeaponGravityGrenadeProjectile>().Setup(weaponSetting.damage, transform.parent.forward, throwForce);
         weaponSetting.currentAmmo--;
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+    }
+
+    public void SetTrajectotyDelegate(TrajectoryDelegate _trajectoryCallback)
+    {
+        trajectoryCallback = _trajectoryCallback;
     }
 }

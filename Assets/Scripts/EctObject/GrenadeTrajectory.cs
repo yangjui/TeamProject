@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestGrenade : MonoBehaviour
+public class GrenadeTrajectory : MonoBehaviour
 {
 
     [SerializeField] private GameObject trajectoryLinePrefab; // 궤도를 그리는 선의 프리팹
@@ -21,7 +21,7 @@ public class TestGrenade : MonoBehaviour
         TrajectoryLineInit();
     }
 
-    void Update()
+    private void Update()
     {
         SetDotsPosition();
     }
@@ -29,6 +29,11 @@ public class TestGrenade : MonoBehaviour
     public void SetThrowForce(float _throwForce)
     {
         throwForce = _throwForce;
+    }
+
+    public void OnOffTrajectory(bool _on)
+    {
+        trajectoryLine.SetActive(_on);
     }
 
     private void TrajectoryLineInit()
@@ -47,6 +52,7 @@ public class TestGrenade : MonoBehaviour
 
     private void SetDotsPosition()
     {
+        if (!trajectoryLine.activeSelf) return;
         // 궤도를 그리는 선의 위치 계산
         for (int i = 0; i < numDots; i++)
         {

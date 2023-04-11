@@ -23,10 +23,12 @@ public class PlayerManager : MonoBehaviour
         go.GetComponent<WeaponSwitchingSystem>().Init();
         go.GetComponentInChildren<WeaponAssaultRifle>().OnChangeAimModeDelegate(OnChangeAimMode);
         go.GetComponent<PlayerController>().SetUnderAttackDelegate(StartBloodScreenCoroutine, OnPlayerIsDead);
-        StartCoroutine(DelegateCoroutine());
+        StartCoroutine(LaserRifleDelegateCoroutine());
+        StartCoroutine(GrenadeDelegateCoroutine());
+        StartCoroutine(GravityGrenadeDelegateCoroutine());
     }
 
-    private IEnumerator DelegateCoroutine()
+    private IEnumerator LaserRifleDelegateCoroutine()
     {
         GameObject laserRifle = null;
         while (laserRifle == null)
@@ -35,6 +37,28 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
         go.GetComponentInChildren<WeaponLaserRifle>().OnChangeChargeModeDelegate(OnChangeChargeMode);
+    }
+
+    private IEnumerator GrenadeDelegateCoroutine()
+    {
+        GameObject Grenade = null;
+        while (Grenade == null)
+        {
+            Grenade = GameObject.Find("Hand Grenade");
+            yield return null;
+        }
+        go.GetComponentInChildren<WeaponGrenade>().SetTrajectotyDelegate(OnOffChangeTrajectory);
+    }
+
+    private IEnumerator GravityGrenadeDelegateCoroutine()
+    {
+        GameObject GravityGrenade = null;
+        while (GravityGrenade == null)
+        {
+            GravityGrenade = GameObject.Find("Gravity Grenade");
+            yield return null;
+        }
+        go.GetComponentInChildren<WeaponGravityGrenade>().SetTrajectotyDelegate(OnOffChangeTrajectory);
     }
 
     public Transform PlayerPosition()
@@ -52,6 +76,11 @@ public class PlayerManager : MonoBehaviour
     private void OnChangeChargeMode(bool _chargeMode)
     {
         go.GetComponent<PlayerController>().ChangeChargeMode(_chargeMode);
+    }
+
+    private void OnOffChangeTrajectory(bool _trajectory)
+    {
+        go.GetComponentInChildren<GrenadeTrajectory>().OnOffTrajectory(_trajectory);
     }
 
     private void StartBloodScreenCoroutine()

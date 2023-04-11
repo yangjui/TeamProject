@@ -145,6 +145,7 @@ public class WeaponLaserRifle : WeaponBase
         StopCoroutine("ChargingLaserCoroutine");
         if (currentChargingTime >= chargingTime)
         {
+            CameraController.instance.StartShakeCamera();
             Destroy(chargeEffect);
             GameObject go = Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.identity);
             go.transform.LookAt(targetPoint);
@@ -154,7 +155,7 @@ public class WeaponLaserRifle : WeaponBase
 
             // 탄 수 UI 업데이트
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-
+            
             currentChargingTime = 0f;
         }
         else Destroy(chargeEffect);
