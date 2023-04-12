@@ -63,8 +63,8 @@ Transform:
   m_Children:
   - {fileID: 1165233061177094828}
   - {fileID: 2546469752489141099}
-  - {fileID: 2448372774034133680}
   - {fileID: 3398639401158924032}
+  - {fileID: 2448372774034133680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5070,7 +5070,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -120
+      scalar: -140
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5186,7 +5186,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -14575,7 +14575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1784417627695309598
 Transform:
   m_ObjectHideFlags: 0
@@ -19475,7 +19475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1784417627980791649
 Transform:
   m_ObjectHideFlags: 0
@@ -19507,7 +19507,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -25331,7 +25331,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -29230,7 +29230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2448372774034133680
 Transform:
   m_ObjectHideFlags: 0
@@ -29246,7 +29246,7 @@ Transform:
   - {fileID: 1784417628505477261}
   - {fileID: 1784417627644638725}
   m_Father: {fileID: 8802470701688589236}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4708712070784298755
 PrefabInstance:
@@ -29261,11 +29261,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7102877249501203992, guid: 313fb798d5590444d8f66dd2ab1ef012, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7958652367791486979, guid: 313fb798d5590444d8f66dd2ab1ef012, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7958652367791486979, guid: 313fb798d5590444d8f66dd2ab1ef012, type: 3}
       propertyPath: m_LocalPosition.x

@@ -27,6 +27,8 @@ public class Lasertest : MonoBehaviour
     [SerializeField]
     private GameObject groundEffectPrefab;
     [SerializeField]
+    private GameObject shockWavePrefab;
+    [SerializeField]
     private Transform chargeEffectLocation;
     [SerializeField]
     private Transform fireEffectLocation;
@@ -83,6 +85,10 @@ public class Lasertest : MonoBehaviour
     {
         if (fireEffectPrefab != null)
         {
+            GameObject wave = Instantiate(shockWavePrefab, fireEffectLocation.position, transform.rotation);
+            Destroy(wave, 2f);
+            
+
             GameObject fire = Instantiate(fireEffectPrefab, fireEffectLocation.position, transform.rotation);
             fire.transform.localScale *= 2f;
             //LineRenderer lineRenderer = fire.GetComponent<LineRenderer>();
