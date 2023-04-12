@@ -33,10 +33,7 @@ public class BlackHole : MonoBehaviour
             if (agents[i] == null) continue;
             if (agents[i].CompareTag("Zombie"))
             {
-                //if (agents[i].GetComponent<Zombie>().CurrentHealth() == 0)
-                //{
-                //    agents.RemoveAt(i);
-                //}
+
                 agents[i].GetComponent<Zombie>().TakeDamage(0);
                 agents[i].GetComponent<Zombie>().BlackHole();
 
@@ -47,14 +44,7 @@ public class BlackHole : MonoBehaviour
                 }
 
             }
-            //else if(agents[i].CompareTag("Dead") || agents[i].CompareTag("Ragdoll"))
-            //{
-            //    if (Vector3.Distance(agents[i].transform.position, transform.position) < blackHoleRadius)
-            //    {
-            //        Vector3 dir = transform.position - agents[i].transform.position;
-            //        agents[i].transform.position += dir * 3f * Time.deltaTime;
-            //    }
-            //}
+
         }
     }
 
@@ -62,7 +52,7 @@ public class BlackHole : MonoBehaviour
     {
         for (int i = agents.Count - 1; i >= 0; --i)
         {
-            if (agents[i] == null) continue; // 이거 컨티뉴 맞음? 널인데 계속 뺑이돌리면 안되는거아닌가 몰?루
+            if (agents[i] == null) continue; 
             agents[i].GetComponent<Zombie>().TakeDamage(100);
             agents.RemoveAt(i);
         }

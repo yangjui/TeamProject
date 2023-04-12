@@ -8,14 +8,34 @@ public class PathTrigger : MonoBehaviour
     private NavAgentManager navAgentManager = null;
 
     [SerializeField]
-    private List<Transform> paths = null;
+    private List<Transform> pathsForA = null;
+
+    [SerializeField]
+    private List<Transform> pathsForB = null;
+
+    [SerializeField]
+    private List<Transform> pathsForC = null;
 
     private void OnTriggerEnter(Collider _other)
     {
         if (_other.CompareTag("Zombie"))
         {
-            navAgentManager.SetNewTarget(this, _other.name);
+            if (_other.name.Substring(_other.name.Length - 1) == "A")
+            {
+                navAgentManager.SetNewTargetForGroupA(this, _other.name);
+            }
+
+            else if (_other.name.Substring(_other.name.Length - 1) == "B")
+            {
+                navAgentManager.SetNewTargetForGroupB(this, _other.name);
+            }
+
+            else if (_other.name.Substring(_other.name.Length - 1) == "C")
+            {
+                navAgentManager.SetNewTargetForGroupC(this, _other.name);
+            }
         }
+
     }
 
     public Transform PathPosition()
@@ -23,19 +43,61 @@ public class PathTrigger : MonoBehaviour
         return this.transform;
     }
 
-    public Transform NextPos()
+
+    public Transform NextPosForA()
     {
-        for (int i = 0; i < paths.Count; ++i)
+        for (int i = 0; i < pathsForA.Count; ++i)
         {
-            if (paths[i].name == this.name)
+            if (pathsForA[i].name == this.name)
             {
-                if (i == paths.Count - 1)
+                if (i == pathsForA.Count - 1)
                 {
-                    return paths[0];
+                    return pathsForA[0];
                 }
+
                 else
                 {
-                    return paths[i + 1];
+                    return pathsForA[i + 1];
+                }
+            }
+        }
+        return this.transform;
+    }
+
+    public Transform NextPosForB()
+    {
+        for (int i = 0; i < pathsForB.Count; ++i)
+        {
+            if (pathsForB[i].name == this.name)
+            {
+                if (i == pathsForB.Count - 1)
+                {
+                    return pathsForB[0];
+                }
+
+                else
+                {
+                    return pathsForB[i + 1];
+                }
+            }
+        }
+        return this.transform;
+    }
+
+    public Transform NextPosForC()
+    {
+        for (int i = 0; i < pathsForC.Count; ++i)
+        {
+            if (pathsForC[i].name == this.name)
+            {
+                if (i == pathsForC.Count - 1)
+                {
+                    return pathsForC[0];
+                }
+
+                else
+                {
+                    return pathsForC[i + 1];
                 }
             }
         }

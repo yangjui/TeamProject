@@ -9,6 +9,7 @@ public class AttackZombie : MonoBehaviour
         if (_other.CompareTag("Player"))
         {
             _other.GetComponent<PlayerController>().TakeDamage(5);
+
         }
     }
 }

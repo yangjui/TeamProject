@@ -27,7 +27,6 @@ public class BlackHoleGrenade : MonoBehaviour
     {
         yield return null;
         GameObject newOBJ = Instantiate(obstacle, transform.position, Quaternion.Euler(Vector3.zero));
-        navAgentManager.DetectNewObstacle(transform.position);
         Destroy(newOBJ, destroyTime);
         Destroy(this.gameObject);
     }
@@ -38,11 +37,6 @@ public class BlackHoleGrenade : MonoBehaviour
         rigidbody.AddForce(_direction, ForceMode.Impulse);
         rigidbody.isKinematic = false;
         rigidbody.useGravity = true;
-    }
-
-    private void OnDestroy()
-    {
-        navAgentManager.ResetAgent();
     }
 
 }
