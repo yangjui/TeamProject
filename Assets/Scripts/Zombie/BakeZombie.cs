@@ -151,7 +151,7 @@ public class BakeZombie : MonoBehaviour
                 newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
                 break;
         }
-        RagdollPosition(this.transform, newRagdoll.transform);
+        // RagdollPosition(this.transform, newRagdoll.transform);
 
         Destroy(this.gameObject);
     }

@@ -9,7 +9,6 @@ public class Ragdoll : MonoBehaviour
     private float onGroundTime = 0;
 
     [SerializeField] private GameObject ragdoll;
-    [SerializeField] private GameObject dead;
 
     private void Start()
     {
@@ -30,7 +29,7 @@ public class Ragdoll : MonoBehaviour
         {
             onGroundTime += Time.deltaTime;
             if (onGroundTime >= 3f)
-                Dead();
+                Kinematic();
         }
         else
             onGroundTime = 0f;
@@ -43,19 +42,6 @@ public class Ragdoll : MonoBehaviour
             childRb.isKinematic = true;
         }
     }
-
-
-
-    private void Dead()
-    {
-        ragdoll.SetActive(false);
-
-        GameObject newDead = Instantiate(dead, transform.position, transform.rotation);
-        DeadPosition(ragdoll.transform, newDead.transform);
-
-        Destroy(ragdoll);
-    }
-
 
     private void DeadPosition(Transform _newRagdoll, Transform _dead)
     {
