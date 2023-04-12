@@ -56,18 +56,6 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(StopBGMCoroutine());
     }
 
-    public void StopSFX(string _sfxName)
-    {
-        for (int i = 0; i < sfx2DList.Count; ++i)
-        {
-            AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
-            if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
-            {
-                sfxI.Stop();
-            }
-        }
-    }
-
     private IEnumerator StopBGMCoroutine()
     {
         float curVolume = bgmPlayer.volume;
@@ -166,6 +154,32 @@ public class SoundManager : MonoBehaviour
             GameObject go = Instantiate(sfx3DPrefab, transform);
             sfx3DPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
             sfx3DList.Add(go);
+        }
+    }
+
+    public void Stop2DSFX(string _sfxName)
+    {
+        if (sfx2DList.Count == 0) return;
+        for (int i = 0; i < sfx2DList.Count; ++i)
+        {
+            AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
+            if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+            {
+                sfxI.Stop();
+            }
+        }
+    }
+
+    public void Stop3DSFX(string _sfxName)
+    {
+        if (sfx3DList.Count == 0) return;
+        for (int i = 0; i < sfx3DList.Count; ++i)
+        {
+            AudioSource sfxI = sfx3DList[i].GetComponent<AudioSource>();
+            if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+            {
+                sfxI.Stop();
+            }
         }
     }
 
