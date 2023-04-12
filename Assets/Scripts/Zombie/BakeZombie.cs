@@ -74,6 +74,8 @@ public class BakeZombie : MonoBehaviour
             newBodyAnimMate[i].SetFloat("_Length", randomAnimSpeed);
             newClothesAnimMate[i].SetFloat("_Length", randomAnimSpeed);
         }
+
+        
     }
 
     private void Update()
@@ -83,10 +85,7 @@ public class BakeZombie : MonoBehaviour
             ChasePlayer(target.position);
         }
 
-        else
-        {
-            navAgent.SetDestination(target.position);
-        }
+
         if (currentHealth <= 0)
         {
             Dead();
@@ -103,7 +102,7 @@ public class BakeZombie : MonoBehaviour
         ZombieState();
     }
 
-    public void ChasePlayer(Vector3 _target) // vellocity
+    private void ChasePlayer(Vector3 _target) // vellocity
     {
         Vector3 direction = (_target - transform.position).normalized;
         Vector3 playerLookAt = new Vector3(_target.x, transform.position.y, _target.z);
@@ -218,6 +217,7 @@ public class BakeZombie : MonoBehaviour
     public void SetNewTarget(Transform _newTarget)
     {
         target = _newTarget;
+        navAgent.SetDestination(target.position);
     }
 
     public float AgentSpeed()
@@ -241,7 +241,7 @@ public class BakeZombie : MonoBehaviour
         {
             isCoroutineRunning = true;
 
-            Debug.Log(this.name + "Attack");
+            //Debug.Log(this.name + "Attack");
 
             attack.SetActive(true);
             bodyMr.material = newBodyAnimMate[3];
@@ -266,7 +266,7 @@ public class BakeZombie : MonoBehaviour
             yield break;
         }
 
-        Debug.Log(this.name + "IDle");
+        //Debug.Log(this.name + "IDle");
 
         attack.SetActive(false);
 
@@ -283,7 +283,7 @@ public class BakeZombie : MonoBehaviour
 
     private void Run()
     {
-        Debug.Log(this.name + "run");
+        //Debug.Log(this.name + "run");
 
         curSpeed = runSpeed;
 
@@ -298,7 +298,7 @@ public class BakeZombie : MonoBehaviour
 
     private void Walk()
     {
-        Debug.Log(this.name + "walk");
+        //Debug.Log(this.name + "walk");
         curSpeed = walkSpeed;
         bodyMr.material = newBodyAnimMate[0];
         clothesMr.material = newClothesAnimMate[0];
@@ -314,7 +314,6 @@ public class BakeZombie : MonoBehaviour
         isAttack = _isAttack;
     }
 
-    // �ؽ�ó ���� �� �ϰ������� ���ϰ��� �ϴ� ����
     //private IEnumerator ChangeAnimMaterial(Material _curMaterial, Material _newMaterial)
     //{
     //    float t = 0f;

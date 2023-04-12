@@ -56,19 +56,16 @@ public class NavAgentManager : MonoBehaviour
             if(i < agentNum/3)
             {
                 newAgent.name = "Agent" + i + "GroupA";
-                newAgent.GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupA[0]);
                 navMeshAgentsGroupA.Add(newAgent);
             }
             else if(agentNum/3 < i && i < ((agentNum/3) + (agentNum/3)))
             {
                 newAgent.name = "Agent" + i + "GroupB";
-                newAgent.GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupB[0]);
                 navMeshAgentsGroupB.Add(newAgent);
             }
             else
             {
                 newAgent.name = "Agent" + i + "GroupC";
-                newAgent.GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupC[0]);
                 navMeshAgentsGroupC.Add(newAgent);
             }
 
@@ -77,9 +74,10 @@ public class NavAgentManager : MonoBehaviour
             newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromGroupList;
             allNavMeshAgents.Add(newAgent);
         }
+
+        SetPathForEachGroup();
     }
 
-    // path�� ���޽� ���� path�� �����̶�� ���� ---------------------------------------------------------------------
     public void SetNewTargetForGroupA(PathTriggerManager _trigger, string _name) 
     {
         for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
@@ -121,9 +119,9 @@ public class NavAgentManager : MonoBehaviour
             }
         }
     }
-    // path�� ���޽� ���� path�� �����̶�� ���� ---------------------------------------------------------------------��
 
-    private void SetPathForEachGroup() // �˶��� �︮�� ������ �� �� �׷츶�� ù��° path�� trasform�˷��ֱ�;
+
+    private void SetPathForEachGroup()
     {
         for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
         {
@@ -141,7 +139,7 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
-    private void RemoveZombieFromList(BakeZombie zombie) // ��� ���� ����Ʈ���� �� �̻� �ɹ��� �ƴ� ���� ����
+    private void RemoveZombieFromList(BakeZombie zombie) 
     {
         for (int i = 0; i < allNavMeshAgents.Count; ++i)
         {
@@ -155,7 +153,7 @@ public class NavAgentManager : MonoBehaviour
     }
 
 
-    private void RemoveZombieFromGroupList(BakeZombie zombie) //// �׷캰 ���� ����Ʈ���� �� �̻� �ɹ��� �ƴ� ���� ����
+    private void RemoveZombieFromGroupList(BakeZombie zombie)
     {
         if(zombie.name.Substring(zombie.name.Length - 1) == "A")
         {
@@ -180,7 +178,7 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
-    private bool RandomPoint(Vector3 center, float range, out Vector3 result) //���� �׺�Ž� ���ο��� ��ȯ
+    private bool RandomPoint(Vector3 center, float range, out Vector3 result) 
     {
         for (int i = 0; i < 10; i++)
         {
