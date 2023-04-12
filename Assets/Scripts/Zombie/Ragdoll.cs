@@ -23,17 +23,17 @@ public class Ragdoll : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
-    private void Update()
-    {
-        if (rb.IsSleeping())
-        {
-            onGroundTime += Time.deltaTime;
-            if (onGroundTime >= 3f)
-                Kinematic();
-        }
-        else
-            onGroundTime = 0f;
-    }
+    //private void Update()
+    //{
+    //    if (rb.IsSleeping())
+    //    {
+    //        onGroundTime += Time.deltaTime;
+    //        if (onGroundTime >= 3f)
+    //            Kinematic();
+    //    }
+    //    else
+    //        onGroundTime = 0f;
+    //}
 
     private void Kinematic()
     {

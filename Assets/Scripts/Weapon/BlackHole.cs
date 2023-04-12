@@ -22,6 +22,7 @@ public class BlackHole : MonoBehaviour
             if (agents[i] == null) continue;
             if (agents[i].CompareTag("Zombie"))
             {
+                agents[i].GetComponent<BakeZombie>().navAgent.enabled = false;
                 agents[i].GetComponent<BakeZombie>().TakeDamage(0);
                 agents[i].GetComponent<BakeZombie>().BlackHole();
 
