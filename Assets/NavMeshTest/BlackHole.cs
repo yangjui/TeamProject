@@ -34,8 +34,8 @@ public class BlackHole : MonoBehaviour
             if (agents[i].CompareTag("Zombie"))
             {
 
-                agents[i].GetComponent<Zombie>().TakeDamage(0);
-                agents[i].GetComponent<Zombie>().BlackHole();
+                agents[i].GetComponent<BakeZombie>().TakeDamage(0);
+                agents[i].GetComponent<BakeZombie>().BlackHole();
 
                 // if (Vector3.Distance(agents[i].transform.position, transform.position) < blackHoleRadius)
                 {
@@ -44,7 +44,6 @@ public class BlackHole : MonoBehaviour
                 }
 
             }
-
         }
     }
 
@@ -52,10 +51,9 @@ public class BlackHole : MonoBehaviour
     {
         for (int i = agents.Count - 1; i >= 0; --i)
         {
-            if (agents[i] == null) continue; 
-            agents[i].GetComponent<Zombie>().TakeDamage(100);
+            if (agents[i] == null) continue;
+            agents[i].GetComponent<BakeZombie>().TakeDamage(100);
             agents.RemoveAt(i);
         }
     }
-
 }

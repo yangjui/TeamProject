@@ -1,60 +1,63 @@
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BakeZombie : MonoBehaviour
 {
-    [Header("# Zombie")]
-    [SerializeField] private GameObject deadRagdoll;
-    [SerializeField] private GameObject dead;
-
-    [SerializeField] private float zombieHealth = 100f;
-
+    [Header("# Animation")]
     [SerializeField] private MeshRenderer bodyMr = null;
     [SerializeField] private MeshRenderer clothesMr = null;
     [SerializeField] private List<Material> bodyAnimMate = null;
-    [SerializeField] private List<Material> clothesAnimMate = null;    
-    private List<Material> newBodyAnimMate = new List<Material>();
-    private List<Material> newClothesAnimMate = new List<Material>();
+    [SerializeField] private List<Material> clothesAnimMate = null;
 
-    private NavMeshAgent navAgent;
+    [Header("# Zombie")]
+    [SerializeField] private GameObject deadRagdoll;
+    [SerializeField] private GameObject leftZombiePrefab;
+    [SerializeField] private GameObject rightZombiePrefab;
+    [SerializeField] private GameObject attack;
 
-    private float currentHealth;
-
-    private float maxWalkSpeed = 5f;
-    private float minWalkSpeed = 3f;
-
-    private float maxRunSpeed = 11f;
-    private float minRunSpeed = 9f;
-
-    private float walkSpeed;
-    private float runSpeed;
-
-    private float blackHoleRadius = 7f;
-    private float detectionRadius = 10f;
-
-
-    private float resetTime = 10f;
-
-    private bool isMember = true;
-    private bool isInBlackHole = false;
-    private bool isRun = false;
-
-    private Vector3 blackHolePosition;
-
-    private Transform target;
-    private Transform playerPosition;
+    [Header("# Status")]
+    [SerializeField] private float zombieHealth = 100f;
+    [SerializeField] private float curSpeed = 5f;
+    [SerializeField] private float runSpeed = 10f;
+    [SerializeField] private float walkSpeed = 5f;
 
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
     public ZombieFreeEventHandler OnZombieFree2;
 
+    [System.NonSerialized] public NavMeshAgent navAgent;
+
+    private int deadType = 0;
+
+    private float currentHealth;
+    private float blackHoleRadius = 7f;
+    private float detectionRadius = 10f;
+    private float distance = 0f;
+
+    private bool isMember = true;
+    private bool isInBlackHole = false;
+    private bool isAttack = false;
+    private bool isIdle = false;
+    private bool isRun = false;
+    private bool isWalk = false;
+    private bool isCoroutineRunning = false;
+
+
+    private Vector3 blackHolePosition;
+    private Transform target;
+    private Transform playerPosition;
     private Rigidbody rb;
+
+    private List<Material> newBodyAnimMate = new List<Material>();
+    private List<Material> newClothesAnimMate = new List<Material>();
 
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
         currentHealth = zombieHealth;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -71,50 +74,41 @@ public class BakeZombie : MonoBehaviour
             newBodyAnimMate[i].SetFloat("_Length", randomAnimSpeed);
             newClothesAnimMate[i].SetFloat("_Length", randomAnimSpeed);
         }
-
-        walkSpeed = Random.Range(minWalkSpeed, maxWalkSpeed);
-        runSpeed = Random.Range(minRunSpeed, maxRunSpeed);
     }
 
     private void Update()
     {
         if (!isMember)
         {
-            if (resetTime > 3)
-            {
-                InTheBlackHole();
-            }
-
-            if (isInBlackHole)
-            {
-                resetTime -= Time.deltaTime;
-                if (resetTime <= 0)
-                {
-                    ResetAgent();
-                }
-            }
-
-            if (!isInBlackHole)
-            {
-                navAgent.SetDestination(target.position);
-            }
+            ChasePlayer(target.position);
         }
+
         else
         {
             navAgent.SetDestination(target.position);
         }
-
-        if (resetTime <= 0)
-        {
-            resetTime = 10f;
-        }
-
-        if (currentHealth <= 0 && !isInBlackHole)
+        if (currentHealth <= 0)
         {
             Dead();
         }
 
+        if (isInBlackHole)
+        {
+            //newBodyAnimMate[i].SetFloat("_Length", 2f);
+            //newClothesAnimMate[i].SetFloat("_Length", 2f);
+        }
+        
+        distance = Vector3.Distance(transform.position, playerPosition.position);
+
         ZombieState();
+    }
+
+    public void ChasePlayer(Vector3 _target) // vellocity
+    {
+        Vector3 direction = (_target - transform.position).normalized;
+        Vector3 playerLookAt = new Vector3(_target.x, transform.position.y, _target.z);
+        rb.MovePosition(transform.position + direction * curSpeed * Time.deltaTime);
+        transform.LookAt(playerLookAt);
     }
 
     public void PlayerPosition(Transform _playerPosition)
@@ -124,34 +118,50 @@ public class BakeZombie : MonoBehaviour
 
     private void ZombieState()
     {
-        switch (Vector3.Distance(transform.position, playerPosition.position))
+        switch (Mathf.Round(distance * 10f) / 10f)
         {
-            case >= 10:
-                Walk();
+            case >= 15.0f:
+                if (!isWalk) Walk();
                 break;
-            case < 10 and >= 2:
-                Run();
+            case < 15.0f and >= 2.0f:
+                if (!isRun) Run();
                 break;
-            case < 2:
-                Idle();
+            case < 2.0f:
+                if (!isAttack && !isIdle && !isCoroutineRunning) StartCoroutine(Idle());
                 break;
             default:
                 return;
         }
     }
 
-
-
     private void Dead()
     {
         this.gameObject.SetActive(false);
-        navAgent.enabled = false;
-        GameObject newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+        GameObject newRagdoll;
+
+        switch (deadType)
+        {
+            case 1:
+                newRagdoll = Instantiate(leftZombiePrefab, transform.position, transform.rotation);
+                break;
+            case 2:
+                newRagdoll = Instantiate(rightZombiePrefab, transform.position, transform.rotation);
+                break;
+            default:
+                newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+                break;
+        }
         RagdollPosition(this.transform, newRagdoll.transform);
 
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
+    public void DeadType(int _type)
+    {
+        deadType = _type;
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò°Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
 
     private void RagdollPosition(Transform _alive, Transform _dead)
     {
@@ -163,29 +173,27 @@ public class BakeZombie : MonoBehaviour
             _dead.transform.GetChild(i).localPosition = _alive.transform.GetChild(i).localPosition;
             _dead.transform.GetChild(i).localRotation = _alive.transform.GetChild(i).localRotation;
         }
-        _dead.transform.position = _alive.transform.position; // ·ºµ¹ ÀÚÃ¼ÀÇ À§Ä¡ ¸ÂÃß±â
-    }
-
-    private void InTheBlackHole()
-    {
-        if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInBlackHole)
-        {
-            navAgent.enabled = false;
-            Vector3 dir = blackHolePosition - transform.position;
-            transform.position += dir * 3f * Time.deltaTime;
-        }
+        _dead.transform.position = _alive.transform.position; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ß±ï¿½
     }
 
     public void NoMoreMember()
     {
         isMember = false;
+        navAgent.enabled = false;
     }
 
-    public void HitByBlackHole(Vector3 _position)
+    public void BlackHole()
     {
-        blackHolePosition = _position;
-        isInBlackHole = true;
+        if (!isInBlackHole)
+        {
+            isInBlackHole = true;
+        }
     }
+
+    //public void StopAnimation() // ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
+    //{
+    //    anim.enabled = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ûµï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //}
 
     public void DetectNewObstacle(Vector3 _position)
     {
@@ -196,9 +204,9 @@ public class BakeZombie : MonoBehaviour
         }
     }
 
-    private void ResetAgent()
+
+    public void ResetAgent()
     {
-        navAgent.enabled = true;
         isInBlackHole = false;
     }
 
@@ -227,41 +235,101 @@ public class BakeZombie : MonoBehaviour
         navAgent.angularSpeed = _speed;
     }
 
-    private void Attack()
+    private IEnumerator Attack()
     {
-        bodyMr.material = newBodyAnimMate[3];
-        clothesMr.material = newClothesAnimMate[3];
+        if (!isAttack)
+        {
+            isCoroutineRunning = true;
+
+            Debug.Log(this.name + "Attack");
+
+            attack.SetActive(true);
+            bodyMr.material = newBodyAnimMate[3];
+            clothesMr.material = newClothesAnimMate[3];
+
+            BoolFlags(false, false, false, true);
+
+            curSpeed = 0.2f;
+
+            yield return new WaitForSeconds(1.3f);
+
+            StartCoroutine(Idle());
+            isAttack = false;
+            isCoroutineRunning = false;
+        }
     }
 
-    private void Idle()
+    private IEnumerator Idle()
     {
-        navAgent.speed = 0.1f;
-        navAgent.angularSpeed = 500f;
+        if (isAttack || isCoroutineRunning)
+        {
+            yield break;
+        }
+
+        Debug.Log(this.name + "IDle");
+
+        attack.SetActive(false);
+
         bodyMr.material = newBodyAnimMate[2];
         clothesMr.material = newClothesAnimMate[2];
-        Attack();
+
+        BoolFlags(false, false, true, false);
+        curSpeed = 0f;
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(Attack());
     }
 
     private void Run()
     {
-        if (!isRun && OnZombieFree2 != null) 
-        {
-            OnZombieFree2(this); // ÀÌº¥Æ® ¹ß»ý°ú ÇÔ²² Á»ºñÀÇ ÀÌ¸§ Àü´Þ
-            isRun = true;
-        }
+        Debug.Log(this.name + "run");
+
+        curSpeed = runSpeed;
 
         bodyMr.material = newBodyAnimMate[1];
         clothesMr.material = newClothesAnimMate[1];
 
-        navAgent.speed = runSpeed;
+
+        if (OnZombieFree2 != null) OnZombieFree2(this);
+
+        BoolFlags(false, true, false, false);
     }
 
     private void Walk()
     {
+        Debug.Log(this.name + "walk");
+        curSpeed = walkSpeed;
         bodyMr.material = newBodyAnimMate[0];
         clothesMr.material = newClothesAnimMate[0];
-        navAgent.speed = walkSpeed;
+
+        BoolFlags(true, false, false, false);
     }
+
+    private void BoolFlags(bool _isWalk, bool _isRun, bool _isIdle, bool _isAttack)
+    {
+        isWalk = _isWalk;
+        isRun = _isRun;
+        isIdle = _isIdle;
+        isAttack = _isAttack;
+    }
+
+    // ï¿½Ø½ï¿½Ã³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //private IEnumerator ChangeAnimMaterial(Material _curMaterial, Material _newMaterial)
+    //{
+    //    float t = 0f;
+
+    //    while (t < 1f)
+    //    {
+    //        t += Time.deltaTime * 0.5f;
+    //        Material newMaterial = new Material(_curMaterial); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½çº» ï¿½ï¿½ï¿½ï¿½
+    //        newMaterial.Lerp(_curMaterial, _newMaterial, t); // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //        bodyMr.material = newMaterial; // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
+    //        yield return null;
+    //    }
+
+    //    _curMaterial = _newMaterial;
+    //}
 
     public void TakeDamage(float playerAttackDamage)
     {
@@ -269,13 +337,8 @@ public class BakeZombie : MonoBehaviour
 
         if (OnZombieFree2 != null)
         {
-            OnZombieFree2(this); // ÀÌº¥Æ® ¹ß»ý°ú ÇÔ²² Á»ºñÀÇ ÀÌ¸§ Àü´Þ
+            OnZombieFree2(this);
+            target = playerPosition;
         }
     }
-
-    public float CurrentHealth()
-    {
-        return currentHealth;
-    }
-
 }

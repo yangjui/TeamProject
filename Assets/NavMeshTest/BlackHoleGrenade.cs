@@ -5,18 +5,10 @@ using UnityEngine;
 
 public class BlackHoleGrenade : MonoBehaviour
 {
-    [SerializeField]
-    private NavAgentManager navAgentManager = null;
-
     [SerializeField] 
     private GameObject obstacle;
 
     private float destroyTime = 7f;
-
-    private void Awake()
-    {
-        navAgentManager = FindObjectOfType<NavAgentManager>();
-    }
 
     private void Start()
     {
@@ -27,6 +19,7 @@ public class BlackHoleGrenade : MonoBehaviour
     {
         yield return null;
         GameObject newOBJ = Instantiate(obstacle, transform.position, Quaternion.Euler(Vector3.zero));
+
         Destroy(newOBJ, destroyTime);
         Destroy(this.gameObject);
     }
@@ -38,5 +31,4 @@ public class BlackHoleGrenade : MonoBehaviour
         rigidbody.isKinematic = false;
         rigidbody.useGravity = true;
     }
-
 }

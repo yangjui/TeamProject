@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -9140723752193763795}
   - component: {fileID: 1048346894163135291}
   - component: {fileID: -6552263539893602426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Zombie_v5
   m_TagString: Zombie
   m_Icon: {fileID: 0}
@@ -34,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 2273763976604684855}
   - {fileID: 6361206952756377506}
+  - {fileID: 8406619105387267313}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,7 +85,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -101,8 +102,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
-  dead: {fileID: 5924059365190695168, guid: c9cc23b8721d86842ad00304af7d5b2f, type: 3}
+  leftZombiePrefab: {fileID: 5924059365190695168, guid: 693c6c08476160145b378f4cd664bbb6, type: 3}
+  rightZombiePrefab: {fileID: 5924059365190695168, guid: 693c6c08476160145b378f4cd664bbb6, type: 3}
+  attack: {fileID: 9087582920721612305}
   zombieHealth: 100
+  curSpeed: 3
+  runSpeed: 8
+  walkSpeed: 3
   bodyMr: {fileID: 4581566493434987248}
   clothesMr: {fileID: 696840839065202811}
   bodyAnimMate:
@@ -115,6 +121,64 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 51dfd7d7a36682d4b90cc57830635067, type: 2}
   - {fileID: 2100000, guid: a3f9ac599bcaec244b11f2e58ec4b153, type: 2}
   - {fileID: 2100000, guid: d5e100c50e057c347874f716b3a627ad, type: 2}
+--- !u!1 &9087582920721612305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8406619105387267313}
+  - component: {fileID: 6412536552129990120}
+  - component: {fileID: 3062654838585924214}
+  m_Layer: 8
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8406619105387267313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087582920721612305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0.202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1987793038858882470}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6412536552129990120
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087582920721612305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3062654838585924214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087582920721612305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f47319fe1569fb46ae001e05eeafed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6288568728936204777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,6 +234,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: V5_Clothes.mixamo.com
       objectReference: {fileID: 0}
+    - target: {fileID: 2617228616418224266, guid: 99133904de807704289b2f06782e37f1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99133904de807704289b2f06782e37f1, type: 3}
 --- !u!23 &696840839065202811 stripped
@@ -192,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 345890327449279884, guid: edf92f79a85e5b6498515b72fb23aa33, type: 3}
       propertyPath: m_Name
       value: V5_Body.mixamo.com
+      objectReference: {fileID: 0}
+    - target: {fileID: 345890327449279884, guid: edf92f79a85e5b6498515b72fb23aa33, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7299660837091995390, guid: edf92f79a85e5b6498515b72fb23aa33, type: 3}
       propertyPath: m_RootOrder
