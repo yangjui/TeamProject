@@ -19,8 +19,8 @@ public class Laserbullet : MonoBehaviour
     {
         if (_other.CompareTag("Zombie"))
         {
-            Zombie zombie = _other.GetComponent<Zombie>();
-            zombie.TakeDamage(damage);
+            //Zombie zombie = _other.GetComponent<Zombie>();
+            //zombie.TakeDamage(damage);
             
             Vector3 Dir = transform.position - _other.transform.position;
             float angle = Vector3.SignedAngle(Dir, transform.forward, Vector3.up);

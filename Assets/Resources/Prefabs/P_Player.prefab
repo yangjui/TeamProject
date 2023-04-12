@@ -1133,6 +1133,7 @@ MonoBehaviour:
   laserEffectPoint: {fileID: 5933864138250310442}
   chargeEffectPrefab: {fileID: 5990112604267223275, guid: e18c351ac3f6ed7409f6cae5ba1302eb, type: 3}
   laserEffectPrefab: {fileID: 2749479866245950336, guid: 1034309b7dfe90844ab87f9fdef85cfb, type: 3}
+  waveEffectPrefab: {fileID: 6318981960976727402, guid: c0aee50458162414aacc6ca79089b9c2, type: 3}
   chargingTime: 2
   chargingSize: 0.05
 --- !u!114 &1982401215

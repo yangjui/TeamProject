@@ -13,6 +13,7 @@ public class WeaponLaserRifle : WeaponBase
     [Header("# Prefab")]
     [SerializeField] private GameObject chargeEffectPrefab = null;
     [SerializeField] private GameObject laserEffectPrefab = null;
+    [SerializeField] private GameObject waveEffectPrefab = null;
 
     [Header("# LaserSetting")]
     [SerializeField] private float chargingTime = 2f;
@@ -131,7 +132,9 @@ public class WeaponLaserRifle : WeaponBase
         {
             Destroy(chargeEffect);
             Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.LookRotation(attackDirection,Vector3.up) * Quaternion.Euler(0f, 180f, 0f));
-      
+            GameObject wave = Instantiate(waveEffectPrefab, laserEffectPoint.position, transform.rotation);
+            Destroy(wave, 2f);
+
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
 
