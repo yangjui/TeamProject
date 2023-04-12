@@ -23,6 +23,10 @@ public class TrainingSceneManager : MonoBehaviour
     private void Update()
     {
         Option();
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            SoundManager.instance.PlayExplosionSound();
+        }
     }
 
     private void ChangeAimMode(bool _ainMode)

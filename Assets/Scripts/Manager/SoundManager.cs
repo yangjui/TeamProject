@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] Sound[] sfx3D = null;
     [SerializeField] Sound[] bgm = null;
     [SerializeField] private AudioMixer mixer = null;
+  
 
     [SerializeField] AudioSource bgmPlayer = null;
     [SerializeField] GameObject sfx2DPrefab = null;
@@ -191,5 +192,43 @@ public class SoundManager : MonoBehaviour
     public void SFXVolume(float _val)
     {
         mixer.SetFloat("SFX", Mathf.Log10(_val) * 20);
+    }
+
+    public void PlayExplosionSound()
+    {
+        StartCoroutine(LowCoroutine());
+    }
+
+    private IEnumerator LowCoroutine()
+    {
+        bool isLowPassActive = true;
+        float lowPassTime = 2f;
+        float lowPassReadyTime = 0f;
+        float lowPassCurrentTime = 0f;
+        while (isLowPassActive)
+        {
+            if (lowPassReadyTime < 1f)
+            {
+                mixer.SetFloat("Low", 500f);
+                lowPassReadyTime += Time.deltaTime;
+                yield return null;
+            }
+            else
+            {
+                lowPassCurrentTime += Time.deltaTime;
+                float t = lowPassCurrentTime / lowPassTime;
+                if (t >= 1f)
+                {
+                    mixer.SetFloat("Low", 22000f);
+                    isLowPassActive = false;
+                }
+                else
+                {
+                    float frequency = Mathf.Lerp(500f, 22000f, t);
+                    mixer.SetFloat("Low", frequency);
+                }
+                yield return null;
+            }
+        }
     }
 }

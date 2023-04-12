@@ -161,8 +161,6 @@ public class BakeZombie : MonoBehaviour
         deadType = _type;
     }
 
-    // ����ó�� �� �ҰŸ� ���� �������� ���� �ʿ�� ������!
-
     private void RagdollPosition(Transform _alive, Transform _dead)
     {
         for (int i = 0; i < _alive.transform.childCount; ++i)
@@ -173,7 +171,7 @@ public class BakeZombie : MonoBehaviour
             _dead.transform.GetChild(i).localPosition = _alive.transform.GetChild(i).localPosition;
             _dead.transform.GetChild(i).localRotation = _alive.transform.GetChild(i).localRotation;
         }
-        _dead.transform.position = _alive.transform.position; // ���� ��ü�� ��ġ ���߱�
+        _dead.transform.position = _alive.transform.position;
     }
 
     public void NoMoreMember()
@@ -189,11 +187,6 @@ public class BakeZombie : MonoBehaviour
             isInBlackHole = true;
         }
     }
-
-    //public void StopAnimation() // ���Ѵٸ� ���߱�
-    //{
-    //    anim.enabled = false; // ���� �������� �������� �ٽ� �ִϸ��̼� �۵��ϵ��� ��������
-    //}
 
     public void DetectNewObstacle(Vector3 _position)
     {
@@ -313,23 +306,6 @@ public class BakeZombie : MonoBehaviour
         isIdle = _isIdle;
         isAttack = _isAttack;
     }
-
-    // �ؽ�ó ���� �� �ϰ������� ���ϰ��� �ϴ� ����
-    //private IEnumerator ChangeAnimMaterial(Material _curMaterial, Material _newMaterial)
-    //{
-    //    float t = 0f;
-
-    //    while (t < 1f)
-    //    {
-    //        t += Time.deltaTime * 0.5f;
-    //        Material newMaterial = new Material(_curMaterial); // ���� ��Ƽ������ ���纻 ����
-    //        newMaterial.Lerp(_curMaterial, _newMaterial, t); // ���ο� ��Ƽ����� ����
-    //        bodyMr.material = newMaterial; // ���ο� ��Ƽ���� �Ҵ�
-    //        yield return null;
-    //    }
-
-    //    _curMaterial = _newMaterial;
-    //}
 
     public void TakeDamage(float playerAttackDamage)
     {
