@@ -16,8 +16,10 @@ public class BombEffect : MonoBehaviour
         for (int i = 0; i < agents.Count; ++i)
         {
             agents[i].GetComponent<Rigidbody>().AddExplosionForce(5000, transform.position, 5f);
-            CameraController.instance.StartShakeCamera();
         }
+        CameraController.instance.StartShakeCamera();
+        SoundManager.instance.PlayExplosionSound();
+        SoundManager.instance.Play3DSFX("explosion-1", transform.position);
     }
 
     private void OnTriggerEnter(Collider _other)
