@@ -18,8 +18,8 @@ public class BombEffect : MonoBehaviour
             agents[i].GetComponent<Rigidbody>().AddExplosionForce(5000, transform.position, 5f);
         }
         CameraController.instance.StartShakeCamera();
-        SoundManager.instance.PlayExplosionSound();
         SoundManager.instance.Play3DSFX("explosion-1", transform.position);
+        SoundManager.instance.PlayExplosionSound();
     }
 
     private void OnTriggerEnter(Collider _other)

@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class AreaOfEffect : MonoBehaviour
 {
-    [SerializeField] private GameObject AOEPrefab = null;
-    RaycastHit hit;
-
     private void Start()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
+        Destroy(gameObject, 4f);
+    }
+
+    private void OnTriggerEnter(Collider _other)
+    {
+        if (_other.CompareTag("Zombie"))
         {
-            if (hit.collider.CompareTag("Platform"))
-            {
-                Instantiate(AOEPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-            }
+            _other.GetComponent<BakeZombie>().Onfire();
         }
     }
 }

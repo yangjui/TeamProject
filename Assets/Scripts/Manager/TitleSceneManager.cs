@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
-    [SerializeField] private Image fadePanel;
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private OptionSetting optionSetting;
+    [SerializeField] private Image fadePanel;
 
     private Color c;
     private void Awake()

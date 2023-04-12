@@ -21,6 +21,7 @@ public class WeaponLaserRifle : WeaponBase
     [SerializeField] private float chargingTime = 2f;
     [SerializeField] private float chargingSize = 0.1f;
 
+    private int layerMask;
     private Vector3 attackDirection;
     private Vector3 targetPoint;
     private GameObject chargeEffect;
@@ -38,6 +39,7 @@ public class WeaponLaserRifle : WeaponBase
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
         mainCamera = Camera.main;
+        layerMask = ~(1 << LayerMask.NameToLayer("Player"));
     }
 
     private void OnEnable()
@@ -100,7 +102,7 @@ public class WeaponLaserRifle : WeaponBase
         targetPoint = Vector3.zero;
 
         ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f);
-        if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
+        if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance, layerMask))
         {
             // 레이가 맞는다면 타겟포인트는 맞은대상
             targetPoint = hit.point;
