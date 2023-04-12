@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 public class BakeZombie : MonoBehaviour
 {
+    public delegate void ZombieFreeEventHandler(BakeZombie zombie);
+    public ZombieFreeEventHandler OnZombieFree2;
+
     [Header("# Animation")]
     [SerializeField] private MeshRenderer bodyMr = null;
     [SerializeField] private MeshRenderer clothesMr = null;
@@ -24,13 +27,12 @@ public class BakeZombie : MonoBehaviour
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float walkSpeed = 5f;
 
-    public delegate void ZombieFreeEventHandler(BakeZombie zombie);
-    public ZombieFreeEventHandler OnZombieFree2;
+    [SerializeField] private GameObject fireEffect = null;
+
 
     [System.NonSerialized] public NavMeshAgent navAgent;
 
     private int deadType = 0;
-
     private float currentHealth;
     private float blackHoleRadius = 7f;
     private float detectionRadius = 10f;
@@ -44,8 +46,6 @@ public class BakeZombie : MonoBehaviour
     private bool isWalk = false;
     private bool isCoroutineRunning = false;
 
-
-    private Vector3 blackHolePosition;
     private Transform target;
     private Transform playerPosition;
     private Rigidbody rb;
@@ -333,12 +333,33 @@ public class BakeZombie : MonoBehaviour
 
     public void TakeDamage(float playerAttackDamage)
     {
-        currentHealth = currentHealth - playerAttackDamage;
+        currentHealth -= playerAttackDamage;
 
         if (OnZombieFree2 != null)
         {
             OnZombieFree2(this);
             target = playerPosition;
+        }
+    }
+
+    public void Onfire()
+    {
+        if (!fireEffect.activeSelf)
+        {
+            fireEffect.SetActive(true);
+            StartCoroutine(ApplyDamageOverTime(20));
+        }
+    }
+
+    IEnumerator ApplyDamageOverTime(float damage)
+    {
+        while (currentHealth > 0)
+        {
+            yield return new WaitForSeconds(1f);
+
+            TakeDamage((float)damage);
+
+            if (currentHealth <= 0) break;
         }
     }
 }

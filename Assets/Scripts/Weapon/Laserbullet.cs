@@ -7,9 +7,6 @@ public class Laserbullet : MonoBehaviour
 {
     [SerializeField] private float damage;
 
-    [SerializeField] private GameObject leftZombiePrefab;
-    [SerializeField] private GameObject rightZombiePrefab;
-
     private void Start()
     {
         Destroy(gameObject, 1f);
@@ -25,12 +22,12 @@ public class Laserbullet : MonoBehaviour
             Vector3 Dir = transform.position - _other.transform.position;
             float angle = Vector3.SignedAngle(Dir, transform.forward, Vector3.up);
 
-            GameObject dummyPrefab = angle < 0 ? leftZombiePrefab : rightZombiePrefab;
-            Instantiate(dummyPrefab, _other.transform.position, Quaternion.identity);
+            //GameObject dummyPrefab = angle < 0 ? leftZombiePrefab : rightZombiePrefab;
+            //Instantiate(dummyPrefab, _other.transform.position, Quaternion.identity);
 
             int dummyType = angle < 0 ? 1 : 2;
 
-            //zombie.DeadType(dummyType);
+            zombie.DeadType(dummyType);
         }
     }
 }

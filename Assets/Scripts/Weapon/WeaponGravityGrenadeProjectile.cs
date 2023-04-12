@@ -22,7 +22,7 @@ public class WeaponGravityGrenadeProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision _collision)
     {
-        Instantiate(blackholePrefab, transform.position, transform.rotation);
+        Instantiate(blackholePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

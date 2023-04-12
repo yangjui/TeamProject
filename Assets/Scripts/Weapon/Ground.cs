@@ -13,12 +13,7 @@ public class Ground : MonoBehaviour
     {
         if (_other.CompareTag("Zombie"))
         {
-            _other.GetComponent<Target>().Onfire();
-        }
-
-        if (_other.CompareTag("Target"))
-        {
-            _other.GetComponent<Target>().Onfire();
+            _other.GetComponent<BakeZombie>().Onfire();
         }
     }
 }

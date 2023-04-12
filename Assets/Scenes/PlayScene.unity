@@ -606,13 +606,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgentManager: {fileID: 450550264}
-  paths:
-  - {fileID: 489867998}
-  - {fileID: 1037234835}
-  - {fileID: 653171154}
-  - {fileID: 1782559845}
-  - {fileID: 1094463371}
-  - {fileID: 350353623}
+  pathsForA: []
+  pathsForB: []
+  pathsForC: []
 --- !u!1 &387263761
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,19 +790,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab:
-  - {fileID: 4189057010568706084, guid: 71dfc2c5fd67b0d4c900bc08346dc1eb, type: 3}
-  - {fileID: -7179311333481470131, guid: 44e7d04e152d63244b87ab717d42a1b0, type: 3}
-  - {fileID: 3577636364133266066, guid: 590c187e588f91d4c895edec09594a03, type: 3}
-  - {fileID: -3998514127418184473, guid: d9f8e8371e5d7334886f76a56a5b65ee, type: 3}
-  - {fileID: -9140723752193763795, guid: 91acd1a08bd7cde47a7d60652da6ee41, type: 3}
+  - {fileID: 4189057010568706084, guid: d2c949999e933404ca9e282f57ee5973, type: 3}
+  - {fileID: -7179311333481470131, guid: 9a76e6e40707ebc43816a2bfed3c029f, type: 3}
+  - {fileID: 3577636364133266066, guid: 0980859c247542941a92d929c44f952f, type: 3}
+  - {fileID: -3998514127418184473, guid: ed828e99ba81a9747a54247840fea7cf, type: 3}
+  - {fileID: -9140723752193763795, guid: 5b8e18a643c6bd441a9fdab72b7bd367, type: 3}
   agentNum: 50
-  target:
+  targetpathForGroupA:
   - {fileID: 489867998}
+  targetpathForGroupB:
   - {fileID: 1037234835}
-  - {fileID: 653171154}
+  targetpathForGroupC:
   - {fileID: 1782559845}
+  inNavPos:
   - {fileID: 1094463371}
   - {fileID: 350353623}
+  - {fileID: 653171154}
 --- !u!195 &450550265
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -971,13 +970,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgentManager: {fileID: 450550264}
-  paths:
-  - {fileID: 489867998}
-  - {fileID: 1037234835}
-  - {fileID: 653171154}
-  - {fileID: 1782559845}
-  - {fileID: 1094463371}
-  - {fileID: 350353623}
+  pathsForA: []
+  pathsForB: []
+  pathsForC: []
 --- !u!1 &536331901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,13 +1356,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgentManager: {fileID: 450550264}
-  paths:
-  - {fileID: 489867998}
-  - {fileID: 1037234835}
-  - {fileID: 653171154}
-  - {fileID: 1782559845}
-  - {fileID: 1094463371}
-  - {fileID: 350353623}
+  pathsForA: []
+  pathsForB: []
+  pathsForC: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,13 +2104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgentManager: {fileID: 450550264}
-  paths:
-  - {fileID: 489867998}
-  - {fileID: 1037234835}
-  - {fileID: 653171154}
-  - {fileID: 1782559845}
-  - {fileID: 1094463371}
-  - {fileID: 350353623}
+  pathsForA: []
+  pathsForB: []
+  pathsForC: []
 --- !u!1 &1082773231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,13 +2315,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgentManager: {fileID: 450550264}
-  paths:
-  - {fileID: 489867998}
-  - {fileID: 1037234835}
-  - {fileID: 653171154}
-  - {fileID: 1782559845}
-  - {fileID: 1094463371}
-  - {fileID: 350353623}
+  pathsForA: []
+  pathsForB: []
+  pathsForC: []
 --- !u!1 &1103675716
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,13 +3471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgentManager: {fileID: 450550264}
-  paths:
-  - {fileID: 489867998}
-  - {fileID: 1037234835}
-  - {fileID: 653171154}
-  - {fileID: 1782559845}
-  - {fileID: 1094463371}
-  - {fileID: 350353623}
+  pathsForA: []
+  pathsForB: []
+  pathsForC: []
 --- !u!1 &1895381786
 GameObject:
   m_ObjectHideFlags: 0
