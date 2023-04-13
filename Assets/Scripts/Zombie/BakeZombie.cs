@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class BakeZombie : MonoBehaviour
 {
+    
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
     public ZombieFreeEventHandler OnZombieFree2;
 
@@ -131,6 +132,10 @@ public class BakeZombie : MonoBehaviour
                 break;
             case 2:
                 newRagdoll = Instantiate(rightZombiePrefab, transform.position, transform.rotation);
+                break;
+            case 3:
+                Debug.Log("Disappear");
+                Destroy(this.gameObject);
                 break;
             default:
                 newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);

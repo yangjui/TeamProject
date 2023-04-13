@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Unlit/TextureAnimPlayer"
 {
 	Properties
@@ -43,7 +45,7 @@ Shader "Unlit/TextureAnimPlayer"
 				float4 _PosTex_TexelSize;
 				float _Length, _DT;
 
-			
+
 
 				v2f vert(appdata v, uint vid : SV_VertexID)
 				{
