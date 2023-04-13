@@ -40,7 +40,7 @@ public class NavAgentManager : MonoBehaviour
 
         for (int i = 0; i < agentNum; ++i)
         {
-            if (RandomPoint(transform.position + new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f) * agentNum * 0.002f), 1f, out instantPositionInNavArea))
+            if (RandomPoint(inNavPos[Random.Range(0, inNavPos.Count)].position + new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f) * agentNum * 0.002f), 1f, out instantPositionInNavArea))
             {
                 instantPosition = instantPositionInNavArea;
             }
