@@ -15,5 +15,9 @@ public class AreaOfEffect : MonoBehaviour
         {
             _other.GetComponent<BakeZombie>().Onfire();
         }
+        if (_other.CompareTag("Target"))
+        {
+            _other.GetComponent<Target>().Onfire();
+        }
     }
 }

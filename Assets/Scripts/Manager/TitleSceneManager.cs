@@ -11,6 +11,8 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField] private Image fadePanel;
 
     private Color c;
+    private bool start = false;
+    
     private void Awake()
     {
         c = fadePanel.color;
@@ -21,6 +23,7 @@ public class TitleSceneManager : MonoBehaviour
 
     public void ChangePlayScene()
     {
+        if (start) return;
         StartCoroutine(FadeInOutStart());
     }
 
@@ -36,6 +39,7 @@ public class TitleSceneManager : MonoBehaviour
 
     public IEnumerator FadeInOutStart()
     {
+        start = true;
         for (float f = 0f; f < 1; f += 0.02f)
         {
             c.a = f;

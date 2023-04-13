@@ -18,6 +18,7 @@ public class WeaponGravityGrenade : WeaponBase
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
         GetComponent<GrenadeTrajectory>().SetThrowForce(throwForce);
         isAttack = false;
+        trajectoryCallback?.Invoke(!isAttack);
     }
 
     private void Awake()

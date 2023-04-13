@@ -25,10 +25,10 @@ public class ImpactObjectPool : MonoBehaviour
         {
             OnSpawnImpact(ImpactType.Platform, hit.point, Quaternion.LookRotation(hit.normal));
         }
-        //else if (hit.transform.CompareTag("Enemy"))
-        //{
-        //    OnSpawnImpact(ImpactType.Enemy, hit.point, Quaternion.LookRotation(hit.normal));
-        //}
+        else if (hit.transform.CompareTag("Target"))
+        {
+            OnSpawnImpact(ImpactType.Enemy, hit.point, Quaternion.LookRotation(hit.normal));
+        }
         else if (hit.transform.CompareTag("Zombie"))
         {
             OnSpawnImpact(ImpactType.Enemy, hit.point, Quaternion.LookRotation(hit.normal));

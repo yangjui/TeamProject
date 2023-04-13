@@ -12,6 +12,9 @@ public class WeaponSwitchingSystem : MonoBehaviour
     private WeaponBase currentWeapon;
     private WeaponBase previousWeapon;
     private WeaponAssaultRifle weaponAssaultRifle;
+    private int index = 0;
+    private float timer = 0f;
+    private float currentTime = 0f;
 
     private void Awake()
     {
@@ -40,7 +43,7 @@ public class WeaponSwitchingSystem : MonoBehaviour
 
     private void UpdateSwitch()
     {
-        if (!Input.anyKeyDown || weaponAssaultRifle.isAimMode) return;
+        if (/*!Input.anyKeyDown || */weaponAssaultRifle.isAimMode) return;
 
         int inputIndex = 0;
         // 입력된 값이 1~4 사이의 숫자라면 inputIndex에 입력값이 저장되고
@@ -48,6 +51,25 @@ public class WeaponSwitchingSystem : MonoBehaviour
         if (int.TryParse(Input.inputString, out inputIndex) && (inputIndex > 0 && inputIndex < 5))
         {
             SwitchingWeapon((WeaponType)(inputIndex - 1));
+            index = inputIndex - 1;
+        }
+
+        timer = Time.time;
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && timer - currentTime > 0.2f)
+        {
+            index++;
+            if (index > 3) index = 0;
+            SwitchingWeapon((WeaponType)(index));
+            currentTime = timer;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && timer - currentTime > 0.2f)
+        {
+            index--;
+            if (index < 0)
+                index = 3;
+            SwitchingWeapon((WeaponType)(index));
+            currentTime = timer;
         }
     }
 

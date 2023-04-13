@@ -35,11 +35,10 @@ public class BlackHole : MonoBehaviour
         {
             Debug.Log("2");
             // 0.2에서 0.8까지 서서히 커지는 부분
-            scale = Mathf.Lerp(scale, 0.4f, Time.deltaTime * 5.0f);
-            if (scale >= 0.79f)
+            scale = Mathf.Lerp(scale, 0.4f, Time.deltaTime * 10.0f);
+            if (scale >= 0.39f)
             {
                 isGrowingSlow = false;
-                isGrowingFast = true;
             }
         }
 
@@ -70,7 +69,7 @@ public class BlackHole : MonoBehaviour
         {
             scale = Mathf.SmoothStep(scale, 0.05f, Time.deltaTime * 20.0f);
             yield return null;
-            if (scale <= 0.06f) 
+            if (scale <= 0.1f) 
             {
                 for (int i = agents.Count - 1; i >= 0; --i)
                 {
