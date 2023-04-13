@@ -6881,7 +6881,8 @@ GameObject:
   - component: {fileID: 1218633710212985074}
   - component: {fileID: 1415637156523322838}
   - component: {fileID: 1416116258548642154}
-  - component: {fileID: -7580158953265074093}
+  - component: {fileID: 6093434834674010076}
+  - component: {fileID: 2875215349631893366}
   m_Layer: 3
   m_Name: DeadRagdoll
   m_TagString: Dead
@@ -7029,7 +7030,20 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e299c6dad34ee654589529fe0e209430, type: 2}
   - {fileID: 2100000, guid: b0fe930d5cf8a7c4cad119f917b58a85, type: 2}
   - {fileID: 2100000, guid: e14b03b7f1f66544fa361168f7b8be43, type: 2}
---- !u!114 &-7580158953265074093
+--- !u!114 &6093434834674010076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312427385808997928}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff391d3bdb5dd4445aee9fc313dd8ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdoll: {fileID: 1312427385808997928}
+--- !u!114 &2875215349631893366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
