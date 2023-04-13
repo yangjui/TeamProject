@@ -88,6 +88,7 @@ public class SoundManager : MonoBehaviour
                     // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
                     if (!sfxJ.isPlaying)
                     {
+                        Debug.Log("1 : " + sfx2DList.Count);
                         sfxJ.clip = sfx2D[i].clip;
                         sfxJ.Play();
                         return;
@@ -95,10 +96,18 @@ public class SoundManager : MonoBehaviour
                 }
                 Add2DList();
 
-                AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>(); // 캐싱
-                sfxI.clip = sfx2D[i].clip;
-                sfxI.Play();
-                return;
+                for (int j = 0; j < sfx2DList.Count; j++) // 음원을 재생할 List의 갯수만큼 반복문 동작
+                {
+                    AudioSource sfxJ = sfx2DList[j].GetComponent<AudioSource>(); // 캐싱
+                    // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
+                    if (!sfxJ.isPlaying)
+                    {
+                        Debug.Log("2 : " + sfx2DList.Count);
+                        sfxJ.clip = sfx2D[i].clip;
+                        sfxJ.Play();
+                        return;
+                    }
+                }
             }
         }
         Debug.Log(p_sfxName + " 이름의 효과음이 없습니다.");
@@ -137,11 +146,18 @@ public class SoundManager : MonoBehaviour
                 }
                 Add3DList();
 
-                AudioSource sfxI = sfx3DList[i].GetComponent<AudioSource>();
-                sfxI.clip = sfx3D[i].clip;
-                sfxI.transform.position = _position;
-                sfxI.Play();
-                return;
+                for (int j = 0; j < sfx3DList.Count; j++)
+                {
+                    AudioSource sfxJ = sfx3DList[j].GetComponent<AudioSource>();
+                    // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
+                    if (!sfxJ.isPlaying)
+                    {
+                        sfxJ.clip = sfx3D[i].clip;
+                        sfxJ.transform.position = _position;
+                        sfxJ.Play();
+                        return;
+                    }
+                }
             }
         }
         Debug.Log(p_sfxName + " 이름의 효과음이 없습니다.");

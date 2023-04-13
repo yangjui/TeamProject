@@ -8,7 +8,8 @@ public class BombEffect : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(Bomb), 0.1f);   
+        Invoke(nameof(Bomb), 0.1f);
+        Destroy(gameObject, 2f);
     }
 
     private void Bomb()
