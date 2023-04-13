@@ -933,9 +933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a8a324dc71f27349badf1045c7963ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadePanel: {fileID: 486105187}
   optionPanel: {fileID: 2874816258398940312}
   optionSetting: {fileID: 1212931774}
+  fadePanel: {fileID: 486105187}
 --- !u!4 &1027890286
 Transform:
   m_ObjectHideFlags: 0

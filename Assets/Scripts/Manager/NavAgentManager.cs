@@ -79,6 +79,13 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
+    public void ChangeWave()
+    {
+        // 여기에 2군단, 3군단 애들이 각각 왼쪽문 오른쪽문 쫓아가게 만들어주세요
+        // 1군단은 이미 1웨이브에서 다죽었음
+        Debug.Log("하하하");
+    }
+
     // path�� ���޽� ���� path�� �����̶�� ���� ---------------------------------------------------------------------
     public void SetNewTargetForGroupA(PathTriggerManager _trigger, string _name) 
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [SerializeField] private GameObject fireEffect = null;
-    private float currentHealth = 500f;
+    private float currentHealth = 140f;
     public void Onfire()
     {
         if (!fireEffect.activeSelf)

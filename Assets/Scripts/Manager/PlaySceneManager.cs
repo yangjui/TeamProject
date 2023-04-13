@@ -13,6 +13,9 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField] private OptionSetting optionSetting;
     [SerializeField] private UIManager uiManager;
     [System.NonSerialized] public Transform playerPosition;
+    [SerializeField] private WaveTrigger waveTrigger;
+
+
 
     private bool isStop = false;
 
@@ -23,6 +26,7 @@ public class PlaySceneManager : MonoBehaviour
         playerManager.Init();
         optionSetting.Init();
         navAgentManager.Init(PlayerPosition());
+        waveTrigger.WaveChangeDelegate(ChangeWave);
     }
 
     private void Update()
@@ -40,6 +44,11 @@ public class PlaySceneManager : MonoBehaviour
     private void ChangeAimMode(bool _ainMode)
     {
         playerHUD.ChangeAimMode(_ainMode);
+    }
+
+    private void ChangeWave()
+    {
+        navAgentManager.ChangeWave();
     }
 
     private void Option()
