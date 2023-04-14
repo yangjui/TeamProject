@@ -60,13 +60,16 @@ public class BakeZombie : MonoBehaviour
     private List<Material> newBodyAnimMate = new List<Material>();
     private List<Material> newClothesAnimMate = new List<Material>();
 
+    private float attackTime = 0;
+    private float returnFormAttackTime = 0;
+
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         currentHealth = zombieHealth;
 
         stateRenderer = StateColor.GetComponent<Renderer>();
-
+        target = null;
     }
 
     private void Start()
@@ -87,14 +90,13 @@ public class BakeZombie : MonoBehaviour
 
     private void Update()
     {
-        if (navAgent.enabled && (!isInBlackHole || !isIdle))
+        if (navAgent.enabled && (!isInBlackHole || !isIdle) && target != null)
             navAgent.SetDestination(target.position);
 
-        if (currentHealth <= 0) Dead();
+        DistanceCheck();
 
-        distance = Vector3.Distance(transform.position, playerPosition.position);
-
-        ZombieState();
+        if (!isMember)
+            ZombieState();
     }
 
     public void PlayerPosition(Transform _playerPosition)
@@ -104,16 +106,18 @@ public class BakeZombie : MonoBehaviour
 
     private void ZombieState()
     {
-        switch (Mathf.Round(distance * 10f) / 10f)
+        switch (Mathf.Round(DistanceCheck() * 10f) / 10f)
         {
             case >= 15.0f:
-                if (!isWalk) Walk();
+                if (isAttack) break;
+                else Walk();
                 break;
             case < 15.0f and >= 2.1f:
-                if (!isRun || !isIdle || !isAttack) Run();
+                if (isAttack) break; 
+                else Run();
                 break;
             case < 2.1f:
-                if (isRun) StartCoroutine(Idle());
+                    Attack();
                 break;
             default:
                 return;
@@ -174,7 +178,6 @@ public class BakeZombie : MonoBehaviour
     public void SetNewTarget(Transform _newTarget)
     {
         target = _newTarget;
-        if (navAgent.enabled) navAgent.SetDestination(target.position);
     }
 
     public void GetAngularSpeedByManager(float _speed)
@@ -182,76 +185,60 @@ public class BakeZombie : MonoBehaviour
         navAgent.angularSpeed = _speed;
     }
 
-    private IEnumerator Attack()
+    private void Attack()
     {
-        if (!isAttack)
+        returnFormAttackTime = 0f;
+        stateRenderer.material.color = Color.red;
+        AnimTextureType(2);
+        attackTime += Time.deltaTime;
+        if(attackTime >= 3f)
         {
             isAttack = true;
-            yield return new WaitForSeconds(1f);
-
             stateRenderer.material.color = Color.blue;
-
-            attack.SetActive(true);
-
             AnimTextureType(3);
-
-            BoolFlags(false, false, false, true);
-
             navAgent.speed = 0f;
-
-            yield return new WaitForSeconds(1.3f);
-
-            attack.SetActive(false);
-            isAttack = false;
-
-            StartCoroutine("Idle");
+            attack.SetActive(true);
+            returnFormAttackTime += Time.deltaTime;
+            if(returnFormAttackTime >= 1f)
+            {
+                AnimTextureType(2);
+                attack.SetActive(false);
+                isAttack = false;
+                attackTime = 0;
+            }
         }
     }
 
-    private IEnumerator Idle()
-    {
-        attack.SetActive(false);
-        stateRenderer.material.color = Color.red;
-
-        navAgent.speed = 0f;
-        // if (!navAgent.isStopped) navAgent.isStopped = true;
-        navAgent.velocity = Vector3.zero;
-
-        AnimTextureType(2);
-
-        BoolFlags(false, false, true, false);
-
-        StartCoroutine("Attack");
-
-        isIdle = false;
-
-        yield return null;
-    }
+    //private IEnumerator Idle()
+    //{
+    //    if(!isAttack)
+    //    {
+    //        attack.SetActive(false);
+    //        stateRenderer.material.color = Color.red;
+    //        navAgent.speed = 0f;
+    //        // if (!navAgent.isStopped) navAgent.isStopped = true;
+    //        navAgent.velocity = Vector3.zero;
+    //        AnimTextureType(2);
+    //        StartCoroutine("Attack");
+    //        yield return null;
+    //    }
+    //}
 
     private void Run()
     {
-        //StopCoroutine("Attack");
-        StopCoroutine("Idle");
-
         stateRenderer.material.color = Color.green;
-
+        StopCoroutine("Idle");
         navAgent.speed = runSpeed;
-
         AnimTextureType(1);
-
         if (OnZombieFree2 != null) OnZombieFree2(this);
-
         BoolFlags(false, true, false, false);
     }
 
     private void Walk()
     {
         stateRenderer.material.color = Color.yellow;
-
         navAgent.speed = walkSpeed;
         AnimTextureType(0);
-
-        BoolFlags(true, false, false, false);
     }
 
     private void BoolFlags(bool _isWalk, bool _isRun, bool _isIdle, bool _isAttack)
@@ -271,8 +258,8 @@ public class BakeZombie : MonoBehaviour
     public void TakeDamage(float _playerAttackDamage)
     {
         currentHealth -= _playerAttackDamage;
-
         if (OnZombieFree2 != null) OnZombieFree2(this);
+        if (currentHealth <= 0) Dead();
     }
 
     public void Onfire()
@@ -295,5 +282,10 @@ public class BakeZombie : MonoBehaviour
             Debug.Log(this.name + currentHealth);
             if (currentHealth <= 0) break;
         }
+    }
+
+    private float DistanceCheck()
+    {
+           return distance = Vector3.Distance(transform.position, playerPosition.position);
     }
 }

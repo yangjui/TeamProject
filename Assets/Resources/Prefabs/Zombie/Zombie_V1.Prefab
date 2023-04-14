@@ -225,7 +225,7 @@ MonoBehaviour:
   attack: {fileID: 3223865877871842678}
   zombieHealth: 100
   runSpeed: 8
-  walkSpeed: 3
+  walkSpeed: 5
   fireEffect: {fileID: 7301621399940611520}
   StateColor: {fileID: 2324799149280977067}
 --- !u!65 &2438517952011672646

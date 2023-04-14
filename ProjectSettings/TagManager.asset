@@ -17,6 +17,7 @@ TagManager:
   - Enemy
   - fire
   - Button
+  - Path
   layers:
   - Default
   - TransparentFX
