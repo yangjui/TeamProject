@@ -20,6 +20,7 @@ public class WeaponLaserRifle : WeaponBase
     [Header("# LaserSetting")]
     [SerializeField] private float chargingTime = 2f;
     [SerializeField] private float chargingSize = 0.1f;
+    [SerializeField] private float maxchargingTime = 5f;
 
     private Vector3 attackDirection;
     private Vector3 targetPoint;
@@ -134,6 +135,10 @@ public class WeaponLaserRifle : WeaponBase
             if (currentChargingTime < chargingTime)
                 chargeEffect.transform.localScale += Vector3.one * currentChargingTime * Time.deltaTime * chargingSize;
             yield return null;
+            if (currentChargingTime > maxchargingTime)
+            {
+                ShotLaser();
+            }
         }
     }
 
