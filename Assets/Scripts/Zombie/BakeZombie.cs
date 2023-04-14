@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class BakeZombie : MonoBehaviour
 {
+    
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
     public ZombieFreeEventHandler OnZombieFree2;
 
@@ -23,9 +24,9 @@ public class BakeZombie : MonoBehaviour
 
     [Header("# Status")]
     [SerializeField] private float zombieHealth = 100f;
-    [SerializeField] private float curSpeed = 5f;
-    [SerializeField] private float runSpeed = 10f;
-    [SerializeField] private float walkSpeed = 5f;
+    // [SerializeField] private float curSpeed = 5f;
+    [SerializeField] private float runSpeed = 6f;
+    [SerializeField] private float walkSpeed = 2f;
 
     [SerializeField] private GameObject fireEffect = null;
 
@@ -44,11 +45,17 @@ public class BakeZombie : MonoBehaviour
     private bool isIdle = false;
     private bool isRun = false;
     private bool isWalk = false;
-    private bool isCoroutineRunning = false;
+
+
+    [SerializeField] private GameObject StateColor;
+    private Renderer stateRenderer;
+
+
+    Vector3 playerLookAt;
 
     private Transform target;
     private Transform playerPosition;
-    private Rigidbody rb;
+    // private Rigidbody rb;
 
     private List<Material> newBodyAnimMate = new List<Material>();
     private List<Material> newClothesAnimMate = new List<Material>();
@@ -57,7 +64,9 @@ public class BakeZombie : MonoBehaviour
     {
         navAgent = GetComponent<NavMeshAgent>();
         currentHealth = zombieHealth;
-        rb = GetComponent<Rigidbody>();
+
+        stateRenderer = StateColor.GetComponent<Renderer>();
+
     }
 
     private void Start()
@@ -78,37 +87,14 @@ public class BakeZombie : MonoBehaviour
 
     private void Update()
     {
-        if (!isMember)
-        {
-            ChasePlayer(target.position);
-        }
-
-        else
-        {
+        if (navAgent.enabled && (!isInBlackHole || !isIdle))
             navAgent.SetDestination(target.position);
-        }
-        if (currentHealth <= 0)
-        {
-            Dead();
-        }
 
-        if (isInBlackHole)
-        {
-            //newBodyAnimMate[i].SetFloat("_Length", 2f);
-            //newClothesAnimMate[i].SetFloat("_Length", 2f);
-        }
-        
+        if (currentHealth <= 0) Dead();
+
         distance = Vector3.Distance(transform.position, playerPosition.position);
 
         ZombieState();
-    }
-
-    public void ChasePlayer(Vector3 _target) // vellocity
-    {
-        Vector3 direction = (_target - transform.position).normalized;
-        Vector3 playerLookAt = new Vector3(_target.x, transform.position.y, _target.z);
-        rb.MovePosition(transform.position + direction * curSpeed * Time.deltaTime);
-        transform.LookAt(playerLookAt);
     }
 
     public void PlayerPosition(Transform _playerPosition)
@@ -123,11 +109,11 @@ public class BakeZombie : MonoBehaviour
             case >= 15.0f:
                 if (!isWalk) Walk();
                 break;
-            case < 15.0f and >= 2.0f:
-                if (!isRun) Run();
+            case < 15.0f and >= 2.1f:
+                if (!isRun || !isIdle || !isAttack) Run();
                 break;
-            case < 2.0f:
-                if (!isAttack && !isIdle && !isCoroutineRunning) StartCoroutine(Idle());
+            case < 2.1f:
+                if (isRun) StartCoroutine(Idle());
                 break;
             default:
                 return;
@@ -147,11 +133,14 @@ public class BakeZombie : MonoBehaviour
             case 2:
                 newRagdoll = Instantiate(rightZombiePrefab, transform.position, transform.rotation);
                 break;
+            case 3:
+                Debug.Log("Disappear");
+                Destroy(this.gameObject);
+                break;
             default:
                 newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
                 break;
         }
-        // RagdollPosition(this.transform, newRagdoll.transform);
 
         Destroy(this.gameObject);
     }
@@ -161,49 +150,16 @@ public class BakeZombie : MonoBehaviour
         deadType = _type;
     }
 
-    // ����ó�� �� �ҰŸ� ���� �������� ���� �ʿ�� ������!
-
-    private void RagdollPosition(Transform _alive, Transform _dead)
-    {
-        for (int i = 0; i < _alive.transform.childCount; ++i)
-        {
-            if (_alive.transform.childCount != 0)
-                RagdollPosition(_alive.transform.GetChild(i), _dead.transform.GetChild(i));
-
-            _dead.transform.GetChild(i).localPosition = _alive.transform.GetChild(i).localPosition;
-            _dead.transform.GetChild(i).localRotation = _alive.transform.GetChild(i).localRotation;
-        }
-        _dead.transform.position = _alive.transform.position; // ���� ��ü�� ��ġ ���߱�
-    }
-
     public void NoMoreMember()
     {
         isMember = false;
-        navAgent.enabled = false;
     }
 
     public void BlackHole()
     {
         if (!isInBlackHole)
-        {
             isInBlackHole = true;
-        }
     }
-
-    //public void StopAnimation() // ���Ѵٸ� ���߱�
-    //{
-    //    anim.enabled = false; // ���� �������� �������� �ٽ� �ִϸ��̼� �۵��ϵ��� ��������
-    //}
-
-    public void DetectNewObstacle(Vector3 _position)
-    {
-        if (Vector3.Distance(_position, transform.position) < detectionRadius && Vector3.Distance(_position, transform.position) > blackHoleRadius)
-        {
-            navAgent.speed = 15f;
-            navAgent.angularSpeed = 500f;
-        }
-    }
-
 
     public void ResetAgent()
     {
@@ -218,16 +174,7 @@ public class BakeZombie : MonoBehaviour
     public void SetNewTarget(Transform _newTarget)
     {
         target = _newTarget;
-    }
-
-    public float AgentSpeed()
-    {
-        return navAgent.speed;
-    }
-
-    public void GetSpeedByManager(float _speed)
-    {
-        navAgent.speed = _speed;
+        if (navAgent.enabled) navAgent.SetDestination(target.position);
     }
 
     public void GetAngularSpeedByManager(float _speed)
@@ -239,57 +186,58 @@ public class BakeZombie : MonoBehaviour
     {
         if (!isAttack)
         {
-            isCoroutineRunning = true;
+            isAttack = true;
+            yield return new WaitForSeconds(1f);
 
-            Debug.Log(this.name + "Attack");
+            stateRenderer.material.color = Color.blue;
 
             attack.SetActive(true);
-            bodyMr.material = newBodyAnimMate[3];
-            clothesMr.material = newClothesAnimMate[3];
+
+            AnimTextureType(3);
 
             BoolFlags(false, false, false, true);
 
-            curSpeed = 0.2f;
+            navAgent.speed = 0f;
 
             yield return new WaitForSeconds(1.3f);
 
-            StartCoroutine(Idle());
+            attack.SetActive(false);
             isAttack = false;
-            isCoroutineRunning = false;
+
+            StartCoroutine("Idle");
         }
     }
 
     private IEnumerator Idle()
     {
-        if (isAttack || isCoroutineRunning)
-        {
-            yield break;
-        }
-
-        Debug.Log(this.name + "IDle");
-
         attack.SetActive(false);
+        stateRenderer.material.color = Color.red;
 
-        bodyMr.material = newBodyAnimMate[2];
-        clothesMr.material = newClothesAnimMate[2];
+        navAgent.speed = 0f;
+        // if (!navAgent.isStopped) navAgent.isStopped = true;
+        navAgent.velocity = Vector3.zero;
+
+        AnimTextureType(2);
 
         BoolFlags(false, false, true, false);
-        curSpeed = 0f;
 
-        yield return new WaitForSeconds(1f);
+        StartCoroutine("Attack");
 
-        StartCoroutine(Attack());
+        isIdle = false;
+
+        yield return null;
     }
 
     private void Run()
     {
-        Debug.Log(this.name + "run");
+        //StopCoroutine("Attack");
+        StopCoroutine("Idle");
 
-        curSpeed = runSpeed;
+        stateRenderer.material.color = Color.green;
 
-        bodyMr.material = newBodyAnimMate[1];
-        clothesMr.material = newClothesAnimMate[1];
+        navAgent.speed = runSpeed;
 
+        AnimTextureType(1);
 
         if (OnZombieFree2 != null) OnZombieFree2(this);
 
@@ -298,10 +246,10 @@ public class BakeZombie : MonoBehaviour
 
     private void Walk()
     {
-        Debug.Log(this.name + "walk");
-        curSpeed = walkSpeed;
-        bodyMr.material = newBodyAnimMate[0];
-        clothesMr.material = newClothesAnimMate[0];
+        stateRenderer.material.color = Color.yellow;
+
+        navAgent.speed = walkSpeed;
+        AnimTextureType(0);
 
         BoolFlags(true, false, false, false);
     }
@@ -314,32 +262,17 @@ public class BakeZombie : MonoBehaviour
         isAttack = _isAttack;
     }
 
-    // �ؽ�ó ���� �� �ϰ������� ���ϰ��� �ϴ� ����
-    //private IEnumerator ChangeAnimMaterial(Material _curMaterial, Material _newMaterial)
-    //{
-    //    float t = 0f;
-
-    //    while (t < 1f)
-    //    {
-    //        t += Time.deltaTime * 0.5f;
-    //        Material newMaterial = new Material(_curMaterial); // ���� ��Ƽ������ ���纻 ����
-    //        newMaterial.Lerp(_curMaterial, _newMaterial, t); // ���ο� ��Ƽ����� ����
-    //        bodyMr.material = newMaterial; // ���ο� ��Ƽ���� �Ҵ�
-    //        yield return null;
-    //    }
-
-    //    _curMaterial = _newMaterial;
-    //}
-
-    public void TakeDamage(float playerAttackDamage)
+    private void AnimTextureType(int _type)
     {
-        currentHealth -= playerAttackDamage;
+        bodyMr.material = newBodyAnimMate[_type];
+        clothesMr.material = newClothesAnimMate[_type];
+    }
 
-        if (OnZombieFree2 != null)
-        {
-            OnZombieFree2(this);
-            target = playerPosition;
-        }
+    public void TakeDamage(float _playerAttackDamage)
+    {
+        currentHealth -= _playerAttackDamage;
+
+        if (OnZombieFree2 != null) OnZombieFree2(this);
     }
 
     public void Onfire()
@@ -351,14 +284,15 @@ public class BakeZombie : MonoBehaviour
         }
     }
 
-    IEnumerator ApplyDamageOverTime(float damage)
+    IEnumerator ApplyDamageOverTime(float _damage)
     {
         while (currentHealth > 0)
         {
             yield return new WaitForSeconds(1f);
 
-            TakeDamage((float)damage);
+            TakeDamage(_damage);
 
+            Debug.Log(this.name + currentHealth);
             if (currentHealth <= 0) break;
         }
     }

@@ -22,15 +22,16 @@ public class PathTriggerManager : MonoBehaviour
         {
             if (_other.name.Substring(_other.name.Length - 1) == "A")
             {
+                Debug.Log("A");
                 navAgentManager.SetNewTargetForGroupA(this, _other.name);
             }
 
-            else if (_other.name.Substring(_other.name.Length - 1) == "B")
+            if (_other.name.Substring(_other.name.Length - 1) == "B")
             {
                 navAgentManager.SetNewTargetForGroupB(this, _other.name);
             }
 
-            else if (_other.name.Substring(_other.name.Length - 1) == "C")
+            if (_other.name.Substring(_other.name.Length - 1) == "C")
             {
                 navAgentManager.SetNewTargetForGroupC(this, _other.name);
             }
