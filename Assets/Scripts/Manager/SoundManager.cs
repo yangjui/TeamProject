@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Sound
@@ -14,41 +15,89 @@ public class Sound
 
 public class SoundManager : MonoBehaviour
 {
+    public enum Stage1_BGM { main, };
+    public enum Stage2_BGM { main, main2, };
+    public enum Stage3_BGM { main, };
+
     public static SoundManager instance;
 
     [SerializeField] Sound[] sfx2D = null;
     [SerializeField] Sound[] sfx3D = null;
-    [SerializeField] Sound[] bgm = null;
     [SerializeField] private AudioMixer mixer = null;
-  
 
-    [SerializeField] AudioSource bgmPlayer = null;
+    [SerializeField] private GameObject bgmPrefab = null;
     [SerializeField] GameObject sfx2DPrefab = null;
     [SerializeField] GameObject sfx3DPrefab = null;
     private List<GameObject> sfx2DList = new List<GameObject>();
     private List<GameObject> sfx3DList = new List<GameObject>();
+
+    private AudioClip[] bgm2;
+    private GameObject bgmPlayer;
+    private AudioSource bgmSource;
+    
     private float timer;
 
-    private void Start()
+    public SoundManager()
     {
         instance = this;
+    }
+    
+    private void Start()
+    {
         // 믹서 볼륨과 UI 설정 값 동기화
         mixer.SetFloat("SFX", Mathf.Log10(PlayerPrefs.GetFloat("sfx")) * 20); 
         mixer.SetFloat("BGM", Mathf.Log10(PlayerPrefs.GetFloat("bgm")) * 20);
     }
 
-    public void PlayBGM(string p_bgmName)
+    public void Init()
     {
-        for (int i = 0; i < bgm.Length; i++)
+        bgmPlayer = Instantiate(bgmPrefab, transform);
+        bgmSource = bgmPlayer.GetComponent<AudioSource>();
+
+        if (SceneManager.GetActiveScene().name == "TitleScene")
         {
-            if (p_bgmName == bgm[i].name)
-            {
-                if (!bgmPlayer.isPlaying)
-                {
-                    bgmPlayer.clip = bgm[i].clip;
-                    bgmPlayer.Play();
-                }
-            }
+            LoadTitleScene();
+        }
+        else if (SceneManager.GetActiveScene().name == "TrainingScene")
+        {
+            LoadTrainingScene();
+        }
+        else if (SceneManager.GetActiveScene().name == "PlayScene")
+        {
+            LoadPlayScene();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (AudioClip clip in bgm2)
+        {
+            Resources.UnloadAsset(clip);
+        }
+        bgm2 = null;
+    }
+
+    private void LoadTitleScene()
+    {
+        bgm2 = Resources.LoadAll<AudioClip>("Sounds\\Stage1\\BGM");
+    }
+
+    private void LoadTrainingScene()
+    {
+        bgm2 = Resources.LoadAll<AudioClip>("Sounds\\Stage2\\BGM");
+    }
+
+    private void LoadPlayScene()
+    {
+        bgm2 = Resources.LoadAll<AudioClip>("Sounds\\Stage3\\BGM");
+    }
+
+    public void PlayBGM(int _Enum)
+    {
+        if (!bgmSource.isPlaying)
+        {
+            bgmSource.clip = bgm2[_Enum];
+            bgmSource.Play();
         }
     }
 
@@ -59,15 +108,15 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator StopBGMCoroutine()
     {
-        float curVolume = bgmPlayer.volume;
+        float curVolume = bgmSource.volume;
         while (timer < 1.5f)
         {
             timer += Time.deltaTime;
-            bgmPlayer.volume = Mathf.Lerp(0.1f, 0f, timer);
+            bgmSource.volume = Mathf.Lerp(0.1f, 0f, timer);
             yield return null;
         }
-        bgmPlayer.Stop();
-        bgmPlayer.volume = curVolume;
+        bgmSource.Stop();
+        bgmSource.volume = curVolume;
         timer = 0f;
     }
 
@@ -88,7 +137,6 @@ public class SoundManager : MonoBehaviour
                     // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
                     if (!sfxJ.isPlaying)
                     {
-                        Debug.Log("1 : " + sfx2DList.Count);
                         sfxJ.clip = sfx2D[i].clip;
                         sfxJ.Play();
                         return;
@@ -102,7 +150,6 @@ public class SoundManager : MonoBehaviour
                     // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
                     if (!sfxJ.isPlaying)
                     {
-                        Debug.Log("2 : " + sfx2DList.Count);
                         sfxJ.clip = sfx2D[i].clip;
                         sfxJ.Play();
                         return;

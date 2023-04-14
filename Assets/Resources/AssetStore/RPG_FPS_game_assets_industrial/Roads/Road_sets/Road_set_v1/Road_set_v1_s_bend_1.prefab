@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000010721903726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Road_set_v1_s_bend_1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4000010721903726
 Transform:
@@ -45,12 +45,12 @@ GameObject:
   - component: {fileID: 33000010761016650}
   - component: {fileID: 23000013738059912}
   - component: {fileID: 64000012806440694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Road_set_v1_s_bend_1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4000013488127554
 Transform:
@@ -143,12 +143,12 @@ GameObject:
   - component: {fileID: 33000011138873016}
   - component: {fileID: 23000011520281732}
   - component: {fileID: 64000011125478918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Road_set_v1_s_bend_1f
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4000011276936740
 Transform:

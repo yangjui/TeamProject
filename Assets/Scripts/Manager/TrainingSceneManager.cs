@@ -13,20 +13,34 @@ public class TrainingSceneManager : MonoBehaviour
 
     private bool isStop = false;
 
+    private void Awake()
+    {
+        SoundManager.instance.Init();
+    }
+
     private void Start()
     {
         playerManager.OnChangeAimModeDelegate(ChangeAimMode);
         playerManager.Init();
         optionSetting.Init();
+
+        SoundManager.instance.PlayBGM((int)SoundManager.Stage2_BGM.main);
+
+        //int random = Random.Range(0, 2);
+        //switch (random)
+        //{
+        //    case 0:
+        //        SoundManager.instance.PlayBGM("BGM_Idle1");
+        //        break;
+        //    case 1:
+        //        SoundManager.instance.PlayBGM("BGM_Idle2");
+        //        break;
+        //}
     }
 
     private void Update()
     {
         Option();
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            SoundManager.instance.PlayExplosionSound();
-        }
     }
 
     private void ChangeAimMode(bool _ainMode)
@@ -70,6 +84,7 @@ public class TrainingSceneManager : MonoBehaviour
     public void OnTitleScene()
     {
         isStop = false;
+        SoundManager.instance.StopBGM();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 1f;

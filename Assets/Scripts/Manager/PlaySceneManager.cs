@@ -27,6 +27,7 @@ public class PlaySceneManager : MonoBehaviour
         optionSetting.Init();
         navAgentManager.Init(PlayerPosition());
         waveTrigger.WaveChangeDelegate(ChangeWave);
+        SoundManager.instance.PlayBGM((int)SoundManager.Stage3_BGM.main);
     }
 
     private void Update()
@@ -94,6 +95,7 @@ public class PlaySceneManager : MonoBehaviour
     public void OnTitleScene()
     {
         isStop = false;
+        SoundManager.instance.StopBGM();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 1f;

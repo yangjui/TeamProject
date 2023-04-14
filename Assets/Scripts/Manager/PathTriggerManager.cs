@@ -36,7 +36,6 @@ public class PathTriggerManager : MonoBehaviour
                 navAgentManager.SetNewTargetForGroupC(this, _other.name);
             }
         }
-
     }
 
     public Transform PathPosition()

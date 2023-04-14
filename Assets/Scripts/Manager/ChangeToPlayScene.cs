@@ -27,6 +27,7 @@ public class ChangeToPlayScene : MonoBehaviour
     private IEnumerator FadeInOutStart()
     {
         change = true;
+        SoundManager.instance.StopBGM();
         for (float f = 0f; f < 1; f += 0.02f)
         {
             c.a = f;
@@ -34,6 +35,6 @@ public class ChangeToPlayScene : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         change = false;
-        LoadingSceneController.LoadScene("PlayScene");
+        LoadingSceneController.LoadScene("Map_v2");
     }
 }

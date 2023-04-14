@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class BakeZombie : MonoBehaviour
 {
-    
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
     public ZombieFreeEventHandler OnZombieFree2;
 

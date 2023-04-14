@@ -14,11 +14,13 @@ public class UIManager : MonoBehaviour
 
     public void ChangePlayScene()
     {
+        SoundManager.instance.StopBGM();
         LoadingSceneController.LoadScene("PlayScene");
     }
 
     public void ChangeTitleScene()
     {
+        SoundManager.instance.StopBGM();
         LoadingSceneController.LoadScene("TitleScene");
     }
 }

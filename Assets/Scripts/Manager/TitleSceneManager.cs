@@ -19,6 +19,12 @@ public class TitleSceneManager : MonoBehaviour
         c = Color.black;
         c.a = 0f;
         fadePanel.color = c;
+        SoundManager.instance.Init();
+    }
+
+    private void Start()
+    {
+        SoundManager.instance.PlayBGM((int)SoundManager.Stage1_BGM.main);
     }
 
     public void ChangePlayScene()
@@ -40,6 +46,7 @@ public class TitleSceneManager : MonoBehaviour
     public IEnumerator FadeInOutStart()
     {
         start = true;
+        SoundManager.instance.StopBGM();
         for (float f = 0f; f < 1; f += 0.02f)
         {
             c.a = f;
