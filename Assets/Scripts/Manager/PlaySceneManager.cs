@@ -14,22 +14,25 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [System.NonSerialized] public Transform playerPosition;
     [SerializeField] private WaveTrigger waveTrigger;
+    [SerializeField] private OffScreenIndicator offScreenIndicator;
 
     private bool isStop = false;
 
     private void Awake()
     {
         SoundManager.instance.Init();
+        playerManager.OnChangeAimModeDelegate(ChangeAimMode);
+        playerManager.OnPlayerIsDeadDelegate(OnReStart);
+        playerManager.Init();
+        offScreenIndicator.Init();
+        optionSetting.Init();
+        navAgentManager.Init(PlayerPosition());
+        waveTrigger.WaveChangeDelegate(ChangeWave);
     }
 
     private void Start()
     {
-        playerManager.OnChangeAimModeDelegate(ChangeAimMode);
-        playerManager.OnPlayerIsDeadDelegate(OnReStart);
-        playerManager.Init();
-        optionSetting.Init();
-        navAgentManager.Init(PlayerPosition());
-        waveTrigger.WaveChangeDelegate(ChangeWave);
+        
         SoundManager.instance.PlayBGM((int)SoundManager.Stage3_BGM.main);
     }
 

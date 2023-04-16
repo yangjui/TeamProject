@@ -746,7 +746,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce122d14a893fcb4b9e58c9afd63e99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx2D: []
+  sfx2D:
+  - name: GameStart
+    clip: {fileID: 8300000, guid: 0bcc2d77224c2c8488c7ae1326c44c76, type: 3}
   sfx3D: []
   mixer: {fileID: 24100000, guid: 6e8738458a85c894da3cccc095d81d6d, type: 2}
   bgmPrefab: {fileID: 1406820057486977, guid: fd2c807bc10c1e249b586cb014aee9b3, type: 3}

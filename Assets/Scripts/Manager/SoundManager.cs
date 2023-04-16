@@ -34,7 +34,10 @@ public class SoundManager : MonoBehaviour
     private AudioClip[] bgm;
     private GameObject bgmPlayer;
     private AudioSource bgmSource;
-    
+
+    private AudioSource sfx2DI;
+    private AudioSource sfx3DI;
+
     private float timer;
 
     public SoundManager()
@@ -138,6 +141,7 @@ public class SoundManager : MonoBehaviour
                     if (!sfxJ.isPlaying)
                     {
                         sfxJ.clip = sfx2D[i].clip;
+                        sfxJ.volume = 0.15f;
                         sfxJ.Play();
                         return;
                     }
@@ -151,6 +155,7 @@ public class SoundManager : MonoBehaviour
                     if (!sfxJ.isPlaying)
                     {
                         sfxJ.clip = sfx2D[i].clip;
+                        sfxJ.volume = 0.15f;
                         sfxJ.Play();
                         return;
                     }
@@ -187,6 +192,7 @@ public class SoundManager : MonoBehaviour
                     {
                         sfxJ.clip = sfx3D[i].clip;
                         sfxJ.transform.position = _position;
+                        sfxJ.volume = 0.15f;
                         sfxJ.Play();
                         return;
                     }
@@ -201,6 +207,7 @@ public class SoundManager : MonoBehaviour
                     {
                         sfxJ.clip = sfx3D[i].clip;
                         sfxJ.transform.position = _position;
+                        sfxJ.volume = 0.15f;
                         sfxJ.Play();
                         return;
                     }
@@ -218,6 +225,32 @@ public class SoundManager : MonoBehaviour
             GameObject go = Instantiate(sfx3DPrefab, transform);
             sfx3DPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
             sfx3DList.Add(go);
+        }
+    }
+
+    public void SFX2DVolumeControl(string _sfxName, float _volume)
+    {
+        if (sfx2DList.Count == 0) return;
+        for (int i = 0; i < sfx2DList.Count; ++i)
+        {
+            sfx2DI = sfx2DList[i].GetComponent<AudioSource>();
+            if (sfx2DI.clip.name == _sfxName && sfx2DI.isPlaying)
+            {
+                sfx2DI.volume = _volume;
+            }
+        }
+    }
+
+    public void SFX3DVolumeControl(string _sfxName, float _volume)
+    {
+        if (sfx2DList.Count == 0) return;
+        for (int i = 0; i < sfx3DList.Count; ++i)
+        {
+            sfx3DI = sfx3DList[i].GetComponent<AudioSource>();
+            if (sfx3DI.clip.name == _sfxName && sfx3DI.isPlaying)
+            {
+                sfx3DI.volume = _volume;
+            }
         }
     }
 

@@ -119,8 +119,9 @@ public class WeaponLaserRifle : WeaponBase
 
     private IEnumerator ChargingLaserCoroutine()
     {
-        Debug.Log("StartCharging!");
         isCharging = true;
+        SoundManager.instance.Play2DSFX("LaserCharging");
+        SoundManager.instance.SFX2DVolumeControl("LaserCharging", 0.5f);
         changeChargeModeCallback?.Invoke(isCharging);
         currentChargingTime = 0f;
 
@@ -136,22 +137,31 @@ public class WeaponLaserRifle : WeaponBase
             if (currentChargingTime < chargingTime)
                 chargeEffect.transform.localScale += Vector3.one * currentChargingTime * Time.deltaTime * chargingSize;
             yield return null;
+            if (currentChargingTime > 4f)
+            {
+                ShotLaser();
+                break;
+            }
         }
     }
 
     private void ShotLaser()
     {
+        if (!isCharging) return;
+        
         TwoStepRaycast();
         isCharging = false;
         changeChargeModeCallback?.Invoke(isCharging);
         StopCoroutine("ChargingLaserCoroutine");
         if (currentChargingTime >= chargingTime)
         {
+            SoundManager.instance.Stop2DSFX("LaserCharging");
+            SoundManager.instance.Play2DSFX("LaserShoot");
+            SoundManager.instance.SFX2DVolumeControl("LaserShoot", 0.5f);
             CameraController.instance.StartShakeCamera();
             Destroy(chargeEffect);
             GameObject go = Instantiate(laserEffectPrefab, laserEffectPoint.position, Quaternion.identity);
             go.transform.LookAt(targetPoint);
-            Debug.Log(targetPoint);
             // 공격 시 currentAmmo 1 감소
             weaponSetting.currentAmmo--;
 
@@ -176,7 +186,6 @@ public class WeaponLaserRifle : WeaponBase
     {
         // 준비상태거나 장전중이면 무기 액션 할 수 없게
         if (isReload || isTakeOut) return;
-        Debug.Log(type);
         if (type == 0)
         {
             if (!weaponSetting.isAutomaticAttack)
@@ -239,9 +248,19 @@ public class WeaponLaserRifle : WeaponBase
         isTakeOut = false;
     }
 
-    public void IsReloadStart()
+    public void PlayReloadSound1()
     {
-        SoundManager.instance.Play2DSFX("assault_rifle_reload_out");
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_01");
+    }
+
+    public void PlayReloadSound2()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_02");
+    }
+
+    public void PlayReloadSound3()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_03");
     }
 
     public void IsReloadOver()

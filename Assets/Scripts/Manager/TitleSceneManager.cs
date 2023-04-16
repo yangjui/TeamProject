@@ -46,6 +46,8 @@ public class TitleSceneManager : MonoBehaviour
     public IEnumerator FadeInOutStart()
     {
         start = true;
+        SoundManager.instance.Play2DSFX("GameStart");
+        SoundManager.instance.SFX2DVolumeControl("GameStart", 1f);
         SoundManager.instance.StopBGM();
         for (float f = 0f; f < 1; f += 0.02f)
         {

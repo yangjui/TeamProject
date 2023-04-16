@@ -368,9 +368,19 @@ public class WeaponAssaultRifle : WeaponBase
         isTakeOut = false;
     }
 
-    public void IsReloadStart()
+    public void PlayReloadSound1()
     {
-        SoundManager.instance.Play2DSFX("assault_rifle_reload_out");
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_01");
+    }
+
+    public void PlayReloadSound2()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_02");
+    }
+
+    public void PlayReloadSound3()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_03");
     }
 
     public void IsReloadOver()

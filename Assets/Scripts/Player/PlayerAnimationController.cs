@@ -6,10 +6,24 @@ public class PlayerAnimationController : MonoBehaviour
 {
     private Animator anim;
     private bool onMetal = true;
+    private bool onGround = true;
+    private int platformMask;
+    private int metalMask;
 
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+    }
+
+    private void Start()
+    {
+        platformMask = 1 << LayerMask.NameToLayer("Platform");
+        metalMask = 1 << LayerMask.NameToLayer("Metal");
+    }
+
+    private void Update()
+    {
+        GroundCheck();        
     }
 
     public float MoveSpeed
@@ -22,6 +36,14 @@ public class PlayerAnimationController : MonoBehaviour
     {
         get => anim.GetBool("isAimMode");
         set => anim.SetBool("isAimMode", value);
+    }
+
+    private void GroundCheck()
+    {
+        bool ground = Physics.Raycast(transform.position, Vector3.down, 2.0f, platformMask);
+        onGround = ground;
+        bool metalGround = Physics.Raycast(transform.position, Vector3.down, 2.0f, metalMask);
+        onMetal = metalGround;
     }
 
     public void OnReload()
@@ -41,11 +63,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void PlayFootstepSound()
     {
-        int random = Random.Range(0, 5);
-        int ran = Random.Range(0, 3);
-        if (!onMetal)
+        int random1 = Random.Range(0, 5);
+        int random2 = Random.Range(0, 3);
+        if (onGround)
         {
-            switch (random)
+            switch (random1)
             {
                 case 0:
                     SoundManager.instance.Play2DSFX("Footstep_01");
@@ -66,16 +88,16 @@ public class PlayerAnimationController : MonoBehaviour
         }
         else if (onMetal)
         {
-            switch (ran)
+            switch (random2)
             {
                 case 0:
                     SoundManager.instance.Play2DSFX("Running_On_Metal_01");
                     break;
                 case 1:
-                    SoundManager.instance.Play2DSFX("Running_On_Metal_03");
+                    SoundManager.instance.Play2DSFX("Running_On_Metal_02");
                     break;
                 case 2:
-                    SoundManager.instance.Play2DSFX("Running_On_Metal_04");
+                    SoundManager.instance.Play2DSFX("Running_On_Metal_03");
                     break;
             }
         }

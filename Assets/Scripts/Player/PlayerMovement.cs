@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector3 moveForce;
     private float moveSpeed;
-    private float jumpForce = 5f;
+    private float jumpForce = 10f;
     private float gravity = -15f;
 
     private CharacterController cc;
