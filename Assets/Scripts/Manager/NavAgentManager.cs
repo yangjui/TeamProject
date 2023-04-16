@@ -24,10 +24,6 @@ public class NavAgentManager : MonoBehaviour
     private List<NavMeshAgent> navMeshAgentsGroupB = new List<NavMeshAgent>();
     private List<NavMeshAgent> navMeshAgentsGroupC = new List<NavMeshAgent>();
 
-    private bool isAlarmON = false;
-    private Vector3 instantPositionInNavArea;
-    private Vector3 instantPosition;
-
     [SerializeField]
     private List<Transform> inNavPos = null;
 
