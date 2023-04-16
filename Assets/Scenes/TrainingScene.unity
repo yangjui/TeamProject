@@ -5231,8 +5231,26 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
   - name: assault_rifle_reload_out
     clip: {fileID: 8300000, guid: 5b907074256e36d41b92e89fb0790633, type: 3}
-  - name: handgun_reload_out
-    clip: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
+  - name: Footstep_01
+    clip: {fileID: 8300000, guid: c5ec34f77f891f74b831d8a3de63867a, type: 3}
+  - name: Footstep_02
+    clip: {fileID: 8300000, guid: 0aaee9ca2328d7747a5b5e251f5fb4ea, type: 3}
+  - name: Footstep_03
+    clip: {fileID: 8300000, guid: 0deb56ed83aeb2d4ab1173ed4dc5c48f, type: 3}
+  - name: Footstep_04
+    clip: {fileID: 8300000, guid: 08434ebc1095e8c46ba8f9a469ca6803, type: 3}
+  - name: Footstep_05
+    clip: {fileID: 8300000, guid: 062c6cf03c477774aa4c9acc8815f47b, type: 3}
+  - name: Running_On_Metal_01
+    clip: {fileID: 8300000, guid: 8749dcf07cb4a874285fea25f878de5a, type: 3}
+  - name: Running_On_Metal_02
+    clip: {fileID: 8300000, guid: d77ed176bd2e084408e829e2b8bf4d1e, type: 3}
+  - name: Running_On_Metal_03
+    clip: {fileID: 8300000, guid: 6b4632602633b654196b618c9eaef212, type: 3}
+  - name: Running_On_Metal_04
+    clip: {fileID: 8300000, guid: 58dcf2cfe07da5143b0599c9423d887d, type: 3}
+  - name: Running_On_Metal_05
+    clip: {fileID: 8300000, guid: 2d2d5b91d06b97d498e30c251f04296d, type: 3}
   sfx3D:
   - name: casing-sound-1
     clip: {fileID: 8300000, guid: 39a52c8570aa5ee4b8c76570a3eda151, type: 3}

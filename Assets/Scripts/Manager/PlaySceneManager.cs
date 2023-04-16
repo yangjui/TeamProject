@@ -15,9 +15,12 @@ public class PlaySceneManager : MonoBehaviour
     [System.NonSerialized] public Transform playerPosition;
     [SerializeField] private WaveTrigger waveTrigger;
 
-
-
     private bool isStop = false;
+
+    private void Awake()
+    {
+        SoundManager.instance.Init();
+    }
 
     private void Start()
     {

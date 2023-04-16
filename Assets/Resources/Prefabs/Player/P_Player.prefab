@@ -1958,11 +1958,11 @@ MonoBehaviour:
     currentMagazine: 0
     maxMagazine: 1
     currentAmmo: 0
-    maxAmmo: 30
+    maxAmmo: 80
     attackRate: 0.1
     attackDistance: 100
     isAutomaticAttack: 1
-    damage: 30
+    damage: 50
   onAmmoEvent:
     m_PersistentCalls:
       m_Calls: []

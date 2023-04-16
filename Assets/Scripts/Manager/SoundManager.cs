@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
     private List<GameObject> sfx2DList = new List<GameObject>();
     private List<GameObject> sfx3DList = new List<GameObject>();
 
-    private AudioClip[] bgm2;
+    private AudioClip[] bgm;
     private GameObject bgmPlayer;
     private AudioSource bgmSource;
     
@@ -54,15 +54,15 @@ public class SoundManager : MonoBehaviour
         bgmPlayer = Instantiate(bgmPrefab, transform);
         bgmSource = bgmPlayer.GetComponent<AudioSource>();
 
-        if (SceneManager.GetActiveScene().name == "TitleScene")
+        if (SceneManager.GetActiveScene().buildIndex == 0) // 타이틀씬이라면
         {
             LoadTitleScene();
         }
-        else if (SceneManager.GetActiveScene().name == "TrainingScene")
+        else if (SceneManager.GetActiveScene().buildIndex == 1) // 트레이닝씬이라면
         {
             LoadTrainingScene();
         }
-        else if (SceneManager.GetActiveScene().name == "PlayScene")
+        else if (SceneManager.GetActiveScene().buildIndex == 2) // 플레이씬이라면
         {
             LoadPlayScene();
         }
@@ -70,33 +70,33 @@ public class SoundManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach (AudioClip clip in bgm2)
+        foreach (AudioClip clip in bgm)
         {
             Resources.UnloadAsset(clip);
         }
-        bgm2 = null;
+        bgm = null;
     }
 
     private void LoadTitleScene()
     {
-        bgm2 = Resources.LoadAll<AudioClip>("Sounds\\Stage1\\BGM");
+        bgm = Resources.LoadAll<AudioClip>("Sounds\\Stage1\\BGM");
     }
 
     private void LoadTrainingScene()
     {
-        bgm2 = Resources.LoadAll<AudioClip>("Sounds\\Stage2\\BGM");
+        bgm = Resources.LoadAll<AudioClip>("Sounds\\Stage2\\BGM");
     }
 
     private void LoadPlayScene()
     {
-        bgm2 = Resources.LoadAll<AudioClip>("Sounds\\Stage3\\BGM");
+        bgm = Resources.LoadAll<AudioClip>("Sounds\\Stage3\\BGM");
     }
 
     public void PlayBGM(int _Enum)
     {
         if (!bgmSource.isPlaying)
         {
-            bgmSource.clip = bgm2[_Enum];
+            bgmSource.clip = bgm[_Enum];
             bgmSource.Play();
         }
     }
