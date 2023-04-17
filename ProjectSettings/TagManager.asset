@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Zombie
+  - Target
+  - Metal
+  - ExplosiveBarrel
+  - Platform
+  - Dead
+  - Ragdoll
+  - Laser
+  - Floor
+  - ground
+  - Enemy
+  - fire
+  - Button
+  - Barricade
+  - Path
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Dead
+  - Water
+  - UI
+  - Player
+  - Platform
+  - Zombie
+  - Casing
+  - Granade
+  - Sound
+  - Ragdoll
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
