@@ -78,9 +78,10 @@ public class NavAgentManager : MonoBehaviour
                 navMeshAgentsGroupC.Add(newAgent);
             }
 
-            newAgent.GetComponent<BakeZombie>().PlayerPosition(playerTransform);
-            newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromList;
-            newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromGroupList;
+            BakeZombie bakeZombie = newAgent.GetComponent<BakeZombie>();
+            bakeZombie.PlayerPosition(playerTransform);
+            bakeZombie.OnZombieFree2 += RemoveZombieFromList;
+            bakeZombie.OnZombieFree2 += RemoveZombieFromGroupList;
 
             allNavMeshAgents.Add(newAgent);
         }
@@ -124,6 +125,10 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
+    public void ChangeWave()
+    {
+        Debug.Log("ChangeWave");
+    }
 
     private void SetPathForEachGroup()
     {
@@ -148,10 +153,11 @@ public class NavAgentManager : MonoBehaviour
     {
         for (int i = 0; i < allNavMeshAgents.Count; ++i)
         {
-            if (allNavMeshAgents[i].GetComponent<BakeZombie>() == zombie)
+            BakeZombie bakeZombie = allNavMeshAgents[i].GetComponent<BakeZombie>();
+            if (bakeZombie == zombie)
             {
-                allNavMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
-                allNavMeshAgents[i].GetComponent<BakeZombie>().NoMoreMember();
+                bakeZombie.SetNewTarget(playerTransform);
+                bakeZombie.NoMoreMember();
                 allNavMeshAgents.RemoveAt(i);
             }
         }

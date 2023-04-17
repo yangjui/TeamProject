@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class BakeZombie : MonoBehaviour
 {
+    
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
     public ZombieFreeEventHandler OnZombieFree2;
 
@@ -58,7 +59,8 @@ public class BakeZombie : MonoBehaviour
     private int idleNum;
 
     private float attackTime = 0;
-    private float returnFormAttackTime = 0;
+    private float returnFromAttackTime = 0;
+    private float returnIdleTime = 0;
 
     private void Awake()
     {
@@ -103,7 +105,12 @@ public class BakeZombie : MonoBehaviour
         DistanceCheck();
 
         if (!isMember)
+        {
             ZombieState();
+            if (isAttack)
+                Attack();
+        }
+
     }
 
     public void PlayerPosition(Transform _playerPosition)
@@ -116,16 +123,14 @@ public class BakeZombie : MonoBehaviour
         switch (Mathf.Round(DistanceCheck() * 10f) / 10f)
         {
             case >= 15.0f:
-                if (isAttack) break;
-                else Walk();
+                if (!isAttack) break; Walk();
                 break;
             case < 15.0f and >= 2.1f:
-                if (isAttack) break; 
-                else Run();
+                if (!isAttack) break; Run();
                 break;
             case < 2.1f:
-                    Attack();
-                break;
+                if (!isAttack) break; Idle();
+                break;;
             default:
                 return;
         }
@@ -192,53 +197,37 @@ public class BakeZombie : MonoBehaviour
         navAgent.angularSpeed = _speed;
     }
 
-    private void Attack()
+    private void Attack() //문제점 : 일단 한번 공격을 시작하면 공격모션이 끝날때 까지 공격상태에서 빠져나오면 안되기 떄문에 다른 스위치 조건들을 bool 값으로 막아야한다.
+                          //그래서 attack의 가장 마지막에 bool값을 바꾸어줘야하는데 시간으로 조건을 걸어두니       
     {
-        returnFormAttackTime = 0f;
+        //어택으로 들어왔어
         stateRenderer.material.color = Color.red;
+        //일단 아이들 상태로 애니메이션을 변경해
         AnimTextureType(idleNum);
-        attackTime += Time.deltaTime;
-        if(attackTime >= 3f)
-        {
-            isAttack = true;
-            stateRenderer.material.color = Color.blue;
-            AnimTextureType(attackNum);
-            navAgent.speed = 0f;
-            attack.SetActive(true);
-            returnFormAttackTime += Time.deltaTime;
-            if(returnFormAttackTime >= 1f)
-            {
-                AnimTextureType(idleNum);
-                attack.SetActive(false);
-                isAttack = false;
-                attackTime = 0;
-            }
-        }
+        stateRenderer.material.color = Color.blue;
+
+        //그리고 나서 어떤 조건 후에 공격애니메이션으로 바꿔 ex)2초후에 등등 
+        AnimTextureType(attackNum);
+        navAgent.speed = 0f;
+        attack.SetActive(true);
+        
+        // 공격애니메이션이 시작되고 나서 특정 조건후 아이들 애니메이션으로 변경 (사실상 공격모션만 끝나면된다.)
+        AnimTextureType(idleNum);
+        attack.SetActive(false);
     }
 
-    //private IEnumerator Idle()
-    //{
-    //    if (!isAttack)
-    //    {
-    //        attack.SetActive(false);
-    //        stateRenderer.material.color = Color.red;
-    //        navAgent.speed = 0f;
-    //        // if (!navAgent.isStopped) navAgent.isStopped = true;
-    //        navAgent.velocity = Vector3.zero;
-    //        AnimTextureType(Random.Range(3, 4));
-    //        StartCoroutine("Attack");
-    //        yield return null;
-    //    }
-    //}
+    private void Idle()
+    {
+        AnimTextureType(idleNum);
+        isAttack = true;
+    }
 
     private void Run()
     {
         stateRenderer.material.color = Color.green;
-        StopCoroutine("Idle");
         navAgent.speed = runSpeed;
         AnimTextureType(runNum);
         if (OnZombieFree2 != null) OnZombieFree2(this);
-        BoolFlags(false, true, false, false);
     }
 
     private void Walk()

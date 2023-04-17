@@ -16,39 +16,33 @@ public class Ragdoll : MonoBehaviour
 
     private void Update()
     {
-        //if (rb.velocity == Vector3.zero)
-        //{
-        //    Debug.Log("haha");
-        //    onGroundTime += Time.deltaTime;
-        //    if (onGroundTime >= 3f)
-        //        Kinematic();
-        //}
-        //else
-        //{ 
-        //    onGroundTime = 0f;
-        //    Debug.Log("HUHU");
-        //}
-    }
-
-    private void OnTriggerEnter(Collider _other)
-    {
-        if (_other.CompareTag("Platform"))
+        if (rb.velocity == Vector3.zero)
         {
-            ColliderPosition();
+            onGroundTime += Time.deltaTime;
+            if (onGroundTime >= 2f)
+                Kinematic();
+        }
+        else
+        {
+            onGroundTime -= Time.deltaTime;
         }
     }
 
-    private void ColliderPosition()
-    {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-    }
+    //private void OnTriggerEnter(Collider _other)
+    //{
+    //    if (_other.CompareTag("Platform"))
+    //    {
+    //        ColliderPosition();
+    //    }
+    //}
+
+    //private void ColliderPosition()
+    //{
+    //    rb.constraints = RigidbodyConstraints.FreezeAll;
+    //}
 
     public void Kinematic()
     {
-        //Debug.Log("Dead");
-        //foreach (Rigidbody child in GetComponentsInChildren<Rigidbody>())
-        //    child.isKinematic = true;
-
         transform.position = pelvis.transform.position;
         pelvis.GetComponent<DeadZombie>().SetPosition();
     }

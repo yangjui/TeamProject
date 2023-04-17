@@ -33,14 +33,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: c11154d34611c23459df1c27927aa2d5, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ShadowTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _DT: 0
-<<<<<<< HEAD
-    - _Length: 1.3040159
-=======
-    - _Length: 1.2576464
->>>>>>> origin/LHB
+    - _Length: 1.2925271
     - _Loop: 1
-    m_Colors: []
+    - _ShadowStrength: 1
+    m_Colors:
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
