@@ -11,7 +11,6 @@ public class NavAgentManager : MonoBehaviour
     [Range(50, 1000)]
     [SerializeField] private int agentNum;
 
-
     private GameObject[] allPaths;
     private List<Transform> targetpathForGroupA = new List<Transform>();
     private List<Transform> targetpathForGroupB = new List<Transform>();
@@ -24,19 +23,27 @@ public class NavAgentManager : MonoBehaviour
     private List<NavMeshAgent> navMeshAgentsGroupB = new List<NavMeshAgent>();
     private List<NavMeshAgent> navMeshAgentsGroupC = new List<NavMeshAgent>();
 
+    [SerializeField] private Barricade rightBarricade;
+    [SerializeField] private Barricade leftBarricade;
+
+    private bool isAlarmON = false;
+    private Vector3 instantPositionInNavArea;
+    private Vector3 instantPosition;
     [SerializeField]
     private List<Transform> inNavPos = null;
 
     private void Awake()
     {
         allPaths = GameObject.FindGameObjectsWithTag("Path");
-        for (int i = 0; i<allPaths.Length; ++i)
+        for (int i = 0; i < allPaths.Length; ++i)
         {
             if (allPaths[i].name.Substring(0, 1) == "A")
             {
                 targetpathForGroupA.Add(allPaths[i].transform);
             }
+
             else if(allPaths[i].name.Substring(0, 1) == "B")
+
             {
                 targetpathForGroupB.Add(allPaths[i].transform);
             }
@@ -62,12 +69,14 @@ public class NavAgentManager : MonoBehaviour
             transform
             );
 
-            if(i < agentNum/3)
+
+            if (i < agentNum / 3)
             {
                 newAgent.name = "Agent" + i + "GroupA";
                 navMeshAgentsGroupA.Add(newAgent);
             }
-            else if(i < agentNum * 2/3)
+
+            else if (i < agentNum * 2 / 3)
             {
                 newAgent.name = "Agent" + i + "GroupB";
                 navMeshAgentsGroupB.Add(newAgent);
@@ -79,10 +88,8 @@ public class NavAgentManager : MonoBehaviour
             }
 
             BakeZombie bakeZombie = newAgent.GetComponent<BakeZombie>();
-            bakeZombie.PlayerPosition(playerTransform);
             bakeZombie.OnZombieFree2 += RemoveZombieFromList;
             bakeZombie.OnZombieFree2 += RemoveZombieFromGroupList;
-
             allNavMeshAgents.Add(newAgent);
         }
 
@@ -125,9 +132,49 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
+    public void DestroyDoor()
+    {
+        if (rightBarricade.GetComponent<Barricade>().barricadeCollapse) { Debug.Log("RightB"); TargetPlayerB(); }
+        if (leftBarricade.GetComponent<Barricade>().barricadeCollapse) TargetPlayerC();
+    }
+
     public void ChangeWave()
     {
-        Debug.Log("ChangeWave");
+        for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
+        {
+            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(rightBarricade.transform);
+        }
+
+        for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
+        {
+            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(leftBarricade.transform);
+        }
+    }
+
+    // public void ChangeWaveGroupA()
+    // {
+    //     for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
+    //     {
+    //         if (i % 2 == 0)
+    //             navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(rightBarricade.transform);
+    //         else
+    //             navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(leftBarricade.transform);
+    //     }
+    // }
+
+    private void TargetPlayerB()
+    {
+        for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
+        {
+            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
+        }
+    }
+    private void TargetPlayerC()
+    {
+        for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
+        {
+            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
+        }
     }
 
     private void SetPathForEachGroup()
@@ -149,15 +196,15 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
-    private void RemoveZombieFromList(BakeZombie zombie) 
+    private void RemoveZombieFromList(BakeZombie zombie)
     {
         for (int i = 0; i < allNavMeshAgents.Count; ++i)
         {
-            BakeZombie bakeZombie = allNavMeshAgents[i].GetComponent<BakeZombie>();
-            if (bakeZombie == zombie)
+            if (allNavMeshAgents[i].GetComponent<BakeZombie>() == zombie)
             {
-                bakeZombie.SetNewTarget(playerTransform);
-                bakeZombie.NoMoreMember();
+                // allNavMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
+                // allNavMeshAgents[i].GetComponent<BakeZombie>().NoMoreMember();
+
                 allNavMeshAgents.RemoveAt(i);
             }
         }
@@ -174,9 +221,9 @@ public class NavAgentManager : MonoBehaviour
                 {
                     navMeshAgentsGroupA.RemoveAt(i);
                 }
-                
             }
         }
+
         else if(zombie.name.Substring(zombie.name.Length - 1) == "B")
         {
             for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
@@ -188,6 +235,7 @@ public class NavAgentManager : MonoBehaviour
                 }
             }
         }
+
         else if (zombie.name.Substring(zombie.name.Length - 1) == "C")
         {
             for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
@@ -201,6 +249,7 @@ public class NavAgentManager : MonoBehaviour
     }
 
     private bool RandomPoint(Vector3 center, float range, out Vector3 result) 
+
     {
         for (int i = 0; i < 10; i++)
         {
