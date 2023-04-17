@@ -59,7 +59,7 @@ public class BakeZombie : MonoBehaviour
     private int idleNum;
 
     private float attackTime = 0;
-    private float returnFormAttackTime = 0;
+    private float returnIdleTime = 0;
 
     private void Awake()
     {
@@ -104,7 +104,18 @@ public class BakeZombie : MonoBehaviour
         DistanceCheck();
 
         if (!isMember)
-            ZombieState();
+        {
+            if(!isAttack)
+            {
+                attackTime = 0f;
+                returnIdleTime = 0f;
+                ZombieState();
+            }
+            else if(isAttack)
+            { 
+                Attack();
+            }
+        }
     }
 
     public void PlayerPosition(Transform _playerPosition)
@@ -117,15 +128,13 @@ public class BakeZombie : MonoBehaviour
         switch (Mathf.Round(DistanceCheck() * 10f) / 10f)
         {
             case >= 15.0f:
-                if (isAttack) break;
-                else Walk();
+                    Walk();
                 break;
             case < 15.0f and >= 2.1f:
-                if (isAttack) break; 
-                else Run();
+                     Run();
                 break;
-            case < 2.1f:
-                    Attack();
+            case < 3.1f:
+                     Idle();
                 break;
             default:
                 return;
@@ -193,53 +202,43 @@ public class BakeZombie : MonoBehaviour
         navAgent.angularSpeed = _speed;
     }
 
-    private void Attack()
+    private void Attack()       
     {
-        returnFormAttackTime = 0f;
-        stateRenderer.material.color = Color.red;
-        AnimTextureType(idleNum);
         attackTime += Time.deltaTime;
-        if(attackTime >= 3f)
+        stateRenderer.material.color = Color.red;
+        if(Mathf.Round(DistanceCheck() * 10f) / 10f > 3.1f)
+        {
+            isAttack = false;
+        }
+
+        if (attackTime >= 2f)
         {
             isAttack = true;
+            returnIdleTime += Time.deltaTime;
             stateRenderer.material.color = Color.blue;
             AnimTextureType(attackNum);
-            navAgent.speed = 0f;
             attack.SetActive(true);
-            returnFormAttackTime += Time.deltaTime;
-            if(returnFormAttackTime >= 1f)
+            if(returnIdleTime >= 1.3f)
             {
-                AnimTextureType(idleNum);
                 attack.SetActive(false);
                 isAttack = false;
-                attackTime = 0;
             }
         }
     }
 
-    //private IEnumerator Idle()
-    //{
-    //    if (!isAttack)
-    //    {
-    //        attack.SetActive(false);
-    //        stateRenderer.material.color = Color.red;
-    //        navAgent.speed = 0f;
-    //        // if (!navAgent.isStopped) navAgent.isStopped = true;
-    //        navAgent.velocity = Vector3.zero;
-    //        AnimTextureType(Random.Range(3, 4));
-    //        StartCoroutine("Attack");
-    //        yield return null;
-    //    }
-    //}
+    private void Idle()
+    {
+        navAgent.speed = 0f;
+        AnimTextureType(idleNum);
+        isAttack = true;
+    }
 
     private void Run()
     {
         stateRenderer.material.color = Color.green;
-        StopCoroutine("Idle");
         navAgent.speed = runSpeed;
         AnimTextureType(runNum);
         if (OnZombieFree2 != null) OnZombieFree2(this);
-        BoolFlags(false, true, false, false);
     }
 
     private void Walk()
