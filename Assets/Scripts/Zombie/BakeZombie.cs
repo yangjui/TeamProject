@@ -139,22 +139,22 @@ public class BakeZombie : MonoBehaviour
     private void Dead()
     {
         this.gameObject.SetActive(false);
-        GameObject newRagdoll;
+        
 
         switch (deadType)
         {
             case 1:
-                newRagdoll = Instantiate(leftZombiePrefab, transform.position, transform.rotation);
+                Instantiate(leftZombiePrefab, transform.position, transform.rotation);
                 break;
             case 2:
-                newRagdoll = Instantiate(rightZombiePrefab, transform.position, transform.rotation);
+                Instantiate(rightZombiePrefab, transform.position, transform.rotation);
                 break;
             case 3:
                 Debug.Log("Disappear");
                 Destroy(this.gameObject);
                 break;
             default:
-                newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+                Instantiate(deadRagdoll, transform.position, transform.rotation);
                 break;
         }
 

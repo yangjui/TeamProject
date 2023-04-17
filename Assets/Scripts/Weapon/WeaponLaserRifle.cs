@@ -39,7 +39,7 @@ public class WeaponLaserRifle : WeaponBase
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
         mainCamera = Camera.main;
-        layerMask = ~(1 << LayerMask.NameToLayer("Player"));
+        layerMask = ~(LayerMask.GetMask("Player", "Path"));
     }
 
     private void OnEnable()
@@ -167,10 +167,14 @@ public class WeaponLaserRifle : WeaponBase
 
             // 탄 수 UI 업데이트
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-            
+
             currentChargingTime = 0f;
         }
-        else Destroy(chargeEffect);
+        else
+        {
+            SoundManager.instance.Stop2DSFX("LaserCharging");
+            Destroy(chargeEffect);
+        }
     }
 
     private void CancelLaser()
