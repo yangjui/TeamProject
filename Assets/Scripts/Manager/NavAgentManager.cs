@@ -11,14 +11,11 @@ public class NavAgentManager : MonoBehaviour
     [Range(50, 1000)]
     [SerializeField] private int agentNum;
 
-    [SerializeField]
-    private List<Transform> targetpathForGroupA = null;
 
-    [SerializeField]
-    private List<Transform> targetpathForGroupB = null;
-
-    [SerializeField]
-    private List<Transform> targetpathForGroupC = null;
+    private GameObject[] allPaths;
+    private List<Transform> targetpathForGroupA = new List<Transform>();
+    private List<Transform> targetpathForGroupB = new List<Transform>();
+    private List<Transform> targetpathForGroupC = new List<Transform>();
 
     private Transform playerTransform;
 
@@ -27,12 +24,28 @@ public class NavAgentManager : MonoBehaviour
     private List<NavMeshAgent> navMeshAgentsGroupB = new List<NavMeshAgent>();
     private List<NavMeshAgent> navMeshAgentsGroupC = new List<NavMeshAgent>();
 
-    private bool isAlarmON = false;
-    private Vector3 instantPositionInNavArea;
-    private Vector3 instantPosition;
     [SerializeField]
     private List<Transform> inNavPos = null;
 
+    private void Awake()
+    {
+        allPaths = GameObject.FindGameObjectsWithTag("Path");
+        for (int i = 0; i<allPaths.Length; ++i)
+        {
+            if (allPaths[i].name.Substring(0, 1) == "A")
+            {
+                targetpathForGroupA.Add(allPaths[i].transform);
+            }
+            else if(allPaths[i].name.Substring(0, 1) == "B")
+            {
+                targetpathForGroupB.Add(allPaths[i].transform);
+            }
+            else
+            {
+                targetpathForGroupC.Add(allPaths[i].transform);
+            }
+        }
+    }
 
     public void Init(Transform _position)
     {
@@ -40,15 +53,11 @@ public class NavAgentManager : MonoBehaviour
 
         for (int i = 0; i < agentNum; ++i)
         {
-            if (RandomPoint(inNavPos[Random.Range(0, inNavPos.Count)].position + new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f) * agentNum * 0.002f), 1f, out instantPositionInNavArea))
-            {
-                instantPosition = instantPositionInNavArea;
-            }
 
             int randomPrefab = Random.Range(0, agentPrefab.Count);
             NavMeshAgent newAgent = Instantiate(
             agentPrefab[randomPrefab],
-            instantPosition,
+            inNavPos[Random.Range(0, inNavPos.Count)].position,
             Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)),
             transform
             );
@@ -56,47 +65,39 @@ public class NavAgentManager : MonoBehaviour
             if(i < agentNum/3)
             {
                 newAgent.name = "Agent" + i + "GroupA";
-                newAgent.GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupA[0]);
                 navMeshAgentsGroupA.Add(newAgent);
             }
-            else if(agentNum/3 < i && i < ((agentNum/3) + (agentNum/3)))
+            else if(i < agentNum * 2/3)
             {
                 newAgent.name = "Agent" + i + "GroupB";
-                newAgent.GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupB[0]);
                 navMeshAgentsGroupB.Add(newAgent);
             }
             else
             {
                 newAgent.name = "Agent" + i + "GroupC";
-                newAgent.GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupC[0]);
                 navMeshAgentsGroupC.Add(newAgent);
             }
 
             newAgent.GetComponent<BakeZombie>().PlayerPosition(playerTransform);
             newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromList;
             newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromGroupList;
+
             allNavMeshAgents.Add(newAgent);
+        }
+
+        if (allNavMeshAgents.Count == agentNum)
+        {
+            SetPathForEachGroup();
         }
     }
 
-    public void ChangeWave()
-    {
-        // 여기에 2군단, 3군단 애들이 각각 왼쪽문 오른쪽문 쫓아가게 만들어주세요
-        // 1군단은 이미 1웨이브에서 다죽었음
-        Debug.Log("하하하");
-    }
-
-    // path�� ���޽� ���� path�� �����̶�� ���� ---------------------------------------------------------------------
     public void SetNewTargetForGroupA(PathTriggerManager _trigger, string _name) 
     {
         for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
         {
             if (navMeshAgentsGroupA[i].name == _name)
             {
-                if (Vector3.Distance(navMeshAgentsGroupA[i].GetComponent<BakeZombie>().CurDestination(), _trigger.PathPosition().position) < 1f)
-                {
-                    navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForA());
-                }
+                navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForA());
             }
         }
     }
@@ -107,10 +108,7 @@ public class NavAgentManager : MonoBehaviour
         {
             if (navMeshAgentsGroupB[i].name == _name)
             {
-                if (Vector3.Distance(navMeshAgentsGroupB[i].GetComponent<BakeZombie>().CurDestination(), _trigger.PathPosition().position) < 1f)
-                {
-                    navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForB());
-                }
+                navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForB());
             }
         }
     }
@@ -121,17 +119,15 @@ public class NavAgentManager : MonoBehaviour
         {
             if (navMeshAgentsGroupC[i].name == _name)
             {
-                if (Vector3.Distance(navMeshAgentsGroupC[i].GetComponent<BakeZombie>().CurDestination(), _trigger.PathPosition().position) < 1f)
-                {
-                    navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForC());
-                }
+                navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForC());
             }
         }
     }
-    // path�� ���޽� ���� path�� �����̶�� ���� ---------------------------------------------------------------------��
 
-    private void SetPathForEachGroup() // �˶��� �︮�� ������ �� �� �׷츶�� ù��° path�� trasform�˷��ֱ�;
+
+    private void SetPathForEachGroup()
     {
+
         for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
         {
             navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupA[0]);
@@ -148,7 +144,7 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
-    private void RemoveZombieFromList(BakeZombie zombie) // ��� ���� ����Ʈ���� �� �̻� �ɹ��� �ƴ� ���� ����
+    private void RemoveZombieFromList(BakeZombie zombie) 
     {
         for (int i = 0; i < allNavMeshAgents.Count; ++i)
         {
@@ -162,32 +158,43 @@ public class NavAgentManager : MonoBehaviour
     }
 
 
-    private void RemoveZombieFromGroupList(BakeZombie zombie) //// �׷캰 ���� ����Ʈ���� �� �̻� �ɹ��� �ƴ� ���� ����
+    private void RemoveZombieFromGroupList(BakeZombie zombie)
     {
         if(zombie.name.Substring(zombie.name.Length - 1) == "A")
         {
             for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
             {
-                navMeshAgentsGroupA.RemoveAt(i);
+                if(navMeshAgentsGroupA[i].GetComponent<BakeZombie>() == zombie)
+                {
+                    navMeshAgentsGroupA.RemoveAt(i);
+                }
+                
             }
         }
         else if(zombie.name.Substring(zombie.name.Length - 1) == "B")
         {
             for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
             {
-                navMeshAgentsGroupB.RemoveAt(i);
+
+                if (navMeshAgentsGroupB[i].GetComponent<BakeZombie>() == zombie)
+                {
+                    navMeshAgentsGroupB.RemoveAt(i);
+                }
             }
         }
         else if (zombie.name.Substring(zombie.name.Length - 1) == "C")
         {
             for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
             {
-                navMeshAgentsGroupC.RemoveAt(i);
+                if (navMeshAgentsGroupC[i].GetComponent<BakeZombie>() == zombie)
+                {
+                    navMeshAgentsGroupC.RemoveAt(i);
+                }
             }
         }
     }
 
-    private bool RandomPoint(Vector3 center, float range, out Vector3 result) //���� �׺�Ž� ���ο��� ��ȯ
+    private bool RandomPoint(Vector3 center, float range, out Vector3 result) 
     {
         for (int i = 0; i < 10; i++)
         {

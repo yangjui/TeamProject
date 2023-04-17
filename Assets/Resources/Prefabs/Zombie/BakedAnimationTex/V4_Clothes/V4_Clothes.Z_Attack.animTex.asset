@@ -36,7 +36,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _DT: 0
+<<<<<<< HEAD
     - _Length: 1.2153878
+=======
+    - _Length: 1.4264607
+>>>>>>> origin/LHB
     - _Loop: 1
     m_Colors: []
   m_BuildTextureStacks: []

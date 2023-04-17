@@ -1,6 +1,93 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!1 &5360506655126291606
+=======
+--- !u!1 &1905463917897695343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7604144102068826043}
+  - component: {fileID: 3340653712956346822}
+  - component: {fileID: 7298196137967735261}
+  m_Layer: 8
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7604144102068826043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905463917897695343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.818, z: 0.133}
+  m_LocalScale: {x: 0.60225, y: 0.79960734, z: 0.60225}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8341843336803858895}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3340653712956346822
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905463917897695343}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7298196137967735261
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905463917897695343}
+  m_Enabled: 1
+  m_CastShadows: 3
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3907387395388295941
+>>>>>>> origin/LHB
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,8 +290,13 @@ Transform:
   - {fileID: 3360730119658943077}
   - {fileID: 4114664986690757851}
   - {fileID: 1347665105661029523}
+<<<<<<< HEAD
   - {fileID: 5853040820898336890}
   - {fileID: 5662374343173066147}
+=======
+  - {fileID: 5886047112695671054}
+  - {fileID: 7604144102068826043}
+>>>>>>> origin/LHB
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,21 +366,35 @@ MonoBehaviour:
   bodyMr: {fileID: 7282967800132153216}
   clothesMr: {fileID: 7745022727399617573}
   bodyAnimMate:
-  - {fileID: 2100000, guid: f646f122fd14e6b4baff3d69cc8990ae, type: 2}
-  - {fileID: 2100000, guid: 4c74d2ca11c5f2141828e8d52f7e85f4, type: 2}
-  - {fileID: 2100000, guid: 93e8ff9a32fa8cb43aed6a74329835d0, type: 2}
   - {fileID: 2100000, guid: 31652d5e6076cc34e94a172c37fc9c35, type: 2}
+  - {fileID: 2100000, guid: b4f6a877f214b434b89e470794d4054b, type: 2}
+  - {fileID: 2100000, guid: 51887324f424ee144b0a331f8ed04a83, type: 2}
+  - {fileID: 2100000, guid: 93e8ff9a32fa8cb43aed6a74329835d0, type: 2}
+  - {fileID: 2100000, guid: ac705a8c3de5d9345a88eb540e38f741, type: 2}
+  - {fileID: 2100000, guid: 4c74d2ca11c5f2141828e8d52f7e85f4, type: 2}
+  - {fileID: 2100000, guid: e9b9223331c9e654d86c4b46d067deef, type: 2}
+  - {fileID: 2100000, guid: d643dd702aecdeb4db9b3af2fbfb0639, type: 2}
+  - {fileID: 2100000, guid: f646f122fd14e6b4baff3d69cc8990ae, type: 2}
   clothesAnimMate:
-  - {fileID: 2100000, guid: 1537681b631f3714e92209f13395a3c5, type: 2}
-  - {fileID: 2100000, guid: 05a971eb46fb21f4499b8f8c95b1dd95, type: 2}
-  - {fileID: 2100000, guid: ab0b518395843354ba723c6c68c4a754, type: 2}
   - {fileID: 2100000, guid: 28afa90b2e452ee4888cb2149376d1ae, type: 2}
+  - {fileID: 2100000, guid: c73ed65b281c6454da0027914b68b7bb, type: 2}
+  - {fileID: 2100000, guid: 11d225c20756f88478b4ba9a2fb1da48, type: 2}
+  - {fileID: 2100000, guid: ab0b518395843354ba723c6c68c4a754, type: 2}
+  - {fileID: 2100000, guid: e585e84f7c6dbbe41a514c7b11459df6, type: 2}
+  - {fileID: 2100000, guid: 05a971eb46fb21f4499b8f8c95b1dd95, type: 2}
+  - {fileID: 2100000, guid: e9890918417e2a34396a664c0138271c, type: 2}
+  - {fileID: 2100000, guid: 832bd15668c4e354986d86fe4916f1ad, type: 2}
+  - {fileID: 2100000, guid: 1537681b631f3714e92209f13395a3c5, type: 2}
   deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
   leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 5360506655126291606}
   zombieHealth: 100
+<<<<<<< HEAD
   runSpeed: 9
+=======
+  runSpeed: 8
+>>>>>>> origin/LHB
   walkSpeed: 5
   fireEffect: {fileID: 1349885181768896931}
   StateColor: {fileID: 5976230334666271872}

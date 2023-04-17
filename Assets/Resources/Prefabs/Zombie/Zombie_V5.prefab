@@ -1,6 +1,9 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!1 &2441343076941594330
+=======
+--- !u!1 &3769001079592717233
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +11,237 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 7695322552063577054}
+  - component: {fileID: 3364850906650943990}
+  - component: {fileID: 6185599211640556394}
+  m_Layer: 8
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7695322552063577054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769001079592717233}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.818, z: 0.133}
+  m_LocalScale: {x: 0.60225, y: 0.79960734, z: 0.60225}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1987793038858882470}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3364850906650943990
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769001079592717233}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6185599211640556394
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769001079592717233}
+  m_Enabled: 1
+  m_CastShadows: 3
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3994163288868938441
+>>>>>>> origin/LHB
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+<<<<<<< HEAD
   - component: {fileID: 1468915610612395388}
   - component: {fileID: 4430687461361082142}
   - component: {fileID: 8376763845933319596}
   - component: {fileID: 2747422486591940932}
   - component: {fileID: 359324389958433590}
+=======
+  - component: {fileID: 1987793038858882470}
+  - component: {fileID: 1136970087103107918}
+  - component: {fileID: -9140723752193763795}
+  - component: {fileID: 1048346894163135291}
+  - component: {fileID: -6552263539893602426}
+  m_Layer: 8
+  m_Name: Zombie_V5
+  m_TagString: Zombie
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1987793038858882470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994163288868938441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2273763976604684855}
+  - {fileID: 6361206952756377506}
+  - {fileID: 8406619105387267313}
+  - {fileID: 4891698520390270630}
+  - {fileID: 5679764132524022418}
+  - {fileID: 7695322552063577054}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1136970087103107918
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994163288868938441}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.92, y: 1.8, z: 0.52}
+  m_Center: {x: 0, y: 0.85, z: 0.04}
+--- !u!195 &-9140723752193763795
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994163288868938441}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!54 &1048346894163135291
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994163288868938441}
+  serializedVersion: 2
+  m_Mass: 50
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!114 &-6552263539893602426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994163288868938441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e8a5c787724bd478e552c4a5380eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyMr: {fileID: 4581566493434987248}
+  clothesMr: {fileID: 696840839065202811}
+  bodyAnimMate:
+  - {fileID: 2100000, guid: 6ab7286d13f68bb47a7f7e51c657ac61, type: 2}
+  - {fileID: 2100000, guid: 19d8b588e10b5dd4ea89872e66893487, type: 2}
+  - {fileID: 2100000, guid: 8c162b6ccad524243ad1288bbf1c2d4b, type: 2}
+  - {fileID: 2100000, guid: 4643c0bff34b5d545b8a4003ee6d00af, type: 2}
+  - {fileID: 2100000, guid: 4d706fa737abeb743a46cf829c4e7de8, type: 2}
+  - {fileID: 2100000, guid: 3731f986bbe79f0419b28ff527904002, type: 2}
+  - {fileID: 2100000, guid: a6d6cdbdf54ad5c4c9165a78f63b6666, type: 2}
+  - {fileID: 2100000, guid: 33b77605e73c61646b619c77c9855e64, type: 2}
+  - {fileID: 2100000, guid: a7ac1494f0a37c349818a62054698550, type: 2}
+  clothesAnimMate:
+  - {fileID: 2100000, guid: d5e100c50e057c347874f716b3a627ad, type: 2}
+  - {fileID: 2100000, guid: c37601e78482c1b4ea89c1d1cb96d036, type: 2}
+  - {fileID: 2100000, guid: fc532cb2d991c56478df64f96b06e2f4, type: 2}
+  - {fileID: 2100000, guid: a3f9ac599bcaec244b11f2e58ec4b153, type: 2}
+  - {fileID: 2100000, guid: b8d9c4d291c7afb4fa20b733eb2ccd6e, type: 2}
+  - {fileID: 2100000, guid: 51dfd7d7a36682d4b90cc57830635067, type: 2}
+  - {fileID: 2100000, guid: cc6a8728bed32124aa9b8b33ee3cb1aa, type: 2}
+  - {fileID: 2100000, guid: fee8141b8c917834a983b2211c12155d, type: 2}
+  - {fileID: 2100000, guid: 9654a9933bb1e0949b4213641362c660, type: 2}
+  deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
+  leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
+  rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
+  attack: {fileID: 9087582920721612305}
+  zombieHealth: 100
+  runSpeed: 8
+  walkSpeed: 5
+  fireEffect: {fileID: 4893955724374246294}
+  StateColor: {fileID: 6943274744756046132}
+--- !u!1 &6943274744756046132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5679764132524022418}
+  - component: {fileID: 8954680161103488316}
+  - component: {fileID: 5034034980911342535}
+  - component: {fileID: 2260609992008399965}
+>>>>>>> origin/LHB
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged

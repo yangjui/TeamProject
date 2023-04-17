@@ -203,8 +203,13 @@ Transform:
   - {fileID: 3610195077220324101}
   - {fileID: 6708027408061639278}
   - {fileID: 2190885909484044945}
+<<<<<<< HEAD
   - {fileID: 8173795944238525231}
   - {fileID: 5847000134020380210}
+=======
+  - {fileID: 5748908582433603215}
+  - {fileID: 434756630393633799}
+>>>>>>> origin/LHB
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,24 +279,124 @@ MonoBehaviour:
   bodyMr: {fileID: 5459820721938442407}
   clothesMr: {fileID: 5741903886407351117}
   bodyAnimMate:
-  - {fileID: 2100000, guid: f2bd68a126e68df4691ffec3a221b86c, type: 2}
-  - {fileID: 2100000, guid: c395af0a6d1c4ff4daa53d89aaff99ec, type: 2}
-  - {fileID: 2100000, guid: d2c621cc84a0e3b45a2f9dbf7bffbaea, type: 2}
   - {fileID: 2100000, guid: a0f07f9c5e607a440b06e028b3a0a967, type: 2}
+  - {fileID: 2100000, guid: 55608fc60e38a4d4fb056ba799e6ebf5, type: 2}
+  - {fileID: 2100000, guid: 694c9a7a5521a33419f1f21a527be9d8, type: 2}
+  - {fileID: 2100000, guid: d2c621cc84a0e3b45a2f9dbf7bffbaea, type: 2}
+  - {fileID: 2100000, guid: cfe0c30991085964b945a5437883cfce, type: 2}
+  - {fileID: 2100000, guid: c395af0a6d1c4ff4daa53d89aaff99ec, type: 2}
+  - {fileID: 2100000, guid: 897f83ed8b3b3794dade7f386e1a6588, type: 2}
+  - {fileID: 2100000, guid: 0ebd65b7ce2edf1449cbcb845d9de229, type: 2}
+  - {fileID: 2100000, guid: f2bd68a126e68df4691ffec3a221b86c, type: 2}
   clothesAnimMate:
-  - {fileID: 2100000, guid: 54bdf6b84ce4339479749c767515f678, type: 2}
-  - {fileID: 2100000, guid: bb3bf6d6b2e0e724fbbc7b128cbd4edc, type: 2}
-  - {fileID: 2100000, guid: 77f362a8022bc6e4da18eec64d3045f0, type: 2}
   - {fileID: 2100000, guid: 921121442cb004143a1e68c0a55654b8, type: 2}
+  - {fileID: 2100000, guid: 7572620e4355a504f9525d55954301ec, type: 2}
+  - {fileID: 2100000, guid: 836154a10b1776449a6ca2702251c1af, type: 2}
+  - {fileID: 2100000, guid: 77f362a8022bc6e4da18eec64d3045f0, type: 2}
+  - {fileID: 2100000, guid: 50cb0821d5c35ad4dac32cfd6bddedb8, type: 2}
+  - {fileID: 2100000, guid: bb3bf6d6b2e0e724fbbc7b128cbd4edc, type: 2}
+  - {fileID: 2100000, guid: 2945ca2641293914b9a216d521cfa776, type: 2}
+  - {fileID: 2100000, guid: 85db4328c9681f64fa11881d3da44dd2, type: 2}
+  - {fileID: 2100000, guid: 54bdf6b84ce4339479749c767515f678, type: 2}
   deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
   leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 5794197864485153275}
   zombieHealth: 100
+<<<<<<< HEAD
   runSpeed: 9
   walkSpeed: 5
   fireEffect: {fileID: 2193121138267127713}
   StateColor: {fileID: 4982410526633111893}
+=======
+  runSpeed: 8
+  walkSpeed: 5
+  fireEffect: {fileID: 2193121138267127713}
+  StateColor: {fileID: 2056085157083036007}
+--- !u!1 &8759146957772024949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434756630393633799}
+  - component: {fileID: 1889088183193515718}
+  - component: {fileID: 6804916806560501638}
+  m_Layer: 8
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434756630393633799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759146957772024949}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.818, z: 0.133}
+  m_LocalScale: {x: 0.60225, y: 0.79960734, z: 0.60225}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7099698577885165802}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1889088183193515718
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759146957772024949}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6804916806560501638
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759146957772024949}
+  m_Enabled: 1
+  m_CastShadows: 3
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+>>>>>>> origin/LHB
 --- !u!1001 &2191392206802707075
 PrefabInstance:
   m_ObjectHideFlags: 0
