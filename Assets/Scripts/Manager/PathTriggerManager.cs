@@ -16,31 +16,26 @@ public class PathTriggerManager : MonoBehaviour
     [SerializeField]
     private List<Transform> pathsForC = null;
 
-    private Transform t;
-
     private void OnTriggerEnter(Collider _other)
     {
         if (_other.CompareTag("Zombie"))
         {
-            if (_other.name.Substring(_other.name.Length - 1) == "A" && this.name.Substring(0, 1) == "A")
+            if (_other.name.Substring(_other.name.Length - 1) == "A")
             {
-                //Debug.Log("path A:  " + _other.name);
+                Debug.Log("A");
                 navAgentManager.SetNewTargetForGroupA(this, _other.name);
             }
 
-            if (_other.name.Substring(_other.name.Length - 1) == "B" && this.name.Substring(0, 1) == "B")
+            if (_other.name.Substring(_other.name.Length - 1) == "B")
             {
-                //Debug.Log("path B:  " + _other.name);
                 navAgentManager.SetNewTargetForGroupB(this, _other.name);
             }
 
-            if (_other.name.Substring(_other.name.Length - 1) == "C" && this.name.Substring(0, 1) == "C")
+            if (_other.name.Substring(_other.name.Length - 1) == "C")
             {
-                //Debug.Log("path C:  " + _other.name);
                 navAgentManager.SetNewTargetForGroupC(this, _other.name);
             }
         }
-
     }
 
     public Transform PathPosition()
@@ -51,45 +46,42 @@ public class PathTriggerManager : MonoBehaviour
 
     public Transform NextPosForA()
     {
-
         for (int i = 0; i < pathsForA.Count; ++i)
         {
-
             if (pathsForA[i].name == this.name)
             {
-
                 if (i == pathsForA.Count - 1)
                 {
-                    t = pathsForA[i];
+                    return pathsForA[0];
                 }
+
                 else
                 {
-                    t = pathsForA[i + 1];
+                    return pathsForA[i + 1];
                 }
             }
         }
-        return t;
+        return this.transform;
     }
 
     public Transform NextPosForB()
     {
         for (int i = 0; i < pathsForB.Count; ++i)
         {
-
             if (pathsForB[i].name == this.name)
             {
                 if (i == pathsForB.Count - 1)
                 {
-                    t = pathsForB[i];
+                    return pathsForB[0];
                 }
 
                 else
                 {
-                    t = pathsForB[i + 1];
+                    return pathsForB[i + 1];
                 }
             }
         }
-        return t;
+        return this.transform;
     }
 
     public Transform NextPosForC()
@@ -100,16 +92,16 @@ public class PathTriggerManager : MonoBehaviour
             {
                 if (i == pathsForC.Count - 1)
                 {
-                    t = pathsForC[i];
+                    return pathsForC[0];
                 }
 
                 else
                 {
-                    t = pathsForC[i + 1];
+                    return pathsForC[i + 1];
                 }
             }
         }
-        return t;
+        return this.transform;
     }
 
     public string PathName()

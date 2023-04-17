@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170667486326532960}
   - component: {fileID: 170667486326532973}
-  - component: {fileID: 2972260133232391999}
+  - component: {fileID: -4121505243513690244}
   m_Layer: 0
   m_Name: P_AOE_Ray
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2972260133232391999
+--- !u!114 &-4121505243513690244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

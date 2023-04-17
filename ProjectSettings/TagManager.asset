@@ -17,8 +17,6 @@ TagManager:
   - Enemy
   - fire
   - Button
-  - Barricade
-  - Path
   layers:
   - Default
   - TransparentFX
@@ -33,7 +31,7 @@ TagManager:
   - Granade
   - Sound
   - Ragdoll
-  - 
+  - Metal
   - 
   - 
   - 

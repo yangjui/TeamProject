@@ -232,12 +232,12 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 400
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -288,8 +288,8 @@ MonoBehaviour:
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 5794197864485153275}
   zombieHealth: 100
-  runSpeed: 15
-  walkSpeed: 10
+  runSpeed: 9
+  walkSpeed: 5
   fireEffect: {fileID: 2193121138267127713}
   StateColor: {fileID: 4982410526633111893}
 --- !u!1001 &2191392206802707075
