@@ -8,7 +8,7 @@ public class Ragdoll : MonoBehaviour
     [SerializeField] private GameObject pelvis = null;
     private Rigidbody rb;
     private float onGroundTime = 0;
-
+    private bool isGround = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,7 +16,7 @@ public class Ragdoll : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity == Vector3.zero)
+        if (rb.velocity == Vector3.zero && isGround)
         {
             onGroundTime += Time.deltaTime;
             if (onGroundTime >= 2f)
@@ -28,13 +28,21 @@ public class Ragdoll : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collider _other)
-    //{
-    //    if (_other.CompareTag("Platform"))
-    //    {
-    //        ColliderPosition();
-    //    }
-    //}
+    private void OnTriggerEnter(Collider _other)
+    {
+        if (_other.CompareTag("Platform"))
+        {
+            isGround = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider _other)
+    {
+        if (_other.CompareTag("Platform"))
+        {
+            isGround = false;
+        }
+    }
 
     //private void ColliderPosition()
     //{

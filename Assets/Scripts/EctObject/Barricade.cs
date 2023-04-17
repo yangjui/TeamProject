@@ -8,10 +8,16 @@ public class Barricade : MonoBehaviour
     [SerializeField] private float maxHp = 50;
     private float currentHp;
     [System.NonSerialized] public bool barricadeCollapse = false;
+    private NavAgentManager navAgentManager;
 
     private void Awake()
     {
         currentHp = maxHp;
+    }
+
+    private void Start()
+    {
+        navAgentManager = FindObjectOfType<NavAgentManager>();
     }
 
     public void BarricadeHP(float _damage)
@@ -25,7 +31,16 @@ public class Barricade : MonoBehaviour
     {
         Debug.Log("Collapse");
         barricadeCollapse = true;
-        this.gameObject.SetActive(false);
-        // Destroy(this.gameObject);
+        // this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (this.name == "RightDoor")
+            navAgentManager.BreakRightDoor();
+
+        if (this.name == "LeftDoor")
+            navAgentManager.BreakLeftDoor();
     }
 }

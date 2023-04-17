@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4690194740058145520}
   - component: {fileID: 8624180039124120555}
   - component: {fileID: 665261179703934353}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,10 +318,11 @@ MonoBehaviour:
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 3223865877871842678}
   zombieHealth: 100
-  runSpeed: 8
-  walkSpeed: 5
+  runSpeed: 12.69
+  walkSpeed: 16.41
   fireEffect: {fileID: 7301621399940611520}
   StateColor: {fileID: 2324799149280977067}
+  pathColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &2438517952011672646
 BoxCollider:
   m_ObjectHideFlags: 0

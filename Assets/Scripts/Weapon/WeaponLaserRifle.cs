@@ -152,7 +152,7 @@ public class WeaponLaserRifle : WeaponBase
         TwoStepRaycast();
         isCharging = false;
         changeChargeModeCallback?.Invoke(isCharging);
-        StopCoroutine("ChargingLaserCoroutine");
+        //StopCoroutine("ChargingLaserCoroutine");
         if (currentChargingTime >= chargingTime)
         {
             SoundManager.instance.Stop2DSFX("LaserCharging");
