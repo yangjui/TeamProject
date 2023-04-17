@@ -81,7 +81,7 @@ public class BlackHole : MonoBehaviour
         for (int i = 0; i < agents.Count; ++i)
         {
             if (agents[i] == null) continue;
-            if (agents.Count > 30) Destroy(agents[i].gameObject);
+            //if (i > 30) agents[i].GetComponent<BakeZombie>().TakeDamage(100);
             if (agents[i].CompareTag("Zombie"))
             {
                 agents[i].GetComponent<BakeZombie>().navAgent.enabled = false;

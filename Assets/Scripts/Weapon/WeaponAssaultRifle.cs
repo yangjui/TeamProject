@@ -52,7 +52,7 @@ public class WeaponAssaultRifle : WeaponBase
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
 
-        layerMask = ~(LayerMask.GetMask("Player", "Path"));
+        layerMask = ~(LayerMask.GetMask("Player", "Path", "Wall"));
     }
 
     private void OnEnable()
