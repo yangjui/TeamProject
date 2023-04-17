@@ -36,6 +36,7 @@ public class BakeZombie : MonoBehaviour
     private bool isInBlackHole = false;
     private bool isAttack = false;
     private bool isIdle = false;
+    private bool isMember = true;
 
     private int attackNum;
     private int runNum;
@@ -45,7 +46,7 @@ public class BakeZombie : MonoBehaviour
     private float returnIdleTime = 0;
     private float distance = 0f;
 
-    private Transform playerPosition;
+    private Transform targetPosition;
 
     [SerializeField] private GameObject StateColor;
     private Renderer stateRenderer;
@@ -78,6 +79,7 @@ public class BakeZombie : MonoBehaviour
             float randomAnimSpeed = Random.Range(1.2f, 1.5f);
             newBodyAnimMate[i].SetFloat("_Length", randomAnimSpeed);
             newClothesAnimMate[i].SetFloat("_Length", randomAnimSpeed);
+
             if (i > 5 && i < 8)
             {
                 newBodyAnimMate[i].SetFloat("_Length", randomAnimSpeed * 0.5f);
@@ -96,22 +98,31 @@ public class BakeZombie : MonoBehaviour
         if (navAgent.enabled && (!isInBlackHole || !isIdle) && target != null)
             navAgent.SetDestination(target.position);
 
-        DistanceCheck();
-        
-        if (!isAttack)
-        {
-            attackTime = 0f;
-            returnIdleTime = 0f;
-            ZombieState();
-        }
+        if (targetPosition != null) DistanceCheck();
 
-        else Attack();
+        if (!isMember)
+        {
+            if (target.CompareTag("Player") || target.CompareTag("Barricade"))
+            {
+                if (!isAttack)
+                {
+                    attackTime = 0f;
+                    returnIdleTime = 0f;
+                    ZombieState();
+                }
+
+                else if (isAttack)
+                {
+                    Attack();
+                }
+            }
+        }
     }
 
 
-    public void PlayerPosition(Transform _playerPosition)
+    public void TargetPosition(Transform _targetPosition)
     {
-        playerPosition = _playerPosition;
+        targetPosition = _targetPosition;
     }
 
     private void ZombieState()
@@ -152,7 +163,6 @@ public class BakeZombie : MonoBehaviour
                 Instantiate(deadRagdoll, transform.position, transform.rotation);
                 break;
         }
-
         Destroy(this.gameObject);
     }
 
@@ -161,10 +171,10 @@ public class BakeZombie : MonoBehaviour
         deadType = _type;
     }
 
-    //public void NoMoreMember()
-    //{
-    //    isMember = false;
-    //}
+    public void NoMoreMember()
+    {
+        isMember = false;
+    }
 
     public void BlackHole()
     {
@@ -251,7 +261,6 @@ public class BakeZombie : MonoBehaviour
         if (currentHealth <= 0) Dead();
     }
 
-
     public void Onfire()
     {
         if (!fireEffect.activeSelf)
@@ -276,6 +285,6 @@ public class BakeZombie : MonoBehaviour
 
     private float DistanceCheck()
     {
-        return distance = Vector3.Distance(transform.position, playerPosition.position);
+        return distance = Vector3.Distance(transform.position, targetPosition.position);
     }
 }

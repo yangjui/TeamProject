@@ -277,12 +277,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f2bd68a126e68df4691ffec3a221b86c, type: 2}
   - {fileID: 2100000, guid: c395af0a6d1c4ff4daa53d89aaff99ec, type: 2}
   - {fileID: 2100000, guid: d2c621cc84a0e3b45a2f9dbf7bffbaea, type: 2}
-  - {fileID: 2100000, guid: a0f07f9c5e607a440b06e028b3a0a967, type: 2}
+  - {fileID: 2100000, guid: d2c621cc84a0e3b45a2f9dbf7bffbaea, type: 2}
   clothesAnimMate:
   - {fileID: 2100000, guid: 54bdf6b84ce4339479749c767515f678, type: 2}
   - {fileID: 2100000, guid: bb3bf6d6b2e0e724fbbc7b128cbd4edc, type: 2}
   - {fileID: 2100000, guid: 77f362a8022bc6e4da18eec64d3045f0, type: 2}
-  - {fileID: 2100000, guid: 921121442cb004143a1e68c0a55654b8, type: 2}
+  - {fileID: 2100000, guid: 77f362a8022bc6e4da18eec64d3045f0, type: 2}
   deadRagdoll: {fileID: 8748114193251562244, guid: 7a6b871f4782ac744b30433f8000414e, type: 3}
   leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}

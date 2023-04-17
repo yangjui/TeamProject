@@ -54,7 +54,7 @@ public class SoundManager : MonoBehaviour
 
     public void Init()
     {
-        bgmPlayer = Instantiate(bgmPrefab, transform); 
+        bgmPlayer = Instantiate(bgmPrefab, transform);
         bgmSource = bgmPlayer.GetComponent<AudioSource>();
 
         if (SceneManager.GetActiveScene().buildIndex == 0) // 타이틀씬이라면

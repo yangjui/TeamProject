@@ -14,7 +14,7 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [System.NonSerialized] public Transform playerPosition;
     [SerializeField] private WaveTrigger waveTrigger;
-    [SerializeField] private OffScreenIndicator offScreenIndicator;
+    // [SerializeField] private OffScreenIndicator offScreenIndicator;
 
     private bool isStop = false;
 
@@ -24,7 +24,7 @@ public class PlaySceneManager : MonoBehaviour
         playerManager.OnChangeAimModeDelegate(ChangeAimMode);
         playerManager.OnPlayerIsDeadDelegate(OnReStart);
         playerManager.Init();
-        offScreenIndicator.Init();
+        // offScreenIndicator.Init();
         optionSetting.Init();
         navAgentManager.Init(PlayerPosition());
         waveTrigger.WaveChangeDelegate(ChangeWave);
