@@ -23,7 +23,6 @@ public class BakeZombie : MonoBehaviour
 
     [Header("# Status")]
     [SerializeField] private float zombieHealth = 100f;
-    // [SerializeField] private float curSpeed = 5f;
     [SerializeField] private float runSpeed = 6f;
     [SerializeField] private float walkSpeed = 2f;
 
@@ -34,27 +33,25 @@ public class BakeZombie : MonoBehaviour
 
     private int deadType = 0;
     private float currentHealth;
-    private float blackHoleRadius = 7f;
-    private float detectionRadius = 10f;
-    private float distance = 0f;
-
-    private bool isMember = true;
     private bool isInBlackHole = false;
     private bool isAttack = false;
     private bool isIdle = false;
-    private bool isRun = false;
-    private bool isWalk = false;
 
+    private int attackNum;
+    private int runNum;
+    private int idleNum;
+
+    private float attackTime = 0;
+    private float returnIdleTime = 0;
+    private float distance = 0f;
+
+    private Transform playerPosition;
 
     [SerializeField] private GameObject StateColor;
     private Renderer stateRenderer;
 
 
-    Vector3 playerLookAt;
-
     private Transform target;
-    private Transform playerPosition;
-    // private Rigidbody rb;
 
     private List<Material> newBodyAnimMate = new List<Material>();
     private List<Material> newClothesAnimMate = new List<Material>();
@@ -65,7 +62,7 @@ public class BakeZombie : MonoBehaviour
         currentHealth = zombieHealth;
 
         stateRenderer = StateColor.GetComponent<Renderer>();
-
+        target = null;
     }
 
     private void Start()
@@ -81,20 +78,36 @@ public class BakeZombie : MonoBehaviour
             float randomAnimSpeed = Random.Range(1.2f, 1.5f);
             newBodyAnimMate[i].SetFloat("_Length", randomAnimSpeed);
             newClothesAnimMate[i].SetFloat("_Length", randomAnimSpeed);
+            if (i > 5 && i < 8)
+            {
+                newBodyAnimMate[i].SetFloat("_Length", randomAnimSpeed * 0.5f);
+                newClothesAnimMate[i].SetFloat("_Length", randomAnimSpeed * 0.5f);
+            }
         }
+
+        attackNum = Random.Range(0, 2);
+        runNum = Random.Range(5, 8);
+        idleNum = Random.Range(3, 5);
+        Debug.Log(this.name + "  att : " + attackNum + "   Run : " + runNum + "    idle : " + idleNum);
     }
 
     private void Update()
     {
-        if (navAgent.enabled && (!isInBlackHole || !isIdle))
+        if (navAgent.enabled && (!isInBlackHole || !isIdle) && target != null)
             navAgent.SetDestination(target.position);
 
-        if (currentHealth <= 0) Dead();
+        DistanceCheck();
+        
+        if (!isAttack)
+        {
+            attackTime = 0f;
+            returnIdleTime = 0f;
+            ZombieState();
+        }
 
-        distance = Vector3.Distance(transform.position, playerPosition.position);
-
-        ZombieState();
+        else Attack();
     }
+
 
     public void PlayerPosition(Transform _playerPosition)
     {
@@ -103,16 +116,16 @@ public class BakeZombie : MonoBehaviour
 
     private void ZombieState()
     {
-        switch (Mathf.Round(distance * 10f) / 10f)
+        switch (Mathf.Round(DistanceCheck() * 10f) / 10f)
         {
             case >= 15.0f:
-                if (!isWalk) Walk();
+                Walk();
                 break;
-            case < 15.0f and >= 2.1f:
-                if (!isRun || !isIdle || !isAttack) Run();
+            case < 15.0f and >= 3.1f:
+                Run();
                 break;
-            case < 2.1f:
-                if (isRun) StartCoroutine(Idle());
+            case < 3.1f:
+                Idle();
                 break;
             default:
                 return;
@@ -122,22 +135,21 @@ public class BakeZombie : MonoBehaviour
     private void Dead()
     {
         this.gameObject.SetActive(false);
-        GameObject newRagdoll;
 
         switch (deadType)
         {
             case 1:
-                newRagdoll = Instantiate(leftZombiePrefab, transform.position, transform.rotation);
+                Instantiate(leftZombiePrefab, transform.position, transform.rotation);
                 break;
             case 2:
-                newRagdoll = Instantiate(rightZombiePrefab, transform.position, transform.rotation);
+                Instantiate(rightZombiePrefab, transform.position, transform.rotation);
                 break;
             case 3:
                 Debug.Log("Disappear");
                 Destroy(this.gameObject);
                 break;
             default:
-                newRagdoll = Instantiate(deadRagdoll, transform.position, transform.rotation);
+                Instantiate(deadRagdoll, transform.position, transform.rotation);
                 break;
         }
 
@@ -149,15 +161,14 @@ public class BakeZombie : MonoBehaviour
         deadType = _type;
     }
 
-    public void NoMoreMember()
-    {
-        isMember = false;
-    }
+    //public void NoMoreMember()
+    //{
+    //    isMember = false;
+    //}
 
     public void BlackHole()
     {
-        if (!isInBlackHole)
-            isInBlackHole = true;
+        if (!isInBlackHole) isInBlackHole = true;
     }
 
     public void ResetAgent()
@@ -181,84 +192,50 @@ public class BakeZombie : MonoBehaviour
         navAgent.angularSpeed = _speed;
     }
 
-    private IEnumerator Attack()
+    private void Attack()
     {
-        if (!isAttack)
+        attackTime += Time.deltaTime;
+        stateRenderer.material.color = Color.red;
+        if (Mathf.Round(DistanceCheck() * 10f) / 10f > 3.1f)
+        {
+            isAttack = false;
+        }
+
+        if (attackTime >= 2f)
         {
             isAttack = true;
-            yield return new WaitForSeconds(1f);
-
+            returnIdleTime += Time.deltaTime;
             stateRenderer.material.color = Color.blue;
-
+            AnimTextureType(attackNum);
             attack.SetActive(true);
-
-            AnimTextureType(3);
-
-            BoolFlags(false, false, false, true);
-
-            navAgent.speed = 0f;
-
-            yield return new WaitForSeconds(1.3f);
-
-            attack.SetActive(false);
-            isAttack = false;
-
-            StartCoroutine("Idle");
+            if (returnIdleTime >= 1.3f)
+            {
+                attack.SetActive(false);
+                isAttack = false;
+            }
         }
     }
 
-    private IEnumerator Idle()
+    private void Idle()
     {
-        attack.SetActive(false);
-        stateRenderer.material.color = Color.red;
-
         navAgent.speed = 0f;
-        // if (!navAgent.isStopped) navAgent.isStopped = true;
-        navAgent.velocity = Vector3.zero;
-
-        AnimTextureType(2);
-
-        BoolFlags(false, false, true, false);
-
-        StartCoroutine("Attack");
-
-        isIdle = false;
-
-        yield return null;
+        AnimTextureType(idleNum);
+        isAttack = true;
     }
 
     private void Run()
     {
-        //StopCoroutine("Attack");
-        StopCoroutine("Idle");
-
         stateRenderer.material.color = Color.green;
-
         navAgent.speed = runSpeed;
-
-        AnimTextureType(1);
-
+        AnimTextureType(runNum);
         if (OnZombieFree2 != null) OnZombieFree2(this);
-
-        BoolFlags(false, true, false, false);
     }
 
     private void Walk()
     {
         stateRenderer.material.color = Color.yellow;
-
         navAgent.speed = walkSpeed;
-        AnimTextureType(0);
-
-        BoolFlags(true, false, false, false);
-    }
-
-    private void BoolFlags(bool _isWalk, bool _isRun, bool _isIdle, bool _isAttack)
-    {
-        isWalk = _isWalk;
-        isRun = _isRun;
-        isIdle = _isIdle;
-        isAttack = _isAttack;
+        AnimTextureType(8);
     }
 
     private void AnimTextureType(int _type)
@@ -270,9 +247,10 @@ public class BakeZombie : MonoBehaviour
     public void TakeDamage(float _playerAttackDamage)
     {
         currentHealth -= _playerAttackDamage;
-
         if (OnZombieFree2 != null) OnZombieFree2(this);
+        if (currentHealth <= 0) Dead();
     }
+
 
     public void Onfire()
     {
@@ -294,5 +272,10 @@ public class BakeZombie : MonoBehaviour
             Debug.Log(this.name + currentHealth);
             if (currentHealth <= 0) break;
         }
+    }
+
+    private float DistanceCheck()
+    {
+        return distance = Vector3.Distance(transform.position, playerPosition.position);
     }
 }

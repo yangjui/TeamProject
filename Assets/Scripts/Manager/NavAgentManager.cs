@@ -33,6 +33,8 @@ public class NavAgentManager : MonoBehaviour
     [SerializeField]
     private List<Transform> inNavPos = null;
 
+    [SerializeField] private Barricade leftBarricade;
+    [SerializeField] private Barricade rightBarricade;
 
     public void Init(Transform _position)
     {
@@ -73,17 +75,32 @@ public class NavAgentManager : MonoBehaviour
             }
 
             newAgent.GetComponent<BakeZombie>().PlayerPosition(playerTransform);
+            newAgent.GetComponent<BakeZombie>().navAgent.enabled = false;
             newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromList;
             newAgent.GetComponent<BakeZombie>().OnZombieFree2 += RemoveZombieFromGroupList;
             allNavMeshAgents.Add(newAgent);
         }
     }
 
+    public void NavAgentOn()
+    {
+        for (int i = 0; i < allNavMeshAgents.Count; ++i)
+        {
+            allNavMeshAgents[i].GetComponent<BakeZombie>().navAgent.enabled = true;
+        }
+    }
+
     public void ChangeWave()
     {
-        // 여기에 2군단, 3군단 애들이 각각 왼쪽문 오른쪽문 쫓아가게 만들어주세요
-        // 1군단은 이미 1웨이브에서 다죽었음
-        Debug.Log("하하하");
+        for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
+        {
+            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(rightBarricade.transform);
+        }
+
+        for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
+        {
+            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(leftBarricade.transform);
+        }
     }
 
     // path�� ���޽� ���� path�� �����̶�� ���� ---------------------------------------------------------------------
@@ -91,13 +108,7 @@ public class NavAgentManager : MonoBehaviour
     {
         for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
         {
-            if (navMeshAgentsGroupA[i].name == _name)
-            {
-                if (Vector3.Distance(navMeshAgentsGroupA[i].GetComponent<BakeZombie>().CurDestination(), _trigger.PathPosition().position) < 1f)
-                {
-                    navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForA());
-                }
-            }
+            navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
         }
     }
 
@@ -154,8 +165,8 @@ public class NavAgentManager : MonoBehaviour
         {
             if (allNavMeshAgents[i].GetComponent<BakeZombie>() == zombie)
             {
-                allNavMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
-                allNavMeshAgents[i].GetComponent<BakeZombie>().NoMoreMember();
+                //allNavMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
+                //allNavMeshAgents[i].GetComponent<BakeZombie>().NoMoreMember();
                 allNavMeshAgents.RemoveAt(i);
             }
         }

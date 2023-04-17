@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 108
+  controlID: 68
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 201
+  controlID: 136
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,8 +193,8 @@ MonoBehaviour:
     y: 715
     width: 856
     height: 232
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -217,10 +217,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 856
     y: 0
-    width: 281
+    width: 379
     height: 947
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1137
+    x: 1235
     y: 0
-    width: 482
+    width: 384
     height: 947
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
@@ -280,7 +280,7 @@ MonoBehaviour:
   - {fileID: 20}
   - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -626,9 +626,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 30.157972, y: -9.137613, z: 6.4205394}
+    m_Target: {x: 80.731255, y: 1.1048636, z: 51.79371}
     speed: 2
-    m_Value: {x: 30.157972, y: -9.137613, z: 6.4205394}
+    m_Value: {x: 0.06656855, y: 0.20682883, z: -0.9811988}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -675,13 +675,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.18548487, y: 0.8033105, z: -0.31949005, w: 0.4675953}
+    m_Target: {x: 0.00089103973, y: 0.9941329, z: -0.109609656, w: 0.010949226}
     speed: 2
-    m_Value: {x: 0.18548486, y: 0.8033105, z: -0.31949002, w: 0.46759528}
+    m_Value: {x: -0.020392932, y: 0.9713606, z: -0.21953815, w: -0.08857622}
   m_Size:
-    m_Target: 36.747192
+    m_Target: 1.1277905
     speed: 2
-    m_Value: 36.747192
+    m_Value: 1.9572837
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -790,9 +790,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -31144
-    y: -31970
-    width: 279
+    x: 856
+    y: 73
+    width: 377
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -801,23 +801,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7cf6ffff
-      m_LastClickedID: -2436
-      m_ExpandedIDs: a2faffff785a0000b65a0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: d0caffffdccaffffe0caffffe6caffffeacaffffeccaffffeecafffffccafffffecaffff06cbffff08cbffff0acbffff0ccbffff0ecbffff10cbffff12cbffff16cbffff26cbffff28cbffff2acbffff2ccbffff2ecbffff30cbffff32cbffff34cbffff36cbffff38cbffff3acbffff3ccbffff3ecbffff44cbffff46cbffff48cbffff4acbffff4ecbffff50cbffff52cbffff54cbffff56cbffff58cbffff78ccffff7accffff7cccffff7eccffff80ccffff82ccffff86ccffff88ccffff8accffff8eccffff90ccffff98ccffff9cccffff9eccffffa0ccffffa4ccffffa8ccffffaaccffffb2ccffffb6ccffffbaccffffbcccffffbeccffffc0ccffffc2ccffffc4ccffffc6ccffffc8ccffffcaccffffccccffffceccffffd2ccffffd4ccffffe0ccffffe2ccffffe4ccffffeaccffffecccffffeeccfffff4ccffff06cdffff8cceffffa4ceffffb2ceffffb4ceffffb6ceffffc2ceffffc4ceffff12cfffff14cfffff16cfffff18cfffff1acfffff1ccfffff1ecfffff20cfffff44d0ffff46d0ffff48d0ffff4ad0ffff4cd0ffff4ed0ffff68d0ffff6ad0ffff9ed0ffffacd0ffffb2d0ffffb6d0ffffb8d0ffffc0d0fffff2d0ffffe0d2fffff4d2fffff8d2ffff0cd3ffff10d3ffff24d3ffff74d3ffff78d3ffffc8d3ffffccd3ffffd0d3ffffd4d3ffffd8d3ffffdcd3ffffe0d3ffff32fbffffbc6c0000f2720000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Ragdoll_V5
+        m_OriginalName: Ragdoll_V5
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -13478
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -847,9 +847,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1137
+    x: 1235
     y: 73
-    width: 480
+    width: 382
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -868,22 +868,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Resources/Prefabs/Zombie
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/AssetStore/UnityTechnologies/ParticlePack
+  - Assets/Resources/Prefabs/Zombie
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "C:\\Users\\admin\\Desktop\\\uC81C\uBC1C\\TeamProject"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4c590000
-    m_LastClickedID: 22860
-    m_ExpandedIDs: 000000004a590000
+    m_SelectedIDs: 50c10000
+    m_LastClickedID: 49488
+    m_ExpandedIDs: 000000000e8a000050b7000054b700005ab700005cb700006eb7000072b7000090b7000014c50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -911,7 +911,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004a590000
+    m_ExpandedIDs: 000000000e8a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -942,18 +942,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 486f0100d40d020074720000746d000020750000806c000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Ragdoll_V5
+      m_OriginalName: Ragdoll_V5
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 57480
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
