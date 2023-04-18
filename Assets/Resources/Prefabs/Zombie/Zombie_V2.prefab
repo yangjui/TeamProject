@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1786589685207618943}
   - component: {fileID: 6861344271711310616}
   - component: {fileID: 6694416746277857473}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3748739623263952297}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0.20199966}
+  m_LocalPosition: {x: 0, y: 1, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,6 +290,7 @@ MonoBehaviour:
   walkSpeed: 16.41
   fireEffect: {fileID: 2193121138267127713}
   StateColor: {fileID: 2056085157083036007}
+  pathColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8759146957772024949
 GameObject:
   m_ObjectHideFlags: 0

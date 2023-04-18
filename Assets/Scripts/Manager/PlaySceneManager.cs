@@ -13,9 +13,10 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField] private OptionSetting optionSetting;
     [SerializeField] private UIManager uiManager;
     [System.NonSerialized] public Transform playerPosition;
-    [SerializeField] private WaveTrigger waveTrigger;
     [SerializeField] private QuestManager questManager;
     [SerializeField] private OffScreenIndicator offScreenIndicator;
+    
+    private CameraController cameraController;
 
     private bool isStop = false;
 
@@ -35,6 +36,7 @@ public class PlaySceneManager : MonoBehaviour
     private void Start()
     {
         SoundManager.instance.PlayBGM((int)SoundManager.Stage3_BGM.main);
+        cameraController = FindObjectOfType<PlayerController>().transform.GetComponentInChildren<CameraController>();
     }
 
     private void Update()
@@ -90,6 +92,7 @@ public class PlaySceneManager : MonoBehaviour
 
     private void OnReStart()
     {
+        cameraController.DeadCameraMove();
         uiManager.OnReStartImage();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

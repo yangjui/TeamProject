@@ -23,6 +23,8 @@ public class LoadingSceneController : MonoBehaviour
 
     private IEnumerator LoadSceneProcess()
     {
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         // LoadScene은 동기방식으로 씬을 불러오게되서 씬을 다 불러오기 전까지 아무 행동을 할 수 없다.
         // 하지만 LoadSceneAsync는 비동기방식으로 씬을 불러오기에 씬을 불러오면서 다른 행동을 할 수 있다.

@@ -15564,7 +15564,6 @@ MonoBehaviour:
   option: {fileID: 753128065}
   optionSetting: {fileID: 1071203885}
   uiManager: {fileID: 1406782330}
-  waveTrigger: {fileID: 0}
   questManager: {fileID: 1870047072}
   offScreenIndicator: {fileID: 788948529}
 --- !u!4 &575933335
@@ -21933,6 +21932,8 @@ GameObject:
   - component: {fileID: 845972886}
   - component: {fileID: 845972885}
   - component: {fileID: 845972884}
+  - component: {fileID: 845972887}
+  - component: {fileID: 845972888}
   m_Layer: 5
   m_Name: Panel_ReStart
   m_TagString: Untagged
@@ -22001,6 +22002,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &845972887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845972883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac27cf5dc6fe05d4b8b5cb13d81e8b02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeInTime: 1
+--- !u!225 &845972888
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845972883}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &849662807
 GameObject:
   m_ObjectHideFlags: 0

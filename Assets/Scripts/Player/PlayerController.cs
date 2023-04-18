@@ -50,11 +50,6 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         WeaponAction();
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            TakeDamage(1); // 테스트
-        }
     }
 
     private void Rotate()
@@ -172,11 +167,9 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         bool isDead = playerStatus.DecreaseHP(_damage);
-        bool dead = false;
-        underAttackCallback?.Invoke();
-        if (isDead && !dead)
+        if (isAlive) underAttackCallback?.Invoke();
+        if (isDead && isAlive)
         {
-            dead = true;
             playerIsDeadCallback?.Invoke();
             // 사망 애니메이션 => 이건 한번만 나와야함. 여러번나오지않게.
             // 사망 사운드
