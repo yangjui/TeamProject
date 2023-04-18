@@ -8,7 +8,7 @@ public class Ragdoll : MonoBehaviour
     [SerializeField] private GameObject pelvis = null;
     private Rigidbody rb;
     private float onGroundTime = 0;
-
+    private bool isGround = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,39 +16,41 @@ public class Ragdoll : MonoBehaviour
 
     private void Update()
     {
-        //if (rb.velocity == Vector3.zero)
-        //{
-        //    Debug.Log("haha");
-        //    onGroundTime += Time.deltaTime;
-        //    if (onGroundTime >= 3f)
-        //        Kinematic();
-        //}
-        //else
-        //{ 
-        //    onGroundTime = 0f;
-        //    Debug.Log("HUHU");
-        //}
+        if (rb.velocity == Vector3.zero && isGround)
+        {
+            onGroundTime += Time.deltaTime;
+            if (onGroundTime >= 2f)
+                Kinematic();
+        }
+        else
+        {
+            onGroundTime -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider _other)
     {
         if (_other.CompareTag("Platform"))
         {
-            ColliderPosition();
+            isGround = true;
         }
     }
 
-    private void ColliderPosition()
+    private void OnTriggerExit(Collider _other)
     {
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        if (_other.CompareTag("Platform"))
+        {
+            isGround = false;
+        }
     }
+
+    //private void ColliderPosition()
+    //{
+    //    rb.constraints = RigidbodyConstraints.FreezeAll;
+    //}
 
     public void Kinematic()
     {
-        //Debug.Log("Dead");
-        //foreach (Rigidbody child in GetComponentsInChildren<Rigidbody>())
-        //    child.isKinematic = true;
-
         transform.position = pelvis.transform.position;
         pelvis.GetComponent<DeadZombie>().SetPosition();
     }

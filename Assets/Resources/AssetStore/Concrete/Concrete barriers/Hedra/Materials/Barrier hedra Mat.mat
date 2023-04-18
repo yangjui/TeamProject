@@ -7,9 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Barrier hedra Mat
-  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords: []
+  m_Name: V4_Body.Run3.animTex
+  m_Shader: {fileID: 4800000, guid: 744a72612a3320a40b62e72c05d0c4eb, type: 3}
+  m_ValidKeywords:
+  - ANIM_LOOP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,18 +21,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: da9915a1f88e09b47b083f543db973b2, type: 3}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 775e852d067562144b44cee9b91c945f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 65c8a9b7429667e47a4a0cab1496b72d, type: 3}
+    - _NmlTex:
+        m_Texture: {fileID: 2800000, guid: fbcbf0f6494693a49ae231fe4c8713ee, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PosTex:
+        m_Texture: {fileID: 2800000, guid: d743d2a0aad4451418b3ba85afb1e061, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Shininess: 0.08652151
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    - _DT: 0
+    - _Length: 0.670837
+    - _Loop: 1
+    m_Colors: []
   m_BuildTextureStacks: []

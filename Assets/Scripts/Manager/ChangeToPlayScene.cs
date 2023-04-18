@@ -35,6 +35,6 @@ public class ChangeToPlayScene : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         change = false;
-        LoadingSceneController.LoadScene("Map_v2");
+        LoadingSceneController.LoadScene("PlayScene");
     }
 }

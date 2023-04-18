@@ -39,7 +39,7 @@ public class WeaponLaserRifle : WeaponBase
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
         mainCamera = Camera.main;
-        layerMask = ~(1 << LayerMask.NameToLayer("Player"));
+        layerMask = ~(LayerMask.GetMask("Player", "Path", "Zombie", "Wall"));
     }
 
     private void OnEnable()
@@ -152,7 +152,7 @@ public class WeaponLaserRifle : WeaponBase
         TwoStepRaycast();
         isCharging = false;
         changeChargeModeCallback?.Invoke(isCharging);
-        StopCoroutine("ChargingLaserCoroutine");
+        //StopCoroutine("ChargingLaserCoroutine");
         if (currentChargingTime >= chargingTime)
         {
             SoundManager.instance.Stop2DSFX("LaserCharging");
@@ -167,10 +167,14 @@ public class WeaponLaserRifle : WeaponBase
 
             // 탄 수 UI 업데이트
             onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-            
+
             currentChargingTime = 0f;
         }
-        else Destroy(chargeEffect);
+        else
+        {
+            SoundManager.instance.Stop2DSFX("LaserCharging");
+            Destroy(chargeEffect);
+        }
     }
 
     private void CancelLaser()
@@ -179,6 +183,7 @@ public class WeaponLaserRifle : WeaponBase
         changeChargeModeCallback?.Invoke(isCharging);
         currentChargingTime = 0f;
         StopCoroutine("ChargingLaserCoroutine");
+        SoundManager.instance.Stop2DSFX("LaserCharging");
         Destroy(chargeEffect);
     }
 

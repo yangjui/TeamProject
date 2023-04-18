@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    public delegate void WaveTriggerDelegate(string _name);
+    private WaveTriggerDelegate waveTriggerCallback = null;
+
     [SerializeField] private Targets[] targets;
 
     private void Start()
@@ -11,18 +14,22 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < targets.Length; ++i)
         {
             targets[i].GetComponent<Targets>().OnTriggerDelegate(SetNextNav);
+            targets[i].GetComponent<Targets>().WaveChangeDelegate(WaveChange);
             targets[i].gameObject.SetActive(false);
         }
         targets[0].gameObject.SetActive(true);
     }
 
-    private void Update()
+    public void StartQuest3()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            targets[1].gameObject.SetActive(false);
-            targets[2].gameObject.SetActive(true);
-        }
+        if (targets[1].gameObject.activeSelf == true)
+        targets[1].gameObject.SetActive(false);
+        targets[2].gameObject.SetActive(true);
+    }
+
+    private void WaveChange(string _name)
+    {
+        waveTriggerCallback?.Invoke(_name);
     }
 
     private void SetNextNav(string _name)
@@ -61,5 +68,10 @@ public class QuestManager : MonoBehaviour
     {
         targets[3].gameObject.SetActive(false);
         targets[4].gameObject.SetActive(false);
+    }
+
+    public void WaveChangeDelegate(WaveTriggerDelegate _waveTriggerCallback)
+    {
+        waveTriggerCallback = _waveTriggerCallback;
     }
 }

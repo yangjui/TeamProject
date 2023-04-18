@@ -8,6 +8,9 @@ public class Targets : MonoBehaviour
     public delegate void TriggerDelegate(string _name);
     private TriggerDelegate triggerCallback = null;
 
+    public delegate void WaveTriggerDelegate(string _name);
+    private WaveTriggerDelegate waveTriggerCallback = null;
+
     [Tooltip("Change this color to change the indicators color for this target")]
     [SerializeField] private Color targetColor = Color.red;
 
@@ -82,6 +85,11 @@ public class Targets : MonoBehaviour
         triggerCallback = _triggerCallback;
     }
 
+    public void WaveChangeDelegate(WaveTriggerDelegate _waveTriggerCallback)
+    {
+        waveTriggerCallback = _waveTriggerCallback;
+    }
+
     private void OnTriggerEnter(Collider _other)
     {
         if (_other.CompareTag("Player"))
@@ -89,6 +97,7 @@ public class Targets : MonoBehaviour
             if (transform.name == "Quest1" || transform.name == "Quest3")
             {
                 triggerCallback?.Invoke(transform.name);
+                waveTriggerCallback?.Invoke(transform.name);
             }
         }
     }

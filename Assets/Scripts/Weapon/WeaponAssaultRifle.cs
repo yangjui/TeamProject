@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,7 +52,7 @@ public class WeaponAssaultRifle : WeaponBase
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
 
-        layerMask = ~(1 << LayerMask.NameToLayer("Player"));
+        layerMask = ~(LayerMask.GetMask("Player", "Path", "Wall"));
     }
 
     private void OnEnable()
