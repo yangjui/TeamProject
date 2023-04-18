@@ -313,7 +313,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d23f0869949ddd14b9ea59d1eaaa018c, type: 2}
   - {fileID: 2100000, guid: 3b0fd937ff218e544bb3a5d87614da85, type: 2}
   - {fileID: 2100000, guid: 9b94bd0cf00655447a103f8882bfa444, type: 2}
-  deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
+  deadRagdoll: {fileID: 7423806376022351339, guid: a867a4055841420418a8784c0c9666f7, type: 3}
   leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 3223865877871842678}
