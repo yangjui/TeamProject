@@ -364,7 +364,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e9890918417e2a34396a664c0138271c, type: 2}
   - {fileID: 2100000, guid: 832bd15668c4e354986d86fe4916f1ad, type: 2}
   - {fileID: 2100000, guid: 1537681b631f3714e92209f13395a3c5, type: 2}
-  deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
+  deadRagdoll: {fileID: 1726421196113889416, guid: ea40b69bfd5928d4cb165d3baf5f5088, type: 3}
   leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 4551496689199534631}
@@ -373,6 +373,7 @@ MonoBehaviour:
   walkSpeed: 16.41
   fireEffect: {fileID: 1349885181768896931}
   StateColor: {fileID: 3907387395388295941}
+  pathColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1350282740186025089
 PrefabInstance:
   m_ObjectHideFlags: 0
