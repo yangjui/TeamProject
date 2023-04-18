@@ -8,32 +8,35 @@ public class NavAgentManager : MonoBehaviour
     public delegate void Quest3Delegate();
     private Quest3Delegate quest3Callback = null;
 
-    [SerializeField]
-    private List<NavMeshAgent> agentPrefab = null;
+    public delegate void CountDelegate(int _Count);
+    private CountDelegate groupACountCallback = null;
+    private CountDelegate groupBCountCallback = null;
+    private CountDelegate groupCCountCallback = null;
+    private CountDelegate maxKillCountCallback = null;
+    private CountDelegate currentMaxKillCountCallback = null;
 
-    [Range(50, 1000)]
-    [SerializeField] private int agentNum;
+    [Range(50, 1000)] [SerializeField] private int agentNum;
+    [SerializeField] private List<NavMeshAgent> agentPrefab = null;
 
+    [Header("# Path")]
     [SerializeField] private List<Transform> targetpathForGroupA = null;
     [SerializeField] private List<Transform> targetpathForGroupB = null;
     [SerializeField] private List<Transform> targetpathForGroupC = null;
 
+    [Header("# Target")]
+    [SerializeField] private List<Transform> inNavPos = null;
+    [SerializeField] private Barricade leftBarricade;
+    [SerializeField] private Barricade rightBarricade;
+
     private Transform playerTransform;
     private GameObject[] allPaths;
-
     private List<NavMeshAgent> allNavMeshAgents = new List<NavMeshAgent>();
     private List<NavMeshAgent> navMeshAgentsGroupA = new List<NavMeshAgent>();
     private List<NavMeshAgent> navMeshAgentsGroupB = new List<NavMeshAgent>();
     private List<NavMeshAgent> navMeshAgentsGroupC = new List<NavMeshAgent>();
-
-    private bool isAlarmON = false;
-    private Vector3 instantPositionInNavArea;
-    private Vector3 instantPosition;
-    [SerializeField]
-    private List<Transform> inNavPos = null;
-
-    [SerializeField] private Barricade leftBarricade;
-    [SerializeField] private Barricade rightBarricade;
+    private int count = 0;
+    private int maxKillCount = 0;
+    private int currentMaxKillCount = 0;
 
     private void Awake()
     {
@@ -109,18 +112,11 @@ public class NavAgentManager : MonoBehaviour
 
             allNavMeshAgents.Add(newAgent);
         }
+        groupACountCallback?.Invoke(navMeshAgentsGroupA.Count);
+        groupBCountCallback?.Invoke(navMeshAgentsGroupB.Count);
+        groupCCountCallback?.Invoke(navMeshAgentsGroupC.Count);
+        StartCoroutine(MaxKillCountCoroutine());
     }
-
-    //public void SetNewTargetForGroupA(PathTriggerManager _trigger, string _name)
-    //{
-    //    for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
-    //    {
-    //        if (navMeshAgentsGroupA[i].name == _name)
-    //        {
-    //            navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(_trigger.NextPosForA());
-    //        }
-    //    }
-    //}
 
     public void SetNewTargetForGroupB(PathTriggerManager _trigger, string _name)
     {
@@ -225,47 +221,28 @@ public class NavAgentManager : MonoBehaviour
         StopCoroutine("SetPathForEachGroupCoroutine");
     }
 
-    //private void SetPathForEachGroup()
-    //{
-    //    int aIndex = 0;
-    //    int bIndex = 0;
-    //    int cIndex = 0;
-
-    //    while (aIndex < navMeshAgentsGroupA.Count || bIndex < navMeshAgentsGroupB.Count || cIndex < navMeshAgentsGroupC.Count)
-    //    {
-    //        if (aIndex < navMeshAgentsGroupA.Count)
-    //        {
-    //            navMeshAgentsGroupA[aIndex].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupA[0]);
-    //            aIndex++;
-    //        }
-
-    //        if (bIndex < navMeshAgentsGroupB.Count)
-    //        {
-    //            navMeshAgentsGroupB[bIndex].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupB[0]);
-    //            bIndex++;
-    //        }
-
-    //        if (cIndex < navMeshAgentsGroupC.Count)
-    //        {
-    //            navMeshAgentsGroupC[cIndex].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupC[0]);
-    //            cIndex++;
-    //        }
-    //    }
-    //    //for (int i = 0; i < navMeshAgentsGroupA.Count; ++i)
-    //    //{
-    //    //    navMeshAgentsGroupA[i].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupA[0]);
-    //    //}
-
-    //    //for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
-    //    //{
-    //    //    navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupB[0]);
-    //    //}
-
-    //    //for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
-    //    //{
-    //    //    navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(targetpathForGroupC[0]);
-    //    //}
-    //}
+    private IEnumerator MaxKillCountCoroutine()
+    {
+        while (true)
+        {
+            count = allNavMeshAgents.Count;
+            yield return new WaitForSeconds(0.3f);
+            if (count - allNavMeshAgents.Count >= 30)
+            {
+                currentMaxKillCount = count - allNavMeshAgents.Count;
+                currentMaxKillCountCallback?.Invoke(currentMaxKillCount);
+                if (maxKillCount < count - allNavMeshAgents.Count)
+                {
+                    maxKillCount = count - allNavMeshAgents.Count;
+                    maxKillCountCallback?.Invoke(maxKillCount);
+                }
+            }
+            if (allNavMeshAgents.Count == 0)
+            {
+                break;
+            }
+        }
+    }
 
     private void RemoveZombieFromList(BakeZombie zombie)
     {
@@ -273,13 +250,10 @@ public class NavAgentManager : MonoBehaviour
         {
             if (allNavMeshAgents[i].GetComponent<BakeZombie>() == zombie)
             {
-                //allNavMeshAgents[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform);
-                //allNavMeshAgents[i].GetComponent<BakeZombie>().TargetPosition(playerTransform);
-                //allNavMeshAgents[i].GetComponent<BakeZombie>().NoMoreMember();
                 allNavMeshAgents.RemoveAt(i);
             }
         }
-    }
+    }    
 
     private void RemoveZombieFromGroupList(BakeZombie zombie)
     {
@@ -290,6 +264,7 @@ public class NavAgentManager : MonoBehaviour
                 if (navMeshAgentsGroupA[i].GetComponent<BakeZombie>() == zombie)
                 {
                     navMeshAgentsGroupA.RemoveAt(i);
+                    groupACountCallback?.Invoke(navMeshAgentsGroupA.Count);
                 }
                 if (navMeshAgentsGroupA.Count <= 0)
                 {
@@ -305,6 +280,7 @@ public class NavAgentManager : MonoBehaviour
                 if (navMeshAgentsGroupB[i].GetComponent<BakeZombie>() == zombie)
                 {
                     navMeshAgentsGroupB.RemoveAt(i);
+                    groupBCountCallback?.Invoke(navMeshAgentsGroupB.Count);
                 }
             }
         }
@@ -315,29 +291,23 @@ public class NavAgentManager : MonoBehaviour
                 if (navMeshAgentsGroupC[i].GetComponent<BakeZombie>() == zombie)
                 {
                     navMeshAgentsGroupC.RemoveAt(i);
+                    groupCCountCallback?.Invoke(navMeshAgentsGroupC.Count);
                 }
             }
         }
     }
 
-    //private bool RandomPoint(Vector3 center, float range, out Vector3 result)
-    //{
-    //    for (int i = 0; i < 10; i++)
-    //    {
-    //        Vector3 randomPoint = center + Random.insideUnitSphere * range;
-    //        NavMeshHit hit;
-    //        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-    //        {
-    //            result = hit.position;
-    //            return true;
-    //        }
-    //    }
-    //    result = inNavPos[Random.Range(0, inNavPos.Count - 1)].position;
-    //    return false;
-    //}
-
     public void SetQuestDelegate(Quest3Delegate _quest3Callback)
     {
         quest3Callback = _quest3Callback;
+    }
+
+    public void SetCountDelegate(CountDelegate _groupACountCallback, CountDelegate _groupBCountCallback, CountDelegate _groupCCountCallback, CountDelegate _maxKillCountCallback, CountDelegate _currentMaxKillCountCallback)
+    {
+        groupACountCallback = _groupACountCallback;
+        groupBCountCallback = _groupBCountCallback;
+        groupCCountCallback = _groupCCountCallback;
+        maxKillCountCallback = _maxKillCountCallback;
+        currentMaxKillCountCallback = _currentMaxKillCountCallback;
     }
 }

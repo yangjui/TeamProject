@@ -378,7 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 8
   runSpeed: 15
-  maxHp: 10
+  maxHp: 100
 --- !u!114 &988425925576858187
 MonoBehaviour:
   m_ObjectHideFlags: 0

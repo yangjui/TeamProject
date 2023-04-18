@@ -28,6 +28,7 @@ public class PlaySceneManager : MonoBehaviour
         playerManager.Init();
         offScreenIndicator.Init();
         optionSetting.Init();
+        navAgentManager.SetCountDelegate(SetGroupA, SetGroupB, SetGroupC, SetMaxKillCount, SetCurrentMaxKillCount);
         navAgentManager.Init(PlayerPosition());
         questManager.WaveChangeDelegate(ChangeWave);
         navAgentManager.SetQuestDelegate(StartQuest3);
@@ -49,6 +50,31 @@ public class PlaySceneManager : MonoBehaviour
         playerPosition = playerManager.PlayerPosition();
 
         return playerPosition;
+    }
+
+    private void SetGroupA(int _count)
+    {
+        uiManager.GroupACount(_count);
+    }
+
+    private void SetGroupB(int _count)
+    {
+        uiManager.GroupBCount(_count);
+    }
+
+    private void SetGroupC(int _count)
+    {
+        uiManager.GroupCCount(_count);
+    }
+
+    private void SetMaxKillCount(int _count)
+    {
+        uiManager.MaxKillCount(_count);
+    }
+
+    private void SetCurrentMaxKillCount(int _count)
+    {
+        uiManager.MaxKill(_count);
     }
 
     private void ChangeWave(string _name)
