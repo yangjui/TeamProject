@@ -5,58 +5,43 @@ using UnityEngine.AI;
 
 public class DeadZombie : MonoBehaviour
 {
+    public GameObject Ragdoll;
 
-    private float resetTime = 10f;
+    private Rigidbody rb;
+    private float onGroundTime = 0;
+    private bool kinematic = false;
 
-    private bool isInblackHole = false;
-
-    private float blackHoleRadius = 7f;
-
-    private Vector3 blackHolePosition;
-
-
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     private void Update()
     {
-        if (resetTime > 3)
+        if (rb.velocity.x <= 0.1f && rb.velocity.y <= 0.1f && rb.velocity.z <= 0.1f)
         {
-            InTheBlackHole();
+            if (kinematic) return;
+            onGroundTime += Time.deltaTime;
+            if (onGroundTime >= 1f)
+                Kinematic();
         }
-
-        if (isInblackHole)
+        else
         {
-            //Debug.Log(transform.name + " : SetDestination" + target.name);
-            resetTime -= Time.deltaTime;
-            if (resetTime <= 0)
-            {
-                ResetAgent();
-            }
-        }
-
-        if (resetTime <= 0)
-        {
-            resetTime = 10f;
+            onGroundTime -= Time.deltaTime;
         }
     }
 
-    private void InTheBlackHole()
+    public void SetPosition()
     {
-        if (Vector3.Distance(blackHolePosition, transform.position) < blackHoleRadius && isInblackHole == true)
-        {
-            Vector3 dir = blackHolePosition - transform.position;
-            transform.position += dir * 3f * Time.deltaTime;
-        }
+        transform.position = transform.parent.position;
     }
 
 
-    public void HitByBlackHole(Vector3 position)
+    private void Kinematic()
     {
-        blackHolePosition = position;
-        isInblackHole = true;
-    }
+        foreach (Rigidbody child in GetComponentsInChildren<Rigidbody>())
+            child.isKinematic = true;
 
-
-    private void ResetAgent()
-    {
-        isInblackHole = false;
+        Ragdoll.GetComponent<Ragdoll>().Kinematic();
+        kinematic = true;
     }
 }

@@ -10,14 +10,22 @@ public class TrainingSceneManager : MonoBehaviour
     [SerializeField] private PlayerHUD playerHUD;
     [SerializeField] private Image option;
     [SerializeField] private OptionSetting optionSetting;
+    [SerializeField] private OffScreenIndicator offScreenIndicator;
 
     private bool isStop = false;
 
-    private void Start()
+    private void Awake()
     {
+        SoundManager.instance.Init();
         playerManager.OnChangeAimModeDelegate(ChangeAimMode);
         playerManager.Init();
+        offScreenIndicator.Init();
         optionSetting.Init();
+    }
+
+    private void Start()
+    {
+        SoundManager.instance.PlayBGM((int)SoundManager.Stage2_BGM.main);
     }
 
     private void Update()
@@ -66,6 +74,7 @@ public class TrainingSceneManager : MonoBehaviour
     public void OnTitleScene()
     {
         isStop = false;
+        SoundManager.instance.StopBGM();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 1f;

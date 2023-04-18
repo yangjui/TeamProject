@@ -23,9 +23,9 @@ public class PlayerManager : MonoBehaviour
         go.GetComponent<WeaponSwitchingSystem>().Init();
         go.GetComponentInChildren<WeaponAssaultRifle>().OnChangeAimModeDelegate(OnChangeAimMode);
         go.GetComponent<PlayerController>().SetUnderAttackDelegate(StartBloodScreenCoroutine, OnPlayerIsDead);
-        StartCoroutine(LaserRifleDelegateCoroutine());
-        StartCoroutine(GrenadeDelegateCoroutine());
-        StartCoroutine(GravityGrenadeDelegateCoroutine());
+        StartCoroutine("LaserRifleDelegateCoroutine");
+        StartCoroutine("GrenadeDelegateCoroutine");
+        StartCoroutine("GravityGrenadeDelegateCoroutine");
     }
 
     private IEnumerator LaserRifleDelegateCoroutine()
@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
         go.GetComponentInChildren<WeaponLaserRifle>().OnChangeChargeModeDelegate(OnChangeChargeMode);
+        StopCoroutine("LaserRifleDelegateCoroutine");
     }
 
     private IEnumerator GrenadeDelegateCoroutine()
@@ -48,6 +49,7 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
         go.GetComponentInChildren<WeaponGrenade>().SetTrajectotyDelegate(OnOffChangeTrajectory);
+        StopCoroutine("GrenadeDelegateCoroutine");
     }
 
     private IEnumerator GravityGrenadeDelegateCoroutine()
@@ -59,6 +61,7 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
         go.GetComponentInChildren<WeaponGravityGrenade>().SetTrajectotyDelegate(OnOffChangeTrajectory);
+        StopCoroutine("GravityGrenadeDelegateCoroutine");
     }
 
     public Transform PlayerPosition()

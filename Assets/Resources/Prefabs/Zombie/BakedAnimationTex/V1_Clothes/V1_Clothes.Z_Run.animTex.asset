@@ -40,7 +40,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _DT: 0
+<<<<<<< HEAD
     - _Length: 1.2096529
+=======
+    - _Length: 1.3026655
+>>>>>>> 0405_A
     - _Loop: 1
     - _ShadowStrength: 1
     m_Colors:

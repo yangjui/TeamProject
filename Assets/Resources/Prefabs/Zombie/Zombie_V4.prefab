@@ -369,8 +369,8 @@ MonoBehaviour:
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 4551496689199534631}
   zombieHealth: 100
-  runSpeed: 8
-  walkSpeed: 5
+  runSpeed: 12.69
+  walkSpeed: 16.41
   fireEffect: {fileID: 1349885181768896931}
   StateColor: {fileID: 3907387395388295941}
 --- !u!1001 &1350282740186025089

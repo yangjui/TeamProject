@@ -24,8 +24,9 @@ public class PathTriggerManager : MonoBehaviour
         {
             if (_other.name.Substring(_other.name.Length - 1) == "A" && this.name.Substring(0, 1) == "A")
             {
-                //Debug.Log("path A:  " + _other.name);
-                navAgentManager.SetNewTargetForGroupA(this, _other.name);
+                ////Debug.Log("path A:  " + _other.name);
+                //navAgentManager.SetNewTargetForGroupA(this, _other.name);
+                navAgentManager.SetTargetForA(this, _other.name);
             }
 
             if (_other.name.Substring(_other.name.Length - 1) == "B" && this.name.Substring(0, 1) == "B")

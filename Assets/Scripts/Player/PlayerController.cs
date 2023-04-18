@@ -12,15 +12,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode keyCodeRun = KeyCode.LeftShift;
     [SerializeField] private KeyCode keyCodeJump = KeyCode.Space;
     [SerializeField] private KeyCode KeyCodeReload = KeyCode.R;
+    [SerializeField] private float walkTimer;
+    [SerializeField] private float runTimer;
 
     private PlayerRotate playerRotate;
     private PlayerMovement playerMovement;
     private PlayerStatus playerStatus;
+    private PlayerAnimationController playerAnimationController;
     private WeaponBase weapon;
 
     private bool isAimMode = false;
     private bool isChargingMode = false;
     private bool isAlive = true;
+    private float inputTimer = 0f;
+
 
     private void Awake()
     {
@@ -30,6 +35,12 @@ public class PlayerController : MonoBehaviour
         playerRotate = GetComponent<PlayerRotate>();
         playerMovement = GetComponent<PlayerMovement>();
         playerStatus = GetComponent<PlayerStatus>();
+        playerAnimationController = GetComponentInChildren<PlayerAnimationController>();
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void Update()
@@ -45,10 +56,6 @@ public class PlayerController : MonoBehaviour
             TakeDamage(1); // 테스트
         }
     }
-    public Transform PlayerPosition()
-    {
-        return this.transform;
-    }
 
     private void Rotate()
     {
@@ -63,9 +70,9 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
+        bool isRun = false;
         if (x != 0 || z != 0)
         {
-            bool isRun = false;
             if (z > 0) isRun = Input.GetKey(keyCodeRun); // 앞으로 갈때만 대쉬키가 활성화됨.
 
             if (!isAimMode && !isChargingMode)
@@ -85,6 +92,27 @@ public class PlayerController : MonoBehaviour
         }
 
         playerMovement.MoveToDir(new Vector3(x, 0, z));
+
+        if (isAimMode && (x != 0 || z != 0))
+        {
+            inputTimer += Time.deltaTime;
+            if (!isRun)
+            {
+                if (inputTimer > walkTimer)
+                {
+                    playerAnimationController.PlayFootstepSound();
+                    inputTimer = 0f;
+                }
+            }
+            else if (isRun)
+            {
+                if (inputTimer > runTimer)
+                {
+                    playerAnimationController.PlayFootstepSound();
+                    inputTimer = 0f;
+                }
+            }
+        }
     }
 
     private void Jump()
@@ -92,6 +120,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(keyCodeJump))
         {
             playerMovement.Jump();
+            playerAnimationController.PlayFootstepSound();
         }
     }
 
@@ -118,6 +147,11 @@ public class PlayerController : MonoBehaviour
         {
             weapon.StartReload();
         }
+    }
+
+    public Transform PlayerPosition()
+    {
+        return this.transform;
     }
 
     public void SwitchingWeapon(WeaponBase _newWeapon)

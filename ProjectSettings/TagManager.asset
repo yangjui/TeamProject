@@ -18,6 +18,7 @@ TagManager:
   - fire
   - Button
   - Path
+  - Barricade
   layers:
   - Default
   - TransparentFX
@@ -30,11 +31,11 @@ TagManager:
   - Zombie
   - Casing
   - Granade
-  - Sound
+  - Wall
   - Ragdoll
-  - 
-  - 
-  - 
+  - Metal
+  - Path
+  - AttackZombie
   - 
   - 
   - 

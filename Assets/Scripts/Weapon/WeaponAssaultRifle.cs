@@ -22,6 +22,7 @@ public class WeaponAssaultRifle : WeaponBase
     private BulletHoleObjectPool bulletHoleObjectPool;
     private Camera mainCamera;
 
+    private int layerMask;
     private bool isModeChange = false;      // 모드전환 여부 체크
     private bool isTakeOut = false;
     private float defaultModeFOV = 60f;     // 기본모드에서의 카메라 FOV
@@ -50,6 +51,8 @@ public class WeaponAssaultRifle : WeaponBase
         weaponSetting.currentAmmo = weaponSetting.maxAmmo;
         // 첫 탄창 수 최대탄창수로 설정
         weaponSetting.currentMagazine = weaponSetting.maxMagazine;
+
+        layerMask = ~(LayerMask.GetMask("Player", "Path", "Wall"));
     }
 
     private void OnEnable()
@@ -174,6 +177,7 @@ public class WeaponAssaultRifle : WeaponBase
         isModeChange = false;
     } // 총 바꿀때마다 기본상태로 리셋
 
+
     private void TwoStepRaycast()
     {
         Ray ray;
@@ -181,7 +185,7 @@ public class WeaponAssaultRifle : WeaponBase
         Vector3 targetPoint = Vector3.zero;
 
         ray = mainCamera.ViewportPointToRay(Vector2.one * 0.5f + shotVec);
-        if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance))
+        if (Physics.Raycast(ray, out hit, weaponSetting.attackDistance, layerMask))
         {
             // 레이가 맞는다면 타겟포인트는 맞은대상
             targetPoint = hit.point;
@@ -196,7 +200,7 @@ public class WeaponAssaultRifle : WeaponBase
         // 위에서 나온 타겟포인트에서 총구방향을 빼면 총구에서 타겟포인트로 향하는 방향을 구할 수 있음
         Vector3 attackDirection = (targetPoint - bulletSpawnPoint.position).normalized;
         // 총구에서 위 방향으로 레이를 쏨
-        if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance))
+        if (Physics.Raycast(bulletSpawnPoint.position, attackDirection, out hit, weaponSetting.attackDistance, layerMask))
         {
             impactObjectPool.SpawnImpact(hit);
             bulletHoleObjectPool.SpawnImpact(hit);
@@ -207,7 +211,7 @@ public class WeaponAssaultRifle : WeaponBase
             }
             if (hit.transform.CompareTag("Button"))
             {
-                LoadingSceneController.LoadScene("PlayScene");
+                hit.transform.GetComponent<ChangeToPlayScene>().ChangeScene();
             }
         }
             Debug.DrawRay(bulletSpawnPoint.position, attackDirection * weaponSetting.attackDistance, Color.blue);
@@ -363,9 +367,19 @@ public class WeaponAssaultRifle : WeaponBase
         isTakeOut = false;
     }
 
-    public void IsReloadStart()
+    public void PlayReloadSound1()
     {
-        SoundManager.instance.Play2DSFX("assault_rifle_reload_out");
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_01");
+    }
+
+    public void PlayReloadSound2()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_02");
+    }
+
+    public void PlayReloadSound3()
+    {
+        SoundManager.instance.Play2DSFX("assault_rifle_reload_out_03");
     }
 
     public void IsReloadOver()

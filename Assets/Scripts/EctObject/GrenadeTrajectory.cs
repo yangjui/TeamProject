@@ -9,6 +9,10 @@ public class GrenadeTrajectory : MonoBehaviour
     [SerializeField] private int numDots; // 궤도를 그릴 점의 개수
     [SerializeField] private float dotSpacing; // 궤도를 그릴 점 간격
 
+    [SerializeField] private float lender_right; // 궤도를 그릴 점 간격
+    [SerializeField] private float lender_up; // 궤도를 그릴 점 간격
+    [SerializeField] private float lender_forward; // 궤도를 그릴 점 간격
+
     private GameObject trajectoryLine; // 궤도를 그리는 선의 GameObject
     private LineRenderer lineRenderer; // 궤도를 그리는 선의 LineRenderer
     private Vector3 direction;
@@ -57,7 +61,7 @@ public class GrenadeTrajectory : MonoBehaviour
         for (int i = 0; i < numDots; i++)
         {
             Vector3 position = CalculatePosition(i * dotSpacing);
-            lineRenderer.SetPosition(i, position + Vector3.forward * 0.5f + Vector3.right * 0.5f);
+            lineRenderer.SetPosition(i, position + transform.forward * lender_forward - transform.right * lender_right + transform.up * lender_up);
         }
     }
 
