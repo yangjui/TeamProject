@@ -11,7 +11,7 @@ public class NavAgentManager : MonoBehaviour
     [SerializeField]
     private List<NavMeshAgent> agentPrefab = null;
 
-    [Range(50, 1000)]
+    [Range(1, 1000)]
     [SerializeField] private int agentNum;
 
     [SerializeField] private List<Transform> targetpathForGroupA = null;

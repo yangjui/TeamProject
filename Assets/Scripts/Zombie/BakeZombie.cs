@@ -64,7 +64,7 @@ public class BakeZombie : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         currentHealth = zombieHealth;
 
-        stateRenderer = StateColor.GetComponent<Renderer>();
+        //stateRenderer = StateColor.GetComponent<Renderer>();
         target = null;
         navAgent.enabled = false;
     }
@@ -93,11 +93,49 @@ public class BakeZombie : MonoBehaviour
         runNum = Random.Range(5, 8);
         idleNum = Random.Range(3, 5);
 
+        if (this.name.Substring(this.name.Length - 1) == "A")
+            pathColor = Color.red;
+        if (this.name.Substring(this.name.Length - 1) == "B")
+            pathColor = Color.green;
+        if (this.name.Substring(this.name.Length - 1) == "C")
+            pathColor = Color.yellow;
+
 
     }
 
     private void Update()
     {
+        //if (navAgent != null && navAgent.hasPath)
+        //{
+        //    // 경로의 모든 포인트를 가져옵니다.
+        //    Vector3[] pathPoints = navAgent.path.corners;
+
+        //    // 경로의 총 길이를 계산합니다.
+        //    float pathLength = 0f;
+        //    for (int i = 0; i < pathPoints.Length - 1; i++)
+        //    {
+        //        pathLength += Vector3.Distance(pathPoints[i], pathPoints[i + 1]);
+        //    }
+
+        //    // 드로우라인을 사용하여 경로를 그립니다.
+        //    Vector3 previousPoint = pathPoints[0];
+        //    float drawnLength = 0f;
+        //    for (int i = 1; i < pathPoints.Length; i++)
+        //    {
+        //        Vector3 currentPoint = pathPoints[i];
+        //        float segmentLength = Vector3.Distance(previousPoint, currentPoint);
+
+        //        // 경로가 그려진 길이가 경로의 총 길이의 5% 이상인 경우에만 경로를 그립니다.
+        //        if (drawnLength / pathLength < 0.95f)
+        //        {
+        //            Debug.DrawLine(previousPoint, currentPoint, pathColor, 0.2f);
+        //        }
+
+        //        previousPoint = currentPoint;
+        //        drawnLength += segmentLength;
+        //    }
+        //}
+
 
         if (navAgent.enabled && (!isInBlackHole || !isIdle) && target != null && targetPosition == null)
             navAgent.SetDestination(target.position);
@@ -105,7 +143,6 @@ public class BakeZombie : MonoBehaviour
 
         if (targetPosition != null)
         {
-
             //Debug.Log(this.name + " : " + targetPosition.name);
             DistanceCheck();
             if(navAgent.enabled && (!isInBlackHole || !isIdle))
@@ -165,26 +202,30 @@ public class BakeZombie : MonoBehaviour
     {
         if (OnZombieFree2 != null) OnZombieFree2(this);
         this.gameObject.SetActive(false);
-        if (!isInBlackHole)
+
+        switch (deadType)
         {
-            switch (deadType)
-            {
-                case 1:
-                    Instantiate(leftZombiePrefab, transform.position, transform.rotation);
-                    break;
-                case 2:
-                    Instantiate(rightZombiePrefab, transform.position, transform.rotation);
-                    break;
-                case 3:
-                    //Debug.Log("Disappear");
-                    Destroy(this.gameObject);
-                    break;
-                default:
-                    Instantiate(deadRagdoll, transform.position, transform.rotation);
-                    break;
-            }
+            case 1:
+                Instantiate(leftZombiePrefab, transform.position, transform.rotation);
+                break;
+            case 2:
+                Instantiate(rightZombiePrefab, transform.position, transform.rotation);
+                break;
+            case 3:
+                //Debug.Log("Disappear");
+                Destroy(this.gameObject);
+                break;
+            default:
+                Instantiate(deadRagdoll, transform.position, transform.rotation);
+                break;
         }
 
+        Destroy(this.gameObject);
+    }
+
+    public void DeadInBlackHole()
+    {
+        if (OnZombieFree2 != null) OnZombieFree2(this);
         Destroy(this.gameObject);
     }
 
