@@ -259,10 +259,13 @@ public class SoundManager : MonoBehaviour
         if (sfx2DList.Count == 0) return;
         for (int i = 0; i < sfx2DList.Count; ++i)
         {
-            AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
-            if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+            if (sfx2DList[i].GetComponent<AudioSource>() != null)
             {
-                sfxI.Stop();
+                AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
+                if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+                {
+                    sfxI.Stop();
+                }
             }
         }
     }

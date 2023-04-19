@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 7240217019399713861}
   - component: {fileID: 4330781455635148935}
   - component: {fileID: 7056581064644702195}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4551496689199534631}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0.20199966}
+  m_LocalPosition: {x: 0, y: 1, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -364,7 +364,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e9890918417e2a34396a664c0138271c, type: 2}
   - {fileID: 2100000, guid: 832bd15668c4e354986d86fe4916f1ad, type: 2}
   - {fileID: 2100000, guid: 1537681b631f3714e92209f13395a3c5, type: 2}
-  deadRagdoll: {fileID: 1312427385808997928, guid: f9f5b46499756b94484b63dbbe1a126f, type: 3}
+  deadRagdoll: {fileID: 1726421196113889416, guid: ea40b69bfd5928d4cb165d3baf5f5088, type: 3}
   leftZombiePrefab: {fileID: 6958166287328324053, guid: 0936530ad26b5b84da12b110c5a685ad, type: 3}
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 4551496689199534631}

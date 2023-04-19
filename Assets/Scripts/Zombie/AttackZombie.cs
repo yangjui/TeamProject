@@ -11,7 +11,7 @@ public class AttackZombie : MonoBehaviour
             _other.GetComponent<PlayerController>().TakeDamage(5);
         }
 
-        if (_other.CompareTag("Barricade"))
+        else if (_other.CompareTag("Barricade"))
         {
             _other.GetComponent<Barricade>().BarricadeHP(5);
         }

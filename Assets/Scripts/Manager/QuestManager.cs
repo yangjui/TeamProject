@@ -8,6 +8,13 @@ public class QuestManager : MonoBehaviour
     private WaveTriggerDelegate waveTriggerCallback = null;
 
     [SerializeField] private Targets[] targets;
+    [SerializeField] private GameObject door = null;
+
+    public void CloseDoor()
+    {
+        door.GetComponentInChildren<Animator>().SetTrigger("isClose");
+        door.GetComponent<BoxCollider>().enabled = true;
+    }
 
     private void Start()
     {
@@ -47,6 +54,7 @@ public class QuestManager : MonoBehaviour
             targets[3].gameObject.SetActive(true);
             targets[4].gameObject.SetActive(true);
             StartCoroutine(StartRoundCoroutine());
+            CloseDoor();
             Invoke(nameof(OffTarget4n5), 8f);
         }
     }

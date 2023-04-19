@@ -132,7 +132,6 @@ public class WeaponLaserRifle : WeaponBase
         chargeEffect.transform.localScale *= 0;
         while (isCharging)
         {
-            //Debug.Log("ChargingTime : " + currentChargingTime);
             currentChargingTime += Time.deltaTime;
             if (currentChargingTime < chargingTime)
                 chargeEffect.transform.localScale += Vector3.one * currentChargingTime * Time.deltaTime * chargingSize;
