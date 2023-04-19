@@ -61,24 +61,6 @@ public class NavAgentManager : MonoBehaviour
         }
     }
 
-    public void BreakRightDoor()
-    {
-        for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
-        {
-            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform.transform);
-            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().TargetPosition(playerTransform.transform);
-        }
-    }
-
-    public void BreakLeftDoor()
-    {
-        for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
-        {
-            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform.transform);
-            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().TargetPosition(playerTransform.transform);
-        }
-    }
-
     public void Init(Transform _position)
     {
         playerTransform = _position;
@@ -325,4 +307,39 @@ public class NavAgentManager : MonoBehaviour
         maxKillCountCallback = _maxKillCountCallback;
         currentMaxKillCountCallback = _currentMaxKillCountCallback;
     }
+
+    public void BreakRightDoor()
+    {
+        for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
+        {
+            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform.transform);
+            navMeshAgentsGroupB[i].GetComponent<BakeZombie>().TargetPosition(playerTransform.transform);
+        }
+        for (int i = 0; i < navMeshAgentsGroupC.Count; i++)
+        {
+            if (navMeshAgentsGroupC[i].GetComponent<BakeZombie>().zombieState != State.Attack)
+            {
+                navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform.transform);
+                navMeshAgentsGroupC[i].GetComponent<BakeZombie>().TargetPosition(playerTransform.transform);
+            }
+        }
+    }
+
+    public void BreakLeftDoor()
+    {
+        for (int i = 0; i < navMeshAgentsGroupC.Count; ++i)
+        {
+            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform.transform);
+            navMeshAgentsGroupC[i].GetComponent<BakeZombie>().TargetPosition(playerTransform.transform);
+        }
+        for (int i = 0; i < navMeshAgentsGroupB.Count; ++i)
+        {
+            if (navMeshAgentsGroupB[i].GetComponent<BakeZombie>().zombieState != State.Attack)
+            {
+                navMeshAgentsGroupB[i].GetComponent<BakeZombie>().SetNewTarget(playerTransform.transform);
+                navMeshAgentsGroupB[i].GetComponent<BakeZombie>().TargetPosition(playerTransform.transform);
+            }
+        }
+    }
+
 }

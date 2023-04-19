@@ -1888,6 +1888,7 @@ GameObject:
   - component: {fileID: 7423806376021852199}
   - component: {fileID: 8045236048351780978}
   - component: {fileID: 5550358859270252220}
+  - component: {fileID: 2975092701592818264}
   m_Layer: 12
   m_Name: pelvis
   m_TagString: Untagged
@@ -1942,6 +1943,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2975092701592818264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423806376022351303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddfe1eafd0a0ea45a64bfdf738c87eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ragdoll: {fileID: 7423806376022351339}
 --- !u!1 &7423806376022351305
 GameObject:
   m_ObjectHideFlags: 0

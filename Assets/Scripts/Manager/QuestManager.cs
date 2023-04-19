@@ -25,6 +25,8 @@ public class QuestManager : MonoBehaviour
         }
         targets[0].gameObject.SetActive(true);
         rightDoor.SetWarningDelegate(SetCamera);
+        leftDoor.SetWarningDelegate(SetCamera);
+
     }
 
     private void SetNextNav(string _name)
@@ -36,11 +38,17 @@ public class QuestManager : MonoBehaviour
             StartCoroutine(StartRoundCoroutine());
             Invoke(nameof(OffTarget2), 8f);
         }
+        else if (_name == "P_AmmoBox")
+        {
+            targets[5].gameObject.SetActive(false);
+            targets[2].gameObject.SetActive(true);
+        }
         else if (_name == "Quest3")
         {
             targets[2].gameObject.SetActive(false);
             targets[3].gameObject.SetActive(true);
             targets[4].gameObject.SetActive(true);
+            
             StartCoroutine(StartRoundCoroutine());
             CloseDoor();
             Invoke(nameof(OffTarget4n5), 8f);
@@ -89,7 +97,7 @@ public class QuestManager : MonoBehaviour
     {
         if (targets[1].gameObject.activeSelf == true)
             targets[1].gameObject.SetActive(false);
-        targets[2].gameObject.SetActive(true);
+        targets[5].gameObject.SetActive(true);
         OpenDoor();
     }
 

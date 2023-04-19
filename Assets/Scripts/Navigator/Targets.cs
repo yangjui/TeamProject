@@ -94,7 +94,7 @@ public class Targets : MonoBehaviour
     {
         if (_other.CompareTag("Player"))
         {
-            if (transform.name == "Quest1" || transform.name == "Quest3")
+            if (transform.name == "Quest1" || transform.name == "P_AmmoBox" || transform.name == "Quest3")
             {
                 triggerCallback?.Invoke(transform.name);
                 waveTriggerCallback?.Invoke(transform.name);

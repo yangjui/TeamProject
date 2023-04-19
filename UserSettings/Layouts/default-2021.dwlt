@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 174006
+  controlID: 13696
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 174012
+  controlID: 13697
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,8 +220,8 @@ MonoBehaviour:
     y: 0
     width: 241
     height: 947
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
-  m_Stats: 1
+  m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
     m_HRangeLocked: 0
@@ -598,9 +598,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 64.14493, y: 9.430994, z: 9.924326}
+    m_Target: {x: 72.98852, y: 2.6212416, z: -7.516589}
     speed: 2
-    m_Value: {x: 64.14493, y: 9.430994, z: 9.924326}
+    m_Value: {x: 72.98852, y: 2.6212416, z: -7.516589}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -647,13 +647,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.21036798, y: -0.00014869249, z: 0.005619569, w: -0.9782843}
+    m_Target: {x: 0.031901833, y: -0.96371186, z: 0.1326292, w: 0.23033649}
     speed: 2
-    m_Value: {x: -0.21023677, y: 0.0013178599, z: 0.0053004967, w: -0.9776352}
+    m_Value: {x: 0.031895395, y: -0.9635174, z: 0.13260244, w: 0.23029001}
   m_Size:
-    m_Target: 2.4223871
+    m_Target: 10
     speed: 2
-    m_Value: 2.4223871
+    m_Value: 10
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -922,7 +922,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7ee1c5ffe2abc6ff0ca5c7ff54a6c7ffa0f4c7fff206c8fff026c8ff8433c8ff449bc9ff50acc9ffa25bcbff145ccbff165ccbfffe99cbff469ccbff76c0cbff76edcbff5802cdffb810ceff1496ceffc61acfffeaa0cfffa6dad5ffeedbd5ff4861d7ffd461d7ff8829edff30dcffff32fbfffffcb30000beb40000dcb400007cb50000aab70000e0b80000d2b9000006ba00004cba000094ba0000d4ba000048bc000050bc0000c0bd000058bf0000acbf0000e6c0000026c10000b6c3000022c50000bac5000006c60000acc70000d2c7000032c800009ac800002ce51100f2e51100e6e61100a4be1200eebf120020271300162b13009e2b1300982e1300b62e1300
+      m_ExpandedIDs: d0dce2ff2cdde2ffa2f3e2ffa8f3e2ff901be3ffb61ce3ffcc38e3fffc58e3ffdc6ce7ff266ee7fffa84e9ff543eedff903fedff943fedff9c3fedffcccdf6fff068f8ffc6c8ffffe2f1ffff2e2f0200f2390200c0420200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -987,22 +987,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Animation
+    - Assets/Resources/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Animation
+  - Assets/Resources/Prefabs
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\admin\Desktop\Merge\TeamProject
+  m_LastProjectPath: E:\Merge\TeamProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f2b10000
-    m_LastClickedID: 45554
-    m_ExpandedIDs: 00000000dcb10000deb10000e2b10000e4b10000e6b10000e8b10000fab100001cb200001eb200003c080b00ea1f0b0000ca9a3b
+    m_SelectedIDs: d8d80000
+    m_LastClickedID: 55512
+    m_ExpandedIDs: 00000000a0d80000a2d80000a4d80000a6d80000a8d80000aad80000acd80000aed80000b0d80000b2d80000b4d80000b6d80000b8d80000bad80000bcd80000bed80000c0d80000c2d80000e0d8000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1030,7 +1030,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000dcb10000e2b10000e4b10000e6b10000e8b10000fab100001cb200001eb200003c080b00ea1f0b0000ca9a3b
+    m_ExpandedIDs: 00000000a0d80000a2d80000a4d80000a6d80000a8d80000aad80000acd80000aed80000b0d80000b2d80000b4d80000b6d80000b8d80000bad80000bcd80000bed80000c0d80000c2d8000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

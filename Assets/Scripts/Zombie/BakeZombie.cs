@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum State { Run, Idle, Attack, Dead }
+
 public class BakeZombie : MonoBehaviour
 {
     public delegate void ZombieFreeEventHandler(BakeZombie zombie);
@@ -47,14 +49,15 @@ public class BakeZombie : MonoBehaviour
     private float distance = 0f;
 
     private Transform targetPosition;
-
-    [SerializeField] private GameObject StateColor;
-    
-    //private Renderer stateRenderer;
     private Transform target;
     private List<Material> newBodyAnimMate = new List<Material>();
     private List<Material> newClothesAnimMate = new List<Material>();
 
+    public State zombieState;
+    
+
+    //[SerializeField] private GameObject StateColor;
+    //private Renderer stateRenderer;
     //public Color pathColor;
 
     private void Awake()
@@ -65,6 +68,7 @@ public class BakeZombie : MonoBehaviour
         //stateRenderer = StateColor.GetComponent<Renderer>();
         target = null;
         navAgent.enabled = false;
+        zombieState = State.Idle;
     }
 
     private void Start()
@@ -97,7 +101,6 @@ public class BakeZombie : MonoBehaviour
 
     private void Update()
     {
-
         if (navAgent.enabled && (!isInBlackHole || !isIdle) && target != null && targetPosition == null)
             navAgent.SetDestination(target.position);
 
@@ -160,6 +163,7 @@ public class BakeZombie : MonoBehaviour
     private void Dead()
     {
         if (OnZombieFree2 != null) OnZombieFree2(this);
+        zombieState = State.Dead;
         this.gameObject.SetActive(false);
         //if (!isInBlackHole)
         {
@@ -222,9 +226,10 @@ public class BakeZombie : MonoBehaviour
 
     private void Attack()
     {
+        zombieState = State.Attack;
         attackTime += Time.deltaTime;
         //stateRenderer.material.color = Color.red;
-        if (Mathf.Round(DistanceCheck() * 10f) / 10f > 3.1f)
+        if (Mathf.Round(DistanceCheck() * 10f) / 10f > 2.7f)
         {
             isAttack = false;
         }
@@ -246,6 +251,7 @@ public class BakeZombie : MonoBehaviour
 
     private void Idle()
     {
+        zombieState = State.Idle;
         navAgent.speed = 0.001f;
         navAgent.angularSpeed = 800;
         AnimTextureType(idleNum);
@@ -254,6 +260,7 @@ public class BakeZombie : MonoBehaviour
 
     private void Run()
     {
+        zombieState = State.Run;
         //stateRenderer.material.color = Color.green;
         navAgent.speed = runSpeed;
         navAgent.angularSpeed = 120;

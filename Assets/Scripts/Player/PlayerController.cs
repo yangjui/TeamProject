@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         if (Time.timeScale == 0 || !isAlive || isClear)
         {
             playerMovement.ForceZero();
+            weapon.StopWeaponAction();
             return;
         }
         Rotate();
