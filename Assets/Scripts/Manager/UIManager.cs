@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayTime playTimeScript;
 
     [Header("# MaxKillCount")]
-    [SerializeField] private TextMeshProUGUI maxKill;
+    [SerializeField] private TextMeshProUGUI currentMaxKill;
 
     private int groupA = 0;
     private int groupB = 0;
@@ -55,7 +55,6 @@ public class UIManager : MonoBehaviour
     {
         if (groupA == 0)
         {
-            Debug.Log("A");
             groupA = _count;
             currentGroupA = _count;
         }
@@ -65,7 +64,6 @@ public class UIManager : MonoBehaviour
 
     public void GroupBCount(int _count)
     {
-        Debug.Log("B");
         if (groupB == 0)
         {
             groupB = _count;
@@ -77,7 +75,6 @@ public class UIManager : MonoBehaviour
 
     public void GroupCCount(int _count)
     {
-        Debug.Log("C");
         if (groupC == 0)
         {
             groupC = _count;
@@ -89,34 +86,34 @@ public class UIManager : MonoBehaviour
 
     public void TotalCount()
     {
-        totalCount.text = "TotalCount        " + (groupA + groupB + groupC);
+        totalCount.text = (groupA + groupB + groupC).ToString();
     }
 
     public void KillCount()
     {
-        killCount.text = "KillCount          " + (groupA + groupB + groupC - currentGroupA - currentGroupB - currentGroupC);
+        killCount.text = (groupA + groupB + groupC - currentGroupA - currentGroupB - currentGroupC).ToString();
     }
 
-    public void MaxKillCount(int _count)
+    public void MaxKillCount(int _count) // 겜끝났을때 알려주는거
     {
-        maxKillCount.text = "MaxKillCount    " + _count;
+        maxKillCount.text = _count.ToString();
     }
 
-    public void PlayTime()
-    {
-        playTime.text = "PlayTime            " + playTimeScript.GetMinute() + " : " + playTimeScript.GetSecond();
-    }
-
-    public void MaxKill(int _count)
+    public void MaxKill(int _count) // 30마리이상죽일때 알려주는거
     {
         StartCoroutine(MaxKillCoroutine(_count));
     }
 
+    public void PlayTime()
+    {
+        playTime.text = playTimeScript.GetMinute() + " : " + playTimeScript.GetSecond();
+    }
+
     private IEnumerator MaxKillCoroutine(int _count)
     {
-        maxKill.gameObject.SetActive(true);
-        maxKill.text = _count + "Kill";
+        currentMaxKill.gameObject.SetActive(true);
+        currentMaxKill.text = _count + "Kill";
         yield return new WaitForSeconds(2);
-        maxKill.gameObject.SetActive(false);
+        currentMaxKill.gameObject.SetActive(false);
     }
 }

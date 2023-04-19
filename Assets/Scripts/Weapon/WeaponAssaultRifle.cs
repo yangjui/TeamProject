@@ -348,7 +348,6 @@ public class WeaponAssaultRifle : WeaponBase
         }
     }
 
-
     /// 애니메이션함수, 콜백
 
     public void IsStopAttack()

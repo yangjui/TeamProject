@@ -32,6 +32,7 @@ public class PlaySceneManager : MonoBehaviour
         navAgentManager.Init(PlayerPosition());
         questManager.WaveChangeDelegate(ChangeWave);
         navAgentManager.SetQuestDelegate(StartQuest3);
+        navAgentManager.SetClearDelegate(OnClear);
     }
 
     private void Start()
@@ -120,6 +121,14 @@ public class PlaySceneManager : MonoBehaviour
     {
         cameraController.DeadCameraMove();
         uiManager.OnReStartImage();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void OnClear()
+    {
+        uiManager.OnReStartImage();
+        playerManager.OnClear();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

@@ -15,5 +15,5 @@ public struct WeaponSetting
     public float attackRate;        // 공격 속도
     public float attackDistance;    // 공격 사거리
     public bool isAutomaticAttack;  // 연속공격 여부
-    public int damage;
+    public int damage;              // 대미지
 }

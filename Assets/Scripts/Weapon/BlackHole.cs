@@ -34,13 +34,23 @@ public class BlackHole : MonoBehaviour
         {
             scale = Mathf.SmoothStep(scale, 0.05f, Time.deltaTime * 20.0f);
             yield return null;
-            if (scale <= 0.1f) 
+            if (scale <= 0.1f)
             {
                 for (int i = agents.Count - 1; i >= 0; --i)
                 {
                     if (agents[i] == null) continue;
-                    agents[i].GetComponent<BakeZombie>().TakeDamage(100);
-                    agents.RemoveAt(i);
+                    if (i < 30)
+                    {
+                        agents[i].GetComponent<BakeZombie>().TakeDamage(100);
+                        agents.RemoveAt(i);
+                    }
+                    else
+                    {
+                        agents[i].GetComponent<BakeZombie>().DeadInBlackHole();
+                        agents.RemoveAt(i);
+                    }
+
+
                 }
                 GameObject go = Instantiate(bombEffect, transform.position, Quaternion.identity);
                 Destroy(go, 2f);
@@ -81,7 +91,7 @@ public class BlackHole : MonoBehaviour
         for (int i = 0; i < agents.Count; ++i)
         {
             if (agents[i] == null) continue;
-            //if (i > 30) agents[i].GetComponent<BakeZombie>().TakeDamage(100);
+            
             if (agents[i].CompareTag("Zombie"))
             {
                 agents[i].GetComponent<BakeZombie>().navAgent.enabled = false;

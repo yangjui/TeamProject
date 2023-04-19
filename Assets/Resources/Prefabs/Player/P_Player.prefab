@@ -701,7 +701,7 @@ MonoBehaviour:
     currentMagazine: 0
     maxMagazine: 0
     currentAmmo: 0
-    maxAmmo: 100
+    maxAmmo: 1
     attackRate: 0
     attackDistance: 0
     isAutomaticAttack: 0
@@ -1381,9 +1381,9 @@ MonoBehaviour:
   weaponSetting:
     weaponName: 1
     currentMagazine: 0
-    maxMagazine: 8
+    maxMagazine: 1
     currentAmmo: 0
-    maxAmmo: 8
+    maxAmmo: 1
     attackRate: 0
     attackDistance: 30
     isAutomaticAttack: 0
@@ -2513,7 +2513,7 @@ MonoBehaviour:
     currentMagazine: 0
     maxMagazine: 0
     currentAmmo: 0
-    maxAmmo: 100
+    maxAmmo: 3
     attackRate: 0
     attackDistance: 0
     isAutomaticAttack: 0

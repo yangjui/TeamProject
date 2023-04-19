@@ -97,6 +97,11 @@ public class PlayerManager : MonoBehaviour
         playerIsDeadCallback?.Invoke();
     }
 
+    public void OnClear()
+    {
+        go.GetComponent<PlayerController>().OnClear();
+    }
+
     public void OnChangeAimModeDelegate(ChangeAimModeDelegate _changeAimModeCallback)
     {
         changeAimModeCallback = _changeAimModeCallback;

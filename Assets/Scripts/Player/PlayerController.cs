@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     private bool isAimMode = false;
     private bool isChargingMode = false;
     private bool isAlive = true;
+    private bool isClear = false;
     private float inputTimer = 0f;
-
 
     private void Awake()
     {
@@ -38,14 +38,13 @@ public class PlayerController : MonoBehaviour
         playerAnimationController = GetComponentInChildren<PlayerAnimationController>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
-        if (Time.timeScale == 0 || !isAlive) return;
+        if (Time.timeScale == 0 || !isAlive || isClear)
+        {
+            playerMovement.ForceZero();
+            return;
+        }
         Rotate();
         Move();
         Jump();
@@ -181,6 +180,11 @@ public class PlayerController : MonoBehaviour
     public void PlayerIsDead()
     {
         isAlive = false;
+    }
+
+    public void OnClear()
+    {
+        isClear = true;
     }
 
     public void SetUnderAttackDelegate(UnderAttackDelegate _underAttackCallback, UnderAttackDelegate _playerIsDeadCallback)

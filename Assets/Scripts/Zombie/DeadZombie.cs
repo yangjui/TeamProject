@@ -35,7 +35,6 @@ public class DeadZombie : MonoBehaviour
         transform.position = transform.parent.position;
     }
 
-
     private void Kinematic()
     {
         foreach (Rigidbody child in GetComponentsInChildren<Rigidbody>())

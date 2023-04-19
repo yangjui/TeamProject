@@ -9,12 +9,11 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] private Targets[] targets;
     [SerializeField] private GameObject door = null;
+    [SerializeField] private Barricade rightDoor = null;
+    [SerializeField] private Barricade leftDoor = null;
+    [SerializeField] private Camera rightCamera = null;
+    [SerializeField] private Camera leftCamera = null;
 
-    public void CloseDoor()
-    {
-        door.GetComponentInChildren<Animator>().SetTrigger("isClose");
-        door.GetComponent<BoxCollider>().enabled = true;
-    }
 
     private void Start()
     {
@@ -25,18 +24,7 @@ public class QuestManager : MonoBehaviour
             targets[i].gameObject.SetActive(false);
         }
         targets[0].gameObject.SetActive(true);
-    }
-
-    public void StartQuest3()
-    {
-        if (targets[1].gameObject.activeSelf == true)
-        targets[1].gameObject.SetActive(false);
-        targets[2].gameObject.SetActive(true);
-    }
-
-    private void WaveChange(string _name)
-    {
-        waveTriggerCallback?.Invoke(_name);
+        rightDoor.SetWarningDelegate(SetCamera);
     }
 
     private void SetNextNav(string _name)
@@ -76,6 +64,45 @@ public class QuestManager : MonoBehaviour
     {
         targets[3].gameObject.SetActive(false);
         targets[4].gameObject.SetActive(false);
+    }
+
+    private void SetCamera(string _name)
+    {
+        if (_name == "RightDoor")
+        {
+            GameObject go = Instantiate(rightCamera.gameObject);
+            Destroy(go, 2f);
+        }
+        else if (_name == "LeftDoor")
+        {
+            GameObject go = Instantiate(leftCamera.gameObject);
+            Destroy(go, 2f);
+        }
+    }
+
+    private void WaveChange(string _name)
+    {
+        waveTriggerCallback?.Invoke(_name);
+    }
+
+    public void StartQuest3()
+    {
+        if (targets[1].gameObject.activeSelf == true)
+            targets[1].gameObject.SetActive(false);
+        targets[2].gameObject.SetActive(true);
+        OpenDoor();
+    }
+
+    public void OpenDoor()
+    {
+        door.GetComponentInChildren<Animator>().SetTrigger("isOpen");
+        door.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void CloseDoor()
+    {
+        door.GetComponentInChildren<Animator>().SetTrigger("isClose");
+        door.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void WaveChangeDelegate(WaveTriggerDelegate _waveTriggerCallback)

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector3 moveForce;
     private float moveSpeed;
-    private float jumpForce = 10f;
+    private float jumpForce = 7f;
     private float gravity = -15f;
 
     private CharacterController cc;
@@ -55,5 +55,9 @@ public class PlayerMovement : MonoBehaviour
         {
             moveForce.y = jumpForce;
         }
+    }
+    public void ForceZero()
+    {
+        moveForce = Vector3.zero;
     }
 }

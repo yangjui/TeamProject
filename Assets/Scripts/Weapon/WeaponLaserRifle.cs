@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WeaponLaserRifle : WeaponBase
 {
@@ -34,12 +35,22 @@ public class WeaponLaserRifle : WeaponBase
     private void Awake()
     {
         base.SetUp();
-        // 첫 탄 수 최대탄수로 설정
-        weaponSetting.currentAmmo = weaponSetting.maxAmmo;
-        // 첫 탄창 수 최대탄창수로 설정
-        weaponSetting.currentMagazine = weaponSetting.maxMagazine;
-        mainCamera = Camera.main;
-        layerMask = ~(LayerMask.GetMask("Player", "Path", "Zombie", "Wall"));
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            weaponSetting.maxAmmo = 100;
+            weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+            weaponSetting.maxMagazine = 8;
+            weaponSetting.currentMagazine = weaponSetting.maxMagazine;
+        }
+        else
+        {
+            // 첫 탄 수 최대탄수로 설정
+            weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+            // 첫 탄창 수 최대탄창수로 설정
+            weaponSetting.currentMagazine = weaponSetting.maxMagazine;
+        }
+            mainCamera = Camera.main;
+            layerMask = ~(LayerMask.GetMask("Player", "Path", "Zombie", "Wall"));
     }
 
     private void OnEnable()
@@ -276,4 +287,6 @@ public class WeaponLaserRifle : WeaponBase
     {
         changeChargeModeCallback = _changeChargeModeCallback;
     } 
+
+
 }

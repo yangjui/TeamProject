@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class WeaponGravityGrenade : WeaponBase
 {
     public delegate void TrajectoryDelegate(bool _bool);
@@ -12,6 +12,22 @@ public class WeaponGravityGrenade : WeaponBase
     [SerializeField] private Transform grenadeSpawnPoint;
     [SerializeField] private float throwForce;
 
+    private void Awake()
+    {
+        base.SetUp();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            weaponSetting.maxAmmo = 100;
+            weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+        }
+        else
+        {
+            weaponSetting.currentMagazine = weaponSetting.maxMagazine;
+            weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+            weaponSetting.currentAmmo = 0;
+        }
+    }
+
     private void OnEnable()
     {
         onMagazineEvent.Invoke(weaponSetting.currentMagazine);
@@ -21,13 +37,6 @@ public class WeaponGravityGrenade : WeaponBase
         trajectoryCallback?.Invoke(!isAttack);
     }
 
-    private void Awake()
-    {
-        base.SetUp();
-
-        weaponSetting.currentMagazine = weaponSetting.maxMagazine;
-        weaponSetting.currentAmmo = weaponSetting.maxAmmo;
-    }
 
     public override void StartWeaponAction(int type = 0)
     {
@@ -74,6 +83,13 @@ public class WeaponGravityGrenade : WeaponBase
         GameObject grenadeClone = Instantiate(gravityGrenadePrefab, grenadeSpawnPoint.position, Random.rotation);
         grenadeClone.GetComponent<WeaponGravityGrenadeProjectile>().Setup(weaponSetting.damage, transform.parent.forward, throwForce);
         weaponSetting.currentAmmo--;
+        onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+    }
+
+    public override void IncreaseMagazine(int _ammo)
+    {
+        weaponSetting.currentAmmo = weaponSetting.currentAmmo + _ammo > weaponSetting.maxAmmo ? weaponSetting.maxAmmo : weaponSetting.currentAmmo + _ammo;
+
         onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
     }
 

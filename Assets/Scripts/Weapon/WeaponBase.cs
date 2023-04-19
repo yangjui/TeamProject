@@ -40,4 +40,12 @@ public abstract class WeaponBase : MonoBehaviour
     {
         anim = GetComponent<PlayerAnimationController>();
     }
+
+    public virtual void IncreaseMagazine(int _magazine)
+    {
+        weaponSetting.currentMagazine = CurrentMagazine + _magazine > MaxMagazine ? MaxMagazine : CurrentMagazine + _magazine;
+        weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+        onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+        onMagazineEvent.Invoke(weaponSetting.currentMagazine);
+    }
 }

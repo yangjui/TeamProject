@@ -8,6 +8,10 @@ public class PlayTime : MonoBehaviour
     private int minute = 0;
     private int second = 0;
 
+    private string hourText;
+    private string minuteText;
+    private string secondText;
+
     private void Start()
     {
         StartCoroutine(TimerCoroutine());
@@ -35,18 +39,42 @@ public class PlayTime : MonoBehaviour
         }
     }
 
-    public int GetHour()
+    public string GetHour()
     {
-        return hour;
+        if (hour < 10)
+        {
+            hourText = "0" + hour;
+        }
+        else if (hour >= 10)
+        {
+            hourText = hour.ToString();
+        }
+        return hourText;
     }
 
-    public int GetMinute()
+    public string GetMinute()
     {
-        return minute;
+        if (minute < 10)
+        {
+            minuteText = "0" + minute;
+        }
+        else if (minute >= 10)
+        {
+            minuteText = minute.ToString();
+        }
+        return minuteText;
     }
 
-    public int GetSecond()
+    public string GetSecond()
     {
-        return second;
+        if (second < 10)
+        {
+            secondText = "0" + second;
+        }
+        else if (second >= 10)
+        {
+            secondText = second.ToString();
+        }
+        return secondText;
     }
 }

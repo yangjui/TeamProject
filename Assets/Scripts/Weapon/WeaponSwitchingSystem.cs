@@ -32,6 +32,9 @@ public class WeaponSwitchingSystem : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
             }
         }
+        SwitchingWeapon(WeaponType.레이저라이플);
+        SwitchingWeapon(WeaponType.수류탄);
+        SwitchingWeapon(WeaponType.중력자탄);
         SwitchingWeapon(WeaponType.돌격소총);
     }
 
@@ -99,5 +102,26 @@ public class WeaponSwitchingSystem : MonoBehaviour
 
         // 현재 사용하는 무기 활성화
         currentWeapon.gameObject.SetActive(true);
+    }
+
+    // 해당 타입 하나의 무기 탄창만 증가시킴
+    public void IncreaseMagazine(WeaponType _weaponType, int _magazine)
+    {
+        if (weapons[(int)_weaponType] != null)
+        {
+            weapons[(int)_weaponType].IncreaseMagazine(_magazine);
+        }
+    }
+
+    // 모든 무기의 무기 탄창 수를 증가시킴
+    public void IncreseMagazine(int _magazine)
+    {
+        for (int i = 0; i < weapons.Length; ++i)
+        {
+            if (weapons[i] != null)
+            {
+                weapons[i].IncreaseMagazine(_magazine);
+            }
+        }
     }
 }

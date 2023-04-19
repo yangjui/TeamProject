@@ -8,6 +8,9 @@ public class NavAgentManager : MonoBehaviour
     public delegate void Quest3Delegate();
     private Quest3Delegate quest3Callback = null;
 
+    public delegate void ClearDelegate();
+    private ClearDelegate clearCallback = null;
+
     public delegate void CountDelegate(int _Count);
     private CountDelegate groupACountCallback = null;
     private CountDelegate groupBCountCallback = null;
@@ -153,11 +156,7 @@ public class NavAgentManager : MonoBehaviour
 
     public void NavAgentOn()
     {
-        for (int i = 0; i < allNavMeshAgents.Count; ++i)
-        {
-            allNavMeshAgents[i].GetComponent<BakeZombie>().navAgent.enabled = true;
-            StartCoroutine("SetPathForEachGroupCoroutine");
-        }
+          StartCoroutine("SetPathForEachGroupCoroutine");
     }
 
     public void ChangeWave(string _name)
@@ -218,6 +217,12 @@ public class NavAgentManager : MonoBehaviour
             }
             yield return null;
         }
+
+        for (int i = 0; i < allNavMeshAgents.Count; ++i)
+        {
+            allNavMeshAgents[i].GetComponent<BakeZombie>().navAgent.enabled = true;
+        }
+
         StopCoroutine("SetPathForEachGroupCoroutine");
     }
 
@@ -295,11 +300,21 @@ public class NavAgentManager : MonoBehaviour
                 }
             }
         }
+
+        if (navMeshAgentsGroupA.Count == 0 && navMeshAgentsGroupB.Count == 0 && navMeshAgentsGroupC.Count == 0)
+        {
+            clearCallback?.Invoke();
+        }
     }
 
     public void SetQuestDelegate(Quest3Delegate _quest3Callback)
     {
         quest3Callback = _quest3Callback;
+    }
+
+    public void SetClearDelegate(ClearDelegate _clearCallback)
+    {
+        clearCallback = _clearCallback;
     }
 
     public void SetCountDelegate(CountDelegate _groupACountCallback, CountDelegate _groupBCountCallback, CountDelegate _groupCCountCallback, CountDelegate _maxKillCountCallback, CountDelegate _currentMaxKillCountCallback)

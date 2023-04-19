@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class WeaponGrenade : WeaponBase
 {
     public delegate void TrajectoryDelegate(bool _bool);
@@ -24,9 +24,16 @@ public class WeaponGrenade : WeaponBase
     private void Awake()
     {
         base.SetUp();
-
-        weaponSetting.currentMagazine = weaponSetting.maxMagazine;
-        weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            weaponSetting.maxAmmo = 100;
+            weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+        }
+        else
+        {
+            weaponSetting.currentMagazine = weaponSetting.maxMagazine;
+            weaponSetting.currentAmmo = weaponSetting.maxAmmo;
+        }
     }
 
     public override void StartWeaponAction(int type = 0)
@@ -80,5 +87,12 @@ public class WeaponGrenade : WeaponBase
     public void SetTrajectotyDelegate(TrajectoryDelegate _trajectoryCallback)
     {
         trajectoryCallback = _trajectoryCallback;
+    }
+
+    public override void IncreaseMagazine(int _ammo)
+    {
+        weaponSetting.currentAmmo = weaponSetting.currentAmmo + _ammo > weaponSetting.maxAmmo ? weaponSetting.maxAmmo : weaponSetting.currentAmmo + _ammo;
+
+        onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
     }
 }

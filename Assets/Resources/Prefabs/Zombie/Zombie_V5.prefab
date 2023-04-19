@@ -214,11 +214,10 @@ MonoBehaviour:
   rightZombiePrefab: {fileID: 6000639296923950618, guid: ae1610bbd1bc8c14388f8bd2e54b9362, type: 3}
   attack: {fileID: 9087582920721612305}
   zombieHealth: 100
-  runSpeed: 12.69
-  walkSpeed: 16.41
+  runSpeed: 8
+  walkSpeed: 5
   fireEffect: {fileID: 4893955724374246294}
   StateColor: {fileID: 6943274744756046132}
-  pathColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6943274744756046132
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5679764132524022418
 Transform:
   m_ObjectHideFlags: 0
