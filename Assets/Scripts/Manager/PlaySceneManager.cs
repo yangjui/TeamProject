@@ -28,7 +28,7 @@ public class PlaySceneManager : MonoBehaviour
         playerManager.Init();
         offScreenIndicator.Init();
         optionSetting.Init();
-        navAgentManager.SetCountDelegate(SetGroupA, SetGroupB, SetGroupC, SetMaxKillCount, SetCurrentMaxKillCount);
+        //navAgentManager.SetCountDelegate(SetGroupA, SetGroupB, SetGroupC, SetMaxKillCount, SetCurrentMaxKillCount);
         navAgentManager.Init(PlayerPosition());
         questManager.WaveChangeDelegate(ChangeWave);
         navAgentManager.SetQuestDelegate(StartQuest3);
