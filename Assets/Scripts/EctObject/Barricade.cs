@@ -15,6 +15,14 @@ public class Barricade : MonoBehaviour
     private NavAgentManager navAgentManager;
     private bool warningA = false;
     private bool warningB = false;
+    private int currentHealth;
+    private float damageThreshold = 0.1f;
+    private bool round2 = false;
+
+    public void Round2Start(bool _bool)
+    {
+        round2 = _bool;
+    }
 
     private void Awake()
     {
@@ -28,10 +36,44 @@ public class Barricade : MonoBehaviour
 
     public void BarricadeHP(float _damage)
     {
+        if (!round2) return;
         currentHp -= _damage;
+        BreakSound();
         Warning();
 
         if (currentHp == 0) BarricadeCollapse();
+    }
+
+    private void BreakSound()
+    {
+        float healthPercentage = (float)currentHealth / (float)maxHp;
+
+        if (healthPercentage % damageThreshold == 0 && healthPercentage < 1f)
+        {
+            int random = Random.Range(0, 6);
+            switch(random)
+            {
+                case 0: 
+                    SoundManager.instance.Play3DSFX("lift_door_bangs_1", transform.position);
+                    break;
+                case 1:
+                    SoundManager.instance.Play3DSFX("lift_door_bangs_2", transform.position);
+                    break;
+                case 2:
+                    SoundManager.instance.Play3DSFX("lift_door_bangs_3", transform.position);
+                    break;
+                case 3:
+                    SoundManager.instance.Play3DSFX("lift_door_bangs_4", transform.position);
+                    break;
+                case 4:
+                    SoundManager.instance.Play3DSFX("lift_door_bangs_5", transform.position);
+                    break;
+                case 5:
+                    SoundManager.instance.Play3DSFX("lift_door_bangs_6", transform.position);
+                    break;
+            }
+            Debug.Log("Health percentage: " + healthPercentage);
+        }
     }
 
     public void BarricadeCollapse()

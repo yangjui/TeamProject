@@ -762,7 +762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 11019885}
   - component: {fileID: 11019886}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: NotWalkable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1205,7 +1205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_TagString
@@ -4400,7 +4400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -14116,7 +14116,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010897860062, guid: 0af2fdc5834b8dd4e9358f7eb61f3c32, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010897860062, guid: 0af2fdc5834b8dd4e9358f7eb61f3c32, type: 3}
       propertyPath: m_TagString
@@ -17953,7 +17953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_TagString
@@ -21183,7 +21183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_TagString
@@ -21846,7 +21846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469303243}
   - component: {fileID: 469303244}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: BoxCollider (9)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -22647,7 +22647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_TagString
@@ -27110,7 +27110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -37237,7 +37237,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010807152532, guid: a750f8bcf5658b740a24b2dccc9caaed, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010807152532, guid: a750f8bcf5658b740a24b2dccc9caaed, type: 3}
       propertyPath: m_IsActive
@@ -41763,7 +41763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 929656920}
   - component: {fileID: 929656921}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: BoxCollider (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49084,7 +49084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -52283,7 +52283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -56269,7 +56269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -56885,7 +56885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -57279,7 +57279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -60107,7 +60107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013674919134, guid: b9e1cb90fd59a7946a88c31e16ff82b5, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000013674919134, guid: b9e1cb90fd59a7946a88c31e16ff82b5, type: 3}
       propertyPath: m_TagString
@@ -60379,7 +60379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1324879070}
   - component: {fileID: 1324879071}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: BoxCollider (7)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -68496,7 +68496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1512973964}
   - component: {fileID: 1512973965}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: BoxCollider (8)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -70074,7 +70074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_IsActive
@@ -73048,6 +73048,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f51e493a8b9df094b868413e03a7d0e1, type: 3}
   - name: explosion-6
     clip: {fileID: 8300000, guid: 37a8c4b99174fa742938356c88331c14, type: 3}
+  - name: lift_door_bangs_1
+    clip: {fileID: 8300000, guid: f6d7f93799f826e4f8c79ac2f8a0c6fb, type: 3}
+  - name: lift_door_bangs_2
+    clip: {fileID: 8300000, guid: fc14f89a652413047987546bb4daaf3d, type: 3}
+  - name: lift_door_bangs_3
+    clip: {fileID: 8300000, guid: 6a520c5da98ecb14dbd3e3afee2ec7c3, type: 3}
+  - name: lift_door_bangs_4
+    clip: {fileID: 8300000, guid: 1eb9a984c9944ae4183c333267e9ae37, type: 3}
+  - name: lift_door_bangs_5
+    clip: {fileID: 8300000, guid: 9947758bfe2c21d488c11ff40645cf44, type: 3}
+  - name: lift_door_bangs_6
+    clip: {fileID: 8300000, guid: e44e355913473204db669c9f3062c8df, type: 3}
+  - name: closing_metal_door_1
+    clip: {fileID: 8300000, guid: 1aa13fc77803350428b3efd4ead2b92c, type: 3}
+  - name: closing_metal_door_2
+    clip: {fileID: 8300000, guid: 313cee648953000478ffea4cc9e4dc51, type: 3}
   mixer: {fileID: 24100000, guid: 6e8738458a85c894da3cccc095d81d6d, type: 2}
   bgmPrefab: {fileID: 1406820057486977, guid: fd2c807bc10c1e249b586cb014aee9b3, type: 3}
   sfx2DPrefab: {fileID: 5732676510553706391, guid: 307a9649b460cbd49bbf7faef5d9df16, type: 3}
@@ -82248,7 +82264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1848156110}
   - component: {fileID: 1848156111}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: BoxCollider (10)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -84484,7 +84500,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000013674919134, guid: b9e1cb90fd59a7946a88c31e16ff82b5, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000013674919134, guid: b9e1cb90fd59a7946a88c31e16ff82b5, type: 3}
       propertyPath: m_TagString
@@ -91428,7 +91444,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1000010657191714, guid: dd9a03a16f506fc4f8425ffe0ece5663, type: 3}
       propertyPath: m_TagString
