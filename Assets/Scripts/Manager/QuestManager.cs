@@ -109,6 +109,7 @@ public class QuestManager : MonoBehaviour
         door.GetComponent<BoxCollider>().enabled = false;
 
         SoundManager.instance.Play3DSFX("closing_metal_door_1", door.transform.position);
+        SoundManager.instance.SFX3DVolumeControl("closing_metal_door_1", 0.5f);
     }
 
     public void CloseDoor()
@@ -116,12 +117,14 @@ public class QuestManager : MonoBehaviour
         door.GetComponentInChildren<Animator>().SetTrigger("isClose");
         door.GetComponent<BoxCollider>().enabled = true;
         SoundManager.instance.Play3DSFX("closing_metal_door_1", door.transform.position);
+        SoundManager.instance.SFX3DVolumeControl("closing_metal_door_1", 0.5f);
         Invoke(nameof(DoorSound), 1f);
     }
 
     private void DoorSound()
     {
         SoundManager.instance.Play3DSFX("closing_metal_door_2", door.transform.position);
+        SoundManager.instance.SFX3DVolumeControl("closing_metal_door_2", 0.5f);
     }
 
     public void WaveChangeDelegate(WaveTriggerDelegate _waveTriggerCallback)

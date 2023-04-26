@@ -41,7 +41,7 @@ public abstract class WeaponBase : MonoBehaviour
         anim = GetComponent<PlayerAnimationController>();
     }
 
-    public virtual void IncreaseMagazine(int _magazine)
+    public virtual void IncreaseMagazine(int _magazine) // Åº¾à»óÀÚ ¸Ô¾úÀ» ¶§ ÃÑ¾ËÃæÀü
     {
         weaponSetting.currentMagazine = CurrentMagazine + _magazine > MaxMagazine ? MaxMagazine : CurrentMagazine + _magazine;
         weaponSetting.currentAmmo = weaponSetting.maxAmmo;

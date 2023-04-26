@@ -108,6 +108,9 @@ public class Barricade : MonoBehaviour
 
         if (this.name == "LeftDoor")
             navAgentManager.BreakLeftDoor();
+
+        SoundManager.instance.Play3DSFX("closing_metal_door_2", transform.position);
+        SoundManager.instance.SFX3DVolumeControl("closing_metal_door_2", 0.5f);
     }
 
     public void SetWarningDelegate(WarningDelegate _warningCallback)

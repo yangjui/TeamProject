@@ -7073,6 +7073,26 @@ PrefabInstance:
       propertyPath: m_DirectAudioMutes.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1451702690288149312, guid: 5c7a009a0db64864a808f2442d9aa4c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451702690288149312, guid: 5c7a009a0db64864a808f2442d9aa4c3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451702690288149312, guid: 5c7a009a0db64864a808f2442d9aa4c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451702690288149312, guid: 5c7a009a0db64864a808f2442d9aa4c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451702690288149312, guid: 5c7a009a0db64864a808f2442d9aa4c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c7a009a0db64864a808f2442d9aa4c3, type: 3}
 --- !u!4 &2076377284 stripped

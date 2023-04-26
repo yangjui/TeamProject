@@ -15,7 +15,7 @@ public class ObjectPool : MonoBehaviour
     private int activeCount;                    // 현재 게임에 사용되고 있는(활성화) 오브젝트 개수
 
     private GameObject poolObject;              // 오브젝트 풀링에서 관리하는 게임 오브젝트 프리팹
-    private List<PoolItem> poolItemList;        // 관리되는 모든 오베즉트를 저장하는 리스트
+    private List<PoolItem> poolItemList;        // 관리되는 모든 오브젝트를 저장하는 리스트
 
     public int MaxCount => maxCount;            // 외부에서 현재 리스트에 등록되어 있는 오브젝트 개수 확인을 위한 프로퍼티
     public int ActiveCount => activeCount;      // 외부에서 현재 활성화 되어 있는 오브젝트 개수 확인을 위한 프로퍼티

@@ -37,7 +37,7 @@ public class WeaponAssaultRifle : WeaponBase
 
     public bool isAimMode = false;
 
-    private enum AmmoType { AssaultRifle, laser };
+    //private enum AmmoType { AssaultRifle, laser };
 
     private void Awake()
     {

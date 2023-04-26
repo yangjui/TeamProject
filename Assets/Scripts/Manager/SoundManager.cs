@@ -40,7 +40,7 @@ public class SoundManager : MonoBehaviour
 
     private float timer;
 
-    public SoundManager()
+    public SoundManager() // »ý¼ºÀÚ
     {
         instance = this;
     }
@@ -168,9 +168,12 @@ public class SoundManager : MonoBehaviour
 
     private void Add2DList()
     {
-        GameObject go = Instantiate(sfx2DPrefab, transform);
-        sfx2DPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        sfx2DList.Add(go);
+        for (int i = 0; i < 5; ++i)
+        {
+            GameObject go = Instantiate(sfx2DPrefab, transform);
+            sfx2DPrefab.GetComponent<AudioSource>().outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+            sfx2DList.Add(go);
+        }
     }
 
     public void Play3DSFX(string p_sfxName, Vector3 _position)
@@ -261,18 +264,13 @@ public class SoundManager : MonoBehaviour
         if (sfx2DList.Count == 0) return;
         for (int i = 0; i < sfx2DList.Count; ++i)
         {
-            Debug.Log(i);
             if (sfx2DList[i].GetComponent<AudioSource>() != null)
             {
                 AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
-                Debug.Log(sfxI);
-                if (sfxI.clip != null)Debug.Log(sfxI.clip.name);
-                Debug.Log(sfxI.isPlaying);
-                Debug.Log(_sfxName);
+
                 if (sfxI.clip != null && sfxI.clip.name == _sfxName && sfxI.isPlaying)
                 {
                     sfxI.Stop();
-                    Debug.Log("STOP");
                     return;
                 }
             }
