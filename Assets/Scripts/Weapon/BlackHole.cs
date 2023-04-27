@@ -32,7 +32,7 @@ public class BlackHole : MonoBehaviour
         isGrowingFast = false;
         while (true)
         {
-            scale = Mathf.SmoothStep(scale, 0.05f, Time.deltaTime * 20.0f);
+            scale = Mathf.SmoothStep(scale, 0.05f, 0.1f);
             yield return null;
             if (scale <= 0.1f)
             {
@@ -63,7 +63,7 @@ public class BlackHole : MonoBehaviour
         if (isGrowingFast)
         {
             // 0에서 0.2까지 빠르게 커지는 부분
-            scale = Mathf.SmoothStep(scale, 0.05f, Time.deltaTime * 10.0f);
+            scale = Mathf.SmoothStep(scale, 0.05f, 0.1f);
             if (scale >= 0.04f)
             {
                 isGrowingFast = false;
@@ -73,7 +73,7 @@ public class BlackHole : MonoBehaviour
         else if (isGrowingSlow)
         {
             // 0.2에서 0.8까지 서서히 커지는 부분
-            scale = Mathf.Lerp(scale, 0.4f, Time.deltaTime * 10.0f);
+            scale = Mathf.Lerp(scale, 0.4f, 0.1f);
             if (scale >= 0.39f)
             {
                 isGrowingSlow = false;

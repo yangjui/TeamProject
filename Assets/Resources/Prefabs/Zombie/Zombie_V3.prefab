@@ -372,7 +372,7 @@ MonoBehaviour:
   runSpeed: 8
   walkSpeed: 5
   fireEffect: {fileID: 8869551185686525531}
-  StateColor: {fileID: 7154049327844394864}
+  zombieState: 0
 --- !u!1001 &4516805817847695776
 PrefabInstance:
   m_ObjectHideFlags: 0

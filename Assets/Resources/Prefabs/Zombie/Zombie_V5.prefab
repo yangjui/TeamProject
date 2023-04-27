@@ -217,7 +217,7 @@ MonoBehaviour:
   runSpeed: 8
   walkSpeed: 5
   fireEffect: {fileID: 4893955724374246294}
-  StateColor: {fileID: 6943274744756046132}
+  zombieState: 0
 --- !u!1 &6943274744756046132
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AreaOfEffectRay : MonoBehaviour
 {
     [SerializeField] private GameObject AOEPrefab = null;
-    RaycastHit hit;
+    private RaycastHit hit;
 
     private void Start()
     {
