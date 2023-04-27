@@ -12,15 +12,6 @@ public class WeaponGrenade : WeaponBase
     [SerializeField] private Transform grenadeSpawnPoint;
     [SerializeField] private float throwForce;
 
-    private void OnEnable()
-    {
-        onMagazineEvent.Invoke(weaponSetting.currentMagazine);
-        onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
-        GetComponent<GrenadeTrajectory>().SetThrowForce(throwForce);
-        isAttack = false;
-        trajectoryCallback?.Invoke(!isAttack);
-    }
-
     private void Awake()
     {
         base.SetUp();
@@ -34,6 +25,15 @@ public class WeaponGrenade : WeaponBase
             weaponSetting.currentMagazine = weaponSetting.maxMagazine;
             weaponSetting.currentAmmo = weaponSetting.maxAmmo;
         }
+    }
+
+    private void OnEnable()
+    {
+        onMagazineEvent.Invoke(weaponSetting.currentMagazine);
+        onAmmoEvent.Invoke(weaponSetting.currentAmmo, weaponSetting.maxAmmo);
+        GetComponent<GrenadeTrajectory>().SetThrowForce(throwForce);
+        isAttack = false;
+        trajectoryCallback?.Invoke(!isAttack);
     }
 
     public override void StartWeaponAction(int type = 0)

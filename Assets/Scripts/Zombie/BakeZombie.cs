@@ -267,12 +267,12 @@ public class BakeZombie : MonoBehaviour
         AnimTextureType(runNum);
     }
 
-    private void Walk()
-    {
-        //stateRenderer.material.color = Color.yellow;
-        navAgent.speed = walkSpeed;
-        AnimTextureType(8);
-    }
+    //private void Walk()
+    //{
+    //    //stateRenderer.material.color = Color.yellow;
+    //    navAgent.speed = walkSpeed;
+    //    AnimTextureType(8);
+    //}
 
     private void AnimTextureType(int _type)
     {

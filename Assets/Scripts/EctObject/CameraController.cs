@@ -15,8 +15,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float waitTime = 0.3f;
     [SerializeField] private float rotSpeed = 0.3f;
 
-
-
     public static CameraController instance;
 
     private Quaternion originRot;
@@ -41,21 +39,8 @@ public class CameraController : MonoBehaviour
         StopCoroutine("ShakeCameraCoroutine");
         StartCoroutine(StopShakeCameraCoroutine());
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            DeadCameraMove();
-        }
-        else if (Input.GetKeyDown(KeyCode.M))
-        {
-            StopAllCoroutines();
-            transform.localPosition = new Vector3(0f, 0.05f, 0.1f);
-            transform.rotation = originRot;
-        }
-    }
 
-        public void DeadCameraMove()
+    public void DeadCameraMove()
     {
         StartCoroutine(DeadCameraMoveCoroutine());
     }
@@ -89,6 +74,15 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private IEnumerator StopShakeCameraCoroutine()
+    {
+        while (Quaternion.Angle(transform.localRotation, originRot) > 0f)
+        {
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originRot, force * Time.deltaTime);
+            yield return null;
+        }
+    }
+
     private IEnumerator DeadCameraMoveCoroutine()
     {
         // Move to target A
@@ -106,15 +100,6 @@ public class CameraController : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, deadCameraPos2.position, moveSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, deadCameraPos2.rotation, rotSpeed * Time.deltaTime);
-            yield return null;
-        }
-    }
-
-    private IEnumerator StopShakeCameraCoroutine()
-    {
-        while (Quaternion.Angle(transform.localRotation, originRot) > 0f)
-        {
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originRot, force * Time.deltaTime);
             yield return null;
         }
     }

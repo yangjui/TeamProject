@@ -8,7 +8,7 @@ public class BlackHole : MonoBehaviour
     [SerializeField] private GameObject bombEffect = null;
 
     private List<GameObject> agents = new List<GameObject>();
-    private float destroyTime = 7f;
+    private float destroyTime = 3f;
 
     private float scale = 0.0f;
     private bool isGrowingFast = true;
@@ -49,8 +49,6 @@ public class BlackHole : MonoBehaviour
                         agents[i].GetComponent<BakeZombie>().DeadInBlackHole();
                         agents.RemoveAt(i);
                     }
-
-
                 }
                 GameObject go = Instantiate(bombEffect, transform.position, Quaternion.identity);
                 Destroy(go, 2f);
@@ -94,9 +92,9 @@ public class BlackHole : MonoBehaviour
             
             if (agents[i].CompareTag("Zombie"))
             {
-                agents[i].GetComponent<BakeZombie>().navAgent.enabled = false;
-                agents[i].GetComponent<BakeZombie>().TakeDamage(0);
-                agents[i].GetComponent<BakeZombie>().BlackHole();
+                BakeZombie bakeZombie = agents[i].GetComponent<BakeZombie>();
+                bakeZombie.navAgent.enabled = false;
+                bakeZombie.BlackHole();
 
                 Vector3 dir = transform.position - agents[i].transform.position;
                 agents[i].transform.position += dir * 1f * Time.deltaTime;

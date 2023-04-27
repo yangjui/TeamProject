@@ -60548,6 +60548,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2038331068}
     m_Modifications:
+    - target: {fileID: 4868143489814254658, guid: 16f9a5bc3be022b4cba5a55ccf22ccd0, type: 3}
+      propertyPath: m_Size.x
+      value: 2176.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868143489814254658, guid: 16f9a5bc3be022b4cba5a55ccf22ccd0, type: 3}
+      propertyPath: m_Size.y
+      value: 1341
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868143489814254658, guid: 16f9a5bc3be022b4cba5a55ccf22ccd0, type: 3}
+      propertyPath: m_Size.z
+      value: 2110.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4868143489814254659, guid: 16f9a5bc3be022b4cba5a55ccf22ccd0, type: 3}
       propertyPath: m_Name
       value: P_AmmoBox
