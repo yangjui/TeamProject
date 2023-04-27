@@ -40,7 +40,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _DT: 0
+<<<<<<< Updated upstream
     - _Length: 1.4016312
+=======
+    - _Length: 1.3567966
+>>>>>>> Stashed changes
     - _Loop: 1
     - _ShadowStrength: 1
     m_Colors:

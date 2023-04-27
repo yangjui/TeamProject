@@ -44,11 +44,6 @@ public class Ragdoll : MonoBehaviour
         }
     }
 
-    //private void ColliderPosition()
-    //{
-    //    rb.constraints = RigidbodyConstraints.FreezeAll;
-    //}
-
     public void Kinematic()
     {
         transform.position = pelvis.transform.position;

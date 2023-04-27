@@ -321,8 +321,12 @@ MonoBehaviour:
   runSpeed: 12.69
   walkSpeed: 16.41
   fireEffect: {fileID: 7301621399940611520}
+<<<<<<< Updated upstream
   StateColor: {fileID: 2324799149280977067}
   pathColor: {r: 0, g: 0, b: 0, a: 0}
+=======
+  zombieState: 0
+>>>>>>> Stashed changes
 --- !u!65 &2438517952011672646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -662,6 +666,10 @@ PrefabInstance:
     - target: {fileID: 7321558847139702484, guid: 24a14726ddb5cd74fbb367313dd0fb92, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7321558847139702484, guid: 24a14726ddb5cd74fbb367313dd0fb92, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7321558847139702484, guid: 24a14726ddb5cd74fbb367313dd0fb92, type: 3}
       propertyPath: m_StaticEditorFlags

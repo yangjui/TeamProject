@@ -36,7 +36,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _DT: 0
+<<<<<<< Updated upstream
     - _Length: 1.3686852
+=======
+    - _Length: 1.4303595
+>>>>>>> Stashed changes
     - _Loop: 1
     m_Colors: []
   m_BuildTextureStacks: []
