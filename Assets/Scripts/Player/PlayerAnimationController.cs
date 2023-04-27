@@ -17,8 +17,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Start()
     {
-        platformMask = 1 << LayerMask.NameToLayer("Platform");
-        metalMask = 1 << LayerMask.NameToLayer("Metal");
+        platformMask = LayerMask.GetMask("Platform");
+        metalMask = LayerMask.GetMask("Metal");
     }
 
     private void Update()
@@ -40,9 +40,9 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void GroundCheck()
     {
-        bool ground = Physics.Raycast(transform.position, Vector3.down, 2.0f, platformMask);
+        bool ground = Physics.Raycast(transform.position, Vector3.down, 2f, platformMask);
         onGround = ground;
-        bool metalGround = Physics.Raycast(transform.position, Vector3.down, 2.0f, metalMask);
+        bool metalGround = Physics.Raycast(transform.position, Vector3.down, 2f, metalMask);
         onMetal = metalGround;
     }
 

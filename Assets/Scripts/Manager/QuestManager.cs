@@ -103,14 +103,25 @@ public class QuestManager : MonoBehaviour
 
     public void OpenDoor()
     {
+        leftDoor.Round2Start(true);
+        rightDoor.Round2Start(true);
         door.GetComponentInChildren<Animator>().SetTrigger("isOpen");
         door.GetComponent<BoxCollider>().enabled = false;
+
+        SoundManager.instance.Play3DSFX("closing_metal_door_1", door.transform.position);
     }
 
     public void CloseDoor()
     {
         door.GetComponentInChildren<Animator>().SetTrigger("isClose");
         door.GetComponent<BoxCollider>().enabled = true;
+        SoundManager.instance.Play3DSFX("closing_metal_door_1", door.transform.position);
+        Invoke(nameof(DoorSound), 1f);
+    }
+
+    private void DoorSound()
+    {
+        SoundManager.instance.Play3DSFX("closing_metal_door_2", door.transform.position);
     }
 
     public void WaveChangeDelegate(WaveTriggerDelegate _waveTriggerCallback)

@@ -95,7 +95,7 @@ public class BakeZombie : MonoBehaviour
         runNum = Random.Range(5, 8);
         idleNum = Random.Range(3, 5);
         AnimTextureType(runNum);
-        runSpeed += Random.Range(-2,1);
+        runSpeed += Random.Range(-2f,0f);
         navAgent.speed = runSpeed;
     }
 

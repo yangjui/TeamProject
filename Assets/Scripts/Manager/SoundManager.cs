@@ -234,22 +234,24 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < sfx2DList.Count; ++i)
         {
             sfx2DI = sfx2DList[i].GetComponent<AudioSource>();
-            if (sfx2DI.clip.name == _sfxName && sfx2DI.isPlaying)
+            if (sfx2DI.clip != null && sfx2DI.clip.name == _sfxName && sfx2DI.isPlaying)
             {
                 sfx2DI.volume = _volume;
+                return;
             }
         }
     }
 
     public void SFX3DVolumeControl(string _sfxName, float _volume)
     {
-        if (sfx2DList.Count == 0) return;
+        if (sfx3DList.Count == 0) return;
         for (int i = 0; i < sfx3DList.Count; ++i)
         {
             sfx3DI = sfx3DList[i].GetComponent<AudioSource>();
-            if (sfx3DI.clip.name == _sfxName && sfx3DI.isPlaying)
+            if (sfx3DI.clip != null && sfx3DI.clip.name == _sfxName && sfx3DI.isPlaying)
             {
                 sfx3DI.volume = _volume;
+                return;
             }
         }
     }
@@ -259,12 +261,19 @@ public class SoundManager : MonoBehaviour
         if (sfx2DList.Count == 0) return;
         for (int i = 0; i < sfx2DList.Count; ++i)
         {
+            Debug.Log(i);
             if (sfx2DList[i].GetComponent<AudioSource>() != null)
             {
                 AudioSource sfxI = sfx2DList[i].GetComponent<AudioSource>();
-                if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+                Debug.Log(sfxI);
+                if (sfxI.clip != null)Debug.Log(sfxI.clip.name);
+                Debug.Log(sfxI.isPlaying);
+                Debug.Log(_sfxName);
+                if (sfxI.clip != null && sfxI.clip.name == _sfxName && sfxI.isPlaying)
                 {
                     sfxI.Stop();
+                    Debug.Log("STOP");
+                    return;
                 }
             }
         }
@@ -276,9 +285,10 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < sfx3DList.Count; ++i)
         {
             AudioSource sfxI = sfx3DList[i].GetComponent<AudioSource>();
-            if (sfxI.clip.name == _sfxName && sfxI.isPlaying)
+            if (sfxI.clip != null && sfxI.clip.name == _sfxName && sfxI.isPlaying)
             {
                 sfxI.Stop();
+                return;
             }
         }
     }
